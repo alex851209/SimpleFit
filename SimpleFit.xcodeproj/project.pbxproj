@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4052DD655D816F8F8765AD5 /* Pods_SimpleFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */; };
 		A548A787256FFC6400782A0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A786256FFC6400782A0E /* AppDelegate.swift */; };
 		A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A788256FFC6400782A0E /* SceneDelegate.swift */; };
 		A548A78B256FFC6400782A0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A78A256FFC6400782A0E /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A548A783256FFC6400782A0E /* SimpleFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A548A786256FFC6400782A0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A548A788256FFC6400782A0E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +26,8 @@
 		A548A78F256FFC6600782A0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A548A792256FFC6600782A0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A548A794256FFC6600782A0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C36156E5D1AC9ABF93F780A1 /* Pods-SimpleFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.release.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.release.xcconfig"; sourceTree = "<group>"; };
+		EB59C87BB5903418AC729B9E /* Pods-SimpleFit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.debug.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4052DD655D816F8F8765AD5 /* Pods_SimpleFit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6BF5BE1B237C83D0CE7AC839 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A548A77A256FFC6400782A0E = {
 			isa = PBXGroup;
 			children = (
 				A548A785256FFC6400782A0E /* SimpleFit */,
 				A548A784256FFC6400782A0E /* Products */,
+				CB03E58534FB18C16EDACF34 /* Pods */,
+				6BF5BE1B237C83D0CE7AC839 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +82,15 @@
 			path = SimpleFit;
 			sourceTree = "<group>";
 		};
+		CB03E58534FB18C16EDACF34 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EB59C87BB5903418AC729B9E /* Pods-SimpleFit.debug.xcconfig */,
+				C36156E5D1AC9ABF93F780A1 /* Pods-SimpleFit.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +98,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A548A797256FFC6600782A0E /* Build configuration list for PBXNativeTarget "SimpleFit" */;
 			buildPhases = (
+				07AF0A5B965CD43319DF399D /* [CP] Check Pods Manifest.lock */,
 				A548A77F256FFC6400782A0E /* Sources */,
 				A548A780256FFC6400782A0E /* Frameworks */,
 				A548A781256FFC6400782A0E /* Resources */,
+				A589E3ED2570A3000024E323 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -131,6 +157,49 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07AF0A5B965CD43319DF399D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SimpleFit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A589E3ED2570A3000024E323 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A548A77F256FFC6400782A0E /* Sources */ = {
@@ -283,6 +352,7 @@
 		};
 		A548A798256FFC6600782A0E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB59C87BB5903418AC729B9E /* Pods-SimpleFit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +372,7 @@
 		};
 		A548A799256FFC6600782A0E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C36156E5D1AC9ABF93F780A1 /* Pods-SimpleFit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
