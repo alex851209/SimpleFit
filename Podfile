@@ -7,5 +7,6 @@ target 'SimpleFit' do
 
   # Pods for SimpleFit
   pod 'SwiftLint'
+  pod 'AAInfographics', :git => 'https://github.com/AAChartModel/AAChartKit-Swift.git'
 
 end

@@ -1,16 +1,28 @@
 PODS:
+  - AAInfographics (5.0.3)
   - SwiftLint (0.41.0)
 
 DEPENDENCIES:
+  - AAInfographics (from `https://github.com/AAChartModel/AAChartKit-Swift.git`)
   - SwiftLint
 
 SPEC REPOS:
   trunk:
     - SwiftLint
 
+EXTERNAL SOURCES:
+  AAInfographics:
+    :git: https://github.com/AAChartModel/AAChartKit-Swift.git
+
+CHECKOUT OPTIONS:
+  AAInfographics:
+    :commit: 7d4dcbf3959be8f718f1c78a1e9fa3836a75d198
+    :git: https://github.com/AAChartModel/AAChartKit-Swift.git
+
 SPEC CHECKSUMS:
+  AAInfographics: 7e0fdd1afab38f77539364cbef8380b22110478d
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
 
-PODFILE CHECKSUM: 7210ffa8e6b0ad5f5907b9c50e8ac2fa668abd94
+PODFILE CHECKSUM: af49fe34039246f836d5339abd92ffa50c5dd10a
 
 COCOAPODS: 1.10.0
