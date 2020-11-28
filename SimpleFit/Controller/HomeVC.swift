@@ -7,42 +7,64 @@
 
 import UIKit
 import AAInfographics
+import SideMenu
 
 class HomeVC: UIViewController {
+    
+    private struct Segue {
+        
+        static let sideMenuNC = "SegueSideMenuNC"
+    }
     
     let aaChartView = AAChartView()
     var aaChartModel = AAChartModel()
     let dataProvider = ChartDataProvider()
-    var chartData = ChartData()
-    var monthLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureNC()
         configureChart()
+        configureSideMenu()
     }
     
-    func configureChart() {
+    private func configureLayout() {
         
-        configureChartModel()
-        configureChartView()
-        layoutLabel()
-        aaChartView.aa_drawChartWithChartModel(aaChartModel)//圖表視圖對象調用圖表模型對象,繪制最終圖形
-    }
-    
-    private func layoutLabel() {
+        let sideMenuButton = UIButton()
+        sideMenuButton.setImage(UIImage.systemAsset(.sideMenu), for: .normal)
+        sideMenuButton.tintColor = .gray
+        sideMenuButton.contentHorizontalAlignment = .fill
+        sideMenuButton.contentVerticalAlignment = .fill
+        sideMenuButton.addTarget(self, action: #selector(showSideMenu), for: .touchUpInside)
         
+        let monthLabel = UILabel()
         monthLabel.text = "11月"
         monthLabel.textColor = .systemGray
         monthLabel.font = .systemFont(ofSize: 40)
         
         monthLabel.translatesAutoresizingMaskIntoConstraints = false
+        sideMenuButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(sideMenuButton)
         view.addSubview(monthLabel)
         
         NSLayoutConstraint.activate([
             monthLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            monthLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30)
+            monthLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            
+            sideMenuButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            sideMenuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            sideMenuButton.widthAnchor.constraint(equalToConstant: 30),
+            sideMenuButton.heightAnchor.constraint(equalToConstant: 25)
         ])
+    }
+    
+    private func configureNC() { navigationController?.navigationBar.isHidden = true }
+    
+    private func configureChart() {
+        
+        configureChartModel()
+        configureChartView()
+        aaChartView.aa_drawChartWithChartModel(aaChartModel)//圖表視圖對象調用圖表模型對象,繪制最終圖形
     }
     
     private func configureChartView() {
@@ -73,7 +95,7 @@ class HomeVC: UIViewController {
                     .dataLabelsFontSize(18)
                     .dataLabelsFontWeight(.bold)
                     .chartType(.spline)//圖表類型
-                    .title("Simple Fit")//圖表主標題
+//                    .title("Simple Fit")//圖表主標題
 //                    .subtitle("2020年11月")//圖表副標題
                     .inverted(false)//是否翻轉圖形
                     .yAxisLabelsEnabled(false)//y 軸是否顯示數據
@@ -87,5 +109,42 @@ class HomeVC: UIViewController {
                     .colorsTheme(["#c0c0c0"])
                     .scrollablePlotArea(AAScrollablePlotArea().minWidth(2000).scrollPositionX(0))
                     .series([AASeriesElement().name("體重").data(weightsData)])
+    }
+    
+    private func configureSideMenu() {
+        
+        let sideMenuNC = storyboard?.instantiateViewController(withIdentifier: "SideMenuNC")
+        SideMenuManager.default.rightMenuNavigationController = sideMenuNC as? SideMenuNavigationController
+        // Enable gestures. The left and/or right menus must be set up above for these to work.
+        SideMenuManager.default.addPanGestureToPresent(toView: navigationController!.navigationBar)
+        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: view)
+        SideMenuManager.default.rightMenuNavigationController?.settings = makeSettings()
+        configureLayout()
+    }
+    
+    @objc private func showSideMenu() { performSegue(withIdentifier: Segue.sideMenuNC, sender: nil) }
+    
+    private func makeSettings() -> SideMenuSettings {
+        
+        let presentationStyle = SideMenuPresentationStyle.menuSlideIn
+        presentationStyle.backgroundColor = .clear
+        presentationStyle.menuStartAlpha = 0.1
+        presentationStyle.presentingEndAlpha = 0.8
+        presentationStyle.onTopShadowOpacity = 0.5
+        
+        var settings = SideMenuSettings()
+        settings.presentationStyle = presentationStyle
+        settings.presentDuration = 1
+        settings.dismissDuration = 1
+        settings.blurEffectStyle = .extraLight
+        settings.menuWidth = view.frame.width - 100
+
+        return settings
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let sideMenuNC = segue.destination as? SideMenuNavigationController else { return }
+        sideMenuNC.settings = makeSettings()
     }
 }
