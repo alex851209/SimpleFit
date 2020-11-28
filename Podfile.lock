@@ -1,13 +1,16 @@
 PODS:
   - AAInfographics (5.0.3)
+  - SideMenu (6.5.0)
   - SwiftLint (0.41.0)
 
 DEPENDENCIES:
   - AAInfographics (from `https://github.com/AAChartModel/AAChartKit-Swift.git`)
+  - SideMenu (~> 6.0)
   - SwiftLint
 
 SPEC REPOS:
   trunk:
+    - SideMenu
     - SwiftLint
 
 EXTERNAL SOURCES:
@@ -21,8 +24,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AAInfographics: 7e0fdd1afab38f77539364cbef8380b22110478d
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
 
-PODFILE CHECKSUM: af49fe34039246f836d5339abd92ffa50c5dd10a
+PODFILE CHECKSUM: 4d52cded6f6adeb57e5566d0242731bc67b0931c
 
 COCOAPODS: 1.10.0
