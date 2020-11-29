@@ -131,7 +131,6 @@ class HomeVC: UIViewController {
     private func makeSettings() -> SideMenuSettings {
         
         let presentationStyle = SideMenuPresentationStyle.menuSlideIn
-        presentationStyle.backgroundColor = .clear
         presentationStyle.menuStartAlpha = 0.1
         presentationStyle.presentingEndAlpha = 0.8
         presentationStyle.onTopShadowOpacity = 0.5
@@ -140,7 +139,7 @@ class HomeVC: UIViewController {
         settings.presentationStyle = presentationStyle
         settings.presentDuration = 1
         settings.dismissDuration = 1
-        settings.blurEffectStyle = .extraLight
+        settings.blurEffectStyle = .systemChromeMaterial
         settings.menuWidth = view.frame.width - 100
 
         return settings

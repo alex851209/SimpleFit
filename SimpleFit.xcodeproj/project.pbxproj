@@ -17,6 +17,9 @@
 		A5BDFD7E25723137004D3F57 /* ChartDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFD7D25723137004D3F57 /* ChartDataProvider.swift */; };
 		A5BDFD8125723362004D3F57 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFD8025723362004D3F57 /* ChartData.swift */; };
 		A5BDFD9625724AA6004D3F57 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFD9525724AA6004D3F57 /* UIImage+Ext.swift */; };
+		A5BDFD9C2572938F004D3F57 /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFD9B2572938F004D3F57 /* SideMenuVC.swift */; };
+		A5BDFDA125729495004D3F57 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDA025729495004D3F57 /* SideMenuCell.swift */; };
+		A5BDFDB32572A7DB004D3F57 /* SideMenuItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDB22572A7DB004D3F57 /* SideMenuItemManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		A5BDFD7D25723137004D3F57 /* ChartDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDataProvider.swift; sourceTree = "<group>"; };
 		A5BDFD8025723362004D3F57 /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		A5BDFD9525724AA6004D3F57 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
+		A5BDFD9B2572938F004D3F57 /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
+		A5BDFDA025729495004D3F57 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+		A5BDFDB22572A7DB004D3F57 /* SideMenuItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuItemManager.swift; sourceTree = "<group>"; };
 		C36156E5D1AC9ABF93F780A1 /* Pods-SimpleFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.release.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.release.xcconfig"; sourceTree = "<group>"; };
 		EB59C87BB5903418AC729B9E /* Pods-SimpleFit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.debug.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +105,7 @@
 		A5BDFD5325721F61004D3F57 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A5BDFD9F25729481004D3F57 /* SideMenu */,
 				A548A78C256FFC6400782A0E /* Main.storyboard */,
 			);
 			path = View;
@@ -107,7 +114,8 @@
 		A5BDFD5425721F80004D3F57 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A548A78A256FFC6400782A0E /* HomeVC.swift */,
+				A5BDFD9825729372004D3F57 /* Home */,
+				A5BDFD9A25729379004D3F57 /* SideMenu */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -125,6 +133,7 @@
 		A5BDFD7625722FDB004D3F57 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A5BDFDA82572A3D7004D3F57 /* SideMenu */,
 				A5BDFD8425723CDE004D3F57 /* Chart */,
 			);
 			path = Model;
@@ -145,6 +154,38 @@
 				A5BDFD9525724AA6004D3F57 /* UIImage+Ext.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		A5BDFD9825729372004D3F57 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A548A78A256FFC6400782A0E /* HomeVC.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		A5BDFD9A25729379004D3F57 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A5BDFD9B2572938F004D3F57 /* SideMenuVC.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		A5BDFD9F25729481004D3F57 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A5BDFDA025729495004D3F57 /* SideMenuCell.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		A5BDFDA82572A3D7004D3F57 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A5BDFDB22572A7DB004D3F57 /* SideMenuItemManager.swift */,
+			);
+			path = SideMenu;
 			sourceTree = "<group>";
 		};
 		CB03E58534FB18C16EDACF34 /* Pods */ = {
@@ -291,10 +332,13 @@
 			files = (
 				A548A78B256FFC6400782A0E /* HomeVC.swift in Sources */,
 				A5BDFD7E25723137004D3F57 /* ChartDataProvider.swift in Sources */,
+				A5BDFDB32572A7DB004D3F57 /* SideMenuItemManager.swift in Sources */,
+				A5BDFD9C2572938F004D3F57 /* SideMenuVC.swift in Sources */,
 				A548A787256FFC6400782A0E /* AppDelegate.swift in Sources */,
 				A5BDFD9625724AA6004D3F57 /* UIImage+Ext.swift in Sources */,
 				A5BDFD8125723362004D3F57 /* ChartData.swift in Sources */,
 				A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */,
+				A5BDFDA125729495004D3F57 /* SideMenuCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,17 +27,78 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="52.901785714285715"/>
         </scene>
-        <!--View Controller-->
+        <!--Side MenuVC-->
         <scene sceneID="r6c-sG-onw">
             <objects>
-                <viewController id="1Hw-x2-YIN" sceneMemberID="viewController">
+                <viewController id="1Hw-x2-YIN" customClass="SideMenuVC" customModule="SimpleFit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wLY-Zv-CD0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bfm-y4-oCU">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SideMenuCell" rowHeight="80" id="6aO-pV-51M" customClass="SideMenuCell" customModule="SimpleFit" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6aO-pV-51M" id="KYx-vC-c8Y">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Y8-1X-bew">
+                                                    <rect key="frame" x="16" y="25" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="Fab-Hs-2la"/>
+                                                        <constraint firstAttribute="height" constant="30" id="Jbi-eG-2aD"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的帳號" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCK-cr-cLx">
+                                                    <rect key="frame" x="62" y="25" width="102" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                    <color key="textColor" red="0.2470588235" green="0.2274509804" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRB-30-B2L" userLabel="Separator">
+                                                    <rect key="frame" x="20" y="79" width="374" height="1"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="Wb4-Nw-7yL"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PCK-cr-cLx" secondAttribute="trailing" constant="20" symbolic="YES" id="4JC-nl-rBd"/>
+                                                <constraint firstItem="1Y8-1X-bew" firstAttribute="centerY" secondItem="KYx-vC-c8Y" secondAttribute="centerY" id="7Ij-8u-w6F"/>
+                                                <constraint firstAttribute="trailing" secondItem="jRB-30-B2L" secondAttribute="trailing" constant="20" id="8Pl-l8-1an"/>
+                                                <constraint firstAttribute="bottom" secondItem="jRB-30-B2L" secondAttribute="bottom" id="Jmu-eF-VzU"/>
+                                                <constraint firstItem="jRB-30-B2L" firstAttribute="leading" secondItem="KYx-vC-c8Y" secondAttribute="leading" constant="20" id="QNf-UD-4bj"/>
+                                                <constraint firstItem="PCK-cr-cLx" firstAttribute="leading" secondItem="1Y8-1X-bew" secondAttribute="trailing" constant="16" id="amH-5M-KcU"/>
+                                                <constraint firstItem="PCK-cr-cLx" firstAttribute="centerY" secondItem="KYx-vC-c8Y" secondAttribute="centerY" id="gpc-gk-d2G"/>
+                                                <constraint firstItem="1Y8-1X-bew" firstAttribute="leading" secondItem="KYx-vC-c8Y" secondAttribute="leading" constant="16" id="ytJ-3u-3dd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="iconImage" destination="1Y8-1X-bew" id="9Vw-SF-OAA"/>
+                                            <outlet property="titleLabel" destination="PCK-cr-cLx" id="Uve-r9-CwI"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Gtt-zJ-zur"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Gtt-zJ-zur" firstAttribute="bottom" secondItem="Bfm-y4-oCU" secondAttribute="bottom" id="I9c-si-5Nt"/>
+                            <constraint firstItem="Bfm-y4-oCU" firstAttribute="leading" secondItem="Gtt-zJ-zur" secondAttribute="leading" id="QU8-xX-C4g"/>
+                            <constraint firstItem="Bfm-y4-oCU" firstAttribute="top" secondItem="Gtt-zJ-zur" secondAttribute="top" id="TjK-q8-DsI"/>
+                            <constraint firstItem="Gtt-zJ-zur" firstAttribute="trailing" secondItem="Bfm-y4-oCU" secondAttribute="trailing" id="qyn-kk-3EX"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nzg-WL-Puv"/>
+                    <connections>
+                        <outlet property="tableView" destination="Bfm-y4-oCU" id="M0C-yi-6T8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="37f-De-mSy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
