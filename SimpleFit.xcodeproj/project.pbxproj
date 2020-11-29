@@ -20,6 +20,8 @@
 		A5BDFD9C2572938F004D3F57 /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFD9B2572938F004D3F57 /* SideMenuVC.swift */; };
 		A5BDFDA125729495004D3F57 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDA025729495004D3F57 /* SideMenuCell.swift */; };
 		A5BDFDB32572A7DB004D3F57 /* SideMenuItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDB22572A7DB004D3F57 /* SideMenuItemManager.swift */; };
+		A5BDFDB625738B0D004D3F57 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDB525738B0D004D3F57 /* Date+Ext.swift */; };
+		A5BDFDB925738C4E004D3F57 /* DateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDB825738C4E004D3F57 /* DateProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		A5BDFD9B2572938F004D3F57 /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
 		A5BDFDA025729495004D3F57 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		A5BDFDB22572A7DB004D3F57 /* SideMenuItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuItemManager.swift; sourceTree = "<group>"; };
+		A5BDFDB525738B0D004D3F57 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		A5BDFDB825738C4E004D3F57 /* DateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProvider.swift; sourceTree = "<group>"; };
 		C36156E5D1AC9ABF93F780A1 /* Pods-SimpleFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.release.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.release.xcconfig"; sourceTree = "<group>"; };
 		EB59C87BB5903418AC729B9E /* Pods-SimpleFit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.debug.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +148,7 @@
 			children = (
 				A5BDFD7D25723137004D3F57 /* ChartDataProvider.swift */,
 				A5BDFD8025723362004D3F57 /* ChartData.swift */,
+				A5BDFDB825738C4E004D3F57 /* DateProvider.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				A5BDFD9525724AA6004D3F57 /* UIImage+Ext.swift */,
+				A5BDFDB525738B0D004D3F57 /* Date+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -333,12 +339,14 @@
 				A548A78B256FFC6400782A0E /* HomeVC.swift in Sources */,
 				A5BDFD7E25723137004D3F57 /* ChartDataProvider.swift in Sources */,
 				A5BDFDB32572A7DB004D3F57 /* SideMenuItemManager.swift in Sources */,
+				A5BDFDB925738C4E004D3F57 /* DateProvider.swift in Sources */,
 				A5BDFD9C2572938F004D3F57 /* SideMenuVC.swift in Sources */,
 				A548A787256FFC6400782A0E /* AppDelegate.swift in Sources */,
 				A5BDFD9625724AA6004D3F57 /* UIImage+Ext.swift in Sources */,
 				A5BDFD8125723362004D3F57 /* ChartData.swift in Sources */,
 				A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */,
 				A5BDFDA125729495004D3F57 /* SideMenuCell.swift in Sources */,
+				A5BDFDB625738B0D004D3F57 /* Date+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

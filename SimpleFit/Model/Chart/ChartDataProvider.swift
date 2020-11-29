@@ -44,13 +44,22 @@ class ChartDataProvider {
     
     private func getCategories() {
         
-        let categories = [
-            "週一<br>01", "週二<br>02", "週三<br>03", "週四<br>04", "週五<br>05", "週六<br>06", "週日<br>07",
-            "週一<br>08", "週二<br>09", "週三<br>10", "週四<br>11", "週五<br>12", "週六<br>13", "週日<br>14",
-            "週一<br>15", "週二<br>16", "週三<br>17", "週四<br>18", "週五<br>19", "週六<br>20", "週日<br>21",
-            "週一<br>22", "週二<br>23", "週三<br>24", "週四<br>25", "週五<br>26", "週六<br>27", "週日<br>28",
-            "週一<br>29", "週二<br>30"
-        ]
+        let currentYear = DateProvider.currentYear()
+        let currentMonth = DateProvider.currentMonth()
+        let countOfDays = DateProvider.getCountOfDaysInMonth(year: currentYear, month: currentMonth)
+        var firstDay = DateProvider.getfirstWeekDayInMonth(year: currentYear, month: currentMonth)
+        var categories = [String]()
+        
+        for count in 1 ... countOfDays {
+            
+            let date = DateProvider.add0BeforeNumber(count)
+            let chineseDay = DateProvider.chineseDays[firstDay].day
+            let category = "\(chineseDay)<br>\(date)"
+            
+            firstDay += firstDay != 6 ? 1 : -6
+            categories.append(category)
+        }
+        
         chartData.categories = categories
     }
 }

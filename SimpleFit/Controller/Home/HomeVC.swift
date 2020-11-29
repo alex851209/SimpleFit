@@ -39,7 +39,7 @@ class HomeVC: UIViewController {
         sideMenuButton.addTarget(self, action: #selector(showSideMenu), for: .touchUpInside)
         
         let monthLabel = UILabel()
-        monthLabel.text = "11月"
+        monthLabel.text = "\(DateProvider.currentMonth())月"
         monthLabel.textColor = .systemGray
         monthLabel.font = .systemFont(ofSize: 40)
         
