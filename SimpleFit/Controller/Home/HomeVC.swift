@@ -14,6 +14,7 @@ class HomeVC: UIViewController {
     private struct Segue {
         
         static let sideMenuNC = "SegueSideMenuNC"
+        static let pickMonth = "SeguePickMonth"
     }
     
     let chartView = AAChartView()
@@ -38,19 +39,20 @@ class HomeVC: UIViewController {
         sideMenuButton.contentVerticalAlignment = .fill
         sideMenuButton.addTarget(self, action: #selector(showSideMenu), for: .touchUpInside)
         
-        let monthLabel = UILabel()
-        monthLabel.text = "\(DateProvider.currentMonth())月"
-        monthLabel.textColor = .systemGray
-        monthLabel.font = .systemFont(ofSize: 40)
+        let pickMonthButton = UIButton()
+        pickMonthButton.setTitle("\(DateProvider.currentMonth())月", for: .normal)
+        pickMonthButton.setTitleColor(.systemGray, for: .normal)
+        pickMonthButton.titleLabel?.font = .systemFont(ofSize: 40)
+        pickMonthButton.addTarget(self, action: #selector(showPickMonthPage), for: .touchUpInside)
         
-        monthLabel.translatesAutoresizingMaskIntoConstraints = false
+        pickMonthButton.translatesAutoresizingMaskIntoConstraints = false
         sideMenuButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(pickMonthButton)
         view.addSubview(sideMenuButton)
-        view.addSubview(monthLabel)
         
         NSLayoutConstraint.activate([
-            monthLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            monthLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            pickMonthButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            pickMonthButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
             
             sideMenuButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             sideMenuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
@@ -128,6 +130,12 @@ class HomeVC: UIViewController {
     
     @objc private func showSideMenu() { performSegue(withIdentifier: Segue.sideMenuNC, sender: nil) }
     
+    @objc private func showPickMonthPage() {
+        
+        view.alpha = 0.8
+        performSegue(withIdentifier: Segue.pickMonth, sender: nil)
+    }
+    
     private func makeSettings() -> SideMenuSettings {
         
         let presentationStyle = SideMenuPresentationStyle.menuSlideIn
@@ -147,7 +155,17 @@ class HomeVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard let sideMenuNC = segue.destination as? SideMenuNavigationController else { return }
-        sideMenuNC.settings = makeSettings()
+        switch segue.identifier {
+        
+        case Segue.sideMenuNC:
+            guard let sideMenuNC = segue.destination as? SideMenuNavigationController else { return }
+            sideMenuNC.settings = makeSettings()
+        case Segue.pickMonth:
+            guard let pickMonthVC = segue.destination as? PickMonthVC else { return }
+            pickMonthVC.callback = { [weak self] in
+                self?.view.alpha = 1
+            }
+        default: break
+        }
     }
 }
