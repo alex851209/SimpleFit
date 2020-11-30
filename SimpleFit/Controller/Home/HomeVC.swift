@@ -21,6 +21,10 @@ class HomeVC: UIViewController {
     var chartModel = AAChartModel()
     var chartOptions = AAOptions()
     let dataProvider = ChartDataProvider()
+    var selectedYear = Date().year()
+    var selectedMonth = Date().month()
+    let pickMonthButton = UIButton()
+    let sideMenuButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,15 +36,13 @@ class HomeVC: UIViewController {
     
     private func configureLayout() {
         
-        let sideMenuButton = UIButton()
         sideMenuButton.setImage(UIImage.systemAsset(.sideMenu), for: .normal)
         sideMenuButton.tintColor = .gray
         sideMenuButton.contentHorizontalAlignment = .fill
         sideMenuButton.contentVerticalAlignment = .fill
         sideMenuButton.addTarget(self, action: #selector(showSideMenu), for: .touchUpInside)
         
-        let pickMonthButton = UIButton()
-        pickMonthButton.setTitle("\(DateProvider.currentMonth())月", for: .normal)
+        pickMonthButton.setTitle("\(selectedMonth)月", for: .normal)
         pickMonthButton.setTitleColor(.systemGray, for: .normal)
         pickMonthButton.titleLabel?.font = .systemFont(ofSize: 40)
         pickMonthButton.addTarget(self, action: #selector(showPickMonthPage), for: .touchUpInside)
@@ -80,7 +82,7 @@ class HomeVC: UIViewController {
     
     private func configureChartModel() {
         
-        let chartData = dataProvider.getData()
+        let chartData = dataProvider.getDataFor(year: selectedYear, month: selectedMonth)
         
         guard let min = chartData.min,
               let max = chartData.max,
@@ -115,6 +117,15 @@ class HomeVC: UIViewController {
         let crosshair = AACrosshair().width(0.01)
         chartOptions = chartModel.aa_toAAOptions()
         chartOptions.xAxis?.crosshair(crosshair)
+    }
+    
+    private func updateChartFor(year: Int, month: Int) {
+        
+        pickMonthButton.setTitle("\(month)月", for: .normal)
+        self.selectedYear = year
+        self.selectedMonth = month
+        configureChart()
+        configureLayout()
     }
     
     private func configureSideMenu() {
@@ -162,8 +173,13 @@ class HomeVC: UIViewController {
             sideMenuNC.settings = makeSettings()
         case Segue.pickMonth:
             guard let pickMonthVC = segue.destination as? DatePickerVC else { return }
-            pickMonthVC.callback = { [weak self] in
+            pickMonthVC.selectedYear = self.selectedYear
+            pickMonthVC.selectedMonth = self.selectedMonth
+            pickMonthVC.callback = { [weak self] (selectedYear, selectedMonth, isCancel) in
+                
                 self?.view.alpha = 1
+                let isDifferentDate = self?.selectedYear != selectedYear || self?.selectedMonth != selectedMonth
+                if !isCancel && isDifferentDate { self?.updateChartFor(year: selectedYear, month: selectedMonth) }
             }
         default: break
         }

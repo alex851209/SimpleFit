@@ -11,32 +11,55 @@ import ADDatePicker
 
 class DatePickerVC: UIViewController {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var datePicker: ADDatePicker! {
+    @IBOutlet weak var datePickerView: UIView! {
         didSet {
-            datePicker.clipsToBounds = true
-            datePicker.layer.cornerRadius = 40
+            datePickerView.clipsToBounds = true
+            datePickerView.layer.cornerRadius = 40
         }
     }
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var datePicker: ADDatePicker!
     
     @IBAction func dismiss(_ sender: Any) {
         
-        callback?()
+        callback?(0, 0, true)
+        dismiss(animated: true)
+    }
+    @IBAction func confirmButtonDidTap(_ sender: Any) {
+        
+        callback?(selectedYear, selectedMonth, false)
         dismiss(animated: true)
     }
     
-    var callback: (() -> Void)?
+    var callback: ((Int, Int, Bool) -> Void)?
+    var selectedYear = 0
+    var selectedMonth = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureDatePicker()
-        configureTitleLabel()
+        configureLayout()
+    }
+    
+    private func configureLayout() {
+        
+        titleLabel.layer.borderWidth = 1
+        titleLabel.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        titleLabel.layer.cornerRadius = 15
+        titleLabel.clipsToBounds = true
+        
+        confirmButton.layer.borderWidth = 1
+        confirmButton.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        confirmButton.layer.cornerRadius = 15
+        confirmButton.clipsToBounds = true
     }
     
     private func configureDatePicker() {
         
-        datePicker.intialDate = Date()
+        let selectedDate = "\(selectedYear)-\(selectedMonth)-01"
+        datePicker.intialDate = DateProvider.dateStringToDate(selectedDate)
         datePicker.bgColor = .clear
         datePicker.deselectTextColor = UIColor.black.withAlphaComponent(0.2)
         datePicker.selectedBgColor = UIColor.black.withAlphaComponent(0.1)
@@ -45,24 +68,13 @@ class DatePickerVC: UIViewController {
         
         datePicker.delegate = self
     }
-    
-    private func configureTitleLabel() {
-        
-        titleLabel.layer.borderWidth = 1
-        titleLabel.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        titleLabel.layer.cornerRadius = 15
-        titleLabel.clipsToBounds = true
-    }
 }
 
 extension DatePickerVC: MIBlurPopupDelegate {
     
-    var popupView: UIView { datePicker }
-    
+    var popupView: UIView { datePickerView }
     var blurEffectStyle: UIBlurEffect.Style? { .none }
-    
     var initialScaleAmmount: CGFloat { 0.1 }
-    
     var animationDuration: TimeInterval { 0.7 }
 }
 
@@ -70,8 +82,8 @@ extension DatePickerVC: ADDatePickerDelegate {
     
     func ADDatePicker(didChange date: Date) {
         
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "MMM, yyyy"
-        titleLabel.text = dateformatter.string(from: date)
+        selectedYear = date.year()
+        selectedMonth = date.month()
+        titleLabel.text = "\(selectedYear)年\(selectedMonth)月"
     }
 }

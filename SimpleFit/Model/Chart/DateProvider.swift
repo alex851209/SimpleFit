@@ -110,4 +110,14 @@ class DateProvider {
 
         return number >= 10 ? String(number) : "0\(number)"
     }
+    
+    static func dateStringToDate(_ dateStr: String) -> Date {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date
+            = dateFormatter.date(from: dateStr)
+        return date!
+    }
 }
