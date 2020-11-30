@@ -9,5 +9,6 @@ target 'SimpleFit' do
   pod 'SwiftLint'
   pod 'AAInfographics', :git => 'https://github.com/AAChartModel/AAChartKit-Swift.git'
   pod 'SideMenu', '~> 6.0'
+  pod 'MIBlurPopup'
   
 end
