@@ -22,7 +22,7 @@
 		A5BDFDB32572A7DB004D3F57 /* SideMenuItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDB22572A7DB004D3F57 /* SideMenuItemManager.swift */; };
 		A5BDFDB625738B0D004D3F57 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDB525738B0D004D3F57 /* Date+Ext.swift */; };
 		A5BDFDB925738C4E004D3F57 /* DateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDB825738C4E004D3F57 /* DateProvider.swift */; };
-		A5BDFDF32573E404004D3F57 /* PickMonthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDF22573E404004D3F57 /* PickMonthVC.swift */; };
+		A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +43,7 @@
 		A5BDFDB22572A7DB004D3F57 /* SideMenuItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuItemManager.swift; sourceTree = "<group>"; };
 		A5BDFDB525738B0D004D3F57 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		A5BDFDB825738C4E004D3F57 /* DateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProvider.swift; sourceTree = "<group>"; };
-		A5BDFDF22573E404004D3F57 /* PickMonthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickMonthVC.swift; sourceTree = "<group>"; };
+		A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerVC.swift; sourceTree = "<group>"; };
 		C36156E5D1AC9ABF93F780A1 /* Pods-SimpleFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.release.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.release.xcconfig"; sourceTree = "<group>"; };
 		EB59C87BB5903418AC729B9E /* Pods-SimpleFit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.debug.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,7 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				A548A78A256FFC6400782A0E /* HomeVC.swift */,
-				A5BDFDF22573E404004D3F57 /* PickMonthVC.swift */,
+				A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -348,7 +348,7 @@
 				A5BDFD9625724AA6004D3F57 /* UIImage+Ext.swift in Sources */,
 				A5BDFD8125723362004D3F57 /* ChartData.swift in Sources */,
 				A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */,
-				A5BDFDF32573E404004D3F57 /* PickMonthVC.swift in Sources */,
+				A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */,
 				A5BDFDA125729495004D3F57 /* SideMenuCell.swift in Sources */,
 				A5BDFDB625738B0D004D3F57 /* Date+Ext.swift in Sources */,
 			);

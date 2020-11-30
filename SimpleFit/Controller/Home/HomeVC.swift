@@ -132,7 +132,7 @@ class HomeVC: UIViewController {
     
     @objc private func showPickMonthPage() {
         
-        view.alpha = 0.8
+        view.alpha = 0.9
         performSegue(withIdentifier: Segue.pickMonth, sender: nil)
     }
     
@@ -161,7 +161,7 @@ class HomeVC: UIViewController {
             guard let sideMenuNC = segue.destination as? SideMenuNavigationController else { return }
             sideMenuNC.settings = makeSettings()
         case Segue.pickMonth:
-            guard let pickMonthVC = segue.destination as? PickMonthVC else { return }
+            guard let pickMonthVC = segue.destination as? DatePickerVC else { return }
             pickMonthVC.callback = { [weak self] in
                 self?.view.alpha = 1
             }
