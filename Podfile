@@ -10,5 +10,6 @@ target 'SimpleFit' do
   pod 'AAInfographics', :git => 'https://github.com/AAChartModel/AAChartKit-Swift.git'
   pod 'SideMenu', '~> 6.0'
   pod 'MIBlurPopup'
+  pod 'ADDatePicker', :git => 'https://github.com/alex851209/ADDatePicker.git', :commit => '49b638a5997b21148f47d8aa05163f1f02d1bb0a'
   
 end

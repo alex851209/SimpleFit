@@ -1,11 +1,13 @@
 PODS:
   - AAInfographics (5.0.3)
+  - ADDatePicker (1.0.0)
   - MIBlurPopup (1.0.0)
   - SideMenu (6.5.0)
   - SwiftLint (0.41.0)
 
 DEPENDENCIES:
   - AAInfographics (from `https://github.com/AAChartModel/AAChartKit-Swift.git`)
+  - ADDatePicker (from `https://github.com/alex851209/ADDatePicker.git`, commit `49b638a5997b21148f47d8aa05163f1f02d1bb0a`)
   - MIBlurPopup
   - SideMenu (~> 6.0)
   - SwiftLint
@@ -19,18 +21,25 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   AAInfographics:
     :git: https://github.com/AAChartModel/AAChartKit-Swift.git
+  ADDatePicker:
+    :commit: 49b638a5997b21148f47d8aa05163f1f02d1bb0a
+    :git: https://github.com/alex851209/ADDatePicker.git
 
 CHECKOUT OPTIONS:
   AAInfographics:
     :commit: 7d4dcbf3959be8f718f1c78a1e9fa3836a75d198
     :git: https://github.com/AAChartModel/AAChartKit-Swift.git
+  ADDatePicker:
+    :commit: 49b638a5997b21148f47d8aa05163f1f02d1bb0a
+    :git: https://github.com/alex851209/ADDatePicker.git
 
 SPEC CHECKSUMS:
   AAInfographics: 7e0fdd1afab38f77539364cbef8380b22110478d
+  ADDatePicker: a3bfbdaeffa7191c9673323352f467c5ec269042
   MIBlurPopup: 7e855df6a79d13bc0840519c2ec9bac50b1ac01a
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
 
-PODFILE CHECKSUM: 721d4372a9968d388dc9586b7e409ec8e129c14a
+PODFILE CHECKSUM: 2eb938500ca61b37364cf1217b61a9966e0aec25
 
 COCOAPODS: 1.10.0
