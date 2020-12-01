@@ -25,6 +25,12 @@ class HomeVC: UIViewController {
     var selectedMonth = Date().month()
     let pickMonthButton = UIButton()
     let sideMenuButton = UIButton()
+    var addMenuButton = UIButton()
+    var weightButton = UIButton()
+    var cameraButton = UIButton()
+    var albumButton = UIButton()
+    var noteButton = UIButton()
+    var isAddMenuOpen = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,31 +42,21 @@ class HomeVC: UIViewController {
     
     private func configureLayout() {
         
-        sideMenuButton.setImage(UIImage.systemAsset(.sideMenu), for: .normal)
-        sideMenuButton.tintColor = .gray
-        sideMenuButton.contentHorizontalAlignment = .fill
-        sideMenuButton.contentVerticalAlignment = .fill
+        sideMenuButton.setImage(UIImage.asset(.sideMenu), for: .normal)
         sideMenuButton.addTarget(self, action: #selector(showSideMenu), for: .touchUpInside)
         
-        pickMonthButton.setTitle("\(selectedMonth)月", for: .normal)
-        pickMonthButton.setTitleColor(.systemGray, for: .normal)
-        pickMonthButton.titleLabel?.font = .systemFont(ofSize: 40)
         pickMonthButton.addTarget(self, action: #selector(showPickMonthPage), for: .touchUpInside)
         
-        pickMonthButton.translatesAutoresizingMaskIntoConstraints = false
-        sideMenuButton.translatesAutoresizingMaskIntoConstraints = false
+        addMenuButton.setImage(UIImage.asset(.add), for: .normal)
+        addMenuButton.addTarget(self, action: #selector(toggleAddMenu), for: .touchUpInside)
+        
         view.addSubview(pickMonthButton)
         view.addSubview(sideMenuButton)
+        view.addSubview(addMenuButton)
         
-        NSLayoutConstraint.activate([
-            pickMonthButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            pickMonthButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
-            
-            sideMenuButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            sideMenuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            sideMenuButton.widthAnchor.constraint(equalToConstant: 30),
-            sideMenuButton.heightAnchor.constraint(equalToConstant: 25)
-        ])
+        addMenuButton.applyAddMenuButton()
+        sideMenuButton.applySideMenuButton()
+        pickMonthButton.applyPickMonthButtonFor(month: selectedMonth)
     }
     
     private func configureNC() { navigationController?.navigationBar.isHidden = true }
@@ -136,14 +132,60 @@ class HomeVC: UIViewController {
         SideMenuManager.default.addPanGestureToPresent(toView: navigationController!.navigationBar)
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: view)
         SideMenuManager.default.rightMenuNavigationController?.settings = makeSettings()
+        
         configureLayout()
     }
     
-    @objc private func showSideMenu() { performSegue(withIdentifier: Segue.sideMenuNC, sender: nil) }
+    @objc private func showSideMenu() {
+        
+        if isAddMenuOpen { toggleAddMenu() }
+        performSegue(withIdentifier: Segue.sideMenuNC, sender: nil)
+    }
+    
+    @objc private func toggleAddMenu() {
+        
+        let buttons = [weightButton, cameraButton, albumButton, noteButton]
+        
+        weightButton.setImage(UIImage.asset(.weight), for: .normal)
+        cameraButton.setImage(UIImage.asset(.camera), for: .normal)
+        albumButton.setImage(UIImage.asset(.album), for: .normal)
+        noteButton.setImage(UIImage.asset(.note), for: .normal)
+        
+        buttons.forEach {
+            view.addSubview($0)
+            $0.applyAddMenuButton()
+        }
+        
+        if isAddMenuOpen {
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, animations: { [weak self] in
+                self?.addMenuButton.transform = .identity
+                var padding: CGFloat = 60
+                
+                buttons.forEach {
+                    $0.alpha = 0
+                    $0.transform = CGAffineTransform(translationX: 0, y: padding)
+                    padding += 60
+                }
+            })
+            isAddMenuOpen = false
+        } else {
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, animations: { [weak self] in
+                self?.addMenuButton.transform = CGAffineTransform(rotationAngle: .pi * 1.25)
+                var padding: CGFloat = 60
+                
+                buttons.forEach {
+                    $0.alpha = 1
+                    $0.transform = CGAffineTransform(translationX: 0, y: -padding)
+                    padding += 60
+                }
+            })
+            isAddMenuOpen = true
+        }
+    }
     
     @objc private func showPickMonthPage() {
         
-        view.alpha = 0.9
+        view.alpha = 0.8
         performSegue(withIdentifier: Segue.pickMonth, sender: nil)
     }
     

@@ -14,6 +14,7 @@
 		A548A78E256FFC6400782A0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A548A78C256FFC6400782A0E /* Main.storyboard */; };
 		A548A790256FFC6600782A0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A548A78F256FFC6600782A0E /* Assets.xcassets */; };
 		A548A793256FFC6600782A0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A548A791256FFC6600782A0E /* LaunchScreen.storyboard */; };
+		A5863E0F25752EB30017F09C /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5863E0E25752EB30017F09C /* UIButton+Ext.swift */; };
 		A5BDFD7E25723137004D3F57 /* ChartDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFD7D25723137004D3F57 /* ChartDataProvider.swift */; };
 		A5BDFD8125723362004D3F57 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFD8025723362004D3F57 /* ChartData.swift */; };
 		A5BDFD9625724AA6004D3F57 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFD9525724AA6004D3F57 /* UIImage+Ext.swift */; };
@@ -35,6 +36,7 @@
 		A548A78F256FFC6600782A0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A548A792256FFC6600782A0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A548A794256FFC6600782A0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5863E0E25752EB30017F09C /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		A5BDFD7D25723137004D3F57 /* ChartDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDataProvider.swift; sourceTree = "<group>"; };
 		A5BDFD8025723362004D3F57 /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		A5BDFD9525724AA6004D3F57 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				A5BDFD9525724AA6004D3F57 /* UIImage+Ext.swift */,
 				A5BDFDB525738B0D004D3F57 /* Date+Ext.swift */,
+				A5863E0E25752EB30017F09C /* UIButton+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				A5BDFD9625724AA6004D3F57 /* UIImage+Ext.swift in Sources */,
 				A5BDFD8125723362004D3F57 /* ChartData.swift in Sources */,
 				A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */,
+				A5863E0F25752EB30017F09C /* UIButton+Ext.swift in Sources */,
 				A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */,
 				A5BDFDA125729495004D3F57 /* SideMenuCell.swift in Sources */,
 				A5BDFDB625738B0D004D3F57 /* Date+Ext.swift in Sources */,
@@ -427,7 +431,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -482,7 +486,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -10,12 +10,15 @@ import UIKit
 enum ImageAsset: String {
     
     // HomeVC
-    case sideMenu = "line.horizontal.3"
+    case sideMenu = "menu"
+    case add = "add"
+    case weight = "weight"
+    case camera = "camera"
+    case album = "album"
+    case note = "note"
 }
 
 extension UIImage {
     
     static func asset(_ asset: ImageAsset) -> UIImage? { return UIImage(named: asset.rawValue) }
-    
-    static func systemAsset(_ asset: ImageAsset) -> UIImage? { return UIImage(systemName: asset.rawValue) }
 }
