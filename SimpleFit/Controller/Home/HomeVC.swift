@@ -127,11 +127,11 @@ class HomeVC: UIViewController {
     private func configureSideMenu() {
         
         let sideMenuNC = storyboard?.instantiateViewController(withIdentifier: "SideMenuNC")
-        SideMenuManager.default.rightMenuNavigationController = sideMenuNC as? SideMenuNavigationController
+        SideMenuManager.default.leftMenuNavigationController = sideMenuNC as? SideMenuNavigationController
         // Enable gestures. The left and/or right menus must be set up above for these to work.
         SideMenuManager.default.addPanGestureToPresent(toView: navigationController!.navigationBar)
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: view)
-        SideMenuManager.default.rightMenuNavigationController?.settings = makeSettings()
+        SideMenuManager.default.leftMenuNavigationController?.settings = makeSettings()
         
         configureLayout()
     }

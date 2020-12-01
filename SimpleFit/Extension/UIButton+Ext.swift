@@ -35,7 +35,7 @@ extension UIButton {
         
         NSLayoutConstraint.activate([
             topAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor, constant: 8),
-            trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -16),
+            leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 16),
             widthAnchor.constraint(equalToConstant: 40),
             heightAnchor.constraint(equalToConstant: 40)
         ])
