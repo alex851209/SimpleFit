@@ -9,9 +9,11 @@ import UIKit
 
 extension UIButton {
     
-    func applyAddMenuButton() {
+    func applyAddButton() {
         
         configureMenuButton()
+        
+        layer.cornerRadius = 25
         
         guard let superview = superview else { return }
         
@@ -20,6 +22,18 @@ extension UIButton {
         NSLayoutConstraint.activate([
             bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -20),
             trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
+            widthAnchor.constraint(equalToConstant: 50),
+            heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+    func applyAddMenuButton() {
+        
+        configureMenuButton()
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
             widthAnchor.constraint(equalToConstant: 40),
             heightAnchor.constraint(equalToConstant: 40)
         ])
@@ -58,6 +72,9 @@ extension UIButton {
     }
     
     private func configureMenuButton() {
+        
+        contentHorizontalAlignment = .fill
+        contentVerticalAlignment = .fill
         
         backgroundColor = .white
         tintColor = .systemGray

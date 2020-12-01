@@ -54,7 +54,7 @@ class HomeVC: UIViewController {
         view.addSubview(sideMenuButton)
         view.addSubview(addMenuButton)
         
-        addMenuButton.applyAddMenuButton()
+        addMenuButton.applyAddButton()
         sideMenuButton.applySideMenuButton()
         pickMonthButton.applyPickMonthButtonFor(month: selectedMonth)
     }
@@ -144,7 +144,8 @@ class HomeVC: UIViewController {
     
     @objc private func toggleAddMenu() {
         
-        let buttons = [weightButton, cameraButton, albumButton, noteButton]
+        let buttons = [noteButton, albumButton, cameraButton, weightButton]
+        var padding: CGFloat = 70
         
         weightButton.setImage(UIImage.asset(.weight), for: .normal)
         cameraButton.setImage(UIImage.asset(.camera), for: .normal)
@@ -154,29 +155,34 @@ class HomeVC: UIViewController {
         buttons.forEach {
             view.addSubview($0)
             $0.applyAddMenuButton()
+            
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                $0.centerXAnchor.constraint(equalTo: addMenuButton.centerXAnchor),
+                $0.centerYAnchor.constraint(equalTo: addMenuButton.centerYAnchor)
+            ])
         }
         
         if isAddMenuOpen {
             UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, animations: { [weak self] in
                 self?.addMenuButton.transform = .identity
-                var padding: CGFloat = 60
                 
                 buttons.forEach {
                     $0.alpha = 0
                     $0.transform = CGAffineTransform(translationX: 0, y: padding)
-                    padding += 60
+                    padding += 70
                 }
             })
             isAddMenuOpen = false
         } else {
             UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, animations: { [weak self] in
                 self?.addMenuButton.transform = CGAffineTransform(rotationAngle: .pi * 1.25)
-                var padding: CGFloat = 60
                 
                 buttons.forEach {
                     $0.alpha = 1
                     $0.transform = CGAffineTransform(translationX: 0, y: -padding)
-                    padding += 60
+                    padding += 70
                 }
             })
             isAddMenuOpen = true
