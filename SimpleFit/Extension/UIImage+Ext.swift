@@ -16,6 +16,9 @@ enum ImageAsset: String {
     case camera = "camera"
     case album = "album"
     case note = "note"
+    
+    //DetailVC
+    case remove = "remove"
 }
 
 extension UIImage {

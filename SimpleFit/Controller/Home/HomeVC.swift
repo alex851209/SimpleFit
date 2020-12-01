@@ -14,7 +14,8 @@ class HomeVC: UIViewController {
     private struct Segue {
         
         static let sideMenuNC = "SegueSideMenuNC"
-        static let pickMonth = "SeguePickMonth"
+        static let datePicker = "SegueDatePicker"
+        static let detail = "SegueDetail"
     }
     
     let chartView = AAChartView()
@@ -73,6 +74,7 @@ class HomeVC: UIViewController {
         let chartViewWidth  = view.frame.size.width
         let chartViewHeight = view.frame.size.height - 80
         chartView.frame = CGRect(x: 0, y: 0, width: chartViewWidth, height: chartViewHeight)
+        chartView.delegate = self
         view.addSubview(chartView)
     }
     
@@ -192,7 +194,7 @@ class HomeVC: UIViewController {
     @objc private func showPickMonthPage() {
         
         view.alpha = 0.8
-        performSegue(withIdentifier: Segue.pickMonth, sender: nil)
+        performSegue(withIdentifier: Segue.datePicker, sender: nil)
     }
     
     private func makeSettings() -> SideMenuSettings {
@@ -219,17 +221,31 @@ class HomeVC: UIViewController {
         case Segue.sideMenuNC:
             guard let sideMenuNC = segue.destination as? SideMenuNavigationController else { return }
             sideMenuNC.settings = makeSettings()
-        case Segue.pickMonth:
-            guard let pickMonthVC = segue.destination as? DatePickerVC else { return }
-            pickMonthVC.selectedYear = self.selectedYear
-            pickMonthVC.selectedMonth = self.selectedMonth
-            pickMonthVC.callback = { [weak self] (selectedYear, selectedMonth, isCancel) in
+        case Segue.datePicker:
+            guard let datePickerVC = segue.destination as? DatePickerVC else { return }
+            datePickerVC.selectedYear = self.selectedYear
+            datePickerVC.selectedMonth = self.selectedMonth
+            datePickerVC.callback = { [weak self] (selectedYear, selectedMonth, isCancel) in
                 
                 self?.view.alpha = 1
                 let isDifferentDate = self?.selectedYear != selectedYear || self?.selectedMonth != selectedMonth
                 if !isCancel && isDifferentDate { self?.updateChartFor(year: selectedYear, month: selectedMonth) }
             }
+        case Segue.detail:
+            guard let detailVC = segue.destination as? DetailVC else { return }
+            detailVC.callback = { [weak self] in
+                self?.view.alpha = 1
+            }
         default: break
         }
+    }
+}
+
+extension HomeVC: AAChartViewDelegate {
+    
+    func aaChartView(_ aaChartView: AAChartView, moveOverEventMessage: AAMoveOverEventMessageModel) {
+        
+        view.alpha = 0.8
+        performSegue(withIdentifier: Segue.detail, sender: nil)
     }
 }
