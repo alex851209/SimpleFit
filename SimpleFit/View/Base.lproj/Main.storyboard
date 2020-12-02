@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17503.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s8g-5e-1cc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17502"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -355,48 +356,49 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xgY-cM-nwr">
                                 <rect key="frame" x="47" y="288" width="320" height="320"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vU-SL-NQ1">
-                                        <rect key="frame" x="125" y="275" width="70" height="36"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00.0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fHd-Fz-iSZ">
+                                        <rect key="frame" x="105" y="25" width="110" height="51.5"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="gFG-0u-gLk"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="dfE-Ln-pa6"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="確認">
-                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新增體重" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wc-TY-Qof">
-                                        <rect key="frame" x="119" y="16" width="82" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="Vcq-kS-zyy">
-                                        <rect key="frame" x="92.5" y="48" width="135" height="30"/>
+                                        <color key="textColor" systemColor="systemGrayColor"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="50"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                    </textField>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foot" translatesAutoresizingMaskIntoConstraints="NO" id="Xhw-D7-ggi">
+                                        <rect key="frame" x="0.0" y="94" width="320" height="200"/>
+                                        <color key="tintColor" systemColor="systemGray5Color"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="CWS-3H-8Xd"/>
-                                            <constraint firstAttribute="width" constant="135" id="rAV-9A-zef"/>
+                                            <constraint firstAttribute="height" constant="200" id="dco-y4-SRT"/>
                                         </constraints>
-                                        <date key="minimumDate" timeIntervalSinceReferenceDate="284036400">
-                                            <!--2010-01-01 11:00:00 +0000-->
-                                        </date>
-                                        <date key="maximumDate" timeIntervalSinceReferenceDate="946638000">
-                                            <!--2030-12-31 11:00:00 +0000-->
-                                        </date>
-                                    </datePicker>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="Vcq-kS-zyy" firstAttribute="centerX" secondItem="xgY-cM-nwr" secondAttribute="centerX" id="Adi-ZR-QPD"/>
+                                    <constraint firstItem="fHd-Fz-iSZ" firstAttribute="top" secondItem="xgY-cM-nwr" secondAttribute="top" constant="25" id="6Mg-h3-ONi"/>
+                                    <constraint firstItem="Xhw-D7-ggi" firstAttribute="centerX" secondItem="xgY-cM-nwr" secondAttribute="centerX" id="8xJ-Zt-rho"/>
                                     <constraint firstAttribute="width" constant="320" id="B1A-UK-Gle"/>
-                                    <constraint firstItem="2Wc-TY-Qof" firstAttribute="centerX" secondItem="xgY-cM-nwr" secondAttribute="centerX" id="EwO-Tp-BuD"/>
                                     <constraint firstAttribute="height" constant="320" id="Lu6-Ra-oip"/>
-                                    <constraint firstItem="0vU-SL-NQ1" firstAttribute="centerX" secondItem="xgY-cM-nwr" secondAttribute="centerX" id="hdE-z0-gdX"/>
-                                    <constraint firstItem="2Wc-TY-Qof" firstAttribute="top" secondItem="xgY-cM-nwr" secondAttribute="top" constant="16" id="jzy-62-Mwn"/>
-                                    <constraint firstAttribute="bottom" secondItem="0vU-SL-NQ1" secondAttribute="bottom" constant="9" id="qyI-tu-GTK"/>
-                                    <constraint firstItem="Vcq-kS-zyy" firstAttribute="top" secondItem="2Wc-TY-Qof" secondAttribute="bottom" constant="8" id="vq2-jE-WNb"/>
+                                    <constraint firstItem="Xhw-D7-ggi" firstAttribute="leading" secondItem="xgY-cM-nwr" secondAttribute="leading" id="bAA-Id-69E"/>
+                                    <constraint firstItem="Xhw-D7-ggi" firstAttribute="top" secondItem="fHd-Fz-iSZ" secondAttribute="bottom" constant="17.5" id="f8t-Ek-oo9"/>
+                                    <constraint firstItem="fHd-Fz-iSZ" firstAttribute="centerX" secondItem="xgY-cM-nwr" secondAttribute="centerX" id="uyT-c3-Ieo"/>
                                 </constraints>
                             </view>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="y52-Kx-QW3">
+                                <rect key="frame" x="135.5" y="233.5" width="143.5" height="34.5"/>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <locale key="locale" localeIdentifier="zh_TW"/>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vU-SL-NQ1">
+                                <rect key="frame" x="177" y="638" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="FxD-8L-SGS"/>
+                                    <constraint firstAttribute="height" constant="60" id="bA3-lw-9gF"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemGray2Color"/>
+                                <state key="normal" image="checkmark"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iBA-Ta-S0V"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -404,15 +406,20 @@
                             <constraint firstItem="xgY-cM-nwr" firstAttribute="centerY" secondItem="F2r-mc-7pe" secondAttribute="centerY" id="1eQ-3k-n1G"/>
                             <constraint firstItem="CYH-K0-4z9" firstAttribute="top" secondItem="F2r-mc-7pe" secondAttribute="top" id="9Mv-cd-sZE"/>
                             <constraint firstItem="CYH-K0-4z9" firstAttribute="trailing" secondItem="iBA-Ta-S0V" secondAttribute="trailing" id="Abb-mc-ZRA"/>
+                            <constraint firstItem="y52-Kx-QW3" firstAttribute="centerX" secondItem="F2r-mc-7pe" secondAttribute="centerX" id="EVf-FL-aYC"/>
                             <constraint firstItem="xgY-cM-nwr" firstAttribute="centerX" secondItem="F2r-mc-7pe" secondAttribute="centerX" id="N3j-St-eT4"/>
+                            <constraint firstItem="0vU-SL-NQ1" firstAttribute="centerX" secondItem="F2r-mc-7pe" secondAttribute="centerX" id="NHL-Jx-zvP"/>
                             <constraint firstAttribute="bottom" secondItem="CYH-K0-4z9" secondAttribute="bottom" id="a50-RH-bx4"/>
                             <constraint firstItem="CYH-K0-4z9" firstAttribute="leading" secondItem="iBA-Ta-S0V" secondAttribute="leading" id="ktb-Am-3SO"/>
+                            <constraint firstItem="xgY-cM-nwr" firstAttribute="top" secondItem="y52-Kx-QW3" secondAttribute="bottom" constant="20" id="wfv-GC-RgH"/>
+                            <constraint firstItem="0vU-SL-NQ1" firstAttribute="top" secondItem="xgY-cM-nwr" secondAttribute="bottom" constant="30" id="ych-7d-TxE"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addWeightView" destination="xgY-cM-nwr" id="Wa7-WG-dVy"/>
                         <outlet property="confirmButton" destination="0vU-SL-NQ1" id="DxW-Rd-mnm"/>
-                        <outlet property="datePicker" destination="Vcq-kS-zyy" id="sNG-y7-oTH"/>
+                        <outlet property="datePicker" destination="y52-Kx-QW3" id="PyC-uN-bVh"/>
+                        <outlet property="weightText" destination="fHd-Fz-iSZ" id="lYJ-WF-vos"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7R0-kS-lKm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -421,12 +428,23 @@
         </scene>
     </scenes>
     <resources>
+        <image name="checkmark" width="372" height="372"/>
+        <image name="foot" width="700" height="610"/>
         <image name="remove" width="384" height="384"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

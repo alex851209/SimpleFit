@@ -10,13 +10,9 @@ import MIBlurPopup
 
 class AddWeightVC: UIViewController {
 
-    @IBOutlet weak var addWeightView: UIView! {
-        didSet {
-            addWeightView.clipsToBounds = true
-            addWeightView.layer.cornerRadius = 40
-        }
-    }
+    @IBOutlet weak var addWeightView: UIView!
     @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var weightText: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     
     @IBAction func dismiss(_ sender: Any) {
@@ -30,33 +26,43 @@ class AddWeightVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
    
-        configureButton()
+        configureLayout()
+    }
+    
+    private func configureLayout() {
+        
+        configureAddWeightView()
+        configureWeightText()
         configureDatePicker()
     }
     
+    private func configureAddWeightView() {
+        
+        addWeightView.layer.borderWidth = 5
+        addWeightView.layer.borderColor = UIColor.systemGray5.cgColor
+        addWeightView.clipsToBounds = true
+        addWeightView.layer.cornerRadius = 40
+    }
+    
     private func configureDatePicker() {
-        
-        datePicker.tintColor = .systemGray
-        
+
         datePicker.layer.borderWidth = 1
-        datePicker.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        datePicker.layer.borderColor = UIColor.systemGray5.cgColor
         datePicker.layer.cornerRadius = 15
         datePicker.clipsToBounds = true
     }
     
-    private func configureButton() {
+    private func configureWeightText() {
         
-        confirmButton.layer.borderWidth = 1
-        confirmButton.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        confirmButton.layer.cornerRadius = 15
-        confirmButton.clipsToBounds = true
+        weightText.layer.cornerRadius = 20
+        weightText.clipsToBounds = true
     }
 }
 
 extension AddWeightVC: MIBlurPopupDelegate {
     
-    var popupView: UIView { addWeightView }
-    var blurEffectStyle: UIBlurEffect.Style? { .none }
+    var popupView: UIView { view }
+    var blurEffectStyle: UIBlurEffect.Style? { .systemUltraThinMaterial }
     var initialScaleAmmount: CGFloat { 0.1 }
     var animationDuration: TimeInterval { 0.7 }
 }

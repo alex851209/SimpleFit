@@ -213,14 +213,13 @@ class HomeVC: UIViewController {
     
     @objc private func showAddWeight() {
         
-        view.alpha = 0.8
         toggleAddMenu()
         performSegue(withIdentifier: Segue.addWeight, sender: nil)
     }
     
     @objc private func showCamera() {
         
-        if isAddMenuOpen { toggleAddMenu() }
+        toggleAddMenu()
         if UIImagePickerController.isSourceTypeAvailable(.camera) { showImagePicker(type: .camera) }
     }
     
@@ -264,16 +263,6 @@ class HomeVC: UIViewController {
                 let isDifferentDate = self?.selectedYear != selectedYear || self?.selectedMonth != selectedMonth
                 if !isCancel && isDifferentDate { self?.updateChartFor(year: selectedYear, month: selectedMonth) }
             }
-        case Segue.detail:
-            guard let detailVC = segue.destination as? DetailVC else { return }
-            detailVC.callback = { [weak self] in
-                self?.view.alpha = 1
-            }
-        case Segue.addWeight:
-            guard let addWeightVC = segue.destination as? AddWeightVC else { return }
-            addWeightVC.callback = { [weak self] in
-                self?.view.alpha = 1
-            }
         default: break
         }
     }
@@ -283,7 +272,6 @@ extension HomeVC: AAChartViewDelegate {
     
     func aaChartView(_ aaChartView: AAChartView, moveOverEventMessage: AAMoveOverEventMessageModel) {
         
-        view.alpha = 0.8
         performSegue(withIdentifier: Segue.detail, sender: nil)
     }
 }
