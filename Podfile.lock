@@ -7,7 +7,7 @@ PODS:
 
 DEPENDENCIES:
   - AAInfographics (from `https://github.com/AAChartModel/AAChartKit-Swift.git`)
-  - ADDatePicker (from `https://github.com/alex851209/ADDatePicker.git`, commit `49b638a5997b21148f47d8aa05163f1f02d1bb0a`)
+  - ADDatePicker (from `https://github.com/alex851209/ADDatePicker.git`, commit `66e721ef409a7aa9611371b675c21eab9d903a07`)
   - MIBlurPopup
   - SideMenu (~> 6.0)
   - SwiftLint
@@ -22,7 +22,7 @@ EXTERNAL SOURCES:
   AAInfographics:
     :git: https://github.com/AAChartModel/AAChartKit-Swift.git
   ADDatePicker:
-    :commit: 49b638a5997b21148f47d8aa05163f1f02d1bb0a
+    :commit: 66e721ef409a7aa9611371b675c21eab9d903a07
     :git: https://github.com/alex851209/ADDatePicker.git
 
 CHECKOUT OPTIONS:
@@ -30,7 +30,7 @@ CHECKOUT OPTIONS:
     :commit: 7d4dcbf3959be8f718f1c78a1e9fa3836a75d198
     :git: https://github.com/AAChartModel/AAChartKit-Swift.git
   ADDatePicker:
-    :commit: 49b638a5997b21148f47d8aa05163f1f02d1bb0a
+    :commit: 66e721ef409a7aa9611371b675c21eab9d903a07
     :git: https://github.com/alex851209/ADDatePicker.git
 
 SPEC CHECKSUMS:
@@ -40,6 +40,6 @@ SPEC CHECKSUMS:
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
 
-PODFILE CHECKSUM: 2eb938500ca61b37364cf1217b61a9966e0aec25
+PODFILE CHECKSUM: ce2a05a0cea26e144b250f1601d6a2811d77ff52
 
 COCOAPODS: 1.10.0
