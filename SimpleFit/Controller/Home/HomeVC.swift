@@ -139,6 +139,14 @@ class HomeVC: UIViewController {
         configureLayout()
     }
     
+    private func showImagePicker(type: UIImagePickerController.SourceType) {
+        
+        let picker = UIImagePickerController()
+        picker.sourceType = type
+        picker.allowsEditing = true
+        present(picker, animated: true, completion: nil)
+    }
+    
     @objc private func showSideMenu() {
         
         if isAddMenuOpen { toggleAddMenu() }
@@ -156,6 +164,8 @@ class HomeVC: UIViewController {
         noteButton.setImage(UIImage.asset(.note), for: .normal)
         
         weightButton.addTarget(self, action: #selector(showAddWeight), for: .touchUpInside)
+        cameraButton.addTarget(self, action: #selector(showCamera), for: .touchUpInside)
+        albumButton.addTarget(self, action: #selector(showAlbum), for: .touchUpInside)
         
         buttons.forEach {
             view.addSubview($0)
@@ -206,6 +216,18 @@ class HomeVC: UIViewController {
         view.alpha = 0.8
         toggleAddMenu()
         performSegue(withIdentifier: Segue.addWeight, sender: nil)
+    }
+    
+    @objc private func showCamera() {
+        
+        if isAddMenuOpen { toggleAddMenu() }
+        if UIImagePickerController.isSourceTypeAvailable(.camera) { showImagePicker(type: .camera) }
+    }
+    
+    @objc private func showAlbum() {
+        
+        if isAddMenuOpen { toggleAddMenu() }
+        showImagePicker(type: .photoLibrary)
     }
     
     private func makeSettings() -> SideMenuSettings {
