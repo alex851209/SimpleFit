@@ -206,7 +206,6 @@ class HomeVC: UIViewController {
     
     @objc private func showPickMonthPage() {
         
-        view.alpha = 0.8
         if isAddMenuOpen { toggleAddMenu() }
         performSegue(withIdentifier: Segue.datePicker, sender: nil)
     }
@@ -258,8 +257,6 @@ class HomeVC: UIViewController {
             datePickerVC.selectedYear = self.selectedYear
             datePickerVC.selectedMonth = self.selectedMonth
             datePickerVC.callback = { [weak self] (selectedYear, selectedMonth, isCancel) in
-                
-                self?.view.alpha = 1
                 let isDifferentDate = self?.selectedYear != selectedYear || self?.selectedMonth != selectedMonth
                 if !isCancel && isDifferentDate { self?.updateChartFor(year: selectedYear, month: selectedMonth) }
             }
@@ -272,6 +269,7 @@ extension HomeVC: AAChartViewDelegate {
     
     func aaChartView(_ aaChartView: AAChartView, moveOverEventMessage: AAMoveOverEventMessageModel) {
         
+        if isAddMenuOpen { toggleAddMenu() }
         performSegue(withIdentifier: Segue.detail, sender: nil)
     }
 }

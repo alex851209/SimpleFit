@@ -10,15 +10,8 @@ import MIBlurPopup
 import ADDatePicker
 
 class DatePickerVC: UIViewController {
-
-    @IBOutlet weak var datePickerView: UIView! {
-        didSet {
-            datePickerView.clipsToBounds = true
-            datePickerView.layer.cornerRadius = 40
-        }
-    }
+    
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var datePicker: ADDatePicker!
     
     @IBAction func dismiss(_ sender: Any) {
@@ -39,21 +32,16 @@ class DatePickerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureTitleLabel()
         configureDatePicker()
-        configureLayout()
     }
     
-    private func configureLayout() {
+    private func configureTitleLabel() {
         
         titleLabel.layer.borderWidth = 1
         titleLabel.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        titleLabel.layer.cornerRadius = 15
+        titleLabel.layer.cornerRadius = titleLabel.frame.height / 2
         titleLabel.clipsToBounds = true
-        
-        confirmButton.layer.borderWidth = 1
-        confirmButton.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        confirmButton.layer.cornerRadius = 15
-        confirmButton.clipsToBounds = true
     }
     
     private func configureDatePicker() {
@@ -72,8 +60,8 @@ class DatePickerVC: UIViewController {
 
 extension DatePickerVC: MIBlurPopupDelegate {
     
-    var popupView: UIView { datePickerView }
-    var blurEffectStyle: UIBlurEffect.Style? { .none }
+    var popupView: UIView { view }
+    var blurEffectStyle: UIBlurEffect.Style? { .light }
     var initialScaleAmmount: CGFloat { 0.1 }
     var animationDuration: TimeInterval { 0.7 }
 }

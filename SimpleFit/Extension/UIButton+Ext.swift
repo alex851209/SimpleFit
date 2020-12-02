@@ -13,6 +13,7 @@ extension UIButton {
         
         configureMenuButton()
         
+        tintColor = .systemGray2
         layer.cornerRadius = 25
         
         guard let superview = superview else { return }

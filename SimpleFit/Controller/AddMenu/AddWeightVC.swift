@@ -15,11 +15,8 @@ class AddWeightVC: UIViewController {
     @IBOutlet weak var weightText: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    @IBAction func dismiss(_ sender: Any) {
-        
-        callback?()
-        dismiss(animated: true)
-    }
+    @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
+    @IBAction func confirmButtonDidTap(_ sender: Any) { dismiss(animated: true) }
     
     var callback: (() -> Void)?
     
@@ -40,21 +37,21 @@ class AddWeightVC: UIViewController {
         
         addWeightView.layer.borderWidth = 5
         addWeightView.layer.borderColor = UIColor.systemGray5.cgColor
-        addWeightView.clipsToBounds = true
         addWeightView.layer.cornerRadius = 40
+        addWeightView.clipsToBounds = true
     }
     
     private func configureDatePicker() {
 
         datePicker.layer.borderWidth = 1
-        datePicker.layer.borderColor = UIColor.systemGray5.cgColor
-        datePicker.layer.cornerRadius = 15
+        datePicker.layer.borderColor = UIColor.systemGray2.cgColor
+        datePicker.layer.cornerRadius = datePicker.frame.height / 2
         datePicker.clipsToBounds = true
     }
     
     private func configureWeightText() {
         
-        weightText.layer.cornerRadius = 20
+        weightText.layer.cornerRadius = 15
         weightText.clipsToBounds = true
     }
 }

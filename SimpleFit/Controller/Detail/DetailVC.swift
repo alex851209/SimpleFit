@@ -10,12 +10,7 @@ import MIBlurPopup
 
 class DetailVC: UIViewController {
     
-    @IBOutlet weak var detailView: UIView! {
-        didSet {
-            detailView.clipsToBounds = true
-            detailView.layer.cornerRadius = 40
-        }
-    }
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var noteTextView: UITextView!
@@ -36,6 +31,13 @@ class DetailVC: UIViewController {
     
     private func configureLayout() {
         
+        titleLabel.layer.borderWidth = 1
+        titleLabel.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        titleLabel.layer.cornerRadius = titleLabel.frame.height / 2
+        titleLabel.clipsToBounds = true
+        
+        weightLabel.layer.borderWidth = 1
+        weightLabel.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
         weightLabel.layer.cornerRadius = weightLabel.frame.width / 2
         weightLabel.clipsToBounds = true
         
@@ -50,8 +52,8 @@ class DetailVC: UIViewController {
 
 extension DetailVC: MIBlurPopupDelegate {
     
-    var popupView: UIView { detailView }
-    var blurEffectStyle: UIBlurEffect.Style? { .systemUltraThinMaterialDark }
+    var popupView: UIView { view }
+    var blurEffectStyle: UIBlurEffect.Style? { .systemUltraThinMaterial }
     var initialScaleAmmount: CGFloat { 0.1 }
     var animationDuration: TimeInterval { 0.7 }
 }
