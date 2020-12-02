@@ -1,6 +1,7 @@
 PODS:
   - AAInfographics (5.0.3)
   - ADDatePicker (1.0.0)
+  - IQKeyboardManagerSwift (6.5.6)
   - MIBlurPopup (1.0.0)
   - SideMenu (6.5.0)
   - SwiftLint (0.41.0)
@@ -8,12 +9,14 @@ PODS:
 DEPENDENCIES:
   - AAInfographics (from `https://github.com/AAChartModel/AAChartKit-Swift.git`)
   - ADDatePicker (from `https://github.com/alex851209/ADDatePicker.git`, commit `66e721ef409a7aa9611371b675c21eab9d903a07`)
+  - IQKeyboardManagerSwift
   - MIBlurPopup
   - SideMenu (~> 6.0)
   - SwiftLint
 
 SPEC REPOS:
   trunk:
+    - IQKeyboardManagerSwift
     - MIBlurPopup
     - SideMenu
     - SwiftLint
@@ -36,10 +39,11 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AAInfographics: 7e0fdd1afab38f77539364cbef8380b22110478d
   ADDatePicker: a3bfbdaeffa7191c9673323352f467c5ec269042
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   MIBlurPopup: 7e855df6a79d13bc0840519c2ec9bac50b1ac01a
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
 
-PODFILE CHECKSUM: ce2a05a0cea26e144b250f1601d6a2811d77ff52
+PODFILE CHECKSUM: bb6fd5a99ec01a8257a3ef420cc576405a7c9859
 
 COCOAPODS: 1.10.0

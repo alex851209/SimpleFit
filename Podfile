@@ -11,5 +11,6 @@ target 'SimpleFit' do
   pod 'SideMenu', '~> 6.0'
   pod 'MIBlurPopup'
   pod 'ADDatePicker', :git => 'https://github.com/alex851209/ADDatePicker.git', :commit => '66e721ef409a7aa9611371b675c21eab9d903a07'
+  pod 'IQKeyboardManagerSwift'
   
 end
