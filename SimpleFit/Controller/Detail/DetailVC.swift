@@ -51,7 +51,7 @@ class DetailVC: UIViewController {
 extension DetailVC: MIBlurPopupDelegate {
     
     var popupView: UIView { detailView }
-    var blurEffectStyle: UIBlurEffect.Style? { .extraLight }
+    var blurEffectStyle: UIBlurEffect.Style? { .systemUltraThinMaterialDark }
     var initialScaleAmmount: CGFloat { 0.1 }
     var animationDuration: TimeInterval { 0.7 }
 }

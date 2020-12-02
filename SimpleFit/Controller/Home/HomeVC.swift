@@ -16,6 +16,7 @@ class HomeVC: UIViewController {
         static let sideMenuNC = "SegueSideMenuNC"
         static let datePicker = "SegueDatePicker"
         static let detail = "SegueDetail"
+        static let addWeight = "SegueAddWeight"
     }
     
     let chartView = AAChartView()
@@ -154,6 +155,8 @@ class HomeVC: UIViewController {
         albumButton.setImage(UIImage.asset(.album), for: .normal)
         noteButton.setImage(UIImage.asset(.note), for: .normal)
         
+        weightButton.addTarget(self, action: #selector(showAddWeight), for: .touchUpInside)
+        
         buttons.forEach {
             view.addSubview($0)
             $0.applyAddMenuButton()
@@ -194,7 +197,15 @@ class HomeVC: UIViewController {
     @objc private func showPickMonthPage() {
         
         view.alpha = 0.8
+        if isAddMenuOpen { toggleAddMenu() }
         performSegue(withIdentifier: Segue.datePicker, sender: nil)
+    }
+    
+    @objc private func showAddWeight() {
+        
+        view.alpha = 0.8
+        toggleAddMenu()
+        performSegue(withIdentifier: Segue.addWeight, sender: nil)
     }
     
     private func makeSettings() -> SideMenuSettings {
@@ -234,6 +245,11 @@ class HomeVC: UIViewController {
         case Segue.detail:
             guard let detailVC = segue.destination as? DetailVC else { return }
             detailVC.callback = { [weak self] in
+                self?.view.alpha = 1
+            }
+        case Segue.addWeight:
+            guard let addWeightVC = segue.destination as? AddWeightVC else { return }
+            addWeightVC.callback = { [weak self] in
                 self?.view.alpha = 1
             }
         default: break

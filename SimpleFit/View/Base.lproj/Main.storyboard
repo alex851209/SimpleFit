@@ -23,6 +23,7 @@
                         <segue destination="jxN-hG-3Tm" kind="presentation" identifier="SegueSideMenuNC" id="Xn2-mh-DDd"/>
                         <segue destination="79N-88-cWt" kind="custom" identifier="SegueDatePicker" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="pxE-dJ-onM"/>
                         <segue destination="3Mj-F4-QRB" kind="custom" identifier="SegueDetail" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="Dyv-aP-9yu"/>
+                        <segue destination="EAM-P2-hXX" kind="custom" identifier="SegueAddWeight" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="793-tA-MHQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -137,7 +138,7 @@
                                             <constraint firstAttribute="height" constant="30" id="18c-Ea-Be1"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <color key="textColor" systemColor="systemGrayColor"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ueg-3i-AU3">
@@ -175,7 +176,7 @@
                                             <constraint firstAttribute="width" constant="180" id="TBP-tq-JfE"/>
                                             <constraint firstAttribute="height" constant="120" id="n2J-2i-G3y"/>
                                         </constraints>
-                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -335,6 +336,88 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vhk-L1-OA4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1997" y="53"/>
+        </scene>
+        <!--Add WeightVC-->
+        <scene sceneID="K9s-YG-kiA">
+            <objects>
+                <viewController id="EAM-P2-hXX" customClass="AddWeightVC" customModule="SimpleFit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="F2r-mc-7pe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CYH-K0-4z9">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <action selector="dismiss:" destination="EAM-P2-hXX" eventType="touchUpInside" id="ARb-b2-xte"/>
+                                    <action selector="dismiss:" destination="79N-88-cWt" eventType="touchUpInside" id="oFW-od-7fv"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xgY-cM-nwr">
+                                <rect key="frame" x="47" y="288" width="320" height="320"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vU-SL-NQ1">
+                                        <rect key="frame" x="125" y="275" width="70" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="gFG-0u-gLk"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="確認">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新增體重" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wc-TY-Qof">
+                                        <rect key="frame" x="119" y="16" width="82" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="Vcq-kS-zyy">
+                                        <rect key="frame" x="92.5" y="48" width="135" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="CWS-3H-8Xd"/>
+                                            <constraint firstAttribute="width" constant="135" id="rAV-9A-zef"/>
+                                        </constraints>
+                                        <date key="minimumDate" timeIntervalSinceReferenceDate="284036400">
+                                            <!--2010-01-01 11:00:00 +0000-->
+                                        </date>
+                                        <date key="maximumDate" timeIntervalSinceReferenceDate="946638000">
+                                            <!--2030-12-31 11:00:00 +0000-->
+                                        </date>
+                                    </datePicker>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Vcq-kS-zyy" firstAttribute="centerX" secondItem="xgY-cM-nwr" secondAttribute="centerX" id="Adi-ZR-QPD"/>
+                                    <constraint firstAttribute="width" constant="320" id="B1A-UK-Gle"/>
+                                    <constraint firstItem="2Wc-TY-Qof" firstAttribute="centerX" secondItem="xgY-cM-nwr" secondAttribute="centerX" id="EwO-Tp-BuD"/>
+                                    <constraint firstAttribute="height" constant="320" id="Lu6-Ra-oip"/>
+                                    <constraint firstItem="0vU-SL-NQ1" firstAttribute="centerX" secondItem="xgY-cM-nwr" secondAttribute="centerX" id="hdE-z0-gdX"/>
+                                    <constraint firstItem="2Wc-TY-Qof" firstAttribute="top" secondItem="xgY-cM-nwr" secondAttribute="top" constant="16" id="jzy-62-Mwn"/>
+                                    <constraint firstAttribute="bottom" secondItem="0vU-SL-NQ1" secondAttribute="bottom" constant="9" id="qyI-tu-GTK"/>
+                                    <constraint firstItem="Vcq-kS-zyy" firstAttribute="top" secondItem="2Wc-TY-Qof" secondAttribute="bottom" constant="8" id="vq2-jE-WNb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="iBA-Ta-S0V"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xgY-cM-nwr" firstAttribute="centerY" secondItem="F2r-mc-7pe" secondAttribute="centerY" id="1eQ-3k-n1G"/>
+                            <constraint firstItem="CYH-K0-4z9" firstAttribute="top" secondItem="F2r-mc-7pe" secondAttribute="top" id="9Mv-cd-sZE"/>
+                            <constraint firstItem="CYH-K0-4z9" firstAttribute="trailing" secondItem="iBA-Ta-S0V" secondAttribute="trailing" id="Abb-mc-ZRA"/>
+                            <constraint firstItem="xgY-cM-nwr" firstAttribute="centerX" secondItem="F2r-mc-7pe" secondAttribute="centerX" id="N3j-St-eT4"/>
+                            <constraint firstAttribute="bottom" secondItem="CYH-K0-4z9" secondAttribute="bottom" id="a50-RH-bx4"/>
+                            <constraint firstItem="CYH-K0-4z9" firstAttribute="leading" secondItem="iBA-Ta-S0V" secondAttribute="leading" id="ktb-Am-3SO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addWeightView" destination="xgY-cM-nwr" id="Wa7-WG-dVy"/>
+                        <outlet property="confirmButton" destination="0vU-SL-NQ1" id="DxW-Rd-mnm"/>
+                        <outlet property="datePicker" destination="Vcq-kS-zyy" id="sNG-y7-oTH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7R0-kS-lKm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1995.6521739130437" y="809.59821428571422"/>
         </scene>
     </scenes>
     <resources>
