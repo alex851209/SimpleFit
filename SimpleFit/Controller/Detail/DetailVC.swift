@@ -43,10 +43,7 @@ class DetailVC: UIViewController {
         
         photoImage.image = UIImage.asset(.album)
         
-        noteTextView.layer.cornerRadius = 20
-        noteTextView.layer.borderWidth = 1
-        noteTextView.layer.borderColor = UIColor.systemGray.cgColor
-        noteTextView.backgroundColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        noteTextView.transform = CGAffineTransform(rotationAngle: .pi * 0.05)
     }
 }
 

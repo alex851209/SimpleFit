@@ -24,6 +24,7 @@
                         <segue destination="79N-88-cWt" kind="custom" identifier="SegueDatePicker" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="pxE-dJ-onM"/>
                         <segue destination="3Mj-F4-QRB" kind="custom" identifier="SegueDetail" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="Dyv-aP-9yu"/>
                         <segue destination="EAM-P2-hXX" kind="custom" identifier="SegueAddWeight" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="793-tA-MHQ"/>
+                        <segue destination="owC-AG-PdU" kind="custom" identifier="SegueAddNote" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="w8P-Nh-1Co"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -151,16 +152,23 @@
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E15-TZ-CJK">
-                                <rect key="frame" x="132" y="455" width="150" height="130"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="note_background" translatesAutoresizingMaskIntoConstraints="NO" id="BKT-RL-AOB">
+                                <rect key="frame" x="82" y="455" width="250" height="230"/>
+                                <color key="tintColor" systemColor="systemGray4Color"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="TBP-tq-JfE"/>
-                                    <constraint firstAttribute="height" constant="130" id="n2J-2i-G3y"/>
+                                    <constraint firstAttribute="width" constant="250" id="8Hi-3A-Uh0"/>
+                                    <constraint firstAttribute="height" constant="230" id="smv-Aa-9Na"/>
                                 </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="2020/12/8 - 慟！！劇情急轉直下？！說好的無痛減重呢？先吃桶胖老爹壓壓驚。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E15-TZ-CJK">
+                                <rect key="frame" x="118" y="530" width="160" height="90"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="TBP-tq-JfE"/>
+                                    <constraint firstAttribute="height" constant="90" id="n2J-2i-G3y"/>
+                                </constraints>
+                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -170,16 +178,18 @@
                             <constraint firstItem="Td9-qv-a7H" firstAttribute="centerX" secondItem="9ET-Z4-IRL" secondAttribute="centerX" id="AD4-Xz-bkc"/>
                             <constraint firstItem="RuF-VQ-Xcg" firstAttribute="leading" secondItem="DuY-y1-KKv" secondAttribute="leading" id="DuG-qF-9hd"/>
                             <constraint firstAttribute="trailing" secondItem="Ueg-3i-AU3" secondAttribute="trailing" constant="16" id="EKB-Sc-hMg"/>
-                            <constraint firstItem="E15-TZ-CJK" firstAttribute="centerX" secondItem="9ET-Z4-IRL" secondAttribute="centerX" id="IHw-p4-vHj"/>
                             <constraint firstItem="RuF-VQ-Xcg" firstAttribute="top" secondItem="9ET-Z4-IRL" secondAttribute="top" id="Krq-t9-GaL"/>
                             <constraint firstItem="PZm-Bk-Hx0" firstAttribute="centerX" secondItem="9ET-Z4-IRL" secondAttribute="centerX" id="Mdz-Q4-IKE"/>
-                            <constraint firstItem="E15-TZ-CJK" firstAttribute="top" secondItem="aCU-nQ-1qS" secondAttribute="bottom" constant="30" id="MgH-f4-u1h"/>
                             <constraint firstItem="Ueg-3i-AU3" firstAttribute="centerY" secondItem="Td9-qv-a7H" secondAttribute="centerY" id="Mz3-Ms-d92"/>
+                            <constraint firstItem="E15-TZ-CJK" firstAttribute="leading" secondItem="BKT-RL-AOB" secondAttribute="leading" constant="36" id="NlM-Q7-npF"/>
                             <constraint firstItem="aCU-nQ-1qS" firstAttribute="top" secondItem="PZm-Bk-Hx0" secondAttribute="bottom" constant="30" id="UB0-QV-CxL"/>
+                            <constraint firstItem="BKT-RL-AOB" firstAttribute="centerX" secondItem="9ET-Z4-IRL" secondAttribute="centerX" id="X0v-Mr-LH0"/>
                             <constraint firstAttribute="bottom" secondItem="RuF-VQ-Xcg" secondAttribute="bottom" id="YEE-op-aeh"/>
                             <constraint firstItem="Td9-qv-a7H" firstAttribute="top" secondItem="DuY-y1-KKv" secondAttribute="top" constant="16" id="ZyB-EA-mWm"/>
+                            <constraint firstItem="BKT-RL-AOB" firstAttribute="top" secondItem="aCU-nQ-1qS" secondAttribute="bottom" constant="30" id="bBl-Na-K9u"/>
                             <constraint firstItem="aCU-nQ-1qS" firstAttribute="centerX" secondItem="9ET-Z4-IRL" secondAttribute="centerX" id="dha-Kw-a6g"/>
                             <constraint firstItem="PZm-Bk-Hx0" firstAttribute="top" secondItem="Td9-qv-a7H" secondAttribute="bottom" constant="40" id="ppT-hA-UM6"/>
+                            <constraint firstItem="E15-TZ-CJK" firstAttribute="top" secondItem="BKT-RL-AOB" secondAttribute="top" constant="75" id="tBK-So-itm"/>
                         </constraints>
                     </view>
                     <connections>
@@ -377,7 +387,6 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iBA-Ta-S0V"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xgY-cM-nwr" firstAttribute="centerY" secondItem="F2r-mc-7pe" secondAttribute="centerY" id="1eQ-3k-n1G"/>
                             <constraint firstItem="CYH-K0-4z9" firstAttribute="top" secondItem="F2r-mc-7pe" secondAttribute="top" id="9Mv-cd-sZE"/>
@@ -402,19 +411,96 @@
             </objects>
             <point key="canvasLocation" x="1995.6521739130437" y="809.59821428571422"/>
         </scene>
+        <!--Add NoteVC-->
+        <scene sceneID="bN9-vS-Tgy">
+            <objects>
+                <viewController id="owC-AG-PdU" customClass="AddNoteVC" customModule="SimpleFit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dMa-Dv-YdK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yH-Vl-Xx9">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <action selector="dismiss:" destination="owC-AG-PdU" eventType="touchUpInside" id="jHb-aL-HDo"/>
+                                </connections>
+                            </button>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="xb2-s4-Apc">
+                                <rect key="frame" x="135" y="203.5" width="144" height="34.5"/>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <locale key="locale" localeIdentifier="zh_TW"/>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMc-cg-n3Z">
+                                <rect key="frame" x="177" y="668" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="m03-cN-v0h"/>
+                                    <constraint firstAttribute="width" constant="60" id="naR-16-zap"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemGray2Color"/>
+                                <state key="normal" image="checkmark"/>
+                                <connections>
+                                    <action selector="confirmButtonDidTap:" destination="owC-AG-PdU" eventType="touchUpInside" id="ybg-KP-PuG"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="note_background" translatesAutoresizingMaskIntoConstraints="NO" id="fb4-iJ-fAt">
+                                <rect key="frame" x="47" y="258" width="320" height="380"/>
+                                <color key="tintColor" systemColor="systemGray4Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="380" id="4z8-Cy-fhQ"/>
+                                    <constraint firstAttribute="width" constant="320" id="FsC-qv-Xl0"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="2020/12/8 - 佛系減重 Day 1，緣份到了，體重機的數字就下降了。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dch-Dl-YXe">
+                                <rect key="frame" x="93" y="398" width="200" height="143"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="143" id="m87-ub-FWw"/>
+                                    <constraint firstAttribute="width" constant="200" id="rKn-Ak-16j"/>
+                                </constraints>
+                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lkb-Ao-f16"/>
+                        <constraints>
+                            <constraint firstItem="AMc-cg-n3Z" firstAttribute="top" secondItem="fb4-iJ-fAt" secondAttribute="bottom" constant="30" id="4D8-dX-Ylt"/>
+                            <constraint firstAttribute="bottom" secondItem="3yH-Vl-Xx9" secondAttribute="bottom" id="BFs-pR-EI4"/>
+                            <constraint firstItem="AMc-cg-n3Z" firstAttribute="centerX" secondItem="dMa-Dv-YdK" secondAttribute="centerX" id="BJg-WT-vGG"/>
+                            <constraint firstItem="3yH-Vl-Xx9" firstAttribute="top" secondItem="dMa-Dv-YdK" secondAttribute="top" id="RH7-8Z-xuf"/>
+                            <constraint firstItem="fb4-iJ-fAt" firstAttribute="centerX" secondItem="dMa-Dv-YdK" secondAttribute="centerX" id="VuF-qr-5sF"/>
+                            <constraint firstItem="xb2-s4-Apc" firstAttribute="centerX" secondItem="dMa-Dv-YdK" secondAttribute="centerX" id="WSA-wf-eRl"/>
+                            <constraint firstItem="fb4-iJ-fAt" firstAttribute="top" secondItem="xb2-s4-Apc" secondAttribute="bottom" constant="20" id="cM1-EW-h0E"/>
+                            <constraint firstAttribute="trailing" secondItem="3yH-Vl-Xx9" secondAttribute="trailing" id="dQH-bG-sLQ"/>
+                            <constraint firstItem="Dch-Dl-YXe" firstAttribute="leading" secondItem="fb4-iJ-fAt" secondAttribute="leading" constant="46" id="f8c-QU-nGg"/>
+                            <constraint firstItem="3yH-Vl-Xx9" firstAttribute="leading" secondItem="dMa-Dv-YdK" secondAttribute="leading" id="f9S-mw-lvM"/>
+                            <constraint firstItem="Dch-Dl-YXe" firstAttribute="top" secondItem="fb4-iJ-fAt" secondAttribute="top" constant="140" id="jBQ-E9-uhv"/>
+                            <constraint firstItem="fb4-iJ-fAt" firstAttribute="centerY" secondItem="dMa-Dv-YdK" secondAttribute="centerY" id="qtU-Gk-RAa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="xb2-s4-Apc" id="R4m-qM-XRQ"/>
+                        <outlet property="noteTextView" destination="Dch-Dl-YXe" id="ijp-Q4-GDg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ryL-dc-Bn4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2905.7971014492755" y="809.59821428571422"/>
+        </scene>
     </scenes>
     <resources>
         <image name="checkmark" width="372" height="372"/>
         <image name="foot" width="700" height="610"/>
+        <image name="note_background" width="384" height="384"/>
         <image name="remove" width="384" height="384"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

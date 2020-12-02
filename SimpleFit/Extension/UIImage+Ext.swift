@@ -17,7 +17,7 @@ enum ImageAsset: String {
     case album = "album"
     case note = "note"
     
-    //DetailVC
+    // DetailVC
     case remove = "remove"
 }
 

@@ -17,6 +17,7 @@ class HomeVC: UIViewController {
         static let datePicker = "SegueDatePicker"
         static let detail = "SegueDetail"
         static let addWeight = "SegueAddWeight"
+        static let addNote = "SegueAddNote"
     }
     
     let chartView = AAChartView()
@@ -166,6 +167,7 @@ class HomeVC: UIViewController {
         weightButton.addTarget(self, action: #selector(showAddWeight), for: .touchUpInside)
         cameraButton.addTarget(self, action: #selector(showCamera), for: .touchUpInside)
         albumButton.addTarget(self, action: #selector(showAlbum), for: .touchUpInside)
+        noteButton.addTarget(self, action: #selector(showAddNote), for: .touchUpInside)
         
         buttons.forEach {
             view.addSubview($0)
@@ -224,8 +226,14 @@ class HomeVC: UIViewController {
     
     @objc private func showAlbum() {
         
-        if isAddMenuOpen { toggleAddMenu() }
+        toggleAddMenu()
         showImagePicker(type: .photoLibrary)
+    }
+    
+    @objc private func showAddNote() {
+        
+        toggleAddMenu()
+        performSegue(withIdentifier: Segue.addNote, sender: nil)
     }
     
     private func makeSettings() -> SideMenuSettings {
