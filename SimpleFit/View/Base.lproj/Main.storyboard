@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17502"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -514,22 +515,92 @@
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <state key="normal" image="photo_frame"/>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="n94-Bo-UOB" customClass="GeminiCollectionView" customModule="Gemini">
+                                <rect key="frame" x="0.0" y="51" width="414" height="757"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fDr-DU-Y8M">
+                                    <size key="itemSize" width="388" height="590"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavoriteCell" id="MsV-pL-n38" customClass="FavoriteCell" customModule="SimpleFit" customModuleProvider="target">
+                                        <rect key="frame" x="13" y="0.0" width="388" height="741"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="qMR-4b-kRL">
+                                            <rect key="frame" x="0.0" y="0.0" width="388" height="741"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bOO-N6-xil">
+                                                    <rect key="frame" x="16" y="192.5" width="356" height="356"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="bOO-N6-xil" secondAttribute="height" id="TiT-Im-kwP"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020年12月9日" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-y4-oLm">
+                                                    <rect key="frame" x="111.5" y="16" width="165" height="26.5"/>
+                                                    <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="165" id="C8i-ob-iV4"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="63.3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTB-fE-tae">
+                                                    <rect key="frame" x="312" y="665" width="60" height="60"/>
+                                                    <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="af6-0y-CzY"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="kU2-Tk-7HF"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="uRA-y4-oLm" firstAttribute="top" secondItem="qMR-4b-kRL" secondAttribute="top" constant="16" id="2fL-uX-9z2"/>
+                                                <constraint firstAttribute="trailing" secondItem="bOO-N6-xil" secondAttribute="trailing" constant="16" id="2nw-RY-670"/>
+                                                <constraint firstItem="bOO-N6-xil" firstAttribute="leading" secondItem="qMR-4b-kRL" secondAttribute="leading" constant="16" id="ENn-9E-e69"/>
+                                                <constraint firstItem="QTB-fE-tae" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qMR-4b-kRL" secondAttribute="leading" constant="20" symbolic="YES" id="IsP-t5-yu2"/>
+                                                <constraint firstItem="uRA-y4-oLm" firstAttribute="centerX" secondItem="qMR-4b-kRL" secondAttribute="centerX" id="Wje-N0-vHt"/>
+                                                <constraint firstItem="bOO-N6-xil" firstAttribute="centerY" secondItem="qMR-4b-kRL" secondAttribute="centerY" id="g1a-PX-rVR"/>
+                                                <constraint firstAttribute="trailing" secondItem="QTB-fE-tae" secondAttribute="trailing" constant="16" id="pcH-n7-ZQN"/>
+                                                <constraint firstAttribute="bottom" secondItem="QTB-fE-tae" secondAttribute="bottom" constant="16" id="tAM-LP-YKh"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="388" height="741"/>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="uRA-y4-oLm" id="CYI-TQ-GC6"/>
+                                            <outlet property="photoImage" destination="bOO-N6-xil" id="aNy-Lz-AOd"/>
+                                            <outlet property="weightLabel" destination="QTB-fE-tae" id="DH1-dP-iM6"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cra-H9-PyE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="7Xp-xd-sEp" firstAttribute="leading" secondItem="cra-H9-PyE" secondAttribute="leading" constant="16" id="0MI-yQ-8Sj"/>
                             <constraint firstItem="cra-H9-PyE" firstAttribute="trailing" secondItem="hcl-p1-1LO" secondAttribute="trailing" constant="16" id="1ir-h0-BPn"/>
+                            <constraint firstItem="n94-Bo-UOB" firstAttribute="top" secondItem="mVm-tz-M97" secondAttribute="bottom" id="6RA-Fy-lEO"/>
                             <constraint firstItem="hcl-p1-1LO" firstAttribute="centerY" secondItem="mVm-tz-M97" secondAttribute="centerY" id="86g-PY-p3j"/>
+                            <constraint firstItem="cra-H9-PyE" firstAttribute="bottom" secondItem="n94-Bo-UOB" secondAttribute="bottom" id="9ih-8m-vG9"/>
                             <constraint firstItem="mVm-tz-M97" firstAttribute="centerX" secondItem="ARx-PL-NdX" secondAttribute="centerX" id="BMP-0n-pKp"/>
+                            <constraint firstItem="cra-H9-PyE" firstAttribute="trailing" secondItem="n94-Bo-UOB" secondAttribute="trailing" id="HyX-K4-BSU"/>
                             <constraint firstItem="mVm-tz-M97" firstAttribute="top" secondItem="cra-H9-PyE" secondAttribute="top" constant="16" id="TCB-Ig-KYR"/>
                             <constraint firstItem="W1I-my-cbG" firstAttribute="centerY" secondItem="mVm-tz-M97" secondAttribute="centerY" id="UK0-KD-Ihj"/>
                             <constraint firstItem="hcl-p1-1LO" firstAttribute="leading" secondItem="W1I-my-cbG" secondAttribute="trailing" constant="16" id="bzh-62-ZJU"/>
                             <constraint firstItem="7Xp-xd-sEp" firstAttribute="centerY" secondItem="mVm-tz-M97" secondAttribute="centerY" id="hSV-gV-3cS"/>
+                            <constraint firstItem="n94-Bo-UOB" firstAttribute="leading" secondItem="cra-H9-PyE" secondAttribute="leading" id="nJj-XO-O2R"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aRb-S8-peO"/>
                     <connections>
+                        <outlet property="favoriteCollectionView" destination="n94-Bo-UOB" id="DHX-xc-zfk"/>
                         <outlet property="titleLabel" destination="mVm-tz-M97" id="RU4-Da-IHF"/>
                     </connections>
                 </viewController>
@@ -557,7 +628,7 @@
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00.0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fHd-Fz-iSZ">
                                         <rect key="frame" x="105" y="25" width="110" height="50"/>
-                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="2JU-4n-CaF"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="dfE-Ln-pa6"/>

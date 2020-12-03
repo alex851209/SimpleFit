@@ -31,12 +31,13 @@ class AddWeightVC: UIViewController {
         datePicker.applyBorder()
         
         weightText.layer.cornerRadius = 15
-        weightText.clipsToBounds = true
+        weightText.layer.borderWidth = 1
+        weightText.layer.borderColor = UIColor.systemGray6.cgColor
         
-        addWeightView.layer.borderWidth = 5
-        addWeightView.layer.borderColor = UIColor.systemGray5.cgColor
+        addWeightView.layer.borderWidth = 2
+        addWeightView.layer.borderColor = UIColor.systemGray6.cgColor
         addWeightView.layer.cornerRadius = 40
-        addWeightView.clipsToBounds = true
+        addWeightView.applyShadow()
     }
 }
 
