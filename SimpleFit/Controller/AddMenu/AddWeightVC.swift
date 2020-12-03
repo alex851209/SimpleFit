@@ -28,31 +28,15 @@ class AddWeightVC: UIViewController {
     
     private func configureLayout() {
         
-        configureAddWeightView()
-        configureWeightText()
-        configureDatePicker()
-    }
-    
-    private func configureAddWeightView() {
+        datePicker.applyBorder()
+        
+        weightText.layer.cornerRadius = 15
+        weightText.clipsToBounds = true
         
         addWeightView.layer.borderWidth = 5
         addWeightView.layer.borderColor = UIColor.systemGray5.cgColor
         addWeightView.layer.cornerRadius = 40
         addWeightView.clipsToBounds = true
-    }
-    
-    private func configureDatePicker() {
-
-        datePicker.layer.borderWidth = 1
-        datePicker.layer.borderColor = UIColor.systemGray2.cgColor
-        datePicker.layer.cornerRadius = datePicker.frame.height / 2
-        datePicker.clipsToBounds = true
-    }
-    
-    private func configureWeightText() {
-        
-        weightText.layer.cornerRadius = 15
-        weightText.clipsToBounds = true
     }
 }
 

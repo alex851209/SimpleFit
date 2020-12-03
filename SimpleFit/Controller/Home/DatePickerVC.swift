@@ -32,19 +32,12 @@ class DatePickerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureTitleLabel()
-        configureDatePicker()
+        configureLayout()
     }
     
-    private func configureTitleLabel() {
+    private func configureLayout() {
         
-        titleLabel.layer.borderWidth = 1
-        titleLabel.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        titleLabel.layer.cornerRadius = titleLabel.frame.height / 2
-        titleLabel.clipsToBounds = true
-    }
-    
-    private func configureDatePicker() {
+        titleLabel.applyBorder()
         
         let selectedDate = "\(selectedYear)-\(selectedMonth)-01"
         datePicker.intialDate = DateProvider.dateStringToDate(selectedDate)

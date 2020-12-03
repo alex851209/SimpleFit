@@ -31,18 +31,9 @@ class DetailVC: UIViewController {
     
     private func configureLayout() {
         
-        titleLabel.layer.borderWidth = 1
-        titleLabel.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        titleLabel.layer.cornerRadius = titleLabel.frame.height / 2
-        titleLabel.clipsToBounds = true
-        
-        weightLabel.layer.borderWidth = 1
-        weightLabel.layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        weightLabel.layer.cornerRadius = weightLabel.frame.width / 2
-        weightLabel.clipsToBounds = true
-        
+        titleLabel.applyBorder()
+        weightLabel.applyBorder()
         photoImage.image = UIImage.asset(.album)
-        
         noteTextView.transform = CGAffineTransform(rotationAngle: .pi * 0.05)
     }
 }

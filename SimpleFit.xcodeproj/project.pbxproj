@@ -26,6 +26,8 @@
 		A5BDFDB925738C4E004D3F57 /* DateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDB825738C4E004D3F57 /* DateProvider.swift */; };
 		A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */; };
 		A5C741EE2577FD82007B477E /* AddNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C741ED2577FD82007B477E /* AddNoteVC.swift */; };
+		A5C9F67E2578758E00558C98 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C9F67D2578758E00558C98 /* UserInfoVC.swift */; };
+		A5C9F681257896AB00558C98 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C9F680257896AB00558C98 /* UIView+Ext.swift */; };
 		A5E46D48257615C400ADF4DA /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E46D47257615C400ADF4DA /* DetailVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +53,8 @@
 		A5BDFDB825738C4E004D3F57 /* DateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProvider.swift; sourceTree = "<group>"; };
 		A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerVC.swift; sourceTree = "<group>"; };
 		A5C741ED2577FD82007B477E /* AddNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteVC.swift; sourceTree = "<group>"; };
+		A5C9F67D2578758E00558C98 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
+		A5C9F680257896AB00558C98 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		A5E46D47257615C400ADF4DA /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		C36156E5D1AC9ABF93F780A1 /* Pods-SimpleFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.release.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.release.xcconfig"; sourceTree = "<group>"; };
 		EB59C87BB5903418AC729B9E /* Pods-SimpleFit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.debug.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 				A5BDFD9525724AA6004D3F57 /* UIImage+Ext.swift */,
 				A5BDFDB525738B0D004D3F57 /* Date+Ext.swift */,
 				A5863E0E25752EB30017F09C /* UIButton+Ext.swift */,
+				A5C9F680257896AB00558C98 /* UIView+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -197,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				A5BDFD9B2572938F004D3F57 /* SideMenuVC.swift */,
+				A5C9F67D2578758E00558C98 /* UserInfoVC.swift */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -381,6 +387,8 @@
 				A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */,
 				A5BDFDA125729495004D3F57 /* SideMenuCell.swift in Sources */,
 				A5BDFDB625738B0D004D3F57 /* Date+Ext.swift in Sources */,
+				A5C9F681257896AB00558C98 /* UIView+Ext.swift in Sources */,
+				A5C9F67E2578758E00558C98 /* UserInfoVC.swift in Sources */,
 				A5E46D48257615C400ADF4DA /* DetailVC.swift in Sources */,
 				A57297BA2577230600A892D4 /* AddWeightVC.swift in Sources */,
 			);

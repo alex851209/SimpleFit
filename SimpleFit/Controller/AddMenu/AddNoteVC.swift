@@ -21,20 +21,12 @@ class AddNoteVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureDatePicker()
-        configureNoteTextView()
+        configureLayout()
     }
     
-    private func configureDatePicker() {
-
-        datePicker.layer.borderWidth = 1
-        datePicker.layer.borderColor = UIColor.systemGray2.cgColor
-        datePicker.layer.cornerRadius = datePicker.frame.height / 2
-        datePicker.clipsToBounds = true
-    }
-    
-    private func configureNoteTextView() {
+    private func configureLayout() {
         
+        datePicker.applyBorder()
         noteTextView.transform = CGAffineTransform(rotationAngle: .pi * 0.05)
     }
 }

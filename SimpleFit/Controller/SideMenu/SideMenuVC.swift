@@ -10,6 +10,11 @@ import SideMenu
 
 class SideMenuVC: UIViewController {
 
+    private struct Segue {
+        
+        static let userInfo = "SegueUserInfo"
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     
     let items = SideMenuItemManager.sideMenuItems
@@ -47,5 +52,13 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
         sideMenuCell.blurEffectStyle = sideMenu.blurEffectStyle
         sideMenuCell.layoutCell(with: items[indexPath.row])
         return sideMenuCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch indexPath.row {
+        case 0: performSegue(withIdentifier: Segue.userInfo, sender: nil)
+        default: break
+        }
     }
 }
