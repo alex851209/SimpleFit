@@ -13,11 +13,13 @@ class SideMenuVC: UIViewController {
     private struct Segue {
         
         static let userInfo = "SegueUserInfo"
+        static let userFavorite = "SegueUserFavorite"
     }
     
     @IBOutlet weak var tableView: UITableView!
     
     let items = SideMenuItemManager.sideMenuItems
+    let segues = [Segue.userInfo, nil, Segue.userFavorite, nil, nil]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,9 +58,7 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        switch indexPath.row {
-        case 0: performSegue(withIdentifier: Segue.userInfo, sender: nil)
-        default: break
-        }
+        guard let identifier = segues[indexPath.row] else { return }
+        performSegue(withIdentifier: identifier, sender: nil)
     }
 }

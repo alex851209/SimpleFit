@@ -14,7 +14,7 @@ class UserInfoVC: UIViewController {
     @IBOutlet weak var logoutButton: UIButton!
     
     @IBAction func editButtonDidTap(_ sender: Any) { editAvatar() }
-    @IBAction func dimiss(_ sender: Any) { navigationController?.popViewController(animated: true) }
+    @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -275,6 +275,7 @@
                     <connections>
                         <outlet property="tableView" destination="Bfm-y4-oCU" id="M0C-yi-6T8"/>
                         <segue destination="Euv-Pk-K3W" kind="show" identifier="SegueUserInfo" id="fs0-Bq-p1G"/>
+                        <segue destination="Fht-j1-OQ9" kind="show" identifier="SegueUserFavorite" id="NBT-NW-Idz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="37f-De-mSy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -338,7 +339,7 @@
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <state key="normal" image="back"/>
                                 <connections>
-                                    <action selector="dimiss:" destination="Euv-Pk-K3W" eventType="touchUpInside" id="dTt-fy-snO"/>
+                                    <action selector="backButtonDidTap:" destination="Euv-Pk-K3W" eventType="touchUpInside" id="dTt-fy-snO"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="個人資料" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BS1-WY-iOq">
@@ -463,6 +464,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FrU-Dm-NJb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4113.04347826087" y="1005.8035714285713"/>
+        </scene>
+        <!--User FavoriteVC-->
+        <scene sceneID="vah-f5-ho5">
+            <objects>
+                <viewController id="Fht-j1-OQ9" customClass="UserFavoriteVC" customModule="SimpleFit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ARx-PL-NdX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xp-xd-sEp">
+                                <rect key="frame" x="16" y="21" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="PhH-sW-QwO"/>
+                                    <constraint firstAttribute="width" constant="25" id="jA3-SI-8mT"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <state key="normal" image="back"/>
+                                <connections>
+                                    <action selector="backButtonDidTap:" destination="Fht-j1-OQ9" eventType="touchUpInside" id="fvU-0u-gW6"/>
+                                    <action selector="backButtonDidTap:" destination="Euv-Pk-K3W" eventType="touchUpInside" id="xSb-56-WER"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收藏" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVm-tz-M97">
+                                <rect key="frame" x="167" y="16" width="80" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="LTk-YD-Sxi"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="W9M-J3-vFc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcl-p1-1LO">
+                                <rect key="frame" x="363" y="16" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="tSv-ku-K2I"/>
+                                    <constraint firstAttribute="height" constant="35" id="xay-FH-LPi"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <state key="normal" image="remove"/>
+                            </button>
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1I-my-cbG">
+                                <rect key="frame" x="315" y="17.5" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="D6J-a6-sNu"/>
+                                    <constraint firstAttribute="height" constant="32" id="ND9-eD-c97"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <state key="normal" image="photo_frame"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cra-H9-PyE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7Xp-xd-sEp" firstAttribute="leading" secondItem="cra-H9-PyE" secondAttribute="leading" constant="16" id="0MI-yQ-8Sj"/>
+                            <constraint firstItem="cra-H9-PyE" firstAttribute="trailing" secondItem="hcl-p1-1LO" secondAttribute="trailing" constant="16" id="1ir-h0-BPn"/>
+                            <constraint firstItem="hcl-p1-1LO" firstAttribute="centerY" secondItem="mVm-tz-M97" secondAttribute="centerY" id="86g-PY-p3j"/>
+                            <constraint firstItem="mVm-tz-M97" firstAttribute="centerX" secondItem="ARx-PL-NdX" secondAttribute="centerX" id="BMP-0n-pKp"/>
+                            <constraint firstItem="mVm-tz-M97" firstAttribute="top" secondItem="cra-H9-PyE" secondAttribute="top" constant="16" id="TCB-Ig-KYR"/>
+                            <constraint firstItem="W1I-my-cbG" firstAttribute="centerY" secondItem="mVm-tz-M97" secondAttribute="centerY" id="UK0-KD-Ihj"/>
+                            <constraint firstItem="hcl-p1-1LO" firstAttribute="leading" secondItem="W1I-my-cbG" secondAttribute="trailing" constant="16" id="bzh-62-ZJU"/>
+                            <constraint firstItem="7Xp-xd-sEp" firstAttribute="centerY" secondItem="mVm-tz-M97" secondAttribute="centerY" id="hSV-gV-3cS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="aRb-S8-peO"/>
+                    <connections>
+                        <outlet property="titleLabel" destination="mVm-tz-M97" id="RU4-Da-IHF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T9c-Br-rYJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5228.985507246377" y="1005.8035714285713"/>
         </scene>
         <!--Add WeightVC-->
         <scene sceneID="K9s-YG-kiA">
@@ -640,6 +713,7 @@
         <image name="height" width="384" height="384"/>
         <image name="name" width="368" height="368"/>
         <image name="note_background" width="384" height="384"/>
+        <image name="photo_frame" width="370" height="370"/>
         <image name="remove" width="384" height="384"/>
         <image name="user_photo" width="360" height="360"/>
         <systemColor name="systemBackgroundColor">
