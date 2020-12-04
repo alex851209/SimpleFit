@@ -14,6 +14,7 @@
 		A548A78E256FFC6400782A0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A548A78C256FFC6400782A0E /* Main.storyboard */; };
 		A548A790256FFC6600782A0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A548A78F256FFC6600782A0E /* Assets.xcassets */; };
 		A548A793256FFC6600782A0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A548A791256FFC6600782A0E /* LaunchScreen.storyboard */; };
+		A5536CC2257A045D00BE60BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5536CC1257A045D00BE60BC /* GoogleService-Info.plist */; };
 		A555EBA02578C5B60099BCB7 /* UserFavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EB9F2578C5B60099BCB7 /* UserFavoriteVC.swift */; };
 		A555EBD32578E3570099BCB7 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EBD22578E3570099BCB7 /* FavoriteCell.swift */; };
 		A555EBD62578E6810099BCB7 /* PagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EBD52578E6810099BCB7 /* PagingFlowLayout.swift */; };
@@ -44,6 +45,7 @@
 		A548A78F256FFC6600782A0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A548A792256FFC6600782A0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A548A794256FFC6600782A0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5536CC1257A045D00BE60BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A555EB9F2578C5B60099BCB7 /* UserFavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoriteVC.swift; sourceTree = "<group>"; };
 		A555EBD22578E3570099BCB7 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		A555EBD52578E6810099BCB7 /* PagingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingFlowLayout.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				A5BDFD8F25724A79004D3F57 /* Extension */,
 				A5BDFD5225721F3E004D3F57 /* Resource */,
 				A548A794256FFC6600782A0E /* Info.plist */,
+				A5536CC1257A045D00BE60BC /* GoogleService-Info.plist */,
 			);
 			path = SimpleFit;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			files = (
 				A548A793256FFC6600782A0E /* LaunchScreen.storyboard in Resources */,
 				A548A790256FFC6600782A0E /* Assets.xcassets in Resources */,
+				A5536CC2257A045D00BE60BC /* GoogleService-Info.plist in Resources */,
 				A548A78E256FFC6400782A0E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
