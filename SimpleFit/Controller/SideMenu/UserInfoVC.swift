@@ -13,7 +13,7 @@ class UserInfoVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
     
-    @IBAction func editButtonDidTap(_ sender: Any) { editAvatar() }
+    @IBAction func editButtonDidTap(_ sender: Any) { showAvatarAlert() }
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
     
     override func viewDidLoad() {
@@ -28,9 +28,15 @@ class UserInfoVC: UIViewController {
         logoutButton.applyBorder()
     }
     
-    private func editAvatar() {
+    private func showAvatarAlert() {
         
-        let requestController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
+        let titleAttributes = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
+            NSAttributedString.Key.foregroundColor: UIColor.black
+        ]
+        let titleString = NSAttributedString(string: "編輯大頭貼", attributes: titleAttributes)
+        alert.setValue(titleString, forKey: "attributedTitle")
         
         let cancleAction = UIAlertAction(title: "取消", style: .cancel)
         let cameraAction = UIAlertAction(title: "相機", style: .default, handler: { [weak self] _ in
@@ -45,10 +51,10 @@ class UserInfoVC: UIViewController {
         let actions = [cancleAction, cameraAction, albumAction]
         actions.forEach {
             $0.setValue(UIColor.darkGray, forKey: "titleTextColor")
-            requestController.addAction($0)
+            alert.addAction($0)
         }
         
-        present(requestController, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     private func showImagePicker(type: UIImagePickerController.SourceType) {
