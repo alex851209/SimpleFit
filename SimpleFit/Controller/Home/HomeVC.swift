@@ -23,7 +23,7 @@ class HomeVC: UIViewController {
     let chartView = AAChartView()
     var chartModel = AAChartModel()
     var chartOptions = AAOptions()
-    let dataProvider = ChartDataProvider()
+    let provider = ChartProvider()
     var selectedYear = Date().year()
     var selectedMonth = Date().month()
     let pickMonthButton = UIButton()
@@ -82,7 +82,7 @@ class HomeVC: UIViewController {
     
     private func configureChartModel() {
         
-        let chartData = dataProvider.getDataFor(year: selectedYear, month: selectedMonth)
+        let chartData = provider.getDataFor(year: selectedYear, month: selectedMonth)
         
         guard let min = chartData.min,
               let max = chartData.max,

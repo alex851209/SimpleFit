@@ -22,6 +22,7 @@ class DateProvider {
         var day: String {
 
             switch self {
+            
             case .sun: return "週日"
             case .mon: return "週一"
             case .tue: return "週二"
@@ -119,5 +120,13 @@ class DateProvider {
         let date
             = dateFormatter.date(from: dateStr)
         return date!
+    }
+
+    static func dateToDateString(_ date: Date) -> String {
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let date = formatter.string(from: date)
+        return date
     }
 }

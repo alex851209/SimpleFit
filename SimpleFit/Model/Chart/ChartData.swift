@@ -14,3 +14,16 @@ struct ChartData {
     var max: Double?
     var categories: [String]?
 }
+
+struct DailyData {
+    
+    var weight: Double?
+    var photo: Photo?
+    var note: String?
+}
+
+struct Photo {
+    
+    var url: String
+    var isFavorite: Bool
+}

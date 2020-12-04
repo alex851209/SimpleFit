@@ -6,9 +6,35 @@
 //
 
 import Foundation
+import Firebase
 
-class ChartDataProvider {
+enum Result<T> {
+
+    case success(T)
+    case failure(Error)
+}
+
+enum ChartField {
     
+    case weight
+    case photo
+    case note
+    
+    var title: String {
+        
+        switch self {
+        
+        case .weight: return "weight"
+        case .photo: return "photo"
+        case .note: return "note"
+        }
+    }
+}
+
+class ChartProvider {
+    
+    let database = Firestore.firestore()
+    let user = "Alex"
     var chartData = ChartData()
     
     func getDataFor(year: Int, month: Int) -> ChartData {
@@ -16,6 +42,47 @@ class ChartDataProvider {
         getWeightFor(year: year, month: month)
         getCategoriesFor(year: year, month: month)
         return chartData
+    }
+    
+    func addDataWith(dailyData: DailyData,
+                     field: ChartField,
+                     date: Date,
+                     completion: @escaping (Result<Void>) -> Void) {
+
+        let id = DateProvider.dateToDateString(date)
+        let doc = database.collection("users").document(user).collection("chartData")
+        
+        switch field {
+        
+        case .weight:
+            
+            guard let weight = dailyData.weight else { return }
+            doc.document(id).setData([field.title: weight], merge: true) { error in
+                if let error = error {
+                    completion(Result.failure(error))
+                } else {
+                    completion(Result.success(()))
+                }
+            }
+        case .photo:
+            guard let photo = dailyData.photo else { return }
+            doc.document(id).setData([field.title: photo], merge: true) { error in
+                if let error = error {
+                    completion(Result.failure(error))
+                } else {
+                    completion(Result.success(()))
+                }
+            }
+        case .note:
+            guard let note = dailyData.note else { return }
+            doc.document(id).setData([field.title: note], merge: true) { error in
+                if let error = error {
+                    completion(Result.failure(error))
+                } else {
+                    completion(Result.success(()))
+                }
+            }
+        }
     }
     
     private func getWeightFor(year: Int, month: Int) {
