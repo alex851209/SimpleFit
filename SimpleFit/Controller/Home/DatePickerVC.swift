@@ -6,10 +6,9 @@
 //
 
 import UIKit
-import MIBlurPopup
 import ADDatePicker
 
-class DatePickerVC: UIViewController {
+class DatePickerVC: BlurViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var datePicker: ADDatePicker!
@@ -28,6 +27,8 @@ class DatePickerVC: UIViewController {
     var callback: ((Int, Int, Bool) -> Void)?
     var selectedYear = 0
     var selectedMonth = 0
+    
+    override var blurEffectStyle: UIBlurEffect.Style? { .light }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,14 +50,6 @@ class DatePickerVC: UIViewController {
         
         datePicker.delegate = self
     }
-}
-
-extension DatePickerVC: MIBlurPopupDelegate {
-    
-    var popupView: UIView { view }
-    var blurEffectStyle: UIBlurEffect.Style? { .light }
-    var initialScaleAmmount: CGFloat { 0.1 }
-    var animationDuration: TimeInterval { 0.7 }
 }
 
 extension DatePickerVC: ADDatePickerDelegate {

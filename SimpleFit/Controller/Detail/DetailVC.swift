@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import MIBlurPopup
 
-class DetailVC: UIViewController {
+class DetailVC: BlurViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
@@ -36,12 +35,4 @@ class DetailVC: UIViewController {
         photoImage.image = UIImage.asset(.album)
         noteTextView.transform = CGAffineTransform(rotationAngle: .pi * 0.05)
     }
-}
-
-extension DetailVC: MIBlurPopupDelegate {
-    
-    var popupView: UIView { view }
-    var blurEffectStyle: UIBlurEffect.Style? { .systemUltraThinMaterial }
-    var initialScaleAmmount: CGFloat { 0.1 }
-    var animationDuration: TimeInterval { 0.7 }
 }

@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import MIBlurPopup
 
-class AddPhotoVC: UIViewController {
+class AddPhotoVC: BlurViewController {
 
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -74,12 +73,4 @@ class AddPhotoVC: UIViewController {
     }
     
     @objc private func dateDidPick(sender: UIDatePicker) { date = sender.date }
-}
-
-extension AddPhotoVC: MIBlurPopupDelegate {
-    
-    var popupView: UIView { view }
-    var blurEffectStyle: UIBlurEffect.Style? { .systemUltraThinMaterial }
-    var initialScaleAmmount: CGFloat { 0.1 }
-    var animationDuration: TimeInterval { 0.7 }
 }

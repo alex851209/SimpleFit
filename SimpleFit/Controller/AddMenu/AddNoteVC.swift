@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import MIBlurPopup
 
-class AddNoteVC: UIViewController {
+class AddNoteVC: BlurViewController {
 
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var noteTextView: UITextView!
@@ -57,12 +56,4 @@ class AddNoteVC: UIViewController {
     }
     
     @objc private func dateDidPick(sender: UIDatePicker) { date = sender.date }
-}
-
-extension AddNoteVC: MIBlurPopupDelegate {
-    
-    var popupView: UIView { view }
-    var blurEffectStyle: UIBlurEffect.Style? { .systemUltraThinMaterial }
-    var initialScaleAmmount: CGFloat { 0.1 }
-    var animationDuration: TimeInterval { 0.7 }
 }
