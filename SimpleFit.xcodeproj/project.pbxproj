@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A4052DD655D816F8F8765AD5 /* Pods_SimpleFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */; };
 		A5191A7D257BC4C20031D333 /* BlurVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5191A7C257BC4C20031D333 /* BlurVC.swift */; };
+		A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5191A84257BCB240031D333 /* PhotoAlertVC.swift */; };
 		A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A520C975257B6F1600215CC1 /* AddPhotoVC.swift */; };
 		A548A787256FFC6400782A0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A786256FFC6400782A0E /* AppDelegate.swift */; };
 		A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A788256FFC6400782A0E /* SceneDelegate.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5191A7C257BC4C20031D333 /* BlurVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurVC.swift; sourceTree = "<group>"; };
+		A5191A84257BCB240031D333 /* PhotoAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlertVC.swift; sourceTree = "<group>"; };
 		A520C975257B6F1600215CC1 /* AddPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoVC.swift; sourceTree = "<group>"; };
 		A548A783256FFC6400782A0E /* SimpleFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A548A786256FFC6400782A0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,14 @@
 				A5191A7C257BC4C20031D333 /* BlurVC.swift */,
 			);
 			path = Blur;
+			sourceTree = "<group>";
+		};
+		A5191A83257BCAE20031D333 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				A5191A84257BCB240031D333 /* PhotoAlertVC.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		A548A77A256FFC6400782A0E = {
@@ -168,6 +178,7 @@
 				A5BDFD9A25729379004D3F57 /* SideMenu */,
 				A57297B7257721BB00A892D4 /* AddMenu */,
 				A5191A7A257BC43B0031D333 /* Blur */,
+				A5191A83257BCAE20031D333 /* Alert */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -409,6 +420,7 @@
 				A548A787256FFC6400782A0E /* AppDelegate.swift in Sources */,
 				A5BDFD9625724AA6004D3F57 /* UIImage+Ext.swift in Sources */,
 				A5BDFD8125723362004D3F57 /* ChartData.swift in Sources */,
+				A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */,
 				A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */,
 				A5863E0F25752EB30017F09C /* UIButton+Ext.swift in Sources */,
 				A555EBA02578C5B60099BCB7 /* UserFavoriteVC.swift in Sources */,

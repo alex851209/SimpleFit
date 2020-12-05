@@ -30,30 +30,7 @@ class UserInfoVC: UIViewController {
     
     private func showAvatarAlert() {
         
-        let alert = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
-        let titleAttributes = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
-            NSAttributedString.Key.foregroundColor: UIColor.black
-        ]
-        let titleString = NSAttributedString(string: "編輯大頭貼", attributes: titleAttributes)
-        alert.setValue(titleString, forKey: "attributedTitle")
-        
-        let cancleAction = UIAlertAction(title: "取消", style: .cancel)
-        let cameraAction = UIAlertAction(title: "相機", style: .default, handler: { [weak self] _ in
-            guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
-            self?.showImagePicker(type: .camera)
-        })
-        let albumAction = UIAlertAction(title: "從相簿選取", style: .default, handler: { [weak self] _ in
-            guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
-            self?.showImagePicker(type: .photoLibrary)
-        })
-        
-        let actions = [cancleAction, cameraAction, albumAction]
-        actions.forEach {
-            $0.setValue(UIColor.darkGray, forKey: "titleTextColor")
-            alert.addAction($0)
-        }
-        
+        let alert = PhotoAlertVC(showAction: showImagePicker(type:))
         present(alert, animated: true, completion: nil)
     }
     
@@ -66,6 +43,7 @@ class UserInfoVC: UIViewController {
         present(picker, animated: true, completion: nil)
     }
 }
+
 extension UserInfoVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
 }
