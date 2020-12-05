@@ -145,6 +145,8 @@ class HomeVC: UIViewController {
         let picker = UIImagePickerController()
         picker.sourceType = type
         picker.allowsEditing = true
+        picker.delegate = self
+        
         present(picker, animated: true, completion: nil)
     }
     
@@ -227,7 +229,7 @@ class HomeVC: UIViewController {
     @objc private func showAlbum() {
         
         toggleAddMenu()
-        showImagePicker(type: .photoLibrary)
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) { showImagePicker(type: .photoLibrary) }
     }
     
     @objc private func showAddNote() {
@@ -279,5 +281,15 @@ extension HomeVC: AAChartViewDelegate {
         
         if isAddMenuOpen { toggleAddMenu() }
         performSegue(withIdentifier: Segue.detail, sender: nil)
+    }
+}
+
+extension HomeVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        
+        provider.uploadPhoto(with: info)
+        dismiss(animated: true, completion: nil)
     }
 }

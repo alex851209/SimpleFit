@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseStorage
 
 enum ChartField {
     
@@ -28,6 +29,7 @@ enum ChartField {
 class ChartProvider {
     
     let database = Firestore.firestore()
+    let storageRef = Storage.storage().reference()
     let user = "Alex"
     var chartData = ChartData()
     
@@ -76,6 +78,42 @@ class ChartProvider {
                 }
             }
         }
+    }
+    
+    func uploadPhoto(with info: [UIImagePickerController.InfoKey: Any]) {
+        
+        // 取得從 UIImagePickerController 選擇的檔案
+        let image = info[.originalImage] as? UIImage
+        
+        // 自動產生一組 ID，方便上傳圖片的命名
+        let uniqueString = NSUUID().uuidString
+        
+        // 有 selectedImage 時，將圖片上傳
+        guard let selectedImage = image,
+              let uploadData = selectedImage.pngData()
+        else { return }
+        
+        let fileRef = storageRef.child("SimpleFitPhotoUpload").child("\(uniqueString).png")
+        fileRef.putData(uploadData, metadata: nil, completion: { (_, error) in
+            
+            if let error = error {
+                
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            
+            // 取得URL
+            fileRef.downloadURL(completion: { (url, error) in
+                
+                if let error = error {
+                    
+                    print("Error: \(error.localizedDescription)")
+                    return
+                }
+                guard let downloadURL = url else { return }
+                print("Photo URL: \(downloadURL)")
+            })
+        })
     }
     
     private func getWeightFor(year: Int, month: Int) {
