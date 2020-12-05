@@ -9,21 +9,14 @@ import Foundation
 import Firebase
 import FirebaseStorage
 
-enum ChartField {
+enum ChartField: String {
     
     case weight
     case photo
     case note
     
-    var title: String {
-        
-        switch self {
-        
-        case .weight: return "weight"
-        case .photo: return "photo"
-        case .note: return "note"
-        }
-    }
+    static let photoUrl = "url"
+    static let photoIsFavorite = "isFavorite"
 }
 
 class ChartProvider {
@@ -52,49 +45,49 @@ class ChartProvider {
         
         case .weight:
             guard let weight = dailyData.weight else { return }
-            doc.document(id).setData([field.title: weight], merge: true) { error in
+            doc.document(id).setData([field.rawValue: weight], merge: true) { error in
                 if let error = error {
-                    completion(Result.failure(error))
+                    completion(.failure(error))
                 } else {
-                    completion(Result.success(weight))
+                    completion(.success(weight))
                 }
             }
         case .photo:
             guard let photo = dailyData.photo else { return }
-            doc.document(id).setData([field.title: photo], merge: true) { error in
+            doc.document(id).setData([
+                field.rawValue: [
+                    ChartField.photoUrl: photo.url,
+                    ChartField.photoIsFavorite: photo.isFavorite
+                ]
+            ], merge: true) { error in
                 if let error = error {
-                    completion(Result.failure(error))
+                    completion(.failure(error))
                 } else {
-                    completion(Result.success(photo))
+                    completion(.success(photo))
                 }
             }
         case .note:
             guard let note = dailyData.note else { return }
-            doc.document(id).setData([field.title: note], merge: true) { error in
+            doc.document(id).setData([field.rawValue: note], merge: true) { error in
                 if let error = error {
-                    completion(Result.failure(error))
+                    completion(.failure(error))
                 } else {
-                    completion(Result.success(note))
+                    completion(.success(note))
                 }
             }
         }
     }
     
-    func uploadPhoto(with info: [UIImagePickerController.InfoKey: Any]) {
-        
-        // 取得從 UIImagePickerController 選擇的檔案
-        let image = info[.originalImage] as? UIImage
+    func uploadPhotoWith(image: UIImage, date: Date, completion: @escaping (Result<URL, Error>) -> Void) {
         
         // 自動產生一組 ID，方便上傳圖片的命名
-        let uniqueString = NSUUID().uuidString
+        let uniqueString = UUID().uuidString
         
-        // 有 selectedImage 時，將圖片上傳
-        guard let selectedImage = image,
-              let uploadData = selectedImage.pngData()
-        else { return }
+        let fileRef = storageRef.child("SimpleFitPhotoUpload").child("\(uniqueString).jpg")
+        // 轉成 data
+        guard let uploadData = image.jpegData(compressionQuality: 0.9) else { return }
         
-        let fileRef = storageRef.child("SimpleFitPhotoUpload").child("\(uniqueString).png")
-        fileRef.putData(uploadData, metadata: nil, completion: { (_, error) in
+        fileRef.putData(uploadData, metadata: nil) { (_, error) in
             
             if let error = error {
                 
@@ -103,7 +96,7 @@ class ChartProvider {
             }
             
             // 取得URL
-            fileRef.downloadURL(completion: { (url, error) in
+            fileRef.downloadURL { (url, error) in
                 
                 if let error = error {
                     
@@ -111,9 +104,9 @@ class ChartProvider {
                     return
                 }
                 guard let downloadURL = url else { return }
-                print("Photo URL: \(downloadURL)")
-            })
-        })
+                completion(.success(downloadURL))
+            }
+        }
     }
     
     private func getWeightFor(year: Int, month: Int) {

@@ -26,6 +26,7 @@
                         <segue destination="3Mj-F4-QRB" kind="custom" identifier="SegueDetail" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="Dyv-aP-9yu"/>
                         <segue destination="EAM-P2-hXX" kind="custom" identifier="SegueAddWeight" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="793-tA-MHQ"/>
                         <segue destination="owC-AG-PdU" kind="custom" identifier="SegueAddNote" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="w8P-Nh-1Co"/>
+                        <segue destination="7cM-va-x4M" kind="custom" identifier="SegueAddPhoto" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="CXv-ws-ZrS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -99,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bwW-EN-Lds" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-336" y="1006"/>
+            <point key="canvasLocation" x="-616" y="1006"/>
         </scene>
         <!--DetailVC-->
         <scene sceneID="Nic-cY-r88">
@@ -161,7 +162,7 @@
                                     <constraint firstAttribute="height" constant="230" id="smv-Aa-9Na"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="2020/12/8 - 慟！！劇情急轉直下？！說好的無痛減重呢？先吃桶胖老爹壓壓驚。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E15-TZ-CJK">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="2020/12/8 - Day1" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E15-TZ-CJK">
                                 <rect key="frame" x="118" y="530" width="160" height="90"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -202,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sdf-vc-cBJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="574" y="1006"/>
+            <point key="canvasLocation" x="294" y="1006"/>
         </scene>
         <!--Side MenuVC-->
         <scene sceneID="r6c-sG-onw">
@@ -464,7 +465,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FrU-Dm-NJb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4113.04347826087" y="1005.8035714285713"/>
+            <point key="canvasLocation" x="4357" y="1006"/>
         </scene>
         <!--User FavoriteVC-->
         <scene sceneID="vah-f5-ho5">
@@ -606,7 +607,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T9c-Br-rYJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5228.985507246377" y="1005.8035714285713"/>
+            <point key="canvasLocation" x="5261" y="1006"/>
         </scene>
         <!--Add WeightVC-->
         <scene sceneID="K9s-YG-kiA">
@@ -697,7 +698,73 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7R0-kS-lKm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1522" y="1006"/>
+            <point key="canvasLocation" x="1242" y="1006"/>
+        </scene>
+        <!--Add PhotoVC-->
+        <scene sceneID="FLB-HE-7xq">
+            <objects>
+                <viewController id="7cM-va-x4M" customClass="AddPhotoVC" customModule="SimpleFit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ciD-C5-PaN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afx-FH-4cI">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <connections>
+                                    <action selector="dismiss:" destination="EAM-P2-hXX" eventType="touchUpInside" id="7Lw-cs-lCF"/>
+                                    <action selector="dismiss:" destination="7cM-va-x4M" eventType="touchUpInside" id="Tx8-Sc-SRz"/>
+                                    <action selector="dismiss:" destination="79N-88-cWt" eventType="touchUpInside" id="tNv-H1-GaT"/>
+                                </connections>
+                            </button>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="FNH-Kv-WUp">
+                                <rect key="frame" x="135" y="233.5" width="144" height="34.5"/>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <locale key="locale" localeIdentifier="zh_TW"/>
+                            </datePicker>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="album" translatesAutoresizingMaskIntoConstraints="NO" id="DJM-is-WdY">
+                                <rect key="frame" x="47" y="288" width="320" height="320"/>
+                                <color key="tintColor" systemColor="systemGray4Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="goP-hh-PFC"/>
+                                    <constraint firstAttribute="height" constant="320" id="pNr-Mp-Tue"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEi-DD-6Bc">
+                                <rect key="frame" x="177" y="638" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="9jU-rs-HmJ"/>
+                                    <constraint firstAttribute="width" constant="60" id="TYS-cD-i7t"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemGray2Color"/>
+                                <state key="normal" image="checkmark"/>
+                                <connections>
+                                    <action selector="confirmButtonDidTap:" destination="7cM-va-x4M" eventType="touchUpInside" id="IHP-8t-9i3"/>
+                                    <action selector="confirmButtonDidTap:" destination="EAM-P2-hXX" eventType="touchUpInside" id="ZKF-zW-U0D"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Xx-FR-zrq"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="afx-FH-4cI" secondAttribute="trailing" id="0Es-3g-YLC"/>
+                            <constraint firstItem="KEi-DD-6Bc" firstAttribute="centerX" secondItem="ciD-C5-PaN" secondAttribute="centerX" id="DL2-Ya-mpk"/>
+                            <constraint firstItem="KEi-DD-6Bc" firstAttribute="top" secondItem="DJM-is-WdY" secondAttribute="bottom" constant="30" id="Uwj-ET-Avf"/>
+                            <constraint firstItem="afx-FH-4cI" firstAttribute="top" secondItem="ciD-C5-PaN" secondAttribute="top" id="Zj6-z6-gnL"/>
+                            <constraint firstItem="afx-FH-4cI" firstAttribute="leading" secondItem="6Xx-FR-zrq" secondAttribute="leading" id="awp-tP-zhO"/>
+                            <constraint firstItem="DJM-is-WdY" firstAttribute="top" secondItem="FNH-Kv-WUp" secondAttribute="bottom" constant="20" id="b5m-9z-xrf"/>
+                            <constraint firstItem="DJM-is-WdY" firstAttribute="centerX" secondItem="ciD-C5-PaN" secondAttribute="centerX" id="b7R-5e-uER"/>
+                            <constraint firstItem="FNH-Kv-WUp" firstAttribute="centerX" secondItem="ciD-C5-PaN" secondAttribute="centerX" id="i2h-8P-HJY"/>
+                            <constraint firstItem="DJM-is-WdY" firstAttribute="centerY" secondItem="ciD-C5-PaN" secondAttribute="centerY" id="vpe-D1-9cA"/>
+                            <constraint firstItem="6Xx-FR-zrq" firstAttribute="bottom" secondItem="afx-FH-4cI" secondAttribute="bottom" id="y6R-JJ-jvS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="FNH-Kv-WUp" id="rbW-gq-jOc"/>
+                        <outlet property="photoImage" destination="DJM-is-WdY" id="jLe-Mt-inT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vVb-cg-gDf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2146" y="1006"/>
         </scene>
         <!--Add NoteVC-->
         <scene sceneID="bN9-vS-Tgy">
@@ -738,7 +805,7 @@
                                     <constraint firstAttribute="width" constant="320" id="FsC-qv-Xl0"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="2020/12/8 - 佛系減重 Day 1，緣份到了，體重機的數字就下降了。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dch-Dl-YXe">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="2020/12/8 - Day1" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dch-Dl-YXe">
                                 <rect key="frame" x="93" y="398" width="200" height="143"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -773,10 +840,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryL-dc-Bn4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2432" y="1006"/>
+            <point key="canvasLocation" x="3052" y="1006"/>
         </scene>
     </scenes>
     <resources>
+        <image name="album" width="384" height="384"/>
         <image name="back" width="358" height="358"/>
         <image name="checkmark" width="372" height="372"/>
         <image name="foot" width="700" height="610"/>

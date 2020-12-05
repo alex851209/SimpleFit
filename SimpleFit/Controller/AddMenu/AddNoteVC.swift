@@ -43,8 +43,16 @@ class AddNoteVC: UIViewController {
         guard let note = noteTextView.text else { return }
         
         let daily = DailyData(weight: nil, photo: nil, note: note)
-        provider.addDataWith(dailyData: daily, field: .note, date: date, completion: { [weak self] _ in
-            print("Success adding a note: \(note) on \(String(describing: self?.date))")
+        provider.addDataWith(dailyData: daily, field: .note, date: date, completion: { [weak self] result in
+            
+            switch result {
+            
+            case .success(let note):
+                let dateString = String(describing: self?.date)
+                print("Success adding new note: \(note) on date: \(dateString)")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         })
     }
     

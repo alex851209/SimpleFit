@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A4052DD655D816F8F8765AD5 /* Pods_SimpleFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */; };
+		A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A520C975257B6F1600215CC1 /* AddPhotoVC.swift */; };
 		A548A787256FFC6400782A0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A786256FFC6400782A0E /* AppDelegate.swift */; };
 		A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A788256FFC6400782A0E /* SceneDelegate.swift */; };
 		A548A78B256FFC6400782A0E /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A78A256FFC6400782A0E /* HomeVC.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A520C975257B6F1600215CC1 /* AddPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoVC.swift; sourceTree = "<group>"; };
 		A548A783256FFC6400782A0E /* SimpleFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A548A786256FFC6400782A0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A548A788256FFC6400782A0E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			children = (
 				A57297B92577230600A892D4 /* AddWeightVC.swift */,
 				A5C741ED2577FD82007B477E /* AddNoteVC.swift */,
+				A520C975257B6F1600215CC1 /* AddPhotoVC.swift */,
 			);
 			path = AddMenu;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				A5C9F67E2578758E00558C98 /* UserInfoVC.swift in Sources */,
 				A5E46D48257615C400ADF4DA /* DetailVC.swift in Sources */,
 				A57297BA2577230600A892D4 /* AddWeightVC.swift in Sources */,
+				A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

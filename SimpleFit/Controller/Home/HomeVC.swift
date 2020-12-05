@@ -18,6 +18,7 @@ class HomeVC: UIViewController {
         static let detail = "SegueDetail"
         static let addWeight = "SegueAddWeight"
         static let addNote = "SegueAddNote"
+        static let addPhoto = "SegueAddPhoto"
     }
     
     let chartView = AAChartView()
@@ -34,6 +35,7 @@ class HomeVC: UIViewController {
     var albumButton = UIButton()
     var noteButton = UIButton()
     var isAddMenuOpen = false
+    var selectedPhoto = UIImage()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -270,6 +272,9 @@ class HomeVC: UIViewController {
                 let isDifferentDate = self?.selectedYear != selectedYear || self?.selectedMonth != selectedMonth
                 if !isCancel && isDifferentDate { self?.updateChartFor(year: selectedYear, month: selectedMonth) }
             }
+        case Segue.addPhoto:
+            guard let addPhotoVC = segue.destination as? AddPhotoVC else { return }
+            addPhotoVC.selectedPhoto = selectedPhoto
         default: break
         }
     }
@@ -289,7 +294,12 @@ extension HomeVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
-        provider.uploadPhoto(with: info)
-        dismiss(animated: true, completion: nil)
+        guard let selectedPhoto = info[.originalImage] as? UIImage else { return }
+        self.selectedPhoto = selectedPhoto
+        
+        dismiss(animated: true, completion: { [weak self] in
+            
+            self?.performSegue(withIdentifier: Segue.addPhoto, sender: nil)
+        })
     }
 }
