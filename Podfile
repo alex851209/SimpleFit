@@ -15,5 +15,6 @@ target 'SimpleFit' do
   pod "Gemini"
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
+  pod 'Firebase/Storage'
   
 end
