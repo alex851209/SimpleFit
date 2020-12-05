@@ -54,8 +54,8 @@ class AddWeightVC: UIViewController {
         else { return }
         
         let daily = DailyData(weight: weight, photo: nil, note: nil)
-        provider.addDataWith(dailyData: daily, field: .weight, date: date, completion: { _ in
-            
+        provider.addDataWith(dailyData: daily, field: .weight, date: date, completion: { [weak self] _ in
+            print("Success adding a weight: \(weight) on \(String(describing: self?.date))")
         })
     }
     

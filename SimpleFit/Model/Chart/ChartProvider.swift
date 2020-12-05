@@ -8,12 +8,6 @@
 import Foundation
 import Firebase
 
-enum Result<T> {
-
-    case success(T)
-    case failure(Error)
-}
-
 enum ChartField {
     
     case weight
@@ -47,7 +41,7 @@ class ChartProvider {
     func addDataWith(dailyData: DailyData,
                      field: ChartField,
                      date: Date,
-                     completion: @escaping (Result<Void>) -> Void) {
+                     completion: @escaping (Result<Any, Error>) -> Void) {
 
         let id = DateProvider.dateToDateString(date)
         let doc = database.collection("users").document(user).collection("chartData")
@@ -55,13 +49,12 @@ class ChartProvider {
         switch field {
         
         case .weight:
-            
             guard let weight = dailyData.weight else { return }
             doc.document(id).setData([field.title: weight], merge: true) { error in
                 if let error = error {
                     completion(Result.failure(error))
                 } else {
-                    completion(Result.success(()))
+                    completion(Result.success(weight))
                 }
             }
         case .photo:
@@ -70,7 +63,7 @@ class ChartProvider {
                 if let error = error {
                     completion(Result.failure(error))
                 } else {
-                    completion(Result.success(()))
+                    completion(Result.success(photo))
                 }
             }
         case .note:
@@ -79,7 +72,7 @@ class ChartProvider {
                 if let error = error {
                     completion(Result.failure(error))
                 } else {
-                    completion(Result.success(()))
+                    completion(Result.success(note))
                 }
             }
         }
