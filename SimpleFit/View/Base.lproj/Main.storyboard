@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17503.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s8g-5e-1cc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17502"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -717,20 +718,15 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="FNH-Kv-WUp">
-                                <rect key="frame" x="135" y="233.5" width="144" height="34.5"/>
+                                <rect key="frame" x="135" y="79" width="144" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34.5" id="giZ-Ml-Lj3"/>
+                                </constraints>
                                 <locale key="locale" localeIdentifier="zh_TW"/>
                             </datePicker>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="album" translatesAutoresizingMaskIntoConstraints="NO" id="DJM-is-WdY">
-                                <rect key="frame" x="47" y="288" width="320" height="320"/>
-                                <color key="tintColor" systemColor="systemGray4Color"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="goP-hh-PFC"/>
-                                    <constraint firstAttribute="height" constant="320" id="pNr-Mp-Tue"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEi-DD-6Bc">
-                                <rect key="frame" x="177" y="638" width="60" height="60"/>
+                                <rect key="frame" x="177" y="752" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="9jU-rs-HmJ"/>
                                     <constraint firstAttribute="width" constant="60" id="TYS-cD-i7t"/>
@@ -742,19 +738,25 @@
                                     <action selector="confirmButtonDidTap:" destination="EAM-P2-hXX" eventType="touchUpInside" id="ZKF-zW-U0D"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="album" translatesAutoresizingMaskIntoConstraints="NO" id="DJM-is-WdY">
+                                <rect key="frame" x="30" y="153.5" width="354" height="558.5"/>
+                                <color key="tintColor" systemColor="systemGray4Color"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Xx-FR-zrq"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="afx-FH-4cI" secondAttribute="trailing" id="0Es-3g-YLC"/>
                             <constraint firstItem="KEi-DD-6Bc" firstAttribute="centerX" secondItem="ciD-C5-PaN" secondAttribute="centerX" id="DL2-Ya-mpk"/>
-                            <constraint firstItem="KEi-DD-6Bc" firstAttribute="top" secondItem="DJM-is-WdY" secondAttribute="bottom" constant="30" id="Uwj-ET-Avf"/>
+                            <constraint firstItem="DJM-is-WdY" firstAttribute="leading" secondItem="6Xx-FR-zrq" secondAttribute="leading" constant="30" id="LCA-8U-aqZ"/>
+                            <constraint firstItem="DJM-is-WdY" firstAttribute="top" secondItem="FNH-Kv-WUp" secondAttribute="bottom" constant="40" id="PgC-oS-DJZ"/>
                             <constraint firstItem="afx-FH-4cI" firstAttribute="top" secondItem="ciD-C5-PaN" secondAttribute="top" id="Zj6-z6-gnL"/>
                             <constraint firstItem="afx-FH-4cI" firstAttribute="leading" secondItem="6Xx-FR-zrq" secondAttribute="leading" id="awp-tP-zhO"/>
-                            <constraint firstItem="DJM-is-WdY" firstAttribute="top" secondItem="FNH-Kv-WUp" secondAttribute="bottom" constant="20" id="b5m-9z-xrf"/>
-                            <constraint firstItem="DJM-is-WdY" firstAttribute="centerX" secondItem="ciD-C5-PaN" secondAttribute="centerX" id="b7R-5e-uER"/>
+                            <constraint firstItem="6Xx-FR-zrq" firstAttribute="trailing" secondItem="DJM-is-WdY" secondAttribute="trailing" constant="30" id="hdr-9Y-tMV"/>
                             <constraint firstItem="FNH-Kv-WUp" firstAttribute="centerX" secondItem="ciD-C5-PaN" secondAttribute="centerX" id="i2h-8P-HJY"/>
-                            <constraint firstItem="DJM-is-WdY" firstAttribute="centerY" secondItem="ciD-C5-PaN" secondAttribute="centerY" id="vpe-D1-9cA"/>
+                            <constraint firstItem="6Xx-FR-zrq" firstAttribute="bottom" secondItem="KEi-DD-6Bc" secondAttribute="bottom" constant="50" id="nwZ-ui-SSf"/>
+                            <constraint firstItem="KEi-DD-6Bc" firstAttribute="top" secondItem="DJM-is-WdY" secondAttribute="bottom" constant="40" id="t9f-6v-Lqo"/>
                             <constraint firstItem="6Xx-FR-zrq" firstAttribute="bottom" secondItem="afx-FH-4cI" secondAttribute="bottom" id="y6R-JJ-jvS"/>
+                            <constraint firstItem="FNH-Kv-WUp" firstAttribute="top" secondItem="6Xx-FR-zrq" secondAttribute="top" constant="35" id="zOv-u5-2KB"/>
                         </constraints>
                     </view>
                     <connections>

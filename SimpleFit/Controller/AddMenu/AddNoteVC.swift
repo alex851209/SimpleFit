@@ -41,7 +41,7 @@ class AddNoteVC: BlurViewController {
         
         guard let note = noteTextView.text else { return }
         
-        let daily = DailyData(weight: nil, photo: nil, note: note)
+        let daily = DailyData(note: note)
         provider.addDataWith(dailyData: daily, field: .note, date: date, completion: { [weak self] result in
             
             switch result {

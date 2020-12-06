@@ -52,7 +52,7 @@ class AddWeightVC: BlurViewController {
               let weight = Double(weightString)
         else { return }
         
-        let daily = DailyData(weight: weight, photo: nil, note: nil)
+        let daily = DailyData(weight: weight)
         provider.addDataWith(dailyData: daily, field: .weight, date: date, completion: { [weak self] result in
             
             switch result {

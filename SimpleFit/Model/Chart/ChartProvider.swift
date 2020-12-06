@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseStorage
+import FirebaseFirestoreSwift
 
 enum ChartField: String {
     
@@ -15,6 +16,8 @@ enum ChartField: String {
     case photo
     case note
     
+    static let month = "month"
+    static let day = "day"
     static let photoUrl = "url"
     static let photoIsFavorite = "isFavorite"
 }
@@ -25,13 +28,7 @@ class ChartProvider {
     let storageRef = Storage.storage().reference()
     let user = "Alex"
     var chartData = ChartData()
-    
-    func getDataFor(year: Int, month: Int) -> ChartData {
-        
-        getWeightFor(year: year, month: month)
-        getCategoriesFor(year: year, month: month)
-        return chartData
-    }
+    var dailyDatas = [DailyData]()
     
     func addDataWith(dailyData: DailyData,
                      field: ChartField,
@@ -39,13 +36,19 @@ class ChartProvider {
                      completion: @escaping (Result<Any, Error>) -> Void) {
 
         let id = DateProvider.dateToDateString(date)
+        let month = DateProvider.dateToMonthString(date)
+        let day = DateProvider.dateToDayString(date)
         let doc = database.collection("users").document(user).collection("chartData")
         
         switch field {
         
         case .weight:
             guard let weight = dailyData.weight else { return }
-            doc.document(id).setData([field.rawValue: weight], merge: true) { error in
+            doc.document(id).setData([
+                field.rawValue: weight,
+                ChartField.month: month,
+                ChartField.day: day
+                ], merge: true) { error in
                 if let error = error {
                     completion(.failure(error))
                 } else {
@@ -58,7 +61,9 @@ class ChartProvider {
                 field.rawValue: [
                     ChartField.photoUrl: photo.url,
                     ChartField.photoIsFavorite: photo.isFavorite
-                ]
+                ],
+                ChartField.month: month,
+                ChartField.day: day
             ], merge: true) { error in
                 if let error = error {
                     completion(.failure(error))
@@ -68,7 +73,11 @@ class ChartProvider {
             }
         case .note:
             guard let note = dailyData.note else { return }
-            doc.document(id).setData([field.rawValue: note], merge: true) { error in
+            doc.document(id).setData([
+                field.rawValue: note,
+                ChartField.month: month,
+                ChartField.day: day
+            ], merge: true) { error in
                 if let error = error {
                     completion(.failure(error))
                 } else {
@@ -109,47 +118,85 @@ class ChartProvider {
         }
     }
     
-    private func getWeightFor(year: Int, month: Int) {
+    func getDataFrom(year: Int, month: Int) -> ChartData {
         
-        let oddWeights = [
-            63.2, 62.9, nil, nil, 63.0, 62.5, 64.2, 62.5, 62.3, 63.3, 62.9, 63.6,
-            63.2, 62.9, 63.5, 64.0, 62.2, 63.5, 64.2, 64.5, 64.3, 64.3, 64.9, 64.6,
-            63.2, 62.9, 62.5, 64.5, 62.2, 63.5
-        ]
+        getWeightFrom(year: year, month: month)
+        getCategoriesFrom(year: year, month: month)
+        return chartData
+    }
+    
+    func fetchDailyDatasFrom(year: Int, month: Int, completion: @escaping (Result<Any, Error>) -> Void) {
         
-        let evenWeights = [
-            65.2, 64.9, 65.1, 65.1, 65.0, 65.5, 65.2, 65.5, 65.3, 65.3, 65.6, 65.8,
-            65.5, 65.6, 65.5, 65.9, 66.0, 65.8, 66.1, 66.2, 65.9, 66.3, 66.3, 66.6,
-            66.2, 66.0, 66.3, 66.5, 66.3, 66.5, 66.8
-        ]
-
-        var weights = [Double?]()
+        let doc = database.collection("users").document(user).collection("chartData")
+        let month = DateProvider.add0BeforeNumber(month)
+        dailyDatas.removeAll()
         
-        switch month % 2 {
-        
-        case 0: weights = evenWeights
-        case 1: weights = oddWeights
-        default: break
+        doc.whereField(ChartField.month, isEqualTo: "\(year)-\(month)").getDocuments { (querySnapshot, error) in
+            
+            if let error = error {
+                
+                print("Error getting documents: \(error)")
+            } else {
+                
+                for document in querySnapshot!.documents {
+                    
+                    do {
+                        if let daily = try document.data(as: DailyData.self, decoder: Firestore.Decoder()) {
+                            self.dailyDatas.append(daily)
+                        }
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+                completion(.success(()))
+            }
         }
-        
+    }
+    
+    private func getWeightFrom(year: Int, month: Int) {
+
+        let countOfDays = DateProvider.getCountOfDaysInMonth(year: year, month: month)
+        var weights = [Double?]()
         var datas = [Any]()
-        
-        for xPosition in 0 ..< weights.count {
+        var clearDatas = [Any?]()
+        let days = dailyDatas.map { $0.day }
+
+        for count in 1 ... countOfDays {
+
+            let day = DateProvider.add0BeforeNumber(count)
+
+            if days.contains(day) {
+                let weight = dailyDatas.filter({ $0.day == day }).map { $0.weight }
+                weights.append(contentsOf: weight)
+            } else {
+                weights.append(nil)
+            }
+        }
+
+        for xPosition in 0 ..< countOfDays {
+
+            clearDatas.append(nil)
             guard let yPosition = weights[xPosition] else { continue }
             let coordinates: [Any] = [xPosition, yPosition]
             datas.append(coordinates)
         }
-        
+
+        chartData.datas = datas
+        chartData.clearDatas = clearDatas
+
         guard let min = weights.compactMap({ $0 }).min(),
               let max = weights.compactMap({ $0 }).max()
-        else { return }
-        
-        chartData.datas = datas
+        else {
+            chartData.min = 0
+            chartData.max = 100
+            return
+        }
+
         chartData.min = min - 5
         chartData.max = max + 5
     }
     
-    private func getCategoriesFor(year: Int, month: Int) {
+    private func getCategoriesFrom(year: Int, month: Int) {
         
         let countOfDays = DateProvider.getCountOfDaysInMonth(year: year, month: month)
         var firstDay = DateProvider.getfirstWeekDayInMonth(year: year, month: month)

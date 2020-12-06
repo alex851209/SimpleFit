@@ -34,6 +34,8 @@ class DateProvider {
         }
     }
     
+    static let formatter = DateFormatter()
+    
     static let chineseDays: [ChineseDay] = [.sun, .mon, .tue, .wed, .thu, .fri, .sat]
     
     static func currentYear() -> Int {
@@ -75,9 +77,8 @@ class DateProvider {
     static func firstWeekDayInCurrentMonth() -> Int {
         
         //星期和數字一一對應 星期日：7
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM"
-        let date = dateFormatter.date(from: String(Date().year())+"-"+String(Date().month()))
+        formatter.dateFormat = "yyyy-MM"
+        let date = formatter.date(from: String(Date().year())+"-"+String(Date().month()))
         let calender = Calendar(identifier: Calendar.Identifier.gregorian)
         let comps = (calender as NSCalendar?)?.components(NSCalendar.Unit.weekday, from: date!)
         var week = comps?.weekday
@@ -87,10 +88,8 @@ class DateProvider {
     
     static func getCountOfDaysInMonth(year: Int, month: Int) -> Int {
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM"
-        let date
-            = dateFormatter.date(from: String(year)+"-"+String(month))
+        formatter.dateFormat = "yyyy-MM"
+        let date = formatter.date(from: String(year)+"-"+String(month))
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         let range = (calendar as NSCalendar?)?.range(of: NSCalendar.Unit.day, in: NSCalendar.Unit.month, for: date!)
         return (range?.length)!
@@ -98,9 +97,8 @@ class DateProvider {
     
     static func getfirstWeekDayInMonth(year: Int, month: Int) -> Int {
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM"
-        let date = dateFormatter.date(from: String(year)+"-"+String(month))
+        formatter.dateFormat = "yyyy-MM"
+        let date = formatter.date(from: String(year)+"-"+String(month))
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         let comps = (calendar as NSCalendar?)?.components(NSCalendar.Unit.weekday, from: date!)
         let week = comps?.weekday
@@ -114,18 +112,29 @@ class DateProvider {
     
     static func dateStringToDate(_ dateStr: String) -> Date {
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let date
-            = dateFormatter.date(from: dateStr)
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "yyyy-MM-dd"
+        let date = formatter.date(from: dateStr)
         return date!
     }
 
     static func dateToDateString(_ date: Date) -> String {
         
-        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        let date = formatter.string(from: date)
+        return date
+    }
+    
+    static func dateToMonthString(_ date: Date) -> String {
+        
+        formatter.dateFormat = "yyyy-MM"
+        let date = formatter.string(from: date)
+        return date
+    }
+    
+    static func dateToDayString(_ date: Date) -> String {
+        
+        formatter.dateFormat = "dd"
         let date = formatter.string(from: date)
         return date
     }

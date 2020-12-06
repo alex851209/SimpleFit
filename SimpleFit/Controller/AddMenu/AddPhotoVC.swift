@@ -57,7 +57,7 @@ class AddPhotoVC: BlurViewController {
 
         let urlString = "\(url)"
         let photo = Photo(url: urlString, isFavorite: false)
-        let daily = DailyData(weight: nil, photo: photo, note: nil)
+        let daily = DailyData(photo: photo)
 
         provider.addDataWith(dailyData: daily, field: .photo, date: date, completion: { [weak self] result in
 

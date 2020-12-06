@@ -43,6 +43,7 @@ class HomeVC: UIViewController {
         configureNC()
         configureChart()
         configureSideMenu()
+        configureLayout()
     }
     
     private func configureLayout() {
@@ -84,16 +85,16 @@ class HomeVC: UIViewController {
     
     private func configureChartModel() {
         
-        let chartData = provider.getDataFor(year: selectedYear, month: selectedMonth)
+        let chartData = provider.getDataFrom(year: selectedYear, month: selectedMonth)
         
         guard let min = chartData.min,
               let max = chartData.max,
               let categories = chartData.categories,
-              let weightsData = chartData.datas
+              let weightsDatas = chartData.datas,
+              let clearDatas = chartData.clearDatas
         else { return }
         
         chartModel = AAChartModel()
-            .animationDuration(1200)
             .categories(categories)
             .chartType(.spline)//圖表類型
             .colorsTheme(["#c0c0c0"])
@@ -106,9 +107,10 @@ class HomeVC: UIViewController {
             .markerRadius(10)//連接點大小
             .markerSymbolStyle(.borderBlank)//折線或者曲線的連接點是否為空心的
             .scrollablePlotArea(AAScrollablePlotArea().minWidth(2000).scrollPositionX(0))
-            .series([AASeriesElement().name("體重").data(weightsData)])
-//            .subtitle("2020年11月")//圖表副標題
-//            .title("Simple Fit")//圖表主標題
+            .series([
+                AASeriesElement().name("體重").data(weightsDatas),
+                AASeriesElement().data(clearDatas as [Any])
+            ])
             .tooltipValueSuffix("公斤")//浮動提示框單位後綴
             .tooltipEnabled(true)//是否顯示浮動提示框
             .touchEventEnabled(true)//是否支持觸摸事件回調
@@ -138,8 +140,6 @@ class HomeVC: UIViewController {
         SideMenuManager.default.addPanGestureToPresent(toView: navigationController!.navigationBar)
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: view)
         SideMenuManager.default.leftMenuNavigationController?.settings = makeSettings()
-        
-        configureLayout()
     }
     
     private func showImagePicker(type: UIImagePickerController.SourceType) {
@@ -269,8 +269,16 @@ class HomeVC: UIViewController {
             datePickerVC.selectedYear = self.selectedYear
             datePickerVC.selectedMonth = self.selectedMonth
             datePickerVC.callback = { [weak self] (selectedYear, selectedMonth, isCancel) in
+                
                 let isDifferentDate = self?.selectedYear != selectedYear || self?.selectedMonth != selectedMonth
-                if !isCancel && isDifferentDate { self?.updateChartFor(year: selectedYear, month: selectedMonth) }
+                
+                if !isCancel && isDifferentDate {
+
+                    self?.provider.fetchDailyDatasFrom(year: selectedYear, month: selectedMonth) { _ in
+
+                        self?.updateChartFor(year: selectedYear, month: selectedMonth)
+                    }
+                }
             }
         case Segue.addPhoto:
             guard let addPhotoVC = segue.destination as? AddPhotoVC else { return }

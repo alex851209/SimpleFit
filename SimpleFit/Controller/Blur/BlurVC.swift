@@ -8,7 +8,7 @@
 import UIKit
 import MIBlurPopup
 
-class BlurViewController: UIViewController ,MIBlurPopupDelegate {
+class BlurViewController: UIViewController, MIBlurPopupDelegate {
     
     var popupView: UIView { view }
     var blurEffectStyle: UIBlurEffect.Style? { .systemUltraThinMaterial }
