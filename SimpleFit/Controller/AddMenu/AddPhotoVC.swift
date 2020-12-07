@@ -31,6 +31,7 @@ class AddPhotoVC: BlurViewController {
     
     private func configureLayout() {
         
+        datePicker.maximumDate = date
         datePicker.applyBorder()
         datePicker.addTarget(self, action: #selector(dateDidPick), for: .valueChanged)
         
