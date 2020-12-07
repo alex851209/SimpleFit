@@ -287,6 +287,9 @@ PODS:
   - gRPC-Core/Interface (1.28.2)
   - GTMSessionFetcher/Core (1.5.0)
   - IQKeyboardManagerSwift (6.5.6)
+  - Kingfisher (5.15.8):
+    - Kingfisher/Core (= 5.15.8)
+  - Kingfisher/Core (5.15.8)
   - leveldb-library (1.22)
   - MIBlurPopup (1.0.0)
   - nanopb (1.30906.0):
@@ -306,6 +309,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift
   - Gemini
   - IQKeyboardManagerSwift
+  - Kingfisher
   - MIBlurPopup
   - SideMenu (~> 6.0)
   - SwiftLint
@@ -327,6 +331,7 @@ SPEC REPOS:
     - gRPC-Core
     - GTMSessionFetcher
     - IQKeyboardManagerSwift
+    - Kingfisher
     - leveldb-library
     - MIBlurPopup
     - nanopb
@@ -367,6 +372,7 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   MIBlurPopup: 7e855df6a79d13bc0840519c2ec9bac50b1ac01a
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
@@ -374,6 +380,6 @@ SPEC CHECKSUMS:
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
 
-PODFILE CHECKSUM: fc3647398d60aa85388f9220af4e922c4727d0e3
+PODFILE CHECKSUM: e067f41173fd0eb4ffe6a66346d00bf42fd02579
 
 COCOAPODS: 1.10.0
