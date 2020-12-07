@@ -16,12 +16,15 @@ class AddNoteVC: BlurViewController {
     @IBAction func confirmButtonDidTap(_ sender: Any) {
         
         addNote()
+        callback?(selectedYear, selectedMonth)
         dismiss(animated: true)
     }
     
-    var callback: (() -> Void)?
+    var callback: ((Int, Int) -> Void)?
     let provider = ChartProvider()
-    var date = Date()
+    var selectedDate = Date()
+    var selectedYear = Date().year()
+    var selectedMonth = Date().month()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +34,7 @@ class AddNoteVC: BlurViewController {
     
     private func configureLayout() {
         
-        datePicker.maximumDate = date
+        datePicker.maximumDate = selectedDate
         datePicker.applyBorder()
         datePicker.addTarget(self, action: #selector(dateDidPick), for: .valueChanged)
         
@@ -43,12 +46,12 @@ class AddNoteVC: BlurViewController {
         guard let note = noteTextView.text else { return }
         
         let daily = DailyData(note: note)
-        provider.addDataWith(dailyData: daily, field: .note, date: date, completion: { [weak self] result in
+        provider.addDataWith(dailyData: daily, field: .note, date: selectedDate, completion: { [weak self] result in
             
             switch result {
             
             case .success(let note):
-                let dateString = String(describing: self?.date)
+                let dateString = String(describing: self?.selectedDate)
                 print("Success adding new note: \(note) on date: \(dateString)")
             case .failure(let error):
                 print(error.localizedDescription)
@@ -56,5 +59,10 @@ class AddNoteVC: BlurViewController {
         })
     }
     
-    @objc private func dateDidPick(sender: UIDatePicker) { date = sender.date }
+    @objc private func dateDidPick(sender: UIDatePicker) {
+        
+        selectedDate = sender.date
+        selectedYear = selectedDate.year()
+        selectedMonth = selectedDate.month()
+    }
 }

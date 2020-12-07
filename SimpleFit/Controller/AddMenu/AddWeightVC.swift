@@ -24,7 +24,7 @@ class AddWeightVC: BlurViewController {
     
     var callback: ((Int, Int) -> Void)?
     let provider = ChartProvider()
-    var date = Date()
+    var selectedDate = Date()
     var selectedYear = Date().year()
     var selectedMonth = Date().month()
     
@@ -36,7 +36,7 @@ class AddWeightVC: BlurViewController {
     
     private func configureLayout() {
         
-        datePicker.maximumDate = date
+        datePicker.maximumDate = selectedDate
         datePicker.applyBorder()
         datePicker.addTarget(self, action: #selector(dateDidPick), for: .valueChanged)
         
@@ -57,12 +57,12 @@ class AddWeightVC: BlurViewController {
         else { return }
         
         let daily = DailyData(weight: weight)
-        provider.addDataWith(dailyData: daily, field: .weight, date: date, completion: { [weak self] result in
+        provider.addDataWith(dailyData: daily, field: .weight, date: selectedDate, completion: { [weak self] result in
             
             switch result {
             
             case .success(let weight):
-                let dateString = String(describing: self?.date)
+                let dateString = String(describing: self?.selectedDate)
                 print("Success adding new weight: \(weight) on date: \(dateString)")
             case .failure(let error):
                 print(error.localizedDescription)
@@ -72,8 +72,8 @@ class AddWeightVC: BlurViewController {
     
     @objc private func dateDidPick(sender: UIDatePicker) {
         
-        date = sender.date
-        selectedYear = date.year()
-        selectedMonth = date.month()
+        selectedDate = sender.date
+        selectedYear = selectedDate.year()
+        selectedMonth = selectedDate.month()
     }
 }

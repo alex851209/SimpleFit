@@ -13,6 +13,7 @@ class DetailVC: BlurViewController {
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var noteTextView: UITextView!
+    @IBOutlet weak var cardView: UIView!
     
     @IBAction func dismiss(_ sender: Any) {
         
@@ -21,6 +22,7 @@ class DetailVC: BlurViewController {
     }
     
     var callback: (() -> Void)?
+    var daily: DailyData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +32,18 @@ class DetailVC: BlurViewController {
     
     private func configureLayout() {
         
+        cardView.layer.cornerRadius = 25
+        cardView.applyShadow()
+        
         titleLabel.applyBorder()
+        
+        guard let weight = daily?.weight else { return }
+        weightLabel.text = "\(weight)"
         weightLabel.applyBorder()
+        
         photoImage.image = UIImage.asset(.album)
+        
         noteTextView.transform = CGAffineTransform(rotationAngle: .pi * 0.05)
+        noteTextView.text = daily?.note
     }
 }

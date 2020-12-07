@@ -16,12 +16,16 @@ class AddPhotoVC: BlurViewController {
     @IBAction func confirmButtonDidTap(_ sender: Any) {
         
         uploadPhoto()
+        callback?(selectedYear, selectedMonth)
         dismiss(animated: true, completion: nil)
     }
     
+    var callback: ((Int, Int) -> Void)?
     let provider = ChartProvider()
-    var date = Date()
     var selectedPhoto = UIImage()
+    var selectedDate = Date()
+    var selectedYear = Date().year()
+    var selectedMonth = Date().month()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +35,7 @@ class AddPhotoVC: BlurViewController {
     
     private func configureLayout() {
         
-        datePicker.maximumDate = date
+        datePicker.maximumDate = selectedDate
         datePicker.applyBorder()
         datePicker.addTarget(self, action: #selector(dateDidPick), for: .valueChanged)
         
@@ -41,7 +45,7 @@ class AddPhotoVC: BlurViewController {
     
     private func uploadPhoto() {
         
-        provider.uploadPhotoWith(image: selectedPhoto, date: date) { result in
+        provider.uploadPhotoWith(image: selectedPhoto, date: selectedDate) { result in
             
             switch result {
             
@@ -60,12 +64,12 @@ class AddPhotoVC: BlurViewController {
         let photo = Photo(url: urlString, isFavorite: false)
         let daily = DailyData(photo: photo)
 
-        provider.addDataWith(dailyData: daily, field: .photo, date: date, completion: { [weak self] result in
+        provider.addDataWith(dailyData: daily, field: .photo, date: selectedDate, completion: { [weak self] result in
 
             switch result {
 
             case .success(let photo):
-                let dateString = String(describing: self?.date)
+                let dateString = String(describing: self?.selectedDate)
                 print("Success adding new photo: \(photo) on date: \(dateString)")
             case .failure(let error):
                 print(error.localizedDescription)
@@ -73,5 +77,9 @@ class AddPhotoVC: BlurViewController {
         })
     }
     
-    @objc private func dateDidPick(sender: UIDatePicker) { date = sender.date }
+    @objc private func dateDidPick(sender: UIDatePicker) {
+        
+        selectedDate = sender.date
+        selectedYear = selectedDate.year()
+        selectedMonth = selectedDate.month() }
 }

@@ -36,6 +36,8 @@ class HomeVC: UIViewController {
     var noteButton = UIButton()
     var isAddMenuOpen = false
     var selectedPhoto = UIImage()
+    var dailys = [DailyData]()
+    var selectedDaily = DailyData()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,16 +68,24 @@ class HomeVC: UIViewController {
     
     private func configureChartWith(year: Int, month: Int) {
         
-        provider.fetchDailyDatasFrom(year: year, month: month) { [weak self] _ in
+        provider.fetchDailyDatasFrom(year: year, month: month) { [weak self] (result) in
             
-            self?.selectedYear = year
-            self?.selectedMonth = month
-            self?.pickMonthButton.setTitle("\(month)月", for: .normal)
-            self?.configureChartModel()
-            self?.configureChartView()
-            self?.configureLayout()
-            guard let chartOptions = self?.chartOptions else { return }
-            self?.chartView.aa_drawChartWithChartOptions(chartOptions)
+            switch result {
+            
+            case .success(let dailys):
+                self?.selectedYear = year
+                self?.selectedMonth = month
+                self?.pickMonthButton.setTitle("\(month)月", for: .normal)
+                self?.configureChartModel()
+                self?.configureChartView()
+                self?.configureLayout()
+                guard let chartOptions = self?.chartOptions else { return }
+                self?.chartView.aa_drawChartWithChartOptions(chartOptions)
+                self?.dailys = dailys
+                
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
@@ -255,6 +265,20 @@ class HomeVC: UIViewController {
         return settings
     }
     
+    private func configureSelectedDaily(with dayString: String) {
+
+        dailys.forEach { if dayString.contains($0.day) { selectedDaily = $0 } }
+    }
+    
+    private func updateChart() -> (Int, Int) -> Void {
+        
+        return { [weak self] (selectedYear, selectedMonth) in
+            
+            let isSameMonth = self?.selectedYear == selectedYear && self?.selectedMonth == selectedMonth
+            if isSameMonth { self?.configureChartWith(year: selectedYear, month: selectedMonth) }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier {
@@ -262,6 +286,11 @@ class HomeVC: UIViewController {
         case Segue.sideMenuNC:
             guard let sideMenuNC = segue.destination as? SideMenuNavigationController else { return }
             sideMenuNC.settings = makeSettings()
+            
+        case Segue.detail:
+            guard let detailVC = segue.destination as? DetailVC else { return }
+            detailVC.daily = selectedDaily
+            
         case Segue.datePicker:
             guard let datePickerVC = segue.destination as? DatePickerVC else { return }
             datePickerVC.selectedYear = self.selectedYear
@@ -271,16 +300,20 @@ class HomeVC: UIViewController {
                 let isDifferentDate = self?.selectedYear != selectedYear || self?.selectedMonth != selectedMonth
                 if isDifferentDate { self?.configureChartWith(year: selectedYear, month: selectedMonth) }
             }
+            
         case Segue.addWeight:
             guard let addWeightVC = segue.destination as? AddWeightVC else { return }
-            addWeightVC.callback = { [weak self] (selectedYear, selectedMonth) in
-                
-                let isSameMonth = self?.selectedYear == selectedYear && self?.selectedMonth == selectedMonth
-                if isSameMonth { self?.configureChartWith(year: selectedYear, month: selectedMonth) }
-            }
+            addWeightVC.callback = updateChart()
+
+        case Segue.addNote:
+            guard let addNoteVC = segue.destination as? AddNoteVC else { return }
+            addNoteVC.callback = updateChart()
+            
         case Segue.addPhoto:
             guard let addPhotoVC = segue.destination as? AddPhotoVC else { return }
             addPhotoVC.selectedPhoto = selectedPhoto
+            addPhotoVC.callback = updateChart()
+            
         default: break
         }
     }
@@ -291,6 +324,8 @@ extension HomeVC: AAChartViewDelegate {
     func aaChartView(_ aaChartView: AAChartView, moveOverEventMessage: AAMoveOverEventMessageModel) {
         
         if isAddMenuOpen { toggleAddMenu() }
+        guard let selectedDay = moveOverEventMessage.category else { return }
+        configureSelectedDaily(with: selectedDay)
         performSegue(withIdentifier: Segue.detail, sender: nil)
     }
 }

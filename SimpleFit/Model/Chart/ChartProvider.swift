@@ -125,7 +125,7 @@ class ChartProvider {
         return chartData
     }
     
-    func fetchDailyDatasFrom(year: Int, month: Int, completion: @escaping (Result<Any, Error>) -> Void) {
+    func fetchDailyDatasFrom(year: Int, month: Int, completion: @escaping (Result<[DailyData], Error>) -> Void) {
         
         let doc = database.collection("users").document(user).collection("chartData")
         let month = DateProvider.add0BeforeNumber(month)
@@ -148,7 +148,7 @@ class ChartProvider {
                         completion(.failure(error))
                     }
                 }
-                completion(.success(()))
+                completion(.success((self.dailyDatas)))
             }
         }
     }
