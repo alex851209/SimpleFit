@@ -41,9 +41,8 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         
         configureNC()
-        configureChart()
+        configureChartWith(year: selectedYear, month: selectedMonth)
         configureSideMenu()
-        configureLayout()
     }
     
     private func configureLayout() {
@@ -65,14 +64,22 @@ class HomeVC: UIViewController {
         pickMonthButton.applyPickMonthButtonFor(month: selectedMonth)
     }
     
-    private func configureNC() { navigationController?.navigationBar.isHidden = true }
-    
-    private func configureChart() {
+    private func configureChartWith(year: Int, month: Int) {
         
-        configureChartModel()
-        configureChartView()
-        chartView.aa_drawChartWithChartOptions(chartOptions)//圖表視圖對象調用圖表模型對象,繪制最終圖形
+        provider.fetchDailyDatasFrom(year: year, month: month) { [weak self] _ in
+            
+            self?.selectedYear = year
+            self?.selectedMonth = month
+            self?.pickMonthButton.setTitle("\(month)月", for: .normal)
+            self?.configureChartModel()
+            self?.configureChartView()
+            self?.configureLayout()
+            guard let chartOptions = self?.chartOptions else { return }
+            self?.chartView.aa_drawChartWithChartOptions(chartOptions)
+        }
     }
+    
+    private func configureNC() { navigationController?.navigationBar.isHidden = true }
     
     private func configureChartView() {
         
@@ -121,15 +128,6 @@ class HomeVC: UIViewController {
         let crosshair = AACrosshair().width(0.01)
         chartOptions = chartModel.aa_toAAOptions()
         chartOptions.xAxis?.crosshair(crosshair)
-    }
-    
-    private func updateChartFor(year: Int, month: Int) {
-        
-        pickMonthButton.setTitle("\(month)月", for: .normal)
-        self.selectedYear = year
-        self.selectedMonth = month
-        configureChart()
-        configureLayout()
     }
     
     private func configureSideMenu() {
@@ -271,28 +269,14 @@ class HomeVC: UIViewController {
             datePickerVC.callback = { [weak self] (selectedYear, selectedMonth) in
                 
                 let isDifferentDate = self?.selectedYear != selectedYear || self?.selectedMonth != selectedMonth
-                
-                if isDifferentDate {
-
-                    self?.provider.fetchDailyDatasFrom(year: selectedYear, month: selectedMonth) { _ in
-
-                        self?.updateChartFor(year: selectedYear, month: selectedMonth)
-                    }
-                }
+                if isDifferentDate { self?.configureChartWith(year: selectedYear, month: selectedMonth) }
             }
         case Segue.addWeight:
             guard let addWeightVC = segue.destination as? AddWeightVC else { return }
             addWeightVC.callback = { [weak self] (selectedYear, selectedMonth) in
                 
                 let isSameMonth = self?.selectedYear == selectedYear && self?.selectedMonth == selectedMonth
-                
-                if isSameMonth {
-                    
-                    self?.provider.fetchDailyDatasFrom(year: selectedYear, month: selectedMonth) { _ in
-                        
-                        self?.updateChartFor(year: selectedYear, month: selectedMonth)
-                    }
-                }
+                if isSameMonth { self?.configureChartWith(year: selectedYear, month: selectedMonth) }
             }
         case Segue.addPhoto:
             guard let addPhotoVC = segue.destination as? AddPhotoVC else { return }
