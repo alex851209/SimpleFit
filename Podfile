@@ -16,6 +16,7 @@ target 'SimpleFit' do
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
   pod 'Firebase/Storage'
+  pod 'Firebase/Auth'
   pod 'Kingfisher'
   
 end
