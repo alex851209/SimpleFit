@@ -13,18 +13,14 @@ class DatePickerVC: BlurViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var datePicker: ADDatePicker!
     
-    @IBAction func dismiss(_ sender: Any) {
-        
-        callback?(0, 0, true)
-        dismiss(animated: true)
-    }
+    @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
     @IBAction func confirmButtonDidTap(_ sender: Any) {
         
-        callback?(selectedYear, selectedMonth, false)
+        callback?(selectedYear, selectedMonth)
         dismiss(animated: true)
     }
     
-    var callback: ((Int, Int, Bool) -> Void)?
+    var callback: ((Int, Int) -> Void)?
     var selectedYear = 0
     var selectedMonth = 0
     

@@ -18,12 +18,15 @@ class AddWeightVC: BlurViewController {
     @IBAction func confirmButtonDidTap(_ sender: Any) {
         
         addWeight()
+        callback?(selectedYear, selectedMonth)
         dismiss(animated: true)
     }
     
-    var callback: (() -> Void)?
+    var callback: ((Int, Int) -> Void)?
     let provider = ChartProvider()
     var date = Date()
+    var selectedYear = Date().year()
+    var selectedMonth = Date().month()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,5 +69,10 @@ class AddWeightVC: BlurViewController {
         })
     }
     
-    @objc private func dateDidPick(sender: UIDatePicker) { date = sender.date }
+    @objc private func dateDidPick(sender: UIDatePicker) {
+        
+        date = sender.date
+        selectedYear = date.year()
+        selectedMonth = date.month()
+    }
 }

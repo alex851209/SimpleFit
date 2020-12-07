@@ -166,8 +166,8 @@ class ChartProvider {
             let day = DateProvider.add0BeforeNumber(count)
 
             if days.contains(day) {
-                let weight = dailyDatas.filter({ $0.day == day }).map { $0.weight }
-                weights.append(contentsOf: weight)
+                let daily = dailyDatas.first( where: { $0.day == day })
+                weights.append(daily?.weight)
             } else {
                 weights.append(nil)
             }

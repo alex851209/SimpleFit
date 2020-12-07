@@ -268,14 +268,28 @@ class HomeVC: UIViewController {
             guard let datePickerVC = segue.destination as? DatePickerVC else { return }
             datePickerVC.selectedYear = self.selectedYear
             datePickerVC.selectedMonth = self.selectedMonth
-            datePickerVC.callback = { [weak self] (selectedYear, selectedMonth, isCancel) in
+            datePickerVC.callback = { [weak self] (selectedYear, selectedMonth) in
                 
                 let isDifferentDate = self?.selectedYear != selectedYear || self?.selectedMonth != selectedMonth
                 
-                if !isCancel && isDifferentDate {
+                if isDifferentDate {
 
                     self?.provider.fetchDailyDatasFrom(year: selectedYear, month: selectedMonth) { _ in
 
+                        self?.updateChartFor(year: selectedYear, month: selectedMonth)
+                    }
+                }
+            }
+        case Segue.addWeight:
+            guard let addWeightVC = segue.destination as? AddWeightVC else { return }
+            addWeightVC.callback = { [weak self] (selectedYear, selectedMonth) in
+                
+                let isSameMonth = self?.selectedYear == selectedYear && self?.selectedMonth == selectedMonth
+                
+                if isSameMonth {
+                    
+                    self?.provider.fetchDailyDatasFrom(year: selectedYear, month: selectedMonth) { _ in
+                        
                         self?.updateChartFor(year: selectedYear, month: selectedMonth)
                     }
                 }
