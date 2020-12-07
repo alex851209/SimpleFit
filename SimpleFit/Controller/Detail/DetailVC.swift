@@ -28,6 +28,7 @@ class DetailVC: BlurViewController {
         super.viewDidLoad()
 
         configureLayout()
+        configureTapGesture()
     }
     
     private func configureLayout() {
@@ -35,15 +36,33 @@ class DetailVC: BlurViewController {
         cardView.layer.cornerRadius = 25
         cardView.applyShadow()
         
+        guard let month = daily?.month,
+              let day = daily?.day
+        else { return }
+        titleLabel.text = month + "-" + day
         titleLabel.applyBorder()
         
-        guard let weight = daily?.weight else { return }
-        weightLabel.text = "\(weight)"
+        if let weight = daily?.weight { weightLabel.text = "\(weight)" }
         weightLabel.applyBorder()
         
-        photoImage.image = UIImage.asset(.album)
+        if let photo = daily?.photo { photoImage.loadImage(photo.url, placeHolder: UIImage.asset(.album)) }
+        photoImage.layer.cornerRadius = 10
+        photoImage.clipsToBounds = true
+        photoImage.applyShadow()
         
         noteTextView.transform = CGAffineTransform(rotationAngle: .pi * 0.05)
         noteTextView.text = daily?.note
+    }
+    
+    private func configureTapGesture() {
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(photoDidTap))
+        photoImage.isUserInteractionEnabled = true
+        photoImage.addGestureRecognizer(recognizer)
+    }
+    
+    @objc private func photoDidTap() {
+        
+        photoImage.showButtonFeedbackAnimation {}
     }
 }

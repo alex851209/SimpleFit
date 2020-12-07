@@ -16,7 +16,6 @@ class AddPhotoVC: BlurViewController {
     @IBAction func confirmButtonDidTap(_ sender: Any) {
         
         uploadPhoto()
-        callback?(selectedYear, selectedMonth)
         dismiss(animated: true, completion: nil)
     }
     
@@ -64,13 +63,15 @@ class AddPhotoVC: BlurViewController {
         let photo = Photo(url: urlString, isFavorite: false)
         let daily = DailyData(photo: photo)
 
-        provider.addDataWith(dailyData: daily, field: .photo, date: selectedDate, completion: { [weak self] result in
+        provider.addDataWith(dailyData: daily, field: .photo, date: selectedDate, completion: { result in
 
             switch result {
 
             case .success(let photo):
-                let dateString = String(describing: self?.selectedDate)
+                let dateString = String(describing: self.selectedDate)
                 print("Success adding new photo: \(photo) on date: \(dateString)")
+                
+                self.callback?(self.selectedYear, self.selectedMonth)
             case .failure(let error):
                 print(error.localizedDescription)
             }
