@@ -162,8 +162,12 @@ class HomeVC: UIViewController {
     
     @objc private func showSideMenu() {
         
-        if isAddMenuOpen { toggleAddMenu() }
-        performSegue(withIdentifier: Segue.sideMenuNC, sender: nil)
+        sideMenuButton.showButtonFeedbackAnimation { [weak self] in
+            
+            guard let isAddMenuOpen = self?.isAddMenuOpen else { return }
+            if isAddMenuOpen { self?.toggleAddMenu() }
+            self?.performSegue(withIdentifier: Segue.sideMenuNC, sender: nil)
+        }
     }
     
     @objc private func toggleAddMenu() {
@@ -220,8 +224,12 @@ class HomeVC: UIViewController {
     
     @objc private func showPickMonthPage() {
         
-        if isAddMenuOpen { toggleAddMenu() }
-        performSegue(withIdentifier: Segue.datePicker, sender: nil)
+        pickMonthButton.showButtonFeedbackAnimation { [weak self] in
+            
+            guard let isAddMenuOpen = self?.isAddMenuOpen else { return }
+            if isAddMenuOpen { self?.toggleAddMenu() }
+            self?.performSegue(withIdentifier: Segue.datePicker, sender: nil)
+        }
     }
     
     @objc private func showAddWeight() {

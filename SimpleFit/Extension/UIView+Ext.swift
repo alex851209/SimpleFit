@@ -25,4 +25,33 @@ extension UIView {
         layer.shadowOpacity = 0.3
         layer.masksToBounds = false
     }
+    
+    private func feedbackEndingAnimation(_ completion: @escaping () -> Void) {
+        
+        UIViewPropertyAnimator
+            .runningPropertyAnimator(withDuration: 0.1,
+                                     delay: 0,
+                                     options: .curveLinear,
+                                     animations: { [weak self] in
+                                        self?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+                                     },
+                                     completion: { [weak self] _ in
+                                        self?.isUserInteractionEnabled = true
+                                        completion()
+                                     })
+    }
+    
+    func showButtonFeedbackAnimation(_ completion: @escaping () -> Void) {
+        
+        UIViewPropertyAnimator
+            .runningPropertyAnimator(withDuration: 0.1,
+                                     delay: 0,
+                                     options: .curveLinear,
+                                     animations: { [weak self] in
+                                        self?.transform = CGAffineTransform.init(scaleX: 0.95, y: 0.95)
+                                        },
+                                     completion: { _ in
+                                        self.feedbackEndingAnimation(completion)
+                                     })
+    }
 }
