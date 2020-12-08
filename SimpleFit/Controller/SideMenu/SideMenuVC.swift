@@ -14,12 +14,13 @@ class SideMenuVC: UIViewController {
         
         static let userInfo = "SegueUserInfo"
         static let userFavorite = "SegueUserFavorite"
+        static let userGoal = "SegueUserGoal"
     }
     
     @IBOutlet weak var tableView: UITableView!
     
     let items = SideMenuItemManager.sideMenuItems
-    let segues = [Segue.userInfo, nil, Segue.userFavorite, nil, nil]
+    let segues = [Segue.userInfo, nil, Segue.userFavorite, nil, Segue.userGoal]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +44,11 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
+        let reuseID = String(describing: SideMenuCell.self)
         
         guard let sideMenuCell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: SideMenuCell.self),
-                for: indexPath )
-                as? SideMenuCell,
+                withIdentifier: reuseID,
+                for: indexPath) as? SideMenuCell,
               let sideMenu = navigationController as? SideMenuNavigationController
         else { return cell }
         
@@ -58,7 +59,12 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let identifier = segues[indexPath.row] else { return }
-        performSegue(withIdentifier: identifier, sender: nil)
+        guard let reuseID = segues[indexPath.row] else { return }
+        
+        let selectedCell = tableView.cellForRow(at: indexPath)
+        selectedCell?.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.performSegue(withIdentifier: reuseID, sender: nil)
+        }
     }
 }

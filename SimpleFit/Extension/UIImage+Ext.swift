@@ -11,7 +11,7 @@ enum ImageAsset: String {
     
     // HomeVC
     case sideMenu = "menu"
-    case add = "add"
+    case add = "add_menu"
     case weight = "weight"
     case camera = "camera"
     case album = "album"

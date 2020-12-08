@@ -75,10 +75,10 @@ extension UserFavoriteVC: UICollectionViewDelegate, UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = UICollectionViewCell()
-        let identifier = String(describing: FavoriteCell.self)
+        let reuseID = String(describing: FavoriteCell.self)
         
         guard let favoriteCell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: identifier,
+                withReuseIdentifier: reuseID,
                 for: indexPath) as? FavoriteCell,
               let image = images[indexPath.item]
         else { return cell }
