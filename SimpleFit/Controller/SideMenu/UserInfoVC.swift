@@ -7,14 +7,31 @@
 
 import UIKit
 import MIBlurPopup
+import FirebaseAuth
 
 class UserInfoVC: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var signOutButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
     
-    @IBAction func editButtonDidTap(_ sender: Any) { showAvatarAlert() }
+    @IBAction func editButtonDidTap(_ sender: Any) {
+        
+        editButton.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.showAvatarAlert()
+        }
+    }
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
+    @IBAction func signOutButtonDidTap(_ sender: Any) {
+        
+        signOutButton.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.showSignOutAlert()
+        }
+    }
+    
+    let firebaseAuth = Auth.auth()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +42,7 @@ class UserInfoVC: UIViewController {
     private func configureLayout() {
         
         titleLabel.applyBorder()
-        logoutButton.applyBorder()
+        signOutButton.applyBorder()
     }
     
     private func showAvatarAlert() {
@@ -41,6 +58,27 @@ class UserInfoVC: UIViewController {
         picker.allowsEditing = true
         picker.delegate = self
         present(picker, animated: true, completion: nil)
+    }
+    
+    private func showSignOutAlert() {
+        
+        let alert = SignOutAlertVC(showAction: signOut)
+        present(alert, animated: true)
+    }
+    
+    private func signOut() {
+        
+        do {
+            try firebaseAuth.signOut()
+            print("Sign out success")
+            let storyboard = UIStoryboard(name: "Auth", bundle: nil)
+            let mainVC = storyboard.instantiateViewController(identifier: "AuthVC")
+            
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                .changeRootViewController(mainVC)
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
     }
 }
 

@@ -34,6 +34,9 @@
 		A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */; };
 		A5C741EE2577FD82007B477E /* AddNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C741ED2577FD82007B477E /* AddNoteVC.swift */; };
 		A5C8732C257E0B7100EFCC86 /* KingfisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C8732B257E0B7100EFCC86 /* KingfisherWrapper.swift */; };
+		A5C8739F257E5D8A00EFCC86 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C8739E257E5D8A00EFCC86 /* AuthVC.swift */; };
+		A5C873BE257E5DCB00EFCC86 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5C873BD257E5DCB00EFCC86 /* Auth.storyboard */; };
+		A5C873C1257F173400EFCC86 /* SignOutAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C873C0257F173400EFCC86 /* SignOutAlertVC.swift */; };
 		A5C9F67E2578758E00558C98 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C9F67D2578758E00558C98 /* UserInfoVC.swift */; };
 		A5C9F681257896AB00558C98 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C9F680257896AB00558C98 /* UIView+Ext.swift */; };
 		A5E46D48257615C400ADF4DA /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E46D47257615C400ADF4DA /* DetailVC.swift */; };
@@ -69,6 +72,10 @@
 		A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerVC.swift; sourceTree = "<group>"; };
 		A5C741ED2577FD82007B477E /* AddNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteVC.swift; sourceTree = "<group>"; };
 		A5C8732B257E0B7100EFCC86 /* KingfisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingfisherWrapper.swift; sourceTree = "<group>"; };
+		A5C87363257E54AD00EFCC86 /* SimpleFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleFit.entitlements; sourceTree = "<group>"; };
+		A5C8739E257E5D8A00EFCC86 /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
+		A5C873BD257E5DCB00EFCC86 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		A5C873C0257F173400EFCC86 /* SignOutAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutAlertVC.swift; sourceTree = "<group>"; };
 		A5C9F67D2578758E00558C98 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 		A5C9F680257896AB00558C98 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		A5E46D47257615C400ADF4DA /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
@@ -108,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				A5191A84257BCB240031D333 /* PhotoAlertVC.swift */,
+				A5C873C0257F173400EFCC86 /* SignOutAlertVC.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -141,6 +149,7 @@
 				A5C87329257E0B4800EFCC86 /* Third Party Wrapper */,
 				A5BDFD5225721F3E004D3F57 /* Resource */,
 				A548A794256FFC6600782A0E /* Info.plist */,
+				A5C87363257E54AD00EFCC86 /* SimpleFit.entitlements */,
 				A5536CC1257A045D00BE60BC /* GoogleService-Info.plist */,
 			);
 			path = SimpleFit;
@@ -169,6 +178,7 @@
 			children = (
 				A5BDFD9F25729481004D3F57 /* SideMenu */,
 				A548A78C256FFC6400782A0E /* Main.storyboard */,
+				A5C873BD257E5DCB00EFCC86 /* Auth.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,6 +186,7 @@
 		A5BDFD5425721F80004D3F57 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A5C8739D257E5D7A00EFCC86 /* Auth */,
 				A5BDFD9825729372004D3F57 /* Home */,
 				A5E46D46257615B300ADF4DA /* Detail */,
 				A5BDFD9A25729379004D3F57 /* SideMenu */,
@@ -271,6 +282,14 @@
 			path = "Third Party Wrapper";
 			sourceTree = "<group>";
 		};
+		A5C8739D257E5D7A00EFCC86 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				A5C8739E257E5D8A00EFCC86 /* AuthVC.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		A5E46D46257615B300ADF4DA /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,6 +369,7 @@
 			files = (
 				A548A793256FFC6600782A0E /* LaunchScreen.storyboard in Resources */,
 				A548A790256FFC6600782A0E /* Assets.xcassets in Resources */,
+				A5C873BE257E5DCB00EFCC86 /* Auth.storyboard in Resources */,
 				A5536CC2257A045D00BE60BC /* GoogleService-Info.plist in Resources */,
 				A548A78E256FFC6400782A0E /* Main.storyboard in Resources */,
 			);
@@ -428,6 +448,7 @@
 				A5BDFDB32572A7DB004D3F57 /* SideMenuItemManager.swift in Sources */,
 				A5BDFDB925738C4E004D3F57 /* DateProvider.swift in Sources */,
 				A5BDFD9C2572938F004D3F57 /* SideMenuVC.swift in Sources */,
+				A5C8739F257E5D8A00EFCC86 /* AuthVC.swift in Sources */,
 				A5C8732C257E0B7100EFCC86 /* KingfisherWrapper.swift in Sources */,
 				A548A787256FFC6400782A0E /* AppDelegate.swift in Sources */,
 				A5BDFD9625724AA6004D3F57 /* UIImage+Ext.swift in Sources */,
@@ -438,6 +459,7 @@
 				A555EBA02578C5B60099BCB7 /* UserFavoriteVC.swift in Sources */,
 				A5191A7D257BC4C20031D333 /* BlurVC.swift in Sources */,
 				A555EBD62578E6810099BCB7 /* PagingFlowLayout.swift in Sources */,
+				A5C873C1257F173400EFCC86 /* SignOutAlertVC.swift in Sources */,
 				A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */,
 				A5BDFDA125729495004D3F57 /* SideMenuCell.swift in Sources */,
 				A5BDFDB625738B0D004D3F57 /* Date+Ext.swift in Sources */,
@@ -594,6 +616,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SimpleFit/SimpleFit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RFKB25HZB5;
 				INFOPLIST_FILE = SimpleFit/Info.plist;
@@ -614,6 +637,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SimpleFit/SimpleFit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RFKB25HZB5;
 				INFOPLIST_FILE = SimpleFit/Info.plist;

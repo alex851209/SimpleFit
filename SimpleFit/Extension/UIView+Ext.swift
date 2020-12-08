@@ -48,7 +48,7 @@ extension UIView {
                                      delay: 0,
                                      options: .curveLinear,
                                      animations: { [weak self] in
-                                        self?.transform = CGAffineTransform.init(scaleX: 0.95, y: 0.95)
+                                        self?.transform = CGAffineTransform.init(scaleX: 0.85, y: 0.85)
                                         },
                                      completion: { _ in
                                         self.feedbackEndingAnimation(completion)
