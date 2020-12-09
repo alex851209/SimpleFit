@@ -14,13 +14,14 @@ class SideMenuVC: UIViewController {
         
         static let userInfo = "SegueUserInfo"
         static let userFavorite = "SegueUserFavorite"
+        static let userReview = "SegueUserReview"
         static let userGoal = "SegueUserGoal"
     }
     
     @IBOutlet weak var tableView: UITableView!
     
     let items = SideMenuItemManager.sideMenuItems
-    let segues = [Segue.userInfo, nil, Segue.userFavorite, nil, Segue.userGoal]
+    let segues = [Segue.userInfo, nil, Segue.userFavorite, Segue.userReview, Segue.userGoal]
     
     override func viewDidLoad() {
         super.viewDidLoad()

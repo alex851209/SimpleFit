@@ -34,7 +34,7 @@ enum SideMenuItem {
         case .user: return "個人"
         case .friend: return "好友"
         case .favorite: return "收藏"
-        case .review: return "里程碑"
+        case .review: return "回顧"
         case .goal: return "目標"
         }
     }
