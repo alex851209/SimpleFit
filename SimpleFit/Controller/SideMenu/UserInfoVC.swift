@@ -13,11 +13,16 @@ class UserInfoVC: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var signOutButton: UIButton!
+    @IBOutlet weak var avatarEditButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var heightTextField: UITextField!
+    @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
     
-    @IBAction func editButtonDidTap(_ sender: Any) {
+    @IBAction func editButtonDidTap(_ sender: Any) { switchMode() }
+    @IBAction func avatarEditButtonDidtap(_ sender: Any) {
         
-        editButton.showButtonFeedbackAnimation { [weak self] in
+        avatarEditButton.showButtonFeedbackAnimation { [weak self] in
             
             self?.showAvatarAlert()
         }
@@ -32,6 +37,7 @@ class UserInfoVC: UIViewController {
     }
     
     let firebaseAuth = Auth.auth()
+    var isEdit = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +49,34 @@ class UserInfoVC: UIViewController {
         
         titleLabel.applyBorder()
         signOutButton.applyBorder()
+        
+        nameTextField.delegate = self
+        heightTextField.delegate = self
+        
+        let normalAttribute = [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
+        let selectedAttribute = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        UISegmentedControl.appearance().setTitleTextAttributes(normalAttribute, for: .normal)
+        UISegmentedControl.appearance().setTitleTextAttributes(selectedAttribute, for: .selected)
+    }
+    
+    private func switchMode() {
+        
+        if isEdit {
+            
+            editButton.setImage(UIImage.asset(.edit), for: .normal)
+            isEdit = false
+        } else {
+            
+            editButton.setImage(UIImage.asset(.confirm), for: .normal)
+            isEdit = true
+        }
+        
+        nameTextField.isEnabled = isEdit
+        genderSegmentedControl.isEnabled = isEdit
+        heightTextField.isEnabled = isEdit
+        
+        nameTextField.borderStyle = isEdit ? .roundedRect : .none
+        heightTextField.borderStyle = isEdit ? .roundedRect : .none
     }
     
     private func showAvatarAlert() {
@@ -84,4 +118,19 @@ class UserInfoVC: UIViewController {
 
 extension UserInfoVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+}
+
+extension UserInfoVC: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        textField.layer.borderColor = UIColor.systemGray.cgColor
+        textField.layer.borderWidth = 1
+        textField.layer.cornerRadius = 5
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        textField.layer.borderWidth = 0
+    }
 }

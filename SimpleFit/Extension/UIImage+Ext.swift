@@ -19,6 +19,10 @@ enum ImageAsset: String {
     
     // DetailVC
     case remove = "remove"
+    
+    // UserInfoVC
+    case edit = "edit"
+    case confirm = "check"
 }
 
 extension UIImage {
