@@ -9,7 +9,7 @@ import Foundation
 
 struct ChartData {
     
-    var datas: [Any]?
+    var datas: [Double?]?
     var clearDatas: [Any?]?
     var min: Double?
     var max: Double?

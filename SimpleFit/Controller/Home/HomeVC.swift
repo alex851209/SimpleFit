@@ -137,6 +137,7 @@ class HomeVC: UIViewController {
         
         let crosshair = AACrosshair().width(0.01)
         chartOptions = chartModel.aa_toAAOptions()
+        chartOptions.plotOptions?.series?.connectNulls(true)
         chartOptions.xAxis?.crosshair(crosshair)
     }
     

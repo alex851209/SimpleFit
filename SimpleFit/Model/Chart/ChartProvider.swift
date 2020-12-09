@@ -156,8 +156,7 @@ class ChartProvider {
     private func getWeightFrom(year: Int, month: Int) {
 
         let countOfDays = DateProvider.getCountOfDaysInMonth(year: year, month: month)
-        var weights = [Double?]()
-        var datas = [Any]()
+        var weightDatas = [Double?]()
         var clearDatas = [Any?]()
         let days = dailyDatas.map { $0.day }
 
@@ -167,25 +166,18 @@ class ChartProvider {
 
             if days.contains(day) {
                 let daily = dailyDatas.first( where: { $0.day == day })
-                weights.append(daily?.weight)
+                weightDatas.append(daily?.weight)
             } else {
-                weights.append(nil)
+                weightDatas.append(nil)
             }
-        }
-
-        for xPosition in 0 ..< countOfDays {
-
             clearDatas.append(nil)
-            guard let yPosition = weights[xPosition] else { continue }
-            let coordinates: [Any] = [xPosition, yPosition]
-            datas.append(coordinates)
         }
-
-        chartData.datas = datas
+        
+        chartData.datas = weightDatas
         chartData.clearDatas = clearDatas
 
-        guard let min = weights.compactMap({ $0 }).min(),
-              let max = weights.compactMap({ $0 }).max()
+        guard let min = weightDatas.compactMap({ $0 }).min(),
+              let max = weightDatas.compactMap({ $0 }).max()
         else {
             chartData.min = 0
             chartData.max = 100
