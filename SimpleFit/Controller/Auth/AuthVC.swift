@@ -12,6 +12,8 @@ import CryptoKit
 
 class AuthVC: UIViewController {
     
+    static let identifier = "AuthVC"
+    
     // Unhashed nonce.
     fileprivate var currentNonce: String?
     
@@ -154,11 +156,10 @@ extension AuthVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPr
                     // User is signed in to Firebase with Apple.
                     // ...
                     print("Sign in with Apple Success")
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let mainVC = storyboard.instantiateViewController(identifier: "MainVC")
                     
+                    let homeVC = UIStoryboard.main.instantiateViewController(withIdentifier: HomeVC.identifier)
                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
-                        .changeRootViewController(mainVC)
+                        .changeRootViewController(homeVC)
                 }
             }
         }

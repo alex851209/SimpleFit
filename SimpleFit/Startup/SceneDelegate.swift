@@ -20,19 +20,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         self.window =  UIWindow(windowScene: scene as! UIWindowScene)
-        var viewController: UIViewController
+        
+        var rootVC: UIViewController
         
         if Auth.auth().currentUser != nil {
 
-            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            viewController = storyboard.instantiateViewController(withIdentifier: "MainVC")
+            rootVC = UIStoryboard.main.instantiateViewController(withIdentifier: HomeVC.identifier)
         } else {
 
-            let storyboard = UIStoryboard.init(name: "Auth", bundle: nil)
-            viewController = storyboard.instantiateViewController(withIdentifier: "AuthVC")
+            rootVC = UIStoryboard.auth.instantiateViewController(withIdentifier: AuthVC.identifier)
         }
-        
-        self.window?.rootViewController = viewController
+        self.window?.rootViewController = rootVC
     }
     
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {

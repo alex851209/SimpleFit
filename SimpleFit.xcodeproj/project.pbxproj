@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A4052DD655D816F8F8765AD5 /* Pods_SimpleFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */; };
+		A5180F5C2580A4D9002E9E1E /* UIStoryboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5180F5B2580A4D9002E9E1E /* UIStoryboard+Ext.swift */; };
 		A5191A7D257BC4C20031D333 /* BlurVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5191A7C257BC4C20031D333 /* BlurVC.swift */; };
 		A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5191A84257BCB240031D333 /* PhotoAlertVC.swift */; };
 		A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A520C975257B6F1600215CC1 /* AddPhotoVC.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5180F5B2580A4D9002E9E1E /* UIStoryboard+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Ext.swift"; sourceTree = "<group>"; };
 		A5191A7C257BC4C20031D333 /* BlurVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurVC.swift; sourceTree = "<group>"; };
 		A5191A84257BCB240031D333 /* PhotoAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlertVC.swift; sourceTree = "<group>"; };
 		A520C975257B6F1600215CC1 /* AddPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoVC.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				A5BDFDB525738B0D004D3F57 /* Date+Ext.swift */,
 				A5863E0E25752EB30017F09C /* UIButton+Ext.swift */,
 				A5C9F680257896AB00558C98 /* UIView+Ext.swift */,
+				A5180F5B2580A4D9002E9E1E /* UIStoryboard+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				A5C873CD257F7EA400EFCC86 /* CardView.swift in Sources */,
 				A555EBA02578C5B60099BCB7 /* UserFavoriteVC.swift in Sources */,
 				A5191A7D257BC4C20031D333 /* BlurVC.swift in Sources */,
+				A5180F5C2580A4D9002E9E1E /* UIStoryboard+Ext.swift in Sources */,
 				A555EBD62578E6810099BCB7 /* PagingFlowLayout.swift in Sources */,
 				A5C873C1257F173400EFCC86 /* SignOutAlertVC.swift in Sources */,
 				A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */,

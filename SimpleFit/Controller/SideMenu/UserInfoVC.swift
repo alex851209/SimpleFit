@@ -105,11 +105,10 @@ class UserInfoVC: UIViewController {
         do {
             try firebaseAuth.signOut()
             print("Sign out success")
-            let storyboard = UIStoryboard(name: "Auth", bundle: nil)
-            let mainVC = storyboard.instantiateViewController(identifier: "AuthVC")
             
+            let authVC = UIStoryboard.auth.instantiateViewController(identifier: AuthVC.identifier)
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
-                .changeRootViewController(mainVC)
+                .changeRootViewController(authVC)
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }

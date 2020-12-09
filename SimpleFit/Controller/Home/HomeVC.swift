@@ -11,6 +11,8 @@ import SideMenu
 
 class HomeVC: UIViewController {
     
+    static let identifier = "HomeVC"
+    
     private struct Segue {
         
         static let sideMenuNC = "SegueSideMenuNC"
@@ -125,7 +127,7 @@ class HomeVC: UIViewController {
             .markerSymbolStyle(.borderBlank)//折線或者曲線的連接點是否為空心的
             .scrollablePlotArea(AAScrollablePlotArea().minWidth(2000).scrollPositionX(0))
             .series([
-                AASeriesElement().name("體重").data(weightsDatas),
+                AASeriesElement().name("體重").data(weightsDatas as [Any]),
                 AASeriesElement().data(clearDatas as [Any])
             ])
             .tooltipValueSuffix("公斤")//浮動提示框單位後綴
