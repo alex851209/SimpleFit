@@ -72,6 +72,8 @@ class UserInfoVC: UIViewController {
         nameTextField.text = user.name
         genderSegmentedControl.selectedSegmentIndex = user.gender == "男" ? 0 : 1
         heightTextField.text = ""
+        avatarImage.loadImage(user.avatar)
+        
         if let height = user.height { heightTextField.text = String(describing: height) }
         self.user = user
     }
@@ -82,7 +84,7 @@ class UserInfoVC: UIViewController {
             
             editButton.setImage(UIImage.asset(.edit), for: .normal)
             isEdit = false
-            uploadInfo()
+            uploadAvatar()
         } else {
             
             editButton.setImage(UIImage.asset(.confirm), for: .normal)
@@ -114,6 +116,25 @@ class UserInfoVC: UIViewController {
             
             case .success(let user):
                 self?.configureInfo(with: user)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func uploadAvatar() {
+        
+        guard let avatar = avatarImage.image else { return }
+        provider.uploadAvatarWith(image: avatar) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let avatarURL):
+                print("Success uploading new avatar with url: \(avatarURL)")
+                let urlString = "\(avatarURL)"
+                self?.user.avatar = urlString
+                self?.uploadInfo()
                 
             case .failure(let error):
                 print(error)
