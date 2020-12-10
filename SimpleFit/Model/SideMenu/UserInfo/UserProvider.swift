@@ -46,4 +46,27 @@ class UserProvider {
             }
         }
     }
+    
+    func fetchInfo(completion: @escaping (Result<User, Error>) -> Void) {
+        
+        let doc = database.collection("users").document(userName)
+        
+        doc.getDocument { (document, error) in
+            
+            if let error = error {
+                
+                print("Error getting document: \(error)")
+            } else if let document = document, document.exists {
+                
+                do {
+                    if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                        
+                        completion(.success(user))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
 }

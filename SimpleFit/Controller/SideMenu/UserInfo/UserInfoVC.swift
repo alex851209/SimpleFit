@@ -46,6 +46,7 @@ class UserInfoVC: UIViewController {
         super.viewDidLoad()
 
         configureLayout()
+        fetchInfo()
     }
     
     private func configureLayout() {
@@ -64,6 +65,15 @@ class UserInfoVC: UIViewController {
         let selectedAttribute = [NSAttributedString.Key.foregroundColor: UIColor.white]
         UISegmentedControl.appearance().setTitleTextAttributes(normalAttribute, for: .normal)
         UISegmentedControl.appearance().setTitleTextAttributes(selectedAttribute, for: .selected)
+    }
+    
+    private func configureInfo(with user: User) {
+        
+        nameTextField.text = user.name
+        genderSegmentedControl.selectedSegmentIndex = user.gender == "男" ? 0 : 1
+        heightTextField.text = ""
+        if let height = user.height { heightTextField.text = String(describing: height) }
+        self.user = user
     }
     
     private func switchMode() {
@@ -93,6 +103,21 @@ class UserInfoVC: UIViewController {
         provider.uploadInfoWith(user: user) { user in
             
             print(user)
+        }
+    }
+    
+    private func fetchInfo() {
+        
+        provider.fetchInfo { [weak self] result in
+            
+            switch result {
+            
+            case .success(let user):
+                self?.configureInfo(with: user)
+                
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
@@ -163,13 +188,15 @@ extension UserInfoVC: UITextFieldDelegate {
         switch textField {
         
         case nameTextField:
-            user.name = textField.text
+            guard let isEmptyName = textField.text?.isEmpty else { return }
+            user.name = isEmptyName ? nil : textField.text
             
         case heightTextField:
-            guard let heightString = textField.text,
-                  let height = Double(heightString)
-            else { return }
-            user.height = height
+            if let heightString = textField.text, let height = Double(heightString) {
+                user.height = height
+            } else {
+                user.height = nil
+            }
             
         default: break
         }
