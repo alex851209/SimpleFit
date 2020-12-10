@@ -13,6 +13,7 @@ class UserInfoVC: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var signOutButton: UIButton!
+    @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var avatarEditButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
@@ -37,7 +38,9 @@ class UserInfoVC: UIViewController {
     }
     
     let firebaseAuth = Auth.auth()
+    let provider = UserProvider()
     var isEdit = false
+    var user = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +56,10 @@ class UserInfoVC: UIViewController {
         nameTextField.delegate = self
         heightTextField.delegate = self
         
+        avatarImage.applyBorder()
+        avatarImage.layer.borderWidth = 3
+        
+        genderSegmentedControl.addTarget(self, action: #selector(genderDidSelect), for: .valueChanged)
         let normalAttribute = [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
         let selectedAttribute = [NSAttributedString.Key.foregroundColor: UIColor.white]
         UISegmentedControl.appearance().setTitleTextAttributes(normalAttribute, for: .normal)
@@ -65,6 +72,7 @@ class UserInfoVC: UIViewController {
             
             editButton.setImage(UIImage.asset(.edit), for: .normal)
             isEdit = false
+            uploadInfo()
         } else {
             
             editButton.setImage(UIImage.asset(.confirm), for: .normal)
@@ -74,9 +82,18 @@ class UserInfoVC: UIViewController {
         nameTextField.isEnabled = isEdit
         genderSegmentedControl.isEnabled = isEdit
         heightTextField.isEnabled = isEdit
+        avatarEditButton.isHidden = !isEdit
         
         nameTextField.borderStyle = isEdit ? .roundedRect : .none
         heightTextField.borderStyle = isEdit ? .roundedRect : .none
+    }
+    
+    private func uploadInfo() {
+        
+        provider.uploadInfoWith(user: user) { user in
+            
+            print(user)
+        }
     }
     
     private func showAvatarAlert() {
@@ -113,22 +130,49 @@ class UserInfoVC: UIViewController {
             print("Error signing out: %@", signOutError)
         }
     }
+    
+    @objc private func genderDidSelect(sender: UISegmentedControl) {
+        
+        let gender = sender.titleForSegment(at: sender.selectedSegmentIndex)
+        user.gender = gender
+    }
 }
 
 extension UserInfoVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        
+        guard let selectedPhoto = info[.editedImage] as? UIImage else { return }
+        avatarImage.image = selectedPhoto
+        dismiss(animated: true)
+    }
 }
 
 extension UserInfoVC: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        textField.layer.borderColor = UIColor.systemGray.cgColor
-        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.systemGray2.cgColor
+        textField.layer.borderWidth = 2
         textField.layer.cornerRadius = 5
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        switch textField {
+        
+        case nameTextField:
+            user.name = textField.text
+            
+        case heightTextField:
+            guard let heightString = textField.text,
+                  let height = Double(heightString)
+            else { return }
+            user.height = height
+            
+        default: break
+        }
         
         textField.layer.borderWidth = 0
     }

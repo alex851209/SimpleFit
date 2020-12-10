@@ -45,6 +45,8 @@
 		A5C873D1257F808F00EFCC86 /* GoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C873D0257F808F00EFCC86 /* GoalCell.swift */; };
 		A5C9F67E2578758E00558C98 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C9F67D2578758E00558C98 /* UserInfoVC.swift */; };
 		A5C9F681257896AB00558C98 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C9F680257896AB00558C98 /* UIView+Ext.swift */; };
+		A5D90FB825820ED500133735 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90FB725820ED500133735 /* UserData.swift */; };
+		A5D90FBC25820F5A00133735 /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90FBB25820F5A00133735 /* UserProvider.swift */; };
 		A5E46D48257615C400ADF4DA /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E46D47257615C400ADF4DA /* DetailVC.swift */; };
 		A5F0FAA1257FDFD200FAD8EB /* AddGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0FAA0257FDFD200FAD8EB /* AddGoalVC.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +93,8 @@
 		A5C873D0257F808F00EFCC86 /* GoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCell.swift; sourceTree = "<group>"; };
 		A5C9F67D2578758E00558C98 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 		A5C9F680257896AB00558C98 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		A5D90FB725820ED500133735 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		A5D90FBB25820F5A00133735 /* UserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
 		A5E46D47257615C400ADF4DA /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		A5F0FAA0257FDFD200FAD8EB /* AddGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalVC.swift; sourceTree = "<group>"; };
 		C36156E5D1AC9ABF93F780A1 /* Pods-SimpleFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.release.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.release.xcconfig"; sourceTree = "<group>"; };
@@ -354,7 +358,8 @@
 		A5BDFDA82572A3D7004D3F57 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
-				A5BDFDB22572A7DB004D3F57 /* SideMenuItemManager.swift */,
+				A5D90FB625820E8600133735 /* UserInfo */,
+				A5D90FB425820E7E00133735 /* Menu */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -381,6 +386,23 @@
 				A5C873CC257F7EA400EFCC86 /* CardView.swift */,
 			);
 			path = CardView;
+			sourceTree = "<group>";
+		};
+		A5D90FB425820E7E00133735 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				A5BDFDB22572A7DB004D3F57 /* SideMenuItemManager.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		A5D90FB625820E8600133735 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				A5D90FB725820ED500133735 /* UserData.swift */,
+				A5D90FBB25820F5A00133735 /* UserProvider.swift */,
+			);
+			path = UserInfo;
 			sourceTree = "<group>";
 		};
 		A5E46D46257615B300ADF4DA /* Detail */ = {
@@ -554,10 +576,12 @@
 				A5863E0F25752EB30017F09C /* UIButton+Ext.swift in Sources */,
 				A5C873CD257F7EA400EFCC86 /* CardView.swift in Sources */,
 				A555EBA02578C5B60099BCB7 /* UserFavoriteVC.swift in Sources */,
+				A5D90FBC25820F5A00133735 /* UserProvider.swift in Sources */,
 				A5191A7D257BC4C20031D333 /* BlurVC.swift in Sources */,
 				A5180F5C2580A4D9002E9E1E /* UIStoryboard+Ext.swift in Sources */,
 				A555EBD62578E6810099BCB7 /* PagingFlowLayout.swift in Sources */,
 				A5C873C1257F173400EFCC86 /* SignOutAlertVC.swift in Sources */,
+				A5D90FB825820ED500133735 /* UserData.swift in Sources */,
 				A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */,
 				A5180F6F25811FB6002E9E1E /* PickPeriodVC.swift in Sources */,
 				A5BDFDA125729495004D3F57 /* SideMenuCell.swift in Sources */,
