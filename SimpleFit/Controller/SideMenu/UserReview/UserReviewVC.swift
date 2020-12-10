@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AAInfographics
 
 class UserReviewVC: UIViewController {
     
@@ -17,9 +18,13 @@ class UserReviewVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet var subtitles: [UILabel]!
     @IBOutlet weak var periodButton: UIButton!
+    @IBOutlet weak var chartBackgroundView: UIView!
     
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
     
+    let chartView = AAChartView()
+    var chartModel = AAChartModel()
+    var chartOptions = AAOptions()
     var beginDate = Date()
     var endDate = Date()
     
@@ -28,6 +33,12 @@ class UserReviewVC: UIViewController {
 
         configureLayout()
         configurePeriodButton()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        configureChart()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,6 +62,49 @@ class UserReviewVC: UIViewController {
                 self?.periodButton.setTitle(periodButtonTitle, for: .normal)
             }
         }
+    }
+    
+    private func configureChart() {
+        
+        configureChartView()
+        configureChartModel()
+        chartView.aa_drawChartWithChartOptions(chartOptions)
+    }
+    
+    private func configureChartView() {
+        
+        let chartViewWidth  = chartBackgroundView.frame.size.width
+        let chartViewHeight = chartBackgroundView.frame.size.height
+        chartView.frame = CGRect(x: 0,
+                                 y: 0,
+                                 width: chartViewWidth,
+                                 height: chartViewHeight)
+        chartBackgroundView.addSubview(chartView)
+    }
+    
+    private func configureChartModel() {
+        
+        let categories = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        
+        let datas = AASeriesElement()
+                        .name("體重")
+                        .data([67.0, 66.9, 69.5, 64.5, 68.2, 61.5, 65.2, 66.5, 63.3, 68.3, 63.9, 69.6])
+        
+        chartModel = AAChartModel()
+                        .categories(categories)
+                        .chartType(.line) // 圖表類型
+                        .colorsTheme(["#c0c0c0"])
+                        .legendEnabled(false) // 是否啟用圖表的圖例(圖表底部的可點擊的小圓點)
+                        .markerRadius(0) // 連接點大小
+                        .series([datas])
+                        .tooltipValueSuffix("公斤")//浮動提示框單位後綴
+                        .zoomType(.x) // x軸縮放
+        
+        let crosshair = AACrosshair().width(1)
+        chartOptions = chartModel.aa_toAAOptions()
+        chartOptions.plotOptions?.series?.connectNulls(true)
+        chartOptions.xAxis?.crosshair(crosshair)
     }
     
     private func configureLayout() {

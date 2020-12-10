@@ -818,6 +818,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="LM2-GP-kTC"/>
                     <connections>
+                        <outlet property="chartBackgroundView" destination="nur-vE-cA8" id="3Ue-aD-jol"/>
                         <outlet property="periodButton" destination="UCR-Ls-BQw" id="BcZ-19-62j"/>
                         <outlet property="titleLabel" destination="rde-bK-IMd" id="vtN-4C-6Yd"/>
                         <outletCollection property="subtitles" destination="2VP-TX-Wd3" collectionClass="NSMutableArray" id="K5r-7y-SEh"/>
