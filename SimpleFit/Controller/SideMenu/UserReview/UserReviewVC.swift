@@ -21,6 +21,7 @@ class UserReviewVC: UIViewController {
     @IBOutlet weak var chartBackgroundView: UIView!
     
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
+    @IBAction func calendarButtonDidTap(_ sender: Any) { performSegue(withIdentifier: Segue.pickPeriod, sender: nil) }
     
     let chartView = AAChartView()
     var chartModel = AAChartModel()
@@ -101,7 +102,7 @@ class UserReviewVC: UIViewController {
                         .tooltipValueSuffix("公斤")//浮動提示框單位後綴
                         .zoomType(.x) // x軸縮放
         
-        let crosshair = AACrosshair().width(1)
+        let crosshair = AACrosshair().width(2)
         chartOptions = chartModel.aa_toAAOptions()
         chartOptions.plotOptions?.series?.connectNulls(true)
         chartOptions.xAxis?.crosshair(crosshair)
@@ -110,7 +111,6 @@ class UserReviewVC: UIViewController {
     private func configureLayout() {
         
         titleLabel.applyBorder()
-        subtitles.forEach { $0.applyBorder() }
     }
     
     private func configurePeriodButton() {
