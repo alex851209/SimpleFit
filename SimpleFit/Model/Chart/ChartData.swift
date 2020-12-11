@@ -23,6 +23,7 @@ struct DailyData: Codable {
     var note: String?
     var month: String = ""
     var day: String = ""
+    var date: String = ""
 }
 
 struct Photo: Codable {

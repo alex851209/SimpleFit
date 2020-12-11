@@ -138,4 +138,12 @@ class DateProvider {
         let date = formatter.string(from: date)
         return date
     }
+    
+    static func getLastMonth(_ date: Date) -> Date {
+        
+        var dateComponent = DateComponents()
+        dateComponent.month = -1
+        guard let lastMonth = Calendar.current.date(byAdding: dateComponent, to: date) else { return date }
+        return lastMonth
+    }
 }

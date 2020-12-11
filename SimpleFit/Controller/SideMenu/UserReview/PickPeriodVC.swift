@@ -17,6 +17,11 @@ class PickPeriodVC: BlurViewController {
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
     @IBAction func confirmButtonDidTap(_ sender: Any) {
         
+        guard endDate > beginDate else {
+            
+            print("'beginDate' must less than 'endDate'")
+            return
+        }
         selectedDateCallback?(beginDate, endDate)
         dismiss(animated: true)
     }

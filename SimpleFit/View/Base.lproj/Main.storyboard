@@ -733,7 +733,6 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nur-vE-cA8">
                                 <rect key="frame" x="0.0" y="95" width="375" height="320"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BRm-qg-hPI">
                                 <rect key="frame" x="30" y="431" width="90" height="200"/>
@@ -744,7 +743,7 @@
                                         <color key="textColor" systemColor="systemGrayColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aao-02-DK7">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="結束" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aao-02-DK7">
                                         <rect key="frame" x="0.0" y="44" width="41" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" systemColor="systemGrayColor"/>
@@ -776,26 +775,26 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fcM-Ct-66o">
                                 <rect key="frame" x="172" y="431" width="178" height="200"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="61.2 公斤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uot-3g-zWh">
-                                        <rect key="frame" x="0.0" y="0.0" width="82.5" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00.0 公斤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uot-3g-zWh">
+                                        <rect key="frame" x="0.0" y="0.0" width="86" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" systemColor="systemGrayColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="63.6 公斤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tt-FN-yBA">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00.0 公斤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tt-FN-yBA">
                                         <rect key="frame" x="0.0" y="44" width="86" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" systemColor="systemGrayColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="59.6 公斤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFs-w5-9iL">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00.0 公斤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFs-w5-9iL">
                                         <rect key="frame" x="0.0" y="88" width="86" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" systemColor="systemGrayColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="67.5 公斤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZ0-Tp-eqn">
-                                        <rect key="frame" x="0.0" y="132" width="83" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00.0 公斤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZ0-Tp-eqn">
+                                        <rect key="frame" x="0.0" y="132" width="86" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" systemColor="systemGrayColor"/>
                                         <nil key="highlightedColor"/>
@@ -811,7 +810,7 @@
                                                     <constraint firstAttribute="width" constant="20" id="RIQ-HG-BuV"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.4 公斤(+ 3.9%)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWa-1t-fUV">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0 公斤(+ 0.0%)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWa-1t-fUV">
                                                 <rect key="frame" x="28" y="0.0" width="150" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" systemColor="systemGrayColor"/>
@@ -907,14 +906,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="LM2-GP-kTC"/>
                     <connections>
-                        <outlet property="chartBackgroundView" destination="nur-vE-cA8" id="3Ue-aD-jol"/>
+                        <outlet property="beginWeightLabel" destination="uot-3g-zWh" id="ZJt-iT-9vi"/>
+                        <outlet property="chartBackgroundView" destination="nur-vE-cA8" id="bw3-TD-b0x"/>
+                        <outlet property="endWeightLabel" destination="5tt-FN-yBA" id="EKD-6v-gNs"/>
+                        <outlet property="maxWeightLabel" destination="oZ0-Tp-eqn" id="Rie-gK-h0m"/>
+                        <outlet property="minWeightLabel" destination="vFs-w5-9iL" id="U1N-ih-JQ3"/>
                         <outlet property="periodButton" destination="UCR-Ls-BQw" id="BcZ-19-62j"/>
                         <outlet property="titleLabel" destination="rde-bK-IMd" id="vtN-4C-6Yd"/>
-                        <outletCollection property="subtitles" destination="2VP-TX-Wd3" collectionClass="NSMutableArray" id="K5r-7y-SEh"/>
-                        <outletCollection property="subtitles" destination="Aao-02-DK7" collectionClass="NSMutableArray" id="oFf-Pe-Iug"/>
-                        <outletCollection property="subtitles" destination="0Sk-rV-cDk" collectionClass="NSMutableArray" id="pkZ-W8-7p8"/>
-                        <outletCollection property="subtitles" destination="Vu2-xK-6qw" collectionClass="NSMutableArray" id="3ij-GH-hrV"/>
-                        <outletCollection property="subtitles" destination="TrK-CC-CCF" collectionClass="NSMutableArray" id="m5u-l7-7TT"/>
+                        <outlet property="weightChangeLabel" destination="JWa-1t-fUV" id="rec-1k-37I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OW7-M6-Mxh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1184,7 +1183,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJe-5f-BqB" customClass="CardView" customModule="SimpleFit" customModuleProvider="target">
                                 <rect key="frame" x="27.5" y="173.5" width="320" height="320"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="開始日期" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dc4-6B-k5h">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="起始日期" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dc4-6B-k5h">
                                         <rect key="frame" x="16" y="16" width="82" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" systemColor="systemGrayColor"/>

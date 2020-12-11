@@ -14,6 +14,8 @@
 		A5191A7D257BC4C20031D333 /* BlurVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5191A7C257BC4C20031D333 /* BlurVC.swift */; };
 		A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5191A84257BCB240031D333 /* PhotoAlertVC.swift */; };
 		A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A520C975257B6F1600215CC1 /* AddPhotoVC.swift */; };
+		A544D64C25832ABB00A43A66 /* ReviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D64B25832ABB00A43A66 /* ReviewProvider.swift */; };
+		A544D6502583792B00A43A66 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D64F2583792B00A43A66 /* Double+Ext.swift */; };
 		A548A787256FFC6400782A0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A786256FFC6400782A0E /* AppDelegate.swift */; };
 		A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A788256FFC6400782A0E /* SceneDelegate.swift */; };
 		A548A78B256FFC6400782A0E /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A78A256FFC6400782A0E /* HomeVC.swift */; };
@@ -59,6 +61,8 @@
 		A5191A7C257BC4C20031D333 /* BlurVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurVC.swift; sourceTree = "<group>"; };
 		A5191A84257BCB240031D333 /* PhotoAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlertVC.swift; sourceTree = "<group>"; };
 		A520C975257B6F1600215CC1 /* AddPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoVC.swift; sourceTree = "<group>"; };
+		A544D64B25832ABB00A43A66 /* ReviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProvider.swift; sourceTree = "<group>"; };
+		A544D64F2583792B00A43A66 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		A548A783256FFC6400782A0E /* SimpleFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A548A786256FFC6400782A0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A548A788256FFC6400782A0E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -205,6 +209,14 @@
 			path = Alert;
 			sourceTree = "<group>";
 		};
+		A544D647258324E000A43A66 /* UserReview */ = {
+			isa = PBXGroup;
+			children = (
+				A544D64B25832ABB00A43A66 /* ReviewProvider.swift */,
+			);
+			path = UserReview;
+			sourceTree = "<group>";
+		};
 		A548A77A256FFC6400782A0E = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +332,7 @@
 				A5863E0E25752EB30017F09C /* UIButton+Ext.swift */,
 				A5C9F680257896AB00558C98 /* UIView+Ext.swift */,
 				A5180F5B2580A4D9002E9E1E /* UIStoryboard+Ext.swift */,
+				A544D64F2583792B00A43A66 /* Double+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -358,6 +371,7 @@
 		A5BDFDA82572A3D7004D3F57 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
+				A544D647258324E000A43A66 /* UserReview */,
 				A5D90FB625820E8600133735 /* UserInfo */,
 				A5D90FB425820E7E00133735 /* Menu */,
 			);
@@ -561,6 +575,7 @@
 				A5BDFD7E25723137004D3F57 /* ChartProvider.swift in Sources */,
 				A5C741EE2577FD82007B477E /* AddNoteVC.swift in Sources */,
 				A5BDFDB32572A7DB004D3F57 /* SideMenuItemManager.swift in Sources */,
+				A544D6502583792B00A43A66 /* Double+Ext.swift in Sources */,
 				A5BDFDB925738C4E004D3F57 /* DateProvider.swift in Sources */,
 				A5BDFD9C2572938F004D3F57 /* SideMenuVC.swift in Sources */,
 				A5C8739F257E5D8A00EFCC86 /* AuthVC.swift in Sources */,
@@ -569,6 +584,7 @@
 				A548A787256FFC6400782A0E /* AppDelegate.swift in Sources */,
 				A5BDFD9625724AA6004D3F57 /* UIImage+Ext.swift in Sources */,
 				A5F0FAA1257FDFD200FAD8EB /* AddGoalVC.swift in Sources */,
+				A544D64C25832ABB00A43A66 /* ReviewProvider.swift in Sources */,
 				A5C873C9257F790F00EFCC86 /* UserGoalVC.swift in Sources */,
 				A5BDFD8125723362004D3F57 /* ChartData.swift in Sources */,
 				A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */,

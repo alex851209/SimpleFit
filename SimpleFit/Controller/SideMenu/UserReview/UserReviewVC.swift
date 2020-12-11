@@ -16,9 +16,13 @@ class UserReviewVC: UIViewController {
     }
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet var subtitles: [UILabel]!
     @IBOutlet weak var periodButton: UIButton!
     @IBOutlet weak var chartBackgroundView: UIView!
+    @IBOutlet weak var beginWeightLabel: UILabel!
+    @IBOutlet weak var endWeightLabel: UILabel!
+    @IBOutlet weak var minWeightLabel: UILabel!
+    @IBOutlet weak var maxWeightLabel: UILabel!
+    @IBOutlet weak var weightChangeLabel: UILabel!
     
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
     @IBAction func calendarButtonDidTap(_ sender: Any) { performSegue(withIdentifier: Segue.pickPeriod, sender: nil) }
@@ -26,7 +30,8 @@ class UserReviewVC: UIViewController {
     let chartView = AAChartView()
     var chartModel = AAChartModel()
     var chartOptions = AAOptions()
-    var beginDate = Date()
+    let provider = ReviewProvider()
+    var beginDate = DateProvider.getLastMonth(Date())
     var endDate = Date()
     
     override func viewDidLoad() {
@@ -34,33 +39,17 @@ class UserReviewVC: UIViewController {
 
         configureLayout()
         configurePeriodButton()
+        fetchReview()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-
-        configureChart()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    private func fetchReview() {
         
-        if segue.identifier == Segue.pickPeriod {
+        provider.fetchReviewDatas(from: beginDate, to: endDate) { [weak self] result in
             
-            guard let pickPeriodVC = segue.destination as? PickPeriodVC else { return }
+            switch result {
             
-            pickPeriodVC.beginDate = beginDate
-            pickPeriodVC.endDate = endDate
-            
-            pickPeriodVC.selectedDateCallback = { [weak self] (beginDate, endDate) in
-                
-                self?.beginDate = beginDate
-                self?.endDate = endDate
-                
-                let beginDateString = DateProvider.dateToDateString(beginDate)
-                let endDateString = DateProvider.dateToDateString(endDate)
-                
-                let periodButtonTitle = "\(beginDateString) ~ \(endDateString)"
-                self?.periodButton.setTitle(periodButtonTitle, for: .normal)
+            case .success: self?.configureChart()
+            case .failure(let error): print(error)
             }
         }
     }
@@ -85,12 +74,13 @@ class UserReviewVC: UIViewController {
     
     private func configureChartModel() {
         
-        let categories = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        let chartData = provider.getChartData()
         
-        let datas = AASeriesElement()
-                        .name("體重")
-                        .data([67.0, 66.9, 69.5, 64.5, 68.2, 61.5, 65.2, 66.5, 63.3, 68.3, 63.9, 69.6])
+        configureWeightLabels(with: chartData)
+        
+        guard let weightsDatas = chartData.datas,
+              let categories = chartData.categories
+        else { return }
         
         chartModel = AAChartModel()
                         .categories(categories)
@@ -98,14 +88,39 @@ class UserReviewVC: UIViewController {
                         .colorsTheme(["#c0c0c0"])
                         .legendEnabled(false) // 是否啟用圖表的圖例(圖表底部的可點擊的小圓點)
                         .markerRadius(0) // 連接點大小
-                        .series([datas])
+                        .series([AASeriesElement().name("體重").data(weightsDatas as [Any])])
                         .tooltipValueSuffix("公斤")//浮動提示框單位後綴
+                        .xAxisLabelsEnabled(false)
                         .zoomType(.x) // x軸縮放
         
         let crosshair = AACrosshair().width(2)
         chartOptions = chartModel.aa_toAAOptions()
         chartOptions.plotOptions?.series?.connectNulls(true)
         chartOptions.xAxis?.crosshair(crosshair)
+    }
+    
+    private func configureWeightLabels(with chartData: ChartData) {
+        
+        guard let beginWeight = chartData.datas?.first,
+              let endWeight = chartData.datas?.last
+        else { return }
+        
+        let beginWeightString = "\(beginWeight ?? 0)" + " 公斤"
+        let endWeightString = "\(endWeight ?? 0)" + " 公斤"
+        let minWeightString = "\(chartData.min ?? 0)" + " 公斤"
+        let maxWeightString = "\(chartData.max ?? 0)" + " 公斤"
+        
+        let weightChangeValue = abs(endWeight! - beginWeight!).round(to: 1)
+        let weightChangeRate = (weightChangeValue / beginWeight! * 100).round(to: 1)
+        let weightChangeValueString = "\(weightChangeValue)" + " 公斤"
+        let symbol = endWeight! > beginWeight! ? "+" : "-"
+        let weightChangeRateString = "(\(symbol) \(weightChangeRate)%)"
+        
+        beginWeightLabel.text = beginWeightString
+        endWeightLabel.text = endWeightString
+        minWeightLabel.text = minWeightString
+        maxWeightLabel.text = maxWeightString
+        weightChangeLabel.text = weightChangeValueString + weightChangeRateString
     }
     
     private func configureLayout() {
@@ -120,5 +135,29 @@ class UserReviewVC: UIViewController {
         
         let periodButtonTitle = "\(beginDateString) ~ \(endDateString)"
         periodButton.setTitle(periodButtonTitle, for: .normal)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == Segue.pickPeriod {
+            
+            guard let pickPeriodVC = segue.destination as? PickPeriodVC else { return }
+            
+            pickPeriodVC.beginDate = beginDate
+            pickPeriodVC.endDate = endDate
+            
+            pickPeriodVC.selectedDateCallback = { [weak self] (beginDate, endDate) in
+                
+                self?.beginDate = beginDate
+                self?.endDate = endDate
+                
+                let beginDateString = DateProvider.dateToDateString(beginDate)
+                let endDateString = DateProvider.dateToDateString(endDate)
+                
+                let periodButtonTitle = "\(beginDateString) ~ \(endDateString)"
+                self?.periodButton.setTitle(periodButtonTitle, for: .normal)
+                self?.fetchReview()
+            }
+        }
     }
 }

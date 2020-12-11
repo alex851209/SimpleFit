@@ -16,6 +16,7 @@ enum ChartField: String {
     case photo
     case note
     
+    static let date = "date"
     static let month = "month"
     static let day = "day"
     static let photoUrl = "url"
@@ -35,7 +36,7 @@ class ChartProvider {
                      date: Date,
                      completion: @escaping (Result<Any, Error>) -> Void) {
 
-        let id = DateProvider.dateToDateString(date)
+        let dateString = DateProvider.dateToDateString(date)
         let month = DateProvider.dateToMonthString(date)
         let day = DateProvider.dateToDayString(date)
         let doc = database.collection("users").document(user).collection("chartData")
@@ -44,8 +45,9 @@ class ChartProvider {
         
         case .weight:
             guard let weight = dailyData.weight else { return }
-            doc.document(id).setData([
+            doc.document(dateString).setData([
                 field.rawValue: weight,
+                ChartField.date: dateString,
                 ChartField.month: month,
                 ChartField.day: day
                 ], merge: true) { error in
@@ -57,11 +59,12 @@ class ChartProvider {
             }
         case .photo:
             guard let photo = dailyData.photo else { return }
-            doc.document(id).setData([
+            doc.document(dateString).setData([
                 field.rawValue: [
                     ChartField.photoUrl: photo.url,
                     ChartField.photoIsFavorite: photo.isFavorite
                 ],
+                ChartField.date: dateString,
                 ChartField.month: month,
                 ChartField.day: day
             ], merge: true) { error in
@@ -73,8 +76,9 @@ class ChartProvider {
             }
         case .note:
             guard let note = dailyData.note else { return }
-            doc.document(id).setData([
+            doc.document(dateString).setData([
                 field.rawValue: note,
+                ChartField.date: dateString,
                 ChartField.month: month,
                 ChartField.day: day
             ], merge: true) { error in
