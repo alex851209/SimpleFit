@@ -37,6 +37,9 @@ class DatePickerVC: BlurViewController {
         titleLabel.applyBorder()
         
         let selectedDate = "\(selectedYear)-\(selectedMonth)-01"
+        let currentYear = Date().year()
+        
+        datePicker.yearRange(inBetween: currentYear - 10, end: currentYear)
         datePicker.intialDate = DateProvider.dateStringToDate(selectedDate)
         datePicker.bgColor = .clear
         datePicker.deselectTextColor = UIColor.black.withAlphaComponent(0.2)
