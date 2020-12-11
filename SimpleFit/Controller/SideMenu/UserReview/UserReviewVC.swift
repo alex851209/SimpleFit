@@ -23,6 +23,7 @@ class UserReviewVC: UIViewController {
     @IBOutlet weak var minWeightLabel: UILabel!
     @IBOutlet weak var maxWeightLabel: UILabel!
     @IBOutlet weak var weightChangeLabel: UILabel!
+    @IBOutlet weak var changeSymbolImge: UIImageView!
     
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
     @IBAction func calendarButtonDidTap(_ sender: Any) { performSegue(withIdentifier: Segue.pickPeriod, sender: nil) }
@@ -110,17 +111,22 @@ class UserReviewVC: UIViewController {
         let minWeightString = "\(chartData.min ?? 0)" + " 公斤"
         let maxWeightString = "\(chartData.max ?? 0)" + " 公斤"
         
+        let weightIsUp = endWeight! > beginWeight!
+        
         let weightChangeValue = abs(endWeight! - beginWeight!).round(to: 1)
         let weightChangeRate = (weightChangeValue / beginWeight! * 100).round(to: 1)
         let weightChangeValueString = "\(weightChangeValue)" + " 公斤"
-        let symbol = endWeight! > beginWeight! ? "+" : "-"
-        let weightChangeRateString = "(\(symbol) \(weightChangeRate)%)"
+        let symbolString = weightIsUp ? "+" : "-"
+        let weightChangeRateString = "(\(symbolString) \(weightChangeRate)%)"
         
         beginWeightLabel.text = beginWeightString
         endWeightLabel.text = endWeightString
         minWeightLabel.text = minWeightString
         maxWeightLabel.text = maxWeightString
         weightChangeLabel.text = weightChangeValueString + weightChangeRateString
+        
+        let transformY: CGFloat = weightIsUp ? 1 : -1
+        changeSymbolImge.transform = CGAffineTransform(scaleX: 1, y: transformY)
     }
     
     private func configureLayout() {
