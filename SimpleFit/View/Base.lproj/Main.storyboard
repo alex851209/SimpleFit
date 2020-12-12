@@ -1115,6 +1115,8 @@
                                             <outlet property="beginWeight" destination="zWl-EG-k56" id="Z8p-T4-SIX"/>
                                             <outlet property="endDate" destination="MWw-7P-U62" id="tBU-HX-Fdp"/>
                                             <outlet property="endWeight" destination="Epm-mE-Mve" id="FH3-aT-QTU"/>
+                                            <outlet property="progressTitleLabel" destination="9dT-Dl-hem" id="Ace-b8-L0Z"/>
+                                            <outlet property="progressView" destination="esP-Ow-fAs" id="U8n-F6-MYb"/>
                                             <outlet property="titleLabel" destination="tKa-aR-W7M" id="gwn-dv-rgp"/>
                                         </connections>
                                     </tableViewCell>

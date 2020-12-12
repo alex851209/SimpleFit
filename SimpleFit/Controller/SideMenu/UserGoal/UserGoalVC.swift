@@ -21,12 +21,14 @@ class UserGoalVC: UIViewController {
     
     let provider = GoalProvider()
     var goalList = [Goal]()
+    var currentWeight: Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureLayout()
         configureTableView()
+        fetchLatestWeight()
         fetchGoalDatas()
     }
     
@@ -49,6 +51,21 @@ class UserGoalVC: UIViewController {
             
             case .success(let goalList):
                 self?.goalList = goalList
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func fetchLatestWeight() {
+        
+        provider.fetchLatestWeight { [weak self] result in
+            
+            switch result {
+            
+            case .success(let weight):
+                self?.currentWeight = weight
                 self?.tableView.reloadData()
                 
             case .failure(let error):
@@ -86,7 +103,7 @@ extension UserGoalVC: UITableViewDelegate, UITableViewDataSource {
                 for: indexPath) as? GoalCell
         else { return cell }
         
-        goalCell.layoutCell(with: goalList[indexPath.row])
+        goalCell.layoutCell(with: goalList[indexPath.row], currentWeight: currentWeight)
         
         return goalCell
     }
