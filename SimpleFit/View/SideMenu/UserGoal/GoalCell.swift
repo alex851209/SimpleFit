@@ -15,11 +15,17 @@ class GoalCell: UITableViewCell {
     @IBOutlet weak var beginWeight: UILabel!
     @IBOutlet weak var endWeight: UILabel!
     
-    func layoutCell() {
+    func layoutCell(with goal: Goal) {
         
         beginWeight.applyBorder()
         beginWeight.layer.borderWidth = 0
         endWeight.applyBorder()
         endWeight.layer.borderWidth = 0
+        
+        titleLabel.text = goal.title
+        beginDate.text = goal.beginDate
+        beginWeight.text = "\(goal.beginWeight)"
+        endDate.text = goal.endDate
+        endWeight.text = "\(goal.endWeight)"
     }
 }

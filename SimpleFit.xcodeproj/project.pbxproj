@@ -16,6 +16,8 @@
 		A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A520C975257B6F1600215CC1 /* AddPhotoVC.swift */; };
 		A544D64C25832ABB00A43A66 /* ReviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D64B25832ABB00A43A66 /* ReviewProvider.swift */; };
 		A544D6502583792B00A43A66 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D64F2583792B00A43A66 /* Double+Ext.swift */; };
+		A544D654258478BE00A43A66 /* GoalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D653258478BE00A43A66 /* GoalData.swift */; };
+		A544D6582584794E00A43A66 /* GoalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D6572584794E00A43A66 /* GoalProvider.swift */; };
 		A548A787256FFC6400782A0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A786256FFC6400782A0E /* AppDelegate.swift */; };
 		A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A788256FFC6400782A0E /* SceneDelegate.swift */; };
 		A548A78B256FFC6400782A0E /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A78A256FFC6400782A0E /* HomeVC.swift */; };
@@ -63,6 +65,8 @@
 		A520C975257B6F1600215CC1 /* AddPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoVC.swift; sourceTree = "<group>"; };
 		A544D64B25832ABB00A43A66 /* ReviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProvider.swift; sourceTree = "<group>"; };
 		A544D64F2583792B00A43A66 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
+		A544D653258478BE00A43A66 /* GoalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalData.swift; sourceTree = "<group>"; };
+		A544D6572584794E00A43A66 /* GoalProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProvider.swift; sourceTree = "<group>"; };
 		A548A783256FFC6400782A0E /* SimpleFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A548A786256FFC6400782A0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A548A788256FFC6400782A0E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -215,6 +219,15 @@
 				A544D64B25832ABB00A43A66 /* ReviewProvider.swift */,
 			);
 			path = UserReview;
+			sourceTree = "<group>";
+		};
+		A544D6522584789300A43A66 /* UserGoal */ = {
+			isa = PBXGroup;
+			children = (
+				A544D653258478BE00A43A66 /* GoalData.swift */,
+				A544D6572584794E00A43A66 /* GoalProvider.swift */,
+			);
+			path = UserGoal;
 			sourceTree = "<group>";
 		};
 		A548A77A256FFC6400782A0E = {
@@ -371,6 +384,7 @@
 		A5BDFDA82572A3D7004D3F57 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
+				A544D6522584789300A43A66 /* UserGoal */,
 				A544D647258324E000A43A66 /* UserReview */,
 				A5D90FB625820E8600133735 /* UserInfo */,
 				A5D90FB425820E7E00133735 /* Menu */,
@@ -571,6 +585,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A544D654258478BE00A43A66 /* GoalData.swift in Sources */,
 				A548A78B256FFC6400782A0E /* HomeVC.swift in Sources */,
 				A5BDFD7E25723137004D3F57 /* ChartProvider.swift in Sources */,
 				A5C741EE2577FD82007B477E /* AddNoteVC.swift in Sources */,
@@ -589,6 +604,7 @@
 				A5BDFD8125723362004D3F57 /* ChartData.swift in Sources */,
 				A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */,
 				A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */,
+				A544D6582584794E00A43A66 /* GoalProvider.swift in Sources */,
 				A5863E0F25752EB30017F09C /* UIButton+Ext.swift in Sources */,
 				A5C873CD257F7EA400EFCC86 /* CardView.swift in Sources */,
 				A555EBA02578C5B60099BCB7 /* UserFavoriteVC.swift in Sources */,

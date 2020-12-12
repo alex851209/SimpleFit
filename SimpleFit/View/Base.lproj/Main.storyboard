@@ -960,7 +960,7 @@
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <state key="normal" image="add"/>
                                 <connections>
-                                    <segue destination="Uf1-HN-E2a" kind="custom" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="pGl-An-aUD"/>
+                                    <segue destination="Uf1-HN-E2a" kind="custom" identifier="SegueAddGoal" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="pGl-An-aUD"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mz1-Fo-6IU">
@@ -1089,7 +1089,7 @@
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# 報復性增肥計畫" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKa-aR-W7M">
                                                     <rect key="frame" x="16" y="8" width="128.5" height="19.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1405,6 +1405,9 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemGray2Color"/>
                                 <state key="normal" image="checkmark"/>
+                                <connections>
+                                    <action selector="confirmButtonDidTap:" destination="Uf1-HN-E2a" eventType="touchUpInside" id="JIn-5m-OqP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0cm-W3-Flt"/>
@@ -1425,6 +1428,8 @@
                     </view>
                     <connections>
                         <outlet property="datePicker" destination="5Dn-VZ-BVp" id="Ox5-kr-21J"/>
+                        <outlet property="goalTitleTextField" destination="zTt-Ry-VPR" id="359-6A-6jq"/>
+                        <outlet property="goalWeightTextField" destination="och-5b-QXh" id="RZT-sw-n2r"/>
                         <outlet property="titleLabel" destination="dg9-BS-trq" id="qQW-jd-hgS"/>
                     </connections>
                 </viewController>

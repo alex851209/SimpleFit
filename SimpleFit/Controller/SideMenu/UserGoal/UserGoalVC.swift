@@ -8,17 +8,26 @@
 import UIKit
 
 class UserGoalVC: UIViewController {
-
+    
+    private struct Segue {
+        
+        static let addGoal = "SegueAddGoal"
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
+    
+    let provider = GoalProvider()
+    var goalList = [Goal]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureLayout()
         configureTableView()
+        fetchGoalDatas()
     }
     
     private func configureTableView() {
@@ -31,11 +40,39 @@ class UserGoalVC: UIViewController {
         
         titleLabel.applyBorder()
     }
+    
+    private func fetchGoalDatas() {
+        
+        provider.fetchGoalDatas { [weak self] result in
+            
+            switch result {
+            
+            case .success(let goalList):
+                self?.goalList = goalList
+                self?.tableView.reloadData()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == Segue.addGoal {
+            
+            guard let addGoalVC = segue.destination as? AddGoalVC else { return }
+            addGoalVC.callback = { [weak self] in
+                
+                self?.fetchGoalDatas()
+            }
+        }
+    }
 }
 
 extension UserGoalVC: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 5 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return goalList.count }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 220 }
     
@@ -49,7 +86,7 @@ extension UserGoalVC: UITableViewDelegate, UITableViewDataSource {
                 for: indexPath) as? GoalCell
         else { return cell }
         
-        goalCell.layoutCell()
+        goalCell.layoutCell(with: goalList[indexPath.row])
         
         return goalCell
     }

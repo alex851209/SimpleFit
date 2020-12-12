@@ -146,4 +146,12 @@ class DateProvider {
         guard let lastMonth = Calendar.current.date(byAdding: dateComponent, to: date) else { return date }
         return lastMonth
     }
+    
+    static func getNextMonth() -> Date {
+        
+        var dateComponent = DateComponents()
+        dateComponent.month = 1
+        guard let nextMonth = Calendar.current.date(byAdding: dateComponent, to: Date()) else { return Date() }
+        return nextMonth
+    }
 }
