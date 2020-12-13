@@ -13,6 +13,7 @@ class SideMenuVC: UIViewController {
     private struct Segue {
         
         static let userInfo = "SegueUserInfo"
+        static let userBoard = "SegueUserBoard"
         static let userFavorite = "SegueUserFavorite"
         static let userReview = "SegueUserReview"
         static let userGoal = "SegueUserGoal"
@@ -21,7 +22,7 @@ class SideMenuVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let items = SideMenuItemManager.sideMenuItems
-    let segues = [Segue.userInfo, nil, Segue.userFavorite, Segue.userReview, Segue.userGoal]
+    let segues = [Segue.userInfo, Segue.userBoard, Segue.userFavorite, Segue.userReview, Segue.userGoal]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +61,7 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let reuseID = segues[indexPath.row] else { return }
+        let reuseID = segues[indexPath.row]
         
         let selectedCell = tableView.cellForRow(at: indexPath)
         selectedCell?.showButtonFeedbackAnimation { [weak self] in

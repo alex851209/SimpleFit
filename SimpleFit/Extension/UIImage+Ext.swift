@@ -25,7 +25,15 @@ enum ImageAsset: String {
     case confirm = "check"
 }
 
+enum SystemImageAsset: String {
+ 
+    // UserBoardVC
+    case time = "clock"
+    case heart = "heart.circle"
+}
+
 extension UIImage {
     
     static func asset(_ asset: ImageAsset) -> UIImage? { return UIImage(named: asset.rawValue) }
+    static func systemAsset(_ asset: SystemImageAsset) -> UIImage? { return UIImage(systemName: asset.rawValue) }
 }
