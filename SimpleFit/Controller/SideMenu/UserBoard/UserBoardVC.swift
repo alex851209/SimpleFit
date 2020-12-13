@@ -9,16 +9,29 @@ import UIKit
 
 class UserBoardVC: UIViewController {
 
+    struct Segue {
+        
+        static let post = "SeguePost"
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var sortButton: UIButton!
     
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
     @IBAction func sortButtonDidTap(_ sender: Any) {
         
         sortButton.showButtonFeedbackAnimation { [weak self] in
+            
             self?.configureSortButton()
+        }
+    }
+    @IBAction func postButtonDidTap(_ sender: Any) {
+        
+        postButton.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.performSegue(withIdentifier: Segue.post, sender: nil)
         }
     }
     
@@ -34,7 +47,7 @@ class UserBoardVC: UIViewController {
     private func configureLayout() {
         
         titleLabel.applyBorder()
-        addButton.applyAddButton()
+        postButton.applyAddButton()
     }
     
     private func configureTableview() {

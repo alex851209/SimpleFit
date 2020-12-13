@@ -17,6 +17,7 @@ class UserReviewVC: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var periodButton: UIButton!
+    @IBOutlet weak var calendarButton: UIButton!
     @IBOutlet weak var chartBackgroundView: UIView!
     @IBOutlet weak var beginWeightLabel: UILabel!
     @IBOutlet weak var endWeightLabel: UILabel!
@@ -26,7 +27,13 @@ class UserReviewVC: UIViewController {
     @IBOutlet weak var changeSymbolImge: UIImageView!
     
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
-    @IBAction func calendarButtonDidTap(_ sender: Any) { performSegue(withIdentifier: Segue.pickPeriod, sender: nil) }
+    @IBAction func calendarButtonDidTap(_ sender: Any) {
+        
+        calendarButton.showButtonFeedbackAnimation { [weak self] in
+                        
+            self?.performSegue(withIdentifier: Segue.pickPeriod, sender: nil)
+        }
+    }
     
     let chartView = AAChartView()
     var chartModel = AAChartModel()

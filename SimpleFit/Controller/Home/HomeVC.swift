@@ -268,7 +268,7 @@ class HomeVC: UIViewController {
         
         var settings = SideMenuSettings()
         settings.presentationStyle = presentationStyle
-        settings.presentDuration = 1
+        settings.presentDuration = 0.7
         settings.dismissDuration = 0.5
         settings.blurEffectStyle = .systemChromeMaterial
         settings.menuWidth = view.frame.width - 100

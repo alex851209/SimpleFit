@@ -20,7 +20,13 @@ class UserInfoVC: UIViewController {
     @IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
     
-    @IBAction func editButtonDidTap(_ sender: Any) { switchMode() }
+    @IBAction func editButtonDidTap(_ sender: Any) {
+        
+        editButton.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.switchMode()
+        }
+    }
     @IBAction func avatarEditButtonDidtap(_ sender: Any) {
         
         avatarEditButton.showButtonFeedbackAnimation { [weak self] in

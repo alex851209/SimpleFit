@@ -16,8 +16,16 @@ class UserGoalVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var addButton: UIButton!
     
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
+    @IBAction func addButtonDidTap(_ sender: Any) {
+        
+        addButton.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.performSegue(withIdentifier: Segue.addGoal, sender: nil)
+        }
+    }
     
     let provider = GoalProvider()
     var goalList = [Goal]()

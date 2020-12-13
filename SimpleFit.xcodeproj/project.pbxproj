@@ -20,6 +20,7 @@
 		A544D6582584794E00A43A66 /* GoalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D6572584794E00A43A66 /* GoalProvider.swift */; };
 		A544D6792585E2E800A43A66 /* UserBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D6782585E2E800A43A66 /* UserBoardVC.swift */; };
 		A544D67E2585E68800A43A66 /* BoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D67D2585E68800A43A66 /* BoardCell.swift */; };
+		A544D68225863EF900A43A66 /* PostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D68125863EF900A43A66 /* PostVC.swift */; };
 		A548A787256FFC6400782A0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A786256FFC6400782A0E /* AppDelegate.swift */; };
 		A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A788256FFC6400782A0E /* SceneDelegate.swift */; };
 		A548A78B256FFC6400782A0E /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A548A78A256FFC6400782A0E /* HomeVC.swift */; };
@@ -53,6 +54,7 @@
 		A5C9F681257896AB00558C98 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C9F680257896AB00558C98 /* UIView+Ext.swift */; };
 		A5D90FB825820ED500133735 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90FB725820ED500133735 /* UserData.swift */; };
 		A5D90FBC25820F5A00133735 /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90FBB25820F5A00133735 /* UserProvider.swift */; };
+		A5E173932586694000537CCF /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E173922586694000537CCF /* CategoryManager.swift */; };
 		A5E46D48257615C400ADF4DA /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E46D47257615C400ADF4DA /* DetailVC.swift */; };
 		A5F0FAA1257FDFD200FAD8EB /* AddGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0FAA0257FDFD200FAD8EB /* AddGoalVC.swift */; };
 /* End PBXBuildFile section */
@@ -71,6 +73,7 @@
 		A544D6572584794E00A43A66 /* GoalProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProvider.swift; sourceTree = "<group>"; };
 		A544D6782585E2E800A43A66 /* UserBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBoardVC.swift; sourceTree = "<group>"; };
 		A544D67D2585E68800A43A66 /* BoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCell.swift; sourceTree = "<group>"; };
+		A544D68125863EF900A43A66 /* PostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVC.swift; sourceTree = "<group>"; };
 		A548A783256FFC6400782A0E /* SimpleFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A548A786256FFC6400782A0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A548A788256FFC6400782A0E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +110,7 @@
 		A5C9F680257896AB00558C98 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		A5D90FB725820ED500133735 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		A5D90FBB25820F5A00133735 /* UserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
+		A5E173922586694000537CCF /* CategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManager.swift; sourceTree = "<group>"; };
 		A5E46D47257615C400ADF4DA /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		A5F0FAA0257FDFD200FAD8EB /* AddGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalVC.swift; sourceTree = "<group>"; };
 		C36156E5D1AC9ABF93F780A1 /* Pods-SimpleFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.release.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.release.xcconfig"; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				A544D6782585E2E800A43A66 /* UserBoardVC.swift */,
+				A544D68125863EF900A43A66 /* PostVC.swift */,
 			);
 			path = UserBoard;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 		A5BDFDA82572A3D7004D3F57 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
+				A5E173912586692600537CCF /* UserBoard */,
 				A544D6522584789300A43A66 /* UserGoal */,
 				A544D647258324E000A43A66 /* UserReview */,
 				A5D90FB625820E8600133735 /* UserInfo */,
@@ -453,6 +459,14 @@
 				A5D90FBB25820F5A00133735 /* UserProvider.swift */,
 			);
 			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		A5E173912586692600537CCF /* UserBoard */ = {
+			isa = PBXGroup;
+			children = (
+				A5E173922586694000537CCF /* CategoryManager.swift */,
+			);
+			path = UserBoard;
 			sourceTree = "<group>";
 		};
 		A5E46D46257615B300ADF4DA /* Detail */ = {
@@ -612,6 +626,7 @@
 				A5BDFD7E25723137004D3F57 /* ChartProvider.swift in Sources */,
 				A5C741EE2577FD82007B477E /* AddNoteVC.swift in Sources */,
 				A5BDFDB32572A7DB004D3F57 /* SideMenuItemManager.swift in Sources */,
+				A5E173932586694000537CCF /* CategoryManager.swift in Sources */,
 				A544D6502583792B00A43A66 /* Double+Ext.swift in Sources */,
 				A5BDFDB925738C4E004D3F57 /* DateProvider.swift in Sources */,
 				A5BDFD9C2572938F004D3F57 /* SideMenuVC.swift in Sources */,
@@ -627,6 +642,7 @@
 				A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */,
 				A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */,
 				A544D6582584794E00A43A66 /* GoalProvider.swift in Sources */,
+				A544D68225863EF900A43A66 /* PostVC.swift in Sources */,
 				A5863E0F25752EB30017F09C /* UIButton+Ext.swift in Sources */,
 				A5C873CD257F7EA400EFCC86 /* CardView.swift in Sources */,
 				A555EBA02578C5B60099BCB7 /* UserFavoriteVC.swift in Sources */,
