@@ -12,6 +12,7 @@ class UserBoardVC: UIViewController {
     struct Segue {
         
         static let post = "SeguePost"
+        static let content = "SegueContent"
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -83,5 +84,11 @@ extension UserBoardVC: UITableViewDelegate, UITableViewDataSource {
         as? BoardCell else { return cell }
         
         return boardCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: Segue.content, sender: nil)
     }
 }
