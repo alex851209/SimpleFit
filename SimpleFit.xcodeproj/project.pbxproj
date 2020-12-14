@@ -15,6 +15,9 @@
 		A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5191A84257BCB240031D333 /* PhotoAlertVC.swift */; };
 		A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A520C975257B6F1600215CC1 /* AddPhotoVC.swift */; };
 		A53DAF5F25868DFE00788FF4 /* ReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DAF5E25868DFE00788FF4 /* ReplyCell.swift */; };
+		A53DAF63258700FD00788FF4 /* UserGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DAF62258700FD00788FF4 /* UserGroupVC.swift */; };
+		A53DAF672587019700788FF4 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DAF662587019700788FF4 /* GroupCell.swift */; };
+		A53DAF6A2587037700788FF4 /* AddGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DAF692587037700788FF4 /* AddGroupVC.swift */; };
 		A544D64C25832ABB00A43A66 /* ReviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D64B25832ABB00A43A66 /* ReviewProvider.swift */; };
 		A544D6502583792B00A43A66 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D64F2583792B00A43A66 /* Double+Ext.swift */; };
 		A544D654258478BE00A43A66 /* GoalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D653258478BE00A43A66 /* GoalData.swift */; };
@@ -71,6 +74,9 @@
 		A5191A84257BCB240031D333 /* PhotoAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlertVC.swift; sourceTree = "<group>"; };
 		A520C975257B6F1600215CC1 /* AddPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoVC.swift; sourceTree = "<group>"; };
 		A53DAF5E25868DFE00788FF4 /* ReplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCell.swift; sourceTree = "<group>"; };
+		A53DAF62258700FD00788FF4 /* UserGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupVC.swift; sourceTree = "<group>"; };
+		A53DAF662587019700788FF4 /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
+		A53DAF692587037700788FF4 /* AddGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupVC.swift; sourceTree = "<group>"; };
 		A544D64B25832ABB00A43A66 /* ReviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProvider.swift; sourceTree = "<group>"; };
 		A544D64F2583792B00A43A66 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		A544D653258478BE00A43A66 /* GoalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalData.swift; sourceTree = "<group>"; };
@@ -225,6 +231,23 @@
 				A5C873C0257F173400EFCC86 /* SignOutAlertVC.swift */,
 			);
 			path = Alert;
+			sourceTree = "<group>";
+		};
+		A53DAF61258700E700788FF4 /* UserGroup */ = {
+			isa = PBXGroup;
+			children = (
+				A53DAF62258700FD00788FF4 /* UserGroupVC.swift */,
+				A53DAF692587037700788FF4 /* AddGroupVC.swift */,
+			);
+			path = UserGroup;
+			sourceTree = "<group>";
+		};
+		A53DAF652587017F00788FF4 /* UserGroup */ = {
+			isa = PBXGroup;
+			children = (
+				A53DAF662587019700788FF4 /* GroupCell.swift */,
+			);
+			path = UserGroup;
 			sourceTree = "<group>";
 		};
 		A544D647258324E000A43A66 /* UserReview */ = {
@@ -396,6 +419,7 @@
 		A5BDFD9A25729379004D3F57 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
+				A53DAF61258700E700788FF4 /* UserGroup */,
 				A5180F5E2580B973002E9E1E /* Menu */,
 				A5180F5F2580B97C002E9E1E /* UserInfo */,
 				A544D6762585E2C100A43A66 /* UserBoard */,
@@ -410,6 +434,7 @@
 			isa = PBXGroup;
 			children = (
 				A5180F642580B9CD002E9E1E /* Menu */,
+				A53DAF652587017F00788FF4 /* UserGroup */,
 				A544D67C2585E67000A43A66 /* UserBoard */,
 				A5180F652580B9D5002E9E1E /* UserFavorite */,
 				A5180F662580B9E0002E9E1E /* UserGoal */,
@@ -637,6 +662,7 @@
 				A53DAF5F25868DFE00788FF4 /* ReplyCell.swift in Sources */,
 				A5BDFDB32572A7DB004D3F57 /* SideMenuItemManager.swift in Sources */,
 				A5E173932586694000537CCF /* CategoryManager.swift in Sources */,
+				A53DAF672587019700788FF4 /* GroupCell.swift in Sources */,
 				A544D6502583792B00A43A66 /* Double+Ext.swift in Sources */,
 				A5BDFDB925738C4E004D3F57 /* DateProvider.swift in Sources */,
 				A5BDFD9C2572938F004D3F57 /* SideMenuVC.swift in Sources */,
@@ -649,6 +675,7 @@
 				A544D64C25832ABB00A43A66 /* ReviewProvider.swift in Sources */,
 				A5C873C9257F790F00EFCC86 /* UserGoalVC.swift in Sources */,
 				A5BDFD8125723362004D3F57 /* ChartData.swift in Sources */,
+				A53DAF6A2587037700788FF4 /* AddGroupVC.swift in Sources */,
 				A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */,
 				A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */,
 				A544D6582584794E00A43A66 /* GoalProvider.swift in Sources */,
@@ -663,6 +690,7 @@
 				A5C873C1257F173400EFCC86 /* SignOutAlertVC.swift in Sources */,
 				A5D90FB825820ED500133735 /* UserData.swift in Sources */,
 				A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */,
+				A53DAF63258700FD00788FF4 /* UserGroupVC.swift in Sources */,
 				A5180F6F25811FB6002E9E1E /* PickPeriodVC.swift in Sources */,
 				A5BDFDA125729495004D3F57 /* SideMenuCell.swift in Sources */,
 				A5E1739625867C2600537CCF /* ContentVC.swift in Sources */,

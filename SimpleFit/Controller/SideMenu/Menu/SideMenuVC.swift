@@ -13,7 +13,8 @@ class SideMenuVC: UIViewController {
     private struct Segue {
         
         static let userInfo = "SegueUserInfo"
-        static let userBoard = "SegueUserBoard"
+        static let userGroup = "SegueUserGroup"
+//        static let userBoard = "SegueUserBoard"
         static let userFavorite = "SegueUserFavorite"
         static let userReview = "SegueUserReview"
         static let userGoal = "SegueUserGoal"
@@ -22,7 +23,7 @@ class SideMenuVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let items = SideMenuItemManager.sideMenuItems
-    let segues = [Segue.userInfo, Segue.userBoard, Segue.userFavorite, Segue.userReview, Segue.userGoal]
+    let segues = [Segue.userInfo, Segue.userGroup, Segue.userFavorite, Segue.userReview, Segue.userGoal]
     
     override func viewDidLoad() {
         super.viewDidLoad()

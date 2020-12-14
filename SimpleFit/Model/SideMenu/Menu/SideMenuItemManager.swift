@@ -10,7 +10,8 @@ import UIKit
 enum SideMenuItem {
 
     case user
-    case board
+//    case board
+    case group
     case favorite
     case review
     case goal
@@ -20,7 +21,8 @@ enum SideMenuItem {
         switch self {
         
         case .user: return UIImage(named: "user")
-        case .board: return UIImage(named: "friend")
+//        case .board: return UIImage(named: "friend")
+        case .group: return UIImage(named: "friend")
         case .favorite: return UIImage(named: "favorite")
         case .review: return UIImage(named: "review")
         case .goal: return UIImage(named: "goal")
@@ -32,7 +34,8 @@ enum SideMenuItem {
         switch self {
         
         case .user: return "個人"
-        case .board: return "討論區"
+//        case .board: return "討論區"
+        case .group: return "群組"
         case .favorite: return "收藏"
         case .review: return "回顧"
         case .goal: return "目標"
@@ -42,5 +45,5 @@ enum SideMenuItem {
 
 class SideMenuItemManager {
     
-    static let sideMenuItems: [SideMenuItem] = [.user, .board, .favorite, .review, .goal]
+    static let sideMenuItems: [SideMenuItem] = [.user, .group, .favorite, .review, .goal]
 }
