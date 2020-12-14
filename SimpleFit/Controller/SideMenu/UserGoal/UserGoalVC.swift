@@ -59,6 +59,7 @@ class UserGoalVC: UIViewController {
             
             case .success(let goalList):
                 self?.goalList = goalList
+                self?.tableView.reloadData()
                 
             case .failure(let error):
                 print(error)

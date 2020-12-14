@@ -98,7 +98,10 @@ class ChartProvider {
         
         let fileRef = storageRef.child("SimpleFitPhotoUpload").child("\(uniqueString).jpg")
         // 轉成 data
-        guard let uploadData = image.jpegData(compressionQuality: 0.9) else { return }
+        
+        let compressedImage = image.scale(newWidth: 600)
+        
+        guard let uploadData = compressedImage.jpegData(compressionQuality: 0.7) else { return }
         
         fileRef.putData(uploadData, metadata: nil) { (_, error) in
             

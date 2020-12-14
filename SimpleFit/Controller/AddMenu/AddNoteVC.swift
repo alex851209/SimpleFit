@@ -11,6 +11,9 @@ class AddNoteVC: BlurViewController {
 
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var noteTextView: UITextView!
+    @IBOutlet weak var pinImage: UIImageView!
+    @IBOutlet weak var cardView: CardView!
+    @IBOutlet weak var backgroundCardView: CardView!
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
     @IBAction func confirmButtonDidTap(_ sender: Any) {
@@ -38,7 +41,9 @@ class AddNoteVC: BlurViewController {
         datePicker.applyBorder()
         datePicker.addTarget(self, action: #selector(dateDidPick), for: .valueChanged)
         
-        noteTextView.transform = CGAffineTransform(rotationAngle: .pi * 0.05)
+        pinImage.transform = CGAffineTransform(rotationAngle: .pi * 0.2)
+        cardView.transform = CGAffineTransform(rotationAngle: -.pi * 0.02)
+        backgroundCardView.transform = CGAffineTransform(rotationAngle: .pi * 0.03)
     }
     
     private func addNote() {

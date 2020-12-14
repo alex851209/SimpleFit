@@ -17,7 +17,7 @@ class HomeVC: UIViewController {
         
         static let sideMenuNC = "SegueSideMenuNC"
         static let datePicker = "SegueDatePicker"
-        static let detail = "SegueDetail"
+        static let daily = "SegueDaily"
         static let addWeight = "SegueAddWeight"
         static let addNote = "SegueAddNote"
         static let addPhoto = "SegueAddPhoto"
@@ -131,7 +131,7 @@ class HomeVC: UIViewController {
                 AASeriesElement().data(clearDatas as [Any])
             ])
             .tooltipValueSuffix("公斤")//浮動提示框單位後綴
-            .tooltipEnabled(true)//是否顯示浮動提示框
+            .tooltipEnabled(false)//是否顯示浮動提示框
             .touchEventEnabled(true)//是否支持觸摸事件回調
             .yAxisLabelsEnabled(false)//y 軸是否顯示數據
             .yAxisMin(min)
@@ -298,9 +298,10 @@ class HomeVC: UIViewController {
             guard let sideMenuNC = segue.destination as? SideMenuNavigationController else { return }
             sideMenuNC.settings = makeSettings()
             
-        case Segue.detail:
-            guard let detailVC = segue.destination as? DetailVC else { return }
-            detailVC.daily = selectedDaily
+        case Segue.daily:
+            guard let dailyVC = segue.destination as? DailyVC else { return }
+            dailyVC.dailys = dailys
+            dailyVC.selectedDaily = selectedDaily
             
         case Segue.datePicker:
             guard let datePickerVC = segue.destination as? DatePickerVC else { return }
@@ -337,7 +338,7 @@ extension HomeVC: AAChartViewDelegate {
         if isAddMenuOpen { toggleAddMenu() }
         guard let selectedDay = moveOverEventMessage.category else { return }
         configureSelectedDaily(with: selectedDay)
-        performSegue(withIdentifier: Segue.detail, sender: nil)
+        performSegue(withIdentifier: Segue.daily, sender: nil)
     }
 }
 

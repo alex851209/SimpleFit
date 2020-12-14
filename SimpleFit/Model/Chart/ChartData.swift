@@ -16,7 +16,7 @@ struct ChartData {
     var categories: [String]?
 }
 
-struct DailyData: Codable {
+struct DailyData: Codable, Equatable {
     
     var weight: Double?
     var photo: Photo?
@@ -26,7 +26,7 @@ struct DailyData: Codable {
     var date: String = ""
 }
 
-struct Photo: Codable {
+struct Photo: Codable, Equatable {
     
     var url: String
     var isFavorite: Bool
