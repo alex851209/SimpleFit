@@ -20,7 +20,8 @@ enum ChartField: String {
     static let month = "month"
     static let day = "day"
     static let photoUrl = "url"
-    static let photoIsFavorite = "isFavorite"
+    static let isFavorite = "isFavorite"
+    static let photoIsFavorite = "photo.isFavorite"
 }
 
 class ChartProvider {
@@ -62,7 +63,7 @@ class ChartProvider {
             doc.document(dateString).setData([
                 field.rawValue: [
                     ChartField.photoUrl: photo.url,
-                    ChartField.photoIsFavorite: photo.isFavorite
+                    ChartField.isFavorite: photo.isFavorite
                 ],
                 ChartField.date: dateString,
                 ChartField.month: month,
@@ -212,5 +213,20 @@ class ChartProvider {
         }
         
         chartData.categories = categories
+    }
+    
+    func addToFavoriteFrom(date: String, completion: @escaping (Result<Any, Error>) -> Void) {
+        
+        let doc = database.collection("users").document(user).collection("chartData").document(date)
+        
+        doc.updateData([
+            "\(ChartField.photo.rawValue).isFavorite": true
+        ]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
     }
 }

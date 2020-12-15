@@ -271,7 +271,7 @@ class HomeVC: UIViewController {
         settings.presentDuration = 0.7
         settings.dismissDuration = 0.5
         settings.blurEffectStyle = .systemChromeMaterial
-        settings.menuWidth = view.frame.width - 100
+        settings.menuWidth = view.frame.width - 135
 
         return settings
     }

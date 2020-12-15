@@ -109,6 +109,7 @@ class DailyVC: BlurViewController {
         if let indexPath = dailyCollectionView.indexPathForItem(at: center) {
             
             dateLabel.text = dailys[indexPath.item].date
+            selectedDaily = dailys[indexPath.item]
         }
     }
     
@@ -117,6 +118,7 @@ class DailyVC: BlurViewController {
         guard let photoDetailVC = segue.destination as? PhotoDetailVC else { return }
         
         photoDetailVC.selectedPhoto = selectedPhoto
+        photoDetailVC.selectedDaily = selectedDaily
     }
 }
 

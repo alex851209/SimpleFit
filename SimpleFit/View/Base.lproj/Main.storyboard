@@ -404,6 +404,9 @@
                                 <state key="normal" image="heart.circle" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
                                 </state>
+                                <connections>
+                                    <action selector="favoriteButtonDidTap:" destination="bWv-NG-FM2" eventType="touchUpInside" id="t1b-H4-tW2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LdR-Zh-MCc"/>
@@ -422,6 +425,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="favoriteButton" destination="MrR-9l-8JU" id="pHh-tu-bjh"/>
                         <outlet property="photoImage" destination="soc-bu-A7Q" id="vnh-ey-SWG"/>
                     </connections>
                 </viewController>
@@ -449,16 +453,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Y8-1X-bew">
-                                                    <rect key="frame" x="16" y="35" width="30" height="30"/>
+                                                    <rect key="frame" x="25" y="37.5" width="25" height="25"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="Fab-Hs-2la"/>
-                                                        <constraint firstAttribute="height" constant="30" id="Jbi-eG-2aD"/>
+                                                        <constraint firstAttribute="width" constant="25" id="Fab-Hs-2la"/>
+                                                        <constraint firstAttribute="height" constant="25" id="Jbi-eG-2aD"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的帳號" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCK-cr-cLx">
-                                                    <rect key="frame" x="62" y="35" width="102" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                    <color key="textColor" red="0.2470588235" green="0.2274509804" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="66" y="36.5" width="93.5" height="27.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRB-30-B2L" userLabel="Separator">
@@ -471,13 +475,13 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PCK-cr-cLx" secondAttribute="trailing" constant="20" symbolic="YES" id="4JC-nl-rBd"/>
-                                                <constraint firstItem="1Y8-1X-bew" firstAttribute="centerY" secondItem="KYx-vC-c8Y" secondAttribute="centerY" id="7Ij-8u-w6F"/>
                                                 <constraint firstAttribute="trailing" secondItem="jRB-30-B2L" secondAttribute="trailing" constant="20" id="8Pl-l8-1an"/>
                                                 <constraint firstAttribute="bottom" secondItem="jRB-30-B2L" secondAttribute="bottom" id="Jmu-eF-VzU"/>
                                                 <constraint firstItem="jRB-30-B2L" firstAttribute="leading" secondItem="KYx-vC-c8Y" secondAttribute="leading" constant="20" id="QNf-UD-4bj"/>
                                                 <constraint firstItem="PCK-cr-cLx" firstAttribute="leading" secondItem="1Y8-1X-bew" secondAttribute="trailing" constant="16" id="amH-5M-KcU"/>
                                                 <constraint firstItem="PCK-cr-cLx" firstAttribute="centerY" secondItem="KYx-vC-c8Y" secondAttribute="centerY" id="gpc-gk-d2G"/>
-                                                <constraint firstItem="1Y8-1X-bew" firstAttribute="leading" secondItem="KYx-vC-c8Y" secondAttribute="leading" constant="16" id="ytJ-3u-3dd"/>
+                                                <constraint firstItem="1Y8-1X-bew" firstAttribute="centerY" secondItem="PCK-cr-cLx" secondAttribute="centerY" id="pPj-FO-KOy"/>
+                                                <constraint firstItem="1Y8-1X-bew" firstAttribute="leading" secondItem="KYx-vC-c8Y" secondAttribute="leading" constant="25" id="ytJ-3u-3dd"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -2828,7 +2832,7 @@
                                 <rect key="frame" x="70" y="196" width="275" height="275"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dch-Dl-YXe">
-                                        <rect key="frame" x="5" y="20" width="265" height="250"/>
+                                        <rect key="frame" x="15" y="25" width="250" height="245"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <string key="text">2020/12/15
 請輸入筆記</string>
@@ -2840,10 +2844,10 @@
                                 <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Dch-Dl-YXe" secondAttribute="bottom" constant="5" id="CmG-KZ-jOX"/>
-                                    <constraint firstAttribute="trailing" secondItem="Dch-Dl-YXe" secondAttribute="trailing" constant="5" id="RW7-1C-6Ld"/>
-                                    <constraint firstItem="Dch-Dl-YXe" firstAttribute="top" secondItem="7X5-7i-JKM" secondAttribute="top" constant="20" id="aOR-IO-PIP"/>
+                                    <constraint firstAttribute="trailing" secondItem="Dch-Dl-YXe" secondAttribute="trailing" constant="10" id="RW7-1C-6Ld"/>
+                                    <constraint firstItem="Dch-Dl-YXe" firstAttribute="top" secondItem="7X5-7i-JKM" secondAttribute="top" constant="25" id="aOR-IO-PIP"/>
                                     <constraint firstAttribute="width" secondItem="7X5-7i-JKM" secondAttribute="height" id="ff5-LK-QQN"/>
-                                    <constraint firstItem="Dch-Dl-YXe" firstAttribute="leading" secondItem="7X5-7i-JKM" secondAttribute="leading" constant="5" id="lTZ-8u-lM3"/>
+                                    <constraint firstItem="Dch-Dl-YXe" firstAttribute="leading" secondItem="7X5-7i-JKM" secondAttribute="leading" constant="15" id="lTZ-8u-lM3"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">

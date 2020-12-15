@@ -33,12 +33,12 @@ enum SideMenuItem {
 
         switch self {
         
-        case .user: return "個人"
+        case .user: return "個 人"
 //        case .board: return "討論區"
-        case .group: return "群組"
-        case .favorite: return "收藏"
-        case .review: return "回顧"
-        case .goal: return "目標"
+        case .group: return "群 組"
+        case .favorite: return "收 藏"
+        case .review: return "回 顧"
+        case .goal: return "目 標"
         }
     }
 }
