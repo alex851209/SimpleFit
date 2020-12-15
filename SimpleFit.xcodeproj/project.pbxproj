@@ -47,6 +47,7 @@
 		A5BDFDB625738B0D004D3F57 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDB525738B0D004D3F57 /* Date+Ext.swift */; };
 		A5BDFDB925738C4E004D3F57 /* DateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDB825738C4E004D3F57 /* DateProvider.swift */; };
 		A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */; };
+		A5C70DD6258880C000DE59B5 /* PhotoDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70DD5258880C000DE59B5 /* PhotoDetailVC.swift */; };
 		A5C741EE2577FD82007B477E /* AddNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C741ED2577FD82007B477E /* AddNoteVC.swift */; };
 		A5C8732C257E0B7100EFCC86 /* KingfisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C8732B257E0B7100EFCC86 /* KingfisherWrapper.swift */; };
 		A5C8739F257E5D8A00EFCC86 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C8739E257E5D8A00EFCC86 /* AuthVC.swift */; };
@@ -109,6 +110,7 @@
 		A5BDFDB525738B0D004D3F57 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		A5BDFDB825738C4E004D3F57 /* DateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProvider.swift; sourceTree = "<group>"; };
 		A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerVC.swift; sourceTree = "<group>"; };
+		A5C70DD5258880C000DE59B5 /* PhotoDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailVC.swift; sourceTree = "<group>"; };
 		A5C741ED2577FD82007B477E /* AddNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteVC.swift; sourceTree = "<group>"; };
 		A5C8732B257E0B7100EFCC86 /* KingfisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingfisherWrapper.swift; sourceTree = "<group>"; };
 		A5C87363257E54AD00EFCC86 /* SimpleFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleFit.entitlements; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				A5E46D47257615C400ADF4DA /* DailyVC.swift */,
+				A5C70DD5258880C000DE59B5 /* PhotoDetailVC.swift */,
 			);
 			path = Daily;
 			sourceTree = "<group>";
@@ -710,6 +713,7 @@
 				A5BDFDB625738B0D004D3F57 /* Date+Ext.swift in Sources */,
 				A5C9F681257896AB00558C98 /* UIView+Ext.swift in Sources */,
 				A555EBD32578E3570099BCB7 /* FavoriteCell.swift in Sources */,
+				A5C70DD6258880C000DE59B5 /* PhotoDetailVC.swift in Sources */,
 				A5C9F67E2578758E00558C98 /* UserInfoVC.swift in Sources */,
 				A5E46D48257615C400ADF4DA /* DailyVC.swift in Sources */,
 				A57297BA2577230600A892D4 /* AddWeightVC.swift in Sources */,

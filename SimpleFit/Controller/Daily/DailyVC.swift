@@ -10,6 +10,11 @@ import Gemini
 
 class DailyVC: BlurViewController {
     
+    private struct Segue {
+        
+        static let photoDetail = "SeguePhotoDetail"
+    }
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var dailyCollectionView: GeminiCollectionView!
     
@@ -18,6 +23,7 @@ class DailyVC: BlurViewController {
     var selectedDaily = DailyData()
     var dailys = [DailyData]()
     var isFirstShow = true
+    var selectedPhoto: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,6 +111,13 @@ class DailyVC: BlurViewController {
             dateLabel.text = dailys[indexPath.item].date
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let photoDetailVC = segue.destination as? PhotoDetailVC else { return }
+        
+        photoDetailVC.selectedPhoto = selectedPhoto
+    }
 }
 
 extension DailyVC: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -127,6 +140,7 @@ extension DailyVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         let averageWeight = calculateAverageWeight()
         
+        dailyCell.delegate = self
         dailyCell.layoutCell(with: dailys[indexPath.item], averageWeight: averageWeight)
         dailyCollectionView.animateCell(dailyCell)
         
@@ -145,4 +159,13 @@ extension DailyVC {
     func scrollViewDidScroll(_ scrollView: UIScrollView) { dailyCollectionView.animateVisibleCells() }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {  detectSelectedCell(scrollView) }
+}
+
+extension DailyVC: DailyCellDelegate {
+    
+    func photoDidTap(with photo: UIImage) {
+        
+        selectedPhoto = photo
+        performSegue(withIdentifier: Segue.photoDetail, sender: nil)
+    }
 }

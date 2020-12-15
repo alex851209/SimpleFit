@@ -8,6 +8,11 @@
 import UIKit
 import Gemini
 
+protocol DailyCellDelegate: AnyObject {
+    
+    func photoDidTap(with image: UIImage)
+}
+
 class DailyCell: GeminiCell {
 
     @IBOutlet weak var weightLabel: UILabel!
@@ -17,6 +22,8 @@ class DailyCell: GeminiCell {
     @IBOutlet weak var photoPlaceholderLabel: UILabel!
     @IBOutlet var notePlaceholderLabels: [UILabel]!
     @IBOutlet weak var notePlaceholderImage: UIImageView!
+    
+    weak var delegate: DailyCellDelegate?
     
     func layoutCell(with daily: DailyData, averageWeight: Double) {
         
@@ -48,8 +55,8 @@ class DailyCell: GeminiCell {
     private func configureNote(with daily: DailyData) {
         
         noteTextView.applyBorder()
-        noteTextView.layer.cornerRadius = 25
-        noteTextView.layer.borderWidth = 0
+        noteTextView.layer.cornerRadius = 15
+        noteTextView.layer.borderColor = UIColor.systemGray4.cgColor
         noteTextView.text = daily.note
         noteTextView.isEditable = false
         
@@ -73,7 +80,11 @@ class DailyCell: GeminiCell {
 
     @objc private func photoDidTap() {
 
-        photoImage.showButtonFeedbackAnimation {}
+        photoImage.showButtonFeedbackAnimation { [weak self] in
+            
+            guard let image = self?.photoImage.image else { return }
+            self?.delegate?.photoDidTap(with: image)
+        }
     }
     
     @objc private func noteDidTap() {
