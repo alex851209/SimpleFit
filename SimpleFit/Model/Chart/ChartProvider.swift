@@ -161,6 +161,32 @@ class ChartProvider {
         }
     }
     
+    func fetchFavoriteDatas(completion: @escaping (Result<[DailyData], Error>) -> Void) {
+        
+        let doc = database.collection("users").document(user).collection("chartData")
+        
+        doc.whereField(ChartField.photoIsFavorite, isEqualTo: true).getDocuments { (querySnapshot, error) in
+            
+            if let error = error {
+                
+                print("Error getting favorites: \(error)")
+            } else {
+                
+                for document in querySnapshot!.documents {
+                    
+                    do {
+                        if let daily = try document.data(as: DailyData.self, decoder: Firestore.Decoder()) {
+                            self.dailyDatas.append(daily)
+                        }
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+                completion(.success((self.dailyDatas)))
+            }
+        }
+    }
+    
     private func getWeightFrom(year: Int, month: Int) {
 
         let countOfDays = DateProvider.getCountOfDaysInMonth(year: year, month: month)

@@ -34,7 +34,6 @@
 		A548A793256FFC6600782A0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A548A791256FFC6600782A0E /* LaunchScreen.storyboard */; };
 		A5536CC2257A045D00BE60BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5536CC1257A045D00BE60BC /* GoogleService-Info.plist */; };
 		A555EBA02578C5B60099BCB7 /* UserFavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EB9F2578C5B60099BCB7 /* UserFavoriteVC.swift */; };
-		A555EBD32578E3570099BCB7 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EBD22578E3570099BCB7 /* FavoriteCell.swift */; };
 		A555EBD62578E6810099BCB7 /* PagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EBD52578E6810099BCB7 /* PagingFlowLayout.swift */; };
 		A57297BA2577230600A892D4 /* AddWeightVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57297B92577230600A892D4 /* AddWeightVC.swift */; };
 		A5863E0F25752EB30017F09C /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5863E0E25752EB30017F09C /* UIButton+Ext.swift */; };
@@ -48,6 +47,8 @@
 		A5BDFDB925738C4E004D3F57 /* DateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDB825738C4E004D3F57 /* DateProvider.swift */; };
 		A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */; };
 		A5C70DD6258880C000DE59B5 /* PhotoDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70DD5258880C000DE59B5 /* PhotoDetailVC.swift */; };
+		A5C70DDA2588FA1800DE59B5 /* FavoriteMonthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70DD92588FA1800DE59B5 /* FavoriteMonthCell.swift */; };
+		A5C70DDD2589B03300DE59B5 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70DDC2589B03300DE59B5 /* Array+Ext.swift */; };
 		A5C741EE2577FD82007B477E /* AddNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C741ED2577FD82007B477E /* AddNoteVC.swift */; };
 		A5C8732C257E0B7100EFCC86 /* KingfisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C8732B257E0B7100EFCC86 /* KingfisherWrapper.swift */; };
 		A5C8739F257E5D8A00EFCC86 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C8739E257E5D8A00EFCC86 /* AuthVC.swift */; };
@@ -97,7 +98,6 @@
 		A548A794256FFC6600782A0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5536CC1257A045D00BE60BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A555EB9F2578C5B60099BCB7 /* UserFavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoriteVC.swift; sourceTree = "<group>"; };
-		A555EBD22578E3570099BCB7 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		A555EBD52578E6810099BCB7 /* PagingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingFlowLayout.swift; sourceTree = "<group>"; };
 		A57297B92577230600A892D4 /* AddWeightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWeightVC.swift; sourceTree = "<group>"; };
 		A5863E0E25752EB30017F09C /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
@@ -111,6 +111,8 @@
 		A5BDFDB825738C4E004D3F57 /* DateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProvider.swift; sourceTree = "<group>"; };
 		A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerVC.swift; sourceTree = "<group>"; };
 		A5C70DD5258880C000DE59B5 /* PhotoDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailVC.swift; sourceTree = "<group>"; };
+		A5C70DD92588FA1800DE59B5 /* FavoriteMonthCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMonthCell.swift; sourceTree = "<group>"; };
+		A5C70DDC2589B03300DE59B5 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
 		A5C741ED2577FD82007B477E /* AddNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteVC.swift; sourceTree = "<group>"; };
 		A5C8732B257E0B7100EFCC86 /* KingfisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingfisherWrapper.swift; sourceTree = "<group>"; };
 		A5C87363257E54AD00EFCC86 /* SimpleFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleFit.entitlements; sourceTree = "<group>"; };
@@ -197,8 +199,8 @@
 		A5180F652580B9D5002E9E1E /* UserFavorite */ = {
 			isa = PBXGroup;
 			children = (
-				A555EBD22578E3570099BCB7 /* FavoriteCell.swift */,
 				A555EBD52578E6810099BCB7 /* PagingFlowLayout.swift */,
+				A5C70DD92588FA1800DE59B5 /* FavoriteMonthCell.swift */,
 			);
 			path = UserFavorite;
 			sourceTree = "<group>";
@@ -416,6 +418,7 @@
 				A5C9F680257896AB00558C98 /* UIView+Ext.swift */,
 				A5180F5B2580A4D9002E9E1E /* UIStoryboard+Ext.swift */,
 				A544D64F2583792B00A43A66 /* Double+Ext.swift */,
+				A5C70DDC2589B03300DE59B5 /* Array+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -689,10 +692,12 @@
 				A544D64C25832ABB00A43A66 /* ReviewProvider.swift in Sources */,
 				A5C873C9257F790F00EFCC86 /* UserGoalVC.swift in Sources */,
 				A53DAF6E258719C800788FF4 /* DailyCell.swift in Sources */,
+				A5C70DDD2589B03300DE59B5 /* Array+Ext.swift in Sources */,
 				A5BDFD8125723362004D3F57 /* ChartData.swift in Sources */,
 				A53DAF6A2587037700788FF4 /* AddGroupVC.swift in Sources */,
 				A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */,
 				A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */,
+				A5C70DDA2588FA1800DE59B5 /* FavoriteMonthCell.swift in Sources */,
 				A544D6582584794E00A43A66 /* GoalProvider.swift in Sources */,
 				A544D68225863EF900A43A66 /* PostVC.swift in Sources */,
 				A5863E0F25752EB30017F09C /* UIButton+Ext.swift in Sources */,
@@ -712,7 +717,6 @@
 				A544D6792585E2E800A43A66 /* UserBoardVC.swift in Sources */,
 				A5BDFDB625738B0D004D3F57 /* Date+Ext.swift in Sources */,
 				A5C9F681257896AB00558C98 /* UIView+Ext.swift in Sources */,
-				A555EBD32578E3570099BCB7 /* FavoriteCell.swift in Sources */,
 				A5C70DD6258880C000DE59B5 /* PhotoDetailVC.swift in Sources */,
 				A5C9F67E2578758E00558C98 /* UserInfoVC.swift in Sources */,
 				A5E46D48257615C400ADF4DA /* DailyVC.swift in Sources */,
