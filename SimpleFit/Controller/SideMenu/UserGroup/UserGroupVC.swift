@@ -27,10 +27,14 @@ class UserGroupVC: UIViewController {
         }
     }
     
+    let provider = GroupProvider()
+    var groupList = [Group]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureLayout()
+        fetchGroup()
         configureTableView()
     }
     
@@ -44,13 +48,29 @@ class UserGroupVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    private func fetchGroup() {
+        
+        provider.fetchGroup { [weak self] result in
+            
+            switch result {
+            
+            case .success(let groupList):
+                self?.groupList = groupList
+                self?.tableView.reloadData()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 extension UserGroupVC: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 10 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return groupList.count }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 150 }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 180 }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -60,8 +80,14 @@ extension UserGroupVC: UITableViewDelegate, UITableViewDataSource {
         guard let groupCell = tableView.dequeueReusableCell(withIdentifier: reuseID,
                                                             for: indexPath) as? GroupCell
         else { return cell }
-        groupCell.layoutCell()
+        groupCell.layoutCell(with: groupList[indexPath.row])
         
         return groupCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let selectedCell = tableView.cellForRow(at: indexPath)
+        selectedCell?.showButtonFeedbackAnimation { }
     }
 }

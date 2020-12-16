@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A4052DD655D816F8F8765AD5 /* Pods_SimpleFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */; };
+		A50A2579258A0BC9007139BB /* GroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50A2578258A0BC9007139BB /* GroupData.swift */; };
+		A50A257C258A0C5A007139BB /* GroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50A257B258A0C5A007139BB /* GroupProvider.swift */; };
 		A5180F5C2580A4D9002E9E1E /* UIStoryboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5180F5B2580A4D9002E9E1E /* UIStoryboard+Ext.swift */; };
 		A5180F6B2580BA68002E9E1E /* UserReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5180F6A2580BA68002E9E1E /* UserReviewVC.swift */; };
 		A5180F6F25811FB6002E9E1E /* PickPeriodVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5180F6E25811FB6002E9E1E /* PickPeriodVC.swift */; };
@@ -72,6 +74,8 @@
 
 /* Begin PBXFileReference section */
 		02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50A2578258A0BC9007139BB /* GroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData.swift; sourceTree = "<group>"; };
+		A50A257B258A0C5A007139BB /* GroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupProvider.swift; sourceTree = "<group>"; };
 		A5180F5B2580A4D9002E9E1E /* UIStoryboard+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Ext.swift"; sourceTree = "<group>"; };
 		A5180F6A2580BA68002E9E1E /* UserReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReviewVC.swift; sourceTree = "<group>"; };
 		A5180F6E25811FB6002E9E1E /* PickPeriodVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPeriodVC.swift; sourceTree = "<group>"; };
@@ -157,6 +161,15 @@
 				02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A50A2577258A0BB8007139BB /* UserGroup */ = {
+			isa = PBXGroup;
+			children = (
+				A50A2578258A0BC9007139BB /* GroupData.swift */,
+				A50A257B258A0C5A007139BB /* GroupProvider.swift */,
+			);
+			path = UserGroup;
 			sourceTree = "<group>";
 		};
 		A5180F5E2580B973002E9E1E /* Menu */ = {
@@ -467,6 +480,7 @@
 		A5BDFDA82572A3D7004D3F57 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
+				A50A2577258A0BB8007139BB /* UserGroup */,
 				A5E173912586692600537CCF /* UserBoard */,
 				A544D6522584789300A43A66 /* UserGoal */,
 				A544D647258324E000A43A66 /* UserReview */,
@@ -695,6 +709,8 @@
 				A548A787256FFC6400782A0E /* AppDelegate.swift in Sources */,
 				A5BDFD9625724AA6004D3F57 /* UIImage+Ext.swift in Sources */,
 				A5F0FAA1257FDFD200FAD8EB /* AddGoalVC.swift in Sources */,
+				A50A257C258A0C5A007139BB /* GroupProvider.swift in Sources */,
+				A50A2579258A0BC9007139BB /* GroupData.swift in Sources */,
 				A544D64C25832ABB00A43A66 /* ReviewProvider.swift in Sources */,
 				A5C873C9257F790F00EFCC86 /* UserGoalVC.swift in Sources */,
 				A53DAF6E258719C800788FF4 /* DailyCell.swift in Sources */,

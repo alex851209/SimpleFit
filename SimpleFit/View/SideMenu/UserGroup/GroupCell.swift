@@ -9,11 +9,20 @@ import UIKit
 
 class GroupCell: UITableViewCell {
 
-    @IBOutlet weak var groupPhotoImage: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var memberCountLabel: UILabel!
+    @IBOutlet weak var coverPhotoImage: UIImageView!
     
-    func layoutCell() {
+    func layoutCell(with group: Group) {
         
-        groupPhotoImage.applyBorder()
-        groupPhotoImage.layer.cornerRadius = 10
+        titleLabel.text = group.title
+        contentLabel.text = group.content
+        categoryLabel.text = "# \(group.category)"
+        
+        coverPhotoImage.clipsToBounds = true
+        coverPhotoImage.layer.cornerRadius = 15
+        coverPhotoImage.loadImage(group.coverPhoto)
     }
 }
