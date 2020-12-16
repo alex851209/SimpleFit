@@ -24,6 +24,8 @@ class DailyVC: BlurViewController {
     var dailys = [DailyData]()
     var isFirstShow = true
     var selectedPhoto: UIImage?
+    var callback: ((Bool, Int) -> Void)?
+    var index = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +59,8 @@ class DailyVC: BlurViewController {
                                              at: .centeredHorizontally, animated: false)
             isFirstShow = false
         }
+        
+        self.index = index
     }
     
     private func calculateAverageWeight() -> Double {
@@ -110,6 +114,7 @@ class DailyVC: BlurViewController {
             
             dateLabel.text = dailys[indexPath.item].date
             selectedDaily = dailys[indexPath.item]
+            self.index = indexPath.item
         }
     }
     
@@ -118,7 +123,12 @@ class DailyVC: BlurViewController {
         guard let photoDetailVC = segue.destination as? PhotoDetailVC else { return }
         
         photoDetailVC.selectedPhoto = selectedPhoto
-        photoDetailVC.selectedDaily = selectedDaily
+        photoDetailVC.selectedDaily = dailys[self.index]
+        photoDetailVC.callback = { isFavorite in
+            
+            self.dailys[self.index].photo?.isFavorite = isFavorite
+            self.callback?(isFavorite, self.index)
+        }
     }
 }
 

@@ -302,6 +302,10 @@ class HomeVC: UIViewController {
             guard let dailyVC = segue.destination as? DailyVC else { return }
             dailyVC.dailys = dailys
             dailyVC.selectedDaily = selectedDaily
+            dailyVC.callback = { (isFavorite, index) in
+                
+                self.dailys[index].photo?.isFavorite = isFavorite
+            }
             
         case Segue.datePicker:
             guard let datePickerVC = segue.destination as? DatePickerVC else { return }

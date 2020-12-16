@@ -215,12 +215,12 @@ class ChartProvider {
         chartData.categories = categories
     }
     
-    func addToFavoriteFrom(date: String, completion: @escaping (Result<Any, Error>) -> Void) {
+    func updatePhoto(isFavorite: Bool, to date: String, completion: @escaping (Result<Any, Error>) -> Void) {
         
         let doc = database.collection("users").document(user).collection("chartData").document(date)
         
         doc.updateData([
-            "\(ChartField.photo.rawValue).isFavorite": true
+            ChartField.photoIsFavorite: isFavorite
         ]) { error in
             if let error = error {
                 completion(.failure(error))
