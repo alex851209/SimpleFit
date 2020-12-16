@@ -43,7 +43,7 @@ class DailyCell: GeminiCell {
     
     private func configurePhoto(with daily: DailyData) {
         
-        photoImage.layer.cornerRadius = 25
+        photoImage.layer.cornerRadius = 15
         
         let hasPhoto = daily.photo != nil ? true : false
         

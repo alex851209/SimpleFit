@@ -14,15 +14,21 @@ class GroupCell: UITableViewCell {
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var memberCountLabel: UILabel!
     @IBOutlet weak var coverPhotoImage: UIImageView!
+    @IBOutlet weak var ownerLabel: UILabel!
+    @IBOutlet weak var ownerAvatarImage: UIImageView!
     
     func layoutCell(with group: Group) {
         
         titleLabel.text = group.title
         contentLabel.text = group.content
         categoryLabel.text = "# \(group.category)"
+        ownerLabel.text = group.owner.name
         
-        coverPhotoImage.clipsToBounds = true
-        coverPhotoImage.layer.cornerRadius = 15
+        ownerAvatarImage.loadImage(group.owner.avatar)
         coverPhotoImage.loadImage(group.coverPhoto)
+        ownerAvatarImage.clipsToBounds = true
+        coverPhotoImage.clipsToBounds = true
+        ownerAvatarImage.layer.cornerRadius = ownerAvatarImage.frame.height / 2
+        coverPhotoImage.layer.cornerRadius = 15
     }
 }

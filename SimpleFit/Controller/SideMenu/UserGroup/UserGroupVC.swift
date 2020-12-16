@@ -27,13 +27,16 @@ class UserGroupVC: UIViewController {
         }
     }
     
+    let userProvider = UserProvider()
     let provider = GroupProvider()
     var groupList = [Group]()
+    var owner = Owner()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureLayout()
+        fetchUserInfo()
         fetchGroup()
         configureTableView()
     }
@@ -63,6 +66,33 @@ class UserGroupVC: UIViewController {
                 print(error)
             }
         }
+    }
+    
+    private func fetchUserInfo() {
+        
+        userProvider.fetchInfo { [weak self] result in
+            
+            switch result {
+            
+            case .success(let user):
+                guard let name = user.name,
+                      let avatar = user.avatar
+                else { return }
+                
+                self?.owner.name = name
+                self?.owner.avatar = avatar
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let addGroupVC = segue.destination as? AddGroupVC else { return }
+        addGroupVC.newGroup.owner = owner
+        addGroupVC.callback = { self.fetchGroup() }
     }
 }
 

@@ -76,8 +76,10 @@ class UserProvider {
         let uniqueString = UUID().uuidString
         
         let fileRef = storageRef.child("SimpleFitAvatarUpload").child("\(uniqueString).jpg")
+        
+        let compressedImage = image.scale(newWidth: 600)
         // 轉成 data
-        guard let uploadData = image.jpegData(compressionQuality: 0.9) else { return }
+        guard let uploadData = compressedImage.jpegData(compressionQuality: 0.7) else { return }
         
         fileRef.putData(uploadData, metadata: nil) { (_, error) in
             

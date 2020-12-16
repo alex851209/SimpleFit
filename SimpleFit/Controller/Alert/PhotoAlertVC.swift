@@ -34,7 +34,7 @@ class PhotoAlertVC: UIAlertController {
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
             NSAttributedString.Key.foregroundColor: UIColor.black
         ]
-        let titleString = NSAttributedString(string: "編輯大頭貼", attributes: titleAttributes)
+        let titleString = NSAttributedString(string: "選擇照片", attributes: titleAttributes)
         setValue(titleString, forKey: "attributedTitle")
         
         let cancleAction = UIAlertAction(title: "取消", style: .cancel)

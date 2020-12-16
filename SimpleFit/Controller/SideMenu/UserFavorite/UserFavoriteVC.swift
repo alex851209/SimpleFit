@@ -56,6 +56,7 @@ class UserFavoriteVC: UIViewController {
             let dailys = allFavorites.filter { $0.month == month }
             monthFavorites.append(Favorite(month: month, dailys: dailys))
         }
+        monthFavorites = monthFavorites.reversed()
     }
     
     private func configureFavoriteDaily() {
@@ -91,7 +92,7 @@ extension UserFavoriteVC: UITableViewDelegate, UITableViewDataSource {
         return monthFavorites.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 150 }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 210 }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

@@ -78,6 +78,8 @@ class DateProvider {
         
         //星期和數字一一對應 星期日：7
         formatter.dateFormat = "yyyy-MM"
+        formatter.locale = Locale(identifier: "zh_Hant_TW")
+        formatter.timeZone = TimeZone(identifier: "Asia/Taipei")
         let date = formatter.date(from: String(Date().year())+"-"+String(Date().month()))
         let calender = Calendar(identifier: Calendar.Identifier.gregorian)
         let comps = (calender as NSCalendar?)?.components(NSCalendar.Unit.weekday, from: date!)
@@ -89,6 +91,8 @@ class DateProvider {
     static func getCountOfDaysInMonth(year: Int, month: Int) -> Int {
         
         formatter.dateFormat = "yyyy-MM"
+        formatter.locale = Locale(identifier: "zh_Hant_TW")
+        formatter.timeZone = TimeZone(identifier: "Asia/Taipei")
         let date = formatter.date(from: String(year)+"-"+String(month))
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         let range = (calendar as NSCalendar?)?.range(of: NSCalendar.Unit.day, in: NSCalendar.Unit.month, for: date!)
@@ -98,6 +102,8 @@ class DateProvider {
     static func getfirstWeekDayInMonth(year: Int, month: Int) -> Int {
         
         formatter.dateFormat = "yyyy-MM"
+        formatter.locale = Locale(identifier: "zh_Hant_TW")
+        formatter.timeZone = TimeZone(identifier: "Asia/Taipei")
         let date = formatter.date(from: String(year)+"-"+String(month))
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         let comps = (calendar as NSCalendar?)?.components(NSCalendar.Unit.weekday, from: date!)
@@ -112,7 +118,8 @@ class DateProvider {
     
     static func dateStringToDate(_ dateStr: String) -> Date {
         
-        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.locale = Locale(identifier: "zh_Hant_TW")
+        formatter.timeZone = TimeZone(identifier: "Asia/Taipei")
         formatter.dateFormat = "yyyy-MM-dd"
         let date = formatter.date(from: dateStr)
         return date!
@@ -120,6 +127,8 @@ class DateProvider {
 
     static func dateToDateString(_ date: Date) -> String {
         
+        formatter.locale = Locale(identifier: "zh_Hant_TW")
+        formatter.timeZone = TimeZone(identifier: "Asia/Taipei")
         formatter.dateFormat = "yyyy-MM-dd"
         let date = formatter.string(from: date)
         return date
@@ -127,6 +136,8 @@ class DateProvider {
     
     static func dateToMonthString(_ date: Date) -> String {
         
+        formatter.locale = Locale(identifier: "zh_Hant_TW")
+        formatter.timeZone = TimeZone(identifier: "Asia/Taipei")
         formatter.dateFormat = "yyyy-MM"
         let date = formatter.string(from: date)
         return date
@@ -134,6 +145,8 @@ class DateProvider {
     
     static func dateToDayString(_ date: Date) -> String {
         
+        formatter.locale = Locale(identifier: "zh_Hant_TW")
+        formatter.timeZone = TimeZone(identifier: "Asia/Taipei")
         formatter.dateFormat = "dd"
         let date = formatter.string(from: date)
         return date

@@ -13,4 +13,11 @@ struct Group: Codable {
     var title: String
     var content: String
     var category: String
+    var owner: Owner = Owner(name: "", avatar: "")
+}
+
+struct Owner: Codable {
+    
+    var name: String = ""
+    var avatar: String = ""
 }
