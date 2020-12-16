@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoriteMonthCell: UITableViewCell {
+class UserFavoriteCell: UITableViewCell {
 
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var photoImage: UIImageView!

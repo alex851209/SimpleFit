@@ -47,8 +47,10 @@
 		A5BDFDB925738C4E004D3F57 /* DateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDB825738C4E004D3F57 /* DateProvider.swift */; };
 		A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */; };
 		A5C70DD6258880C000DE59B5 /* PhotoDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70DD5258880C000DE59B5 /* PhotoDetailVC.swift */; };
-		A5C70DDA2588FA1800DE59B5 /* FavoriteMonthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70DD92588FA1800DE59B5 /* FavoriteMonthCell.swift */; };
+		A5C70DDA2588FA1800DE59B5 /* UserFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70DD92588FA1800DE59B5 /* UserFavoriteCell.swift */; };
 		A5C70DDD2589B03300DE59B5 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70DDC2589B03300DE59B5 /* Array+Ext.swift */; };
+		A5C70DE02589DA1000DE59B5 /* MonthFavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70DDF2589DA1000DE59B5 /* MonthFavoriteVC.swift */; };
+		A5C70DE32589DD9900DE59B5 /* MonthFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70DE22589DD9900DE59B5 /* MonthFavoriteCell.swift */; };
 		A5C741EE2577FD82007B477E /* AddNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C741ED2577FD82007B477E /* AddNoteVC.swift */; };
 		A5C8732C257E0B7100EFCC86 /* KingfisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C8732B257E0B7100EFCC86 /* KingfisherWrapper.swift */; };
 		A5C8739F257E5D8A00EFCC86 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C8739E257E5D8A00EFCC86 /* AuthVC.swift */; };
@@ -111,8 +113,10 @@
 		A5BDFDB825738C4E004D3F57 /* DateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProvider.swift; sourceTree = "<group>"; };
 		A5BDFDF22573E404004D3F57 /* DatePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerVC.swift; sourceTree = "<group>"; };
 		A5C70DD5258880C000DE59B5 /* PhotoDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailVC.swift; sourceTree = "<group>"; };
-		A5C70DD92588FA1800DE59B5 /* FavoriteMonthCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMonthCell.swift; sourceTree = "<group>"; };
+		A5C70DD92588FA1800DE59B5 /* UserFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoriteCell.swift; sourceTree = "<group>"; };
 		A5C70DDC2589B03300DE59B5 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
+		A5C70DDF2589DA1000DE59B5 /* MonthFavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthFavoriteVC.swift; sourceTree = "<group>"; };
+		A5C70DE22589DD9900DE59B5 /* MonthFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthFavoriteCell.swift; sourceTree = "<group>"; };
 		A5C741ED2577FD82007B477E /* AddNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteVC.swift; sourceTree = "<group>"; };
 		A5C8732B257E0B7100EFCC86 /* KingfisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingfisherWrapper.swift; sourceTree = "<group>"; };
 		A5C87363257E54AD00EFCC86 /* SimpleFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleFit.entitlements; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				A555EB9F2578C5B60099BCB7 /* UserFavoriteVC.swift */,
+				A5C70DDF2589DA1000DE59B5 /* MonthFavoriteVC.swift */,
 			);
 			path = UserFavorite;
 			sourceTree = "<group>";
@@ -200,7 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				A555EBD52578E6810099BCB7 /* PagingFlowLayout.swift */,
-				A5C70DD92588FA1800DE59B5 /* FavoriteMonthCell.swift */,
+				A5C70DD92588FA1800DE59B5 /* UserFavoriteCell.swift */,
+				A5C70DE22589DD9900DE59B5 /* MonthFavoriteCell.swift */,
 			);
 			path = UserFavorite;
 			sourceTree = "<group>";
@@ -697,8 +703,9 @@
 				A53DAF6A2587037700788FF4 /* AddGroupVC.swift in Sources */,
 				A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */,
 				A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */,
-				A5C70DDA2588FA1800DE59B5 /* FavoriteMonthCell.swift in Sources */,
+				A5C70DDA2588FA1800DE59B5 /* UserFavoriteCell.swift in Sources */,
 				A544D6582584794E00A43A66 /* GoalProvider.swift in Sources */,
+				A5C70DE32589DD9900DE59B5 /* MonthFavoriteCell.swift in Sources */,
 				A544D68225863EF900A43A66 /* PostVC.swift in Sources */,
 				A5863E0F25752EB30017F09C /* UIButton+Ext.swift in Sources */,
 				A5C873CD257F7EA400EFCC86 /* CardView.swift in Sources */,
@@ -723,6 +730,7 @@
 				A57297BA2577230600A892D4 /* AddWeightVC.swift in Sources */,
 				A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */,
 				A5E1739925867D2C00537CCF /* ContentCell.swift in Sources */,
+				A5C70DE02589DA1000DE59B5 /* MonthFavoriteVC.swift in Sources */,
 				A544D67E2585E68800A43A66 /* BoardCell.swift in Sources */,
 				A5180F6B2580BA68002E9E1E /* UserReviewVC.swift in Sources */,
 			);

@@ -10,11 +10,16 @@ import Gemini
 
 struct Favorite {
     
-    var month: String
-    var dailys: [DailyData]
+    var month: String = ""
+    var dailys: [DailyData] = []
 }
 
 class UserFavoriteVC: UIViewController {
+    
+    private struct Segue {
+        
+        static let monthFavorite = "SegueMonthFavorite"
+    }
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -24,6 +29,7 @@ class UserFavoriteVC: UIViewController {
     let provider = ChartProvider()
     var allFavorites = [DailyData]()
     var monthFavorites = [Favorite]()
+    var selectedMonthIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +74,14 @@ class UserFavoriteVC: UIViewController {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let monthFavoriteVC = segue.destination as? MonthFavoriteVC,
+              let index = selectedMonthIndex
+        else { return }
+        monthFavoriteVC.favorite = monthFavorites[index]
+    }
 }
 
 extension UserFavoriteVC: UITableViewDelegate, UITableViewDataSource {
@@ -82,14 +96,25 @@ extension UserFavoriteVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
-        let reuseID = String(describing: FavoriteMonthCell.self)
+        let reuseID = String(describing: UserFavoriteCell.self)
         
         guard let favoriteMonthCell = tableView.dequeueReusableCell(withIdentifier: reuseID,
-                                                                    for: indexPath) as? FavoriteMonthCell
+                                                                    for: indexPath) as? UserFavoriteCell
         else { return cell }
         
         favoriteMonthCell.layoutCell(with: monthFavorites[indexPath.row])
         
         return favoriteMonthCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        selectedMonthIndex = indexPath.row
+        
+        let selectedCell = tableView.cellForRow(at: indexPath)
+        selectedCell?.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.performSegue(withIdentifier: Segue.monthFavorite, sender: nil)
+        }
     }
 }

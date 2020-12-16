@@ -40,6 +40,8 @@ class AddPhotoVC: BlurViewController {
         
         photoImage.image = selectedPhoto
         photoImage.applyShadow()
+        photoImage.layer.shadowOffset = CGSize(width: 5, height: 10)
+        photoImage.layer.shadowOpacity = 0.2
     }
     
     private func uploadPhoto() {
