@@ -15,7 +15,7 @@ class AddGroupVC: BlurViewController {
     @IBOutlet weak var ownerNameLabel: UILabel!
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var groupTitleTextField: UITextField!
-    @IBOutlet weak var groupIntroTextView: UITextView!
+    @IBOutlet weak var groupContentTextView: UITextView!
     @IBOutlet weak var coverPhotoButton: UIButton!
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
@@ -23,8 +23,9 @@ class AddGroupVC: BlurViewController {
     @IBAction func photoButtonDidTap(_ sender: Any) { showPhotoAlert() }
     
     let provider = GroupProvider()
-    var newGroup = Group(coverPhoto: "", title: "", content: "", category: "")
+    var newGroup = Group(id: "", coverPhoto: "", title: "", content: "", category: "")
     var callback: (() -> Void)?
+    var user = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,23 +40,26 @@ class AddGroupVC: BlurViewController {
         titleLabel.applyBorder()
         categoryTextField.applyBorder()
         groupTitleTextField.applyBorder()
-        groupIntroTextView.applyBorder()
+        groupContentTextView.applyBorder()
         
         categoryTextField.delegate = self
         groupTitleTextField.delegate = self
-        groupIntroTextView.delegate = self
+        groupContentTextView.delegate = self
         
         categoryTextField.layer.cornerRadius = 5
         categoryTextField.layer.borderColor = UIColor.systemGray4.cgColor
         groupTitleTextField.layer.cornerRadius = 5
         groupTitleTextField.layer.borderColor = UIColor.systemGray4.cgColor
-        groupIntroTextView.layer.cornerRadius = 5
-        groupIntroTextView.layer.borderColor = UIColor.systemGray4.cgColor
+        groupContentTextView.layer.cornerRadius = 5
+        groupContentTextView.layer.borderColor = UIColor.systemGray4.cgColor
         
         ownerNameLabel.text = newGroup.owner.name
         ownerAvatarImage.loadImage(newGroup.owner.avatar)
-        ownerAvatarImage.applyBorder()
-        ownerAvatarImage.layer.borderWidth = 2
+        ownerAvatarImage.layer.cornerRadius = ownerAvatarImage.frame.height / 2
+        
+        coverPhotoButton.imageView?.contentMode = .scaleAspectFill
+        coverPhotoButton.clipsToBounds = true
+        coverPhotoButton.layer.cornerRadius = 10
     }
     
     private func showPhotoAlert() {
@@ -75,7 +79,20 @@ class AddGroupVC: BlurViewController {
     
     private func uploadCoverPhoto() {
         
-        guard let coverPhotoImage = coverPhotoButton.currentImage else { return }
+        let isEmptyContent = groupContentTextView.textColor == UIColor.systemGray3
+        
+        guard let coverPhotoImage = coverPhotoButton.currentImage,
+              let isEmptyCategory = categoryTextField.text?.isEmpty,
+              let isEmptyTitle = groupTitleTextField.text?.isEmpty
+        else { return }
+        
+        guard !isEmptyCategory,
+              !isEmptyTitle,
+              !isEmptyContent
+        else {
+            print("Please fill in all info")
+            return
+        }
         
         provider.uploadPhotoWith(image: coverPhotoImage) { [weak self] result in
             
@@ -93,7 +110,7 @@ class AddGroupVC: BlurViewController {
     
     private func addGroup() {
         
-        provider.addGroupWith(group: newGroup) { [weak self] result in
+        provider.addGroupWith(group: newGroup, user: user) { [weak self] result in
             
             switch result {
             

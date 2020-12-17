@@ -10,6 +10,7 @@ import Firebase
 
 enum GroupField: String {
     
+    case id
     case category
     case title
     case content
@@ -20,12 +21,21 @@ enum GroupField: String {
     static let ownerAvatar = "avatar"
 }
 
+enum MemberField: String {
+    
+    case avatar
+    case gender
+    case height
+    case name
+}
+
 class GroupProvider {
     
     let database = Firestore.firestore()
     let storageRef = Storage.storage().reference()
     let userName = "Alex"
     var groupList = [Group]()
+    var memberList = [User]()
     
     func fetchGroup(completion: @escaping (Result<[Group], Error>) -> Void) {
         
@@ -91,11 +101,13 @@ class GroupProvider {
         }
     }
     
-    func addGroupWith(group: Group, completion: @escaping (Result<Group, Error>) -> Void) {
+    func addGroupWith(group: Group, user: User, completion: @escaping (Result<Group, Error>) -> Void) {
 
         let doc = database.collection("users").document(userName).collection("group")
+        let id = doc.document().documentID
         
-        doc.document().setData([
+        doc.document(id).setData([
+            GroupField.id.rawValue: id,
             GroupField.category.rawValue: group.category,
             GroupField.title.rawValue: group.title,
             GroupField.content.rawValue: group.content,
@@ -104,12 +116,56 @@ class GroupProvider {
                 GroupField.ownerName: group.owner.name,
                 GroupField.ownerAvatar: group.owner.avatar
             ]
-        ]) { error in
+        ]) { [weak self] error in
             
             if let error = error {
                 completion(.failure(error))
             } else {
                 completion(.success(group))
+                
+                guard let userName = self?.userName else { return }
+                
+                doc.document(id).collection("member").document(userName).setData([
+                    MemberField.name.rawValue: user.name as Any,
+                    MemberField.gender.rawValue: user.gender as Any,
+                    MemberField.height.rawValue: user.height as Any,
+                    MemberField.avatar.rawValue: user.avatar as Any
+                ])
+            }
+        }
+    }
+    
+    func fetchMember(in group: Group, completion: @escaping (Result<[User], Error>) -> Void) {
+        
+        let doc = database
+                    .collection("users")
+                    .document(userName)
+                    .collection("group")
+                    .document(group.id)
+                    .collection("member")
+        
+        doc.getDocuments { [weak self] (querySnapshot, error) in
+            
+            self?.memberList.removeAll()
+            
+            if let error = error {
+                
+                print("Error getting documents: \(error)")
+            } else {
+                
+                for document in querySnapshot!.documents {
+                    
+                    do {
+                        if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                            
+                            self?.memberList.append(user)
+                        }
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+                guard let memberList = self?.memberList else { return }
+                completion(.success(memberList))
             }
         }
     }

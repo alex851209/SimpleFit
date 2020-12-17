@@ -9,6 +9,7 @@ import Foundation
 
 struct Group: Codable {
     
+    var id: String
     var coverPhoto: String
     var title: String
     var content: String

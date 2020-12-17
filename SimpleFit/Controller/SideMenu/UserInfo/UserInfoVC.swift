@@ -63,8 +63,7 @@ class UserInfoVC: UIViewController {
         nameTextField.delegate = self
         heightTextField.delegate = self
         
-        avatarImage.applyBorder()
-        avatarImage.layer.borderWidth = 3
+        avatarImage.layer.cornerRadius = avatarImage.frame.height / 2
         
         genderSegmentedControl.addTarget(self, action: #selector(genderDidSelect), for: .valueChanged)
         let normalAttribute = [NSAttributedString.Key.foregroundColor: UIColor.systemGray]

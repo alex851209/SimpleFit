@@ -23,6 +23,9 @@ enum ImageAsset: String {
     // UserInfoVC
     case edit = "edit"
     case confirm = "check"
+    
+    // User
+    case person = "user_photo"
 }
 
 enum SystemImageAsset: String {

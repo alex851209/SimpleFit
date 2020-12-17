@@ -17,11 +17,12 @@ class GroupCell: UITableViewCell {
     @IBOutlet weak var ownerLabel: UILabel!
     @IBOutlet weak var ownerAvatarImage: UIImageView!
     
-    func layoutCell(with group: Group) {
+    func layoutCell(with group: Group, memberCount: Int) {
         
         titleLabel.text = group.title
         contentLabel.text = group.content
         categoryLabel.text = "# \(group.category)"
+        memberCountLabel.text = "\(memberCount)"
         ownerLabel.text = group.owner.name
         
         ownerAvatarImage.loadImage(group.owner.avatar)
