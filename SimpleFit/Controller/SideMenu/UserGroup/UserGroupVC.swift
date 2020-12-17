@@ -118,6 +118,7 @@ class UserGroupVC: UIViewController {
         
         case Segue.addGroup:
             guard let addGroupVC = segue.destination as? AddGroupVC else { return }
+            
             addGroupVC.newGroup.owner = owner
             addGroupVC.user = user
             addGroupVC.callback = { self.fetchGroup() }
@@ -128,6 +129,7 @@ class UserGroupVC: UIViewController {
             else { return }
             
             groupDetailVC.group = selectedGroup
+            groupDetailVC.user = user
             
         default: break
         }

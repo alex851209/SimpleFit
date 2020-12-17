@@ -9,15 +9,16 @@ import UIKit
 
 class ChallengeCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var avatarImage: UIImageView!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    func layoutCell(with challenge: Challenge) {
+        
+        avatarImage.loadImage(challenge.avatar)
+        avatarImage.layer.cornerRadius = 15
+        
+        contentLabel.text = challenge.content
+        dateLabel.text = challenge.date
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

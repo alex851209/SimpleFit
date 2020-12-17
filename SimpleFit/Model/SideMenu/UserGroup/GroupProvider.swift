@@ -29,6 +29,14 @@ enum MemberField: String {
     case name
 }
 
+enum ChallengeField: String {
+    
+    case id
+    case avatar
+    case content
+    case date
+}
+
 class GroupProvider {
     
     let database = Firestore.firestore()
@@ -36,6 +44,7 @@ class GroupProvider {
     let userName = "Alex"
     var groupList = [Group]()
     var memberList = [User]()
+    var challengeList = [Challenge]()
     
     func fetchGroup(completion: @escaping (Result<[Group], Error>) -> Void) {
         
@@ -166,6 +175,70 @@ class GroupProvider {
                 }
                 guard let memberList = self?.memberList else { return }
                 completion(.success(memberList))
+            }
+        }
+    }
+    
+    func fetchChallenge(in group: Group, completion: @escaping (Result<[Challenge], Error>) -> Void) {
+        
+        challengeList.removeAll()
+        
+        let doc = database
+                    .collection("users")
+                    .document(userName)
+                    .collection("group")
+                    .document(group.id)
+                    .collection("challenge")
+                    .order(by: "date", descending: true)
+        
+        doc.getDocuments { [weak self] (querySnapshot, error) in
+            
+            if let error = error {
+                
+                print("Error getting documents: \(error)")
+            } else {
+                
+                for document in querySnapshot!.documents {
+                    
+                    do {
+                        if let challenge = try document.data(as: Challenge.self, decoder: Firestore.Decoder()) {
+                            
+                            self?.challengeList.append(challenge)
+                        }
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+                guard let challengeList = self?.challengeList else { return }
+                completion(.success(challengeList))
+            }
+        }
+    }
+    
+    func addChallenge(in group: Group,
+                      with challenge: Challenge,
+                      completion: @escaping (Result<Challenge, Error>) -> Void) {
+        
+        let doc = database
+                    .collection("users")
+                    .document(userName)
+                    .collection("group")
+                    .document(group.id)
+                    .collection("challenge")
+        
+        let id = doc.document().documentID
+        
+        doc.document(id).setData([
+            ChallengeField.id.rawValue: id,
+            ChallengeField.avatar.rawValue: challenge.avatar as Any,
+            ChallengeField.content.rawValue: challenge.content,
+            ChallengeField.date.rawValue: challenge.date
+        ]) { error in
+            
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(challenge))
             }
         }
     }

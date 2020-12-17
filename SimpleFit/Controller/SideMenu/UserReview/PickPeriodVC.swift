@@ -17,11 +17,6 @@ class PickPeriodVC: BlurViewController {
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
     @IBAction func confirmButtonDidTap(_ sender: Any) {
         
-        guard endDate > beginDate else {
-            
-            print("'beginDate' must less than 'endDate'")
-            return
-        }
         selectedDateCallback?(beginDate, endDate)
         dismiss(animated: true)
     }
@@ -47,7 +42,8 @@ class PickPeriodVC: BlurViewController {
         
         beginDatePicker.date = beginDate
         endDatePicker.date = endDate
-        beginDatePicker.maximumDate = Date()
+        beginDatePicker.maximumDate = endDate
+        endDatePicker.minimumDate = beginDate
         endDatePicker.maximumDate = Date()
         
         beginDatePicker.setValue(UIColor.darkGray, forKeyPath: "textColor")
@@ -58,7 +54,15 @@ class PickPeriodVC: BlurViewController {
         endDatePicker.addTarget(self, action: #selector(endDateDidPick), for: .valueChanged)
     }
     
-    @objc private func beginDateDidPick(sender: UIDatePicker) { beginDate = sender.date }
+    @objc private func beginDateDidPick(sender: UIDatePicker) {
+        
+        beginDate = sender.date
+        endDatePicker.minimumDate = beginDate
+    }
     
-    @objc private func endDateDidPick(sender: UIDatePicker) { endDate = sender.date }
+    @objc private func endDateDidPick(sender: UIDatePicker) {
+        
+        endDate = sender.date
+        beginDatePicker.maximumDate = endDate
+    }
 }

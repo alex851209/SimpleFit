@@ -133,7 +133,12 @@ class UserReviewVC: UIViewController {
         weightChangeLabel.text = weightChangeValueString + weightChangeRateString
         
         let transformY: CGFloat = weightIsUp ? 1 : -1
+        let upColor = UIColor(red: 192/255, green: 255/255, blue: 51/255, alpha: 1)
+        let downColor = UIColor(red: 251/255, green: 75/255, blue: 75/255, alpha: 1)
+        let symbolColor = weightIsUp ? upColor : downColor
+        
         changeSymbolImge.transform = CGAffineTransform(scaleX: 1, y: transformY)
+        changeSymbolImge.tintColor = symbolColor
     }
     
     private func configureLayout() {

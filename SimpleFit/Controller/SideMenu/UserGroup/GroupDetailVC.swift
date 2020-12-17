@@ -9,6 +9,11 @@ import UIKit
 
 class GroupDetailVC: UIViewController {
 
+    private struct Segue {
+        
+        static let addChallenge = "SegueAddChallenge"
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -20,6 +25,8 @@ class GroupDetailVC: UIViewController {
     let provider = GroupProvider()
     var group = Group(id: "", coverPhoto: "", title: "", content: "", category: "")
     var members = [User]()
+    var challenges = [Challenge]()
+    var user = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +34,7 @@ class GroupDetailVC: UIViewController {
         configureLayout()
         configureTableView()
         fetchMember()
+        fetchChallenge()
     }
     
     private func configureLayout() {
@@ -56,9 +64,28 @@ class GroupDetailVC: UIViewController {
         }
     }
     
+    private func fetchChallenge() {
+        
+        provider.fetchChallenge(in: group) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let challenges):
+                self?.challenges = challenges
+                self?.tableView.reloadData()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     @objc private func addChallenge(sender: UIButton) {
         
-        sender.showButtonFeedbackAnimation {}
+        sender.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.performSegue(withIdentifier: Segue.addChallenge, sender: nil)
+        }
     }
     
     private func configureHeaderView() -> UIView? {
@@ -80,7 +107,36 @@ class GroupDetailVC: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(addButton)
         
+        if challenges.isEmpty {
+            
+            let emptyLabel = UILabel()
+            let separator = UIView()
+            
+            emptyLabel.text = "目前尚無挑戰"
+            emptyLabel.font = UIFont.systemFont(ofSize: 16)
+            emptyLabel.textColor = .systemGray2
+            emptyLabel.frame = CGRect(x: 16, y: 40, width: 100, height: 35)
+            
+            separator.backgroundColor = UIColor.black.withAlphaComponent(0.05)
+            separator.frame = CGRect(x: 16, y: 70, width: UIScreen.main.bounds.width - 32, height: 1)
+            
+            view.addSubview(emptyLabel)
+            view.addSubview(separator)
+        }
+        
         return view
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let addChallengeVC = segue.destination as? AddChallengeVC else { return }
+        
+        addChallengeVC.user = user
+        addChallengeVC.group = group
+        addChallengeVC.callback = { [weak self] in
+            
+            self?.fetchChallenge()
+        }
     }
 }
 
@@ -88,7 +144,7 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return section == 2 ? 5 : 1
+        return section == 2 ? challenges.count : 1
     }
     
     func numberOfSections(in tableView: UITableView) -> Int { return 4 }
@@ -100,7 +156,9 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        return section == 2 ? 40 : 0
+        if section == 2 { return challenges.isEmpty ? 70 : 40 }
+        
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -151,6 +209,8 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             guard let challengeCell = tableView.dequeueReusableCell(withIdentifier: reuseID,
                                                                     for: indexPath) as? ChallengeCell
             else { return cell }
+            
+            challengeCell.layoutCell(with: challenges[indexPath.row])
             
             return challengeCell
             

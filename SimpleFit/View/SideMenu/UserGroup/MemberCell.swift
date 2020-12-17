@@ -32,8 +32,6 @@ class MemberCell: UITableViewCell {
                 avatarButton.loadImage(member.avatar)
             }
             
-            avatarButton.contentHorizontalAlignment = .fill
-            avatarButton.contentVerticalAlignment = .fill
             avatarButton.tintColor = .systemGray2
             avatarButton.clipsToBounds = true
             avatarButton.layer.cornerRadius = 20

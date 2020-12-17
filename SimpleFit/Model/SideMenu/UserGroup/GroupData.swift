@@ -22,3 +22,11 @@ struct Owner: Codable {
     var name: String = ""
     var avatar: String = ""
 }
+
+struct Challenge: Codable {
+    
+    var id: String
+    var avatar: String?
+    var content: String
+    var date: String
+}
