@@ -11,6 +11,8 @@ class MemberCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBAction func addButtonDidTap(_ sender: UIButton) { addMember(sender: sender) }
+    
     func layoutCell(with members: [User]) {
         
         configureMembers(with: members)
@@ -55,5 +57,10 @@ class MemberCell: UITableViewCell {
     @objc private func showMember(sender: UIButton) {
         
         sender.showButtonFeedbackAnimation { }
+    }
+    
+    private func addMember(sender: UIButton) {
+        
+        sender.showButtonFeedbackAnimation {}
     }
 }

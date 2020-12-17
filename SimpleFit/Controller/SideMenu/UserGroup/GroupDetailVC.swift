@@ -55,15 +55,68 @@ class GroupDetailVC: UIViewController {
             }
         }
     }
+    
+    @objc private func addChallenge(sender: UIButton) {
+        
+        sender.showButtonFeedbackAnimation {}
+    }
+    
+    private func configureHeaderView() -> UIView? {
+        
+        let view = UIView()
+        let titleLabel = UILabel()
+        let addButton = UIButton()
+        
+        titleLabel.text = "挑戰"
+        titleLabel.font = UIFont.systemFont(ofSize: 20)
+        titleLabel.textColor = .systemGray
+        titleLabel.frame = CGRect(x: 16, y: 2, width: 50, height: 35)
+        
+        addButton.setImage(UIImage.asset(.add), for: .normal)
+        addButton.tintColor = .systemGray3
+        addButton.frame = CGRect(x: UIScreen.main.bounds.maxX - 38, y: 8, width: 22, height: 22)
+        addButton.addTarget(self, action: #selector(addChallenge(sender:)), for: .touchUpInside)
+        
+        view.addSubview(titleLabel)
+        view.addSubview(addButton)
+        
+        return view
+    }
 }
 
 extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 4 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return section == 2 ? 5 : 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int { return 4 }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        return section == 2 ? configureHeaderView() : UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return section == 2 ? 40 : 0
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return indexPath.row == 0 ? 130 : 80
+        var height: CGFloat = 0
+        
+        switch indexPath.section {
+        
+        case 0: height = 135
+        case 1: height = 90
+        case 2: height = 44
+        case 3: height = 44
+        default: break
+        }
+        
+        return height
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -71,7 +124,7 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell()
         var reuseID = ""
         
-        switch indexPath.row {
+        switch indexPath.section {
         
         case 0:
             reuseID = String(describing: InfoCell.self)
