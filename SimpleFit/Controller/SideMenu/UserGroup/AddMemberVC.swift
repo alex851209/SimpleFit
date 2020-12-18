@@ -1,5 +1,5 @@
 //
-//  AddChallengeVC.swift
+//  AddMemberVC.swift
 //  SimpleFit
 //
 //  Created by shuo on 2020/12/18.
@@ -7,19 +7,18 @@
 
 import UIKit
 
-class AddChallengeVC: BlurViewController {
+class AddMemberVC: BlurViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var challengeContentTextField: UITextField!
+    @IBOutlet weak var addMemberTextField: UITextField!
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
-    @IBAction func confirmButtonDidTap(_ sender: Any) { addChallenge() }
+    @IBAction func confirmButtonDidTap(_ sender: Any) { addMember() }
     
-    var group = Group(id: "", coverPhoto: "", title: "", content: "", category: "")
-    var user = User()
     let provider = GroupProvider()
-    var challenge = Challenge(id: "", content: "", date: "")
-    let date = DateProvider.dateToDateString(Date())
+    var user = User()
+    var newMember = User()
+    var group = Group(id: "", coverPhoto: "", title: "", content: "", category: "")
     var callback: (() -> Void)?
     
     override func viewDidLoad() {
@@ -31,20 +30,19 @@ class AddChallengeVC: BlurViewController {
     private func configureLayout() {
         
         titleLabel.applyBorder()
-        
-        challengeContentTextField.delegate = self
-        challengeContentTextField.layer.cornerRadius = 5
-        challengeContentTextField.layer.borderColor = UIColor.systemGray4.cgColor
+        addMemberTextField.delegate = self
+        addMemberTextField.layer.cornerRadius = 5
+        addMemberTextField.layer.borderColor = UIColor.systemGray4.cgColor
     }
     
-    private func addChallenge() {
+    private func addMember() {
         
-        provider.addChallenge(in: group, with: challenge) { [weak self] result in
+        provider.addMember(newMember, in: group) { [weak self] result in
             
             switch result {
             
-            case .success(let challenge):
-                print("Success adding new challenge: \(challenge)")
+            case .success(let newMember):
+                print("Success adding new member: \(newMember)")
                 self?.callback?()
                 self?.dismiss(animated: true)
                 
@@ -55,7 +53,7 @@ class AddChallengeVC: BlurViewController {
     }
 }
 
-extension AddChallengeVC: UITextFieldDelegate {
+extension AddMemberVC: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
@@ -68,8 +66,7 @@ extension AddChallengeVC: UITextFieldDelegate {
         textField.layer.borderColor = UIColor.systemGray4.cgColor
         textField.layer.borderWidth = 1
         
-        guard let content = textField.text else { return }
-        
-        challenge = Challenge(id: "", avatar: user.avatar, content: content, date: date)
+        guard let name = textField.text else { return }
+        self.newMember.name = name
     }
 }

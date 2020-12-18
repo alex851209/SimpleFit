@@ -13,6 +13,8 @@ class MemberCell: UITableViewCell {
     
     @IBAction func addButtonDidTap(_ sender: UIButton) { addMember(sender: sender) }
     
+    var callback: (() -> Void)?
+    
     func layoutCell(with members: [User]) {
         
         configureMembers(with: members)
@@ -26,7 +28,7 @@ class MemberCell: UITableViewCell {
             
             let avatarButton = UIButton()
             
-            if member.avatar == nil {
+            if member.avatar == "" {
                 avatarButton.setImage(UIImage.asset(.person), for: .normal)
             } else {
                 avatarButton.loadImage(member.avatar)
@@ -59,6 +61,9 @@ class MemberCell: UITableViewCell {
     
     private func addMember(sender: UIButton) {
         
-        sender.showButtonFeedbackAnimation {}
+        sender.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.callback?()
+        }
     }
 }

@@ -242,4 +242,70 @@ class GroupProvider {
             }
         }
     }
+    
+    func addMember(_ user: User, in group: Group, completion: @escaping (Result<User, Error>) -> Void) {
+        
+        let doc = database
+                    .collection("users")
+                    .document(userName)
+                    .collection("group")
+                    .document(group.id)
+                    .collection("member")
+        
+        searchUser(user) { result in
+            
+            switch result {
+            
+            case .success(let user):
+                
+                guard let name = user.name,
+                      let gender = user.gender,
+                      let height = user.height,
+                      let avatar = user.avatar
+                else { return }
+                
+                doc.document(name).setData([
+                    MemberField.name.rawValue: name,
+                    MemberField.gender.rawValue: gender,
+                    MemberField.height.rawValue: height,
+                    MemberField.avatar.rawValue: avatar
+                ]) { error in
+                    
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(user))
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func searchUser(_ user: User, completion: @escaping (Result<User, Error>) -> Void) {
+        
+        let doc = database.collection("users").whereField("name", isEqualTo: user.name as Any)
+        
+        doc.getDocuments { (querySnapshot, error) in
+            
+            if let error = error {
+                
+                print("Error getting documents: \(error)")
+            } else {
+                
+                for document in querySnapshot!.documents {
+                    
+                    do {
+                        if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                            
+                            completion(.success(user))
+                        }
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+            }
+        }
+    }
 }

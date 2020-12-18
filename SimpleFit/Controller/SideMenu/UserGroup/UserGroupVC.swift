@@ -45,6 +45,12 @@ class UserGroupVC: UIViewController {
         configureTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchMemberCount()
+    }
+    
     private func configureLayout() {
         
         titleLabel.applyBorder()

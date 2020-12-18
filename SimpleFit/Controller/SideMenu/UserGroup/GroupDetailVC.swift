@@ -12,6 +12,7 @@ class GroupDetailVC: UIViewController {
     private struct Segue {
         
         static let addChallenge = "SegueAddChallenge"
+        static let addMember = "SegueAddMember"
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -129,13 +130,29 @@ class GroupDetailVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard let addChallengeVC = segue.destination as? AddChallengeVC else { return }
+        switch segue.identifier {
         
-        addChallengeVC.user = user
-        addChallengeVC.group = group
-        addChallengeVC.callback = { [weak self] in
+        case Segue.addChallenge:
+            guard let addChallengeVC = segue.destination as? AddChallengeVC else { return }
             
-            self?.fetchChallenge()
+            addChallengeVC.user = user
+            addChallengeVC.group = group
+            addChallengeVC.callback = { [weak self] in
+                
+                self?.fetchChallenge()
+            }
+            
+        case Segue.addMember:
+            guard let addMemberVC = segue.destination as? AddMemberVC else { return }
+            
+            addMemberVC.user = user
+            addMemberVC.group = group
+            addMemberVC.callback = { [weak self] in
+                
+                self?.fetchMember()
+            }
+            
+        default: break
         }
     }
 }
@@ -201,6 +218,10 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             else { return cell }
             
             memberCell.layoutCell(with: members)
+            memberCell.callback = { [weak self] in
+                
+                self?.performSegue(withIdentifier: Segue.addMember, sender: nil)
+            }
             
             return memberCell
             
