@@ -37,6 +37,13 @@ enum ChallengeField: String {
     case date
 }
 
+enum AlbumField: String {
+    
+    case id
+    case name
+    case url
+}
+
 class GroupProvider {
     
     let database = Firestore.firestore()
@@ -45,6 +52,7 @@ class GroupProvider {
     var groupList = [Group]()
     var memberList = [User]()
     var challengeList = [Challenge]()
+    var albumList = [Album]()
     
     func fetchGroup(completion: @escaping (Result<[Group], Error>) -> Void) {
         
@@ -305,6 +313,69 @@ class GroupProvider {
                         completion(.failure(error))
                     }
                 }
+            }
+        }
+    }
+    
+    func addPhoto(in group: Group,
+                  from user: User,
+                  with photo: URL,
+                  completion: @escaping (Result<URL, Error>) -> Void) {
+        
+        let doc = database
+                    .collection("users")
+                    .document(userName)
+                    .collection("group")
+                    .document(group.id)
+                    .collection("album")
+        
+        let id = doc.document().documentID
+        
+        doc.document(id).setData([
+            AlbumField.id.rawValue: id,
+            AlbumField.name.rawValue: user.name as Any,
+            AlbumField.url.rawValue: "\(photo)"
+        ]) { error in
+            
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(photo))
+            }
+        }
+    }
+    
+    func fetchAlbum(in group: Group, completion: @escaping (Result<[Album], Error>) -> Void) {
+        
+        let doc = database
+                    .collection("users")
+                    .document(userName)
+                    .collection("group")
+                    .document(group.id)
+                    .collection("album")
+        
+        doc.getDocuments { [weak self] (querySnapshot, error) in
+            
+            self?.albumList.removeAll()
+            
+            if let error = error {
+                
+                print("Error getting documents: \(error)")
+            } else {
+                
+                for document in querySnapshot!.documents {
+                    
+                    do {
+                        if let album = try document.data(as: Album.self, decoder: Firestore.Decoder()) {
+                            
+                            self?.albumList.append(album)
+                        }
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+                guard let albumList = self?.albumList else { return }
+                completion(.success(albumList))
             }
         }
     }

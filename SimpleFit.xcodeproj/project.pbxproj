@@ -18,6 +18,7 @@
 		A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A520C975257B6F1600215CC1 /* AddPhotoVC.swift */; };
 		A53725A7258BBB570061E64B /* AddChallengeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725A6258BBB570061E64B /* AddChallengeVC.swift */; };
 		A53725AA258C47600061E64B /* AddMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725A9258C47600061E64B /* AddMemberVC.swift */; };
+		A53725B1258C798D0061E64B /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725B0258C798D0061E64B /* PhotoCollectionCell.swift */; };
 		A53DAF5F25868DFE00788FF4 /* ReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DAF5E25868DFE00788FF4 /* ReplyCell.swift */; };
 		A53DAF63258700FD00788FF4 /* UserGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DAF62258700FD00788FF4 /* UserGroupVC.swift */; };
 		A53DAF672587019700788FF4 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DAF662587019700788FF4 /* GroupCell.swift */; };
@@ -91,6 +92,7 @@
 		A520C975257B6F1600215CC1 /* AddPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoVC.swift; sourceTree = "<group>"; };
 		A53725A6258BBB570061E64B /* AddChallengeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChallengeVC.swift; sourceTree = "<group>"; };
 		A53725A9258C47600061E64B /* AddMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberVC.swift; sourceTree = "<group>"; };
+		A53725B0258C798D0061E64B /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionCell.swift; sourceTree = "<group>"; };
 		A53DAF5E25868DFE00788FF4 /* ReplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCell.swift; sourceTree = "<group>"; };
 		A53DAF62258700FD00788FF4 /* UserGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupVC.swift; sourceTree = "<group>"; };
 		A53DAF662587019700788FF4 /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				A59D3002258B292D00ABC2A2 /* MemberCell.swift */,
 				A59D3005258B293E00ABC2A2 /* ChallengeCell.swift */,
 				A59D3008258B294A00ABC2A2 /* PhotoCell.swift */,
+				A53725B0258C798D0061E64B /* PhotoCollectionCell.swift */,
 			);
 			path = UserGroup;
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 				A5180F5C2580A4D9002E9E1E /* UIStoryboard+Ext.swift in Sources */,
 				A555EBD62578E6810099BCB7 /* PagingFlowLayout.swift in Sources */,
 				A5C873C1257F173400EFCC86 /* SignOutAlertVC.swift in Sources */,
+				A53725B1258C798D0061E64B /* PhotoCollectionCell.swift in Sources */,
 				A5D90FB825820ED500133735 /* UserData.swift in Sources */,
 				A5BDFDF32573E404004D3F57 /* DatePickerVC.swift in Sources */,
 				A53DAF63258700FD00788FF4 /* UserGroupVC.swift in Sources */,

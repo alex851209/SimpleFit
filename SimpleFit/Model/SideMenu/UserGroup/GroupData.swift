@@ -30,3 +30,10 @@ struct Challenge: Codable {
     var content: String
     var date: String
 }
+
+struct Album: Codable {
+    
+    var id: String
+    var name: String
+    var url: String
+}

@@ -28,6 +28,8 @@ class GroupDetailVC: UIViewController {
     var members = [User]()
     var challenges = [Challenge]()
     var user = User()
+    var photosURL = [URL]()
+    var albums = [Album]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,7 @@ class GroupDetailVC: UIViewController {
         configureTableView()
         fetchMember()
         fetchChallenge()
+        fetchAlbum()
     }
     
     private func configureLayout() {
@@ -73,6 +76,22 @@ class GroupDetailVC: UIViewController {
             
             case .success(let challenges):
                 self?.challenges = challenges
+                self?.tableView.reloadData()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func fetchAlbum() {
+        
+        provider.fetchAlbum(in: group) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let albums):
+                self?.albums = albums
                 self?.tableView.reloadData()
                 
             case .failure(let error):
@@ -126,6 +145,57 @@ class GroupDetailVC: UIViewController {
         }
         
         return view
+    }
+    
+    private func configurePhotoCellHeight() -> CGFloat {
+        
+        return albums.isEmpty ? 70 : 250
+    }
+    
+    private func showPhotoAlert() {
+        
+        let alert = PhotoAlertVC(showAction: showImagePicker(type:))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func showImagePicker(type: UIImagePickerController.SourceType) {
+        
+        let picker = UIImagePickerController()
+        picker.sourceType = type
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+    }
+    
+    private func uploadPhoto(with image: UIImage) {
+        
+        provider.uploadPhotoWith(image: image) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let url):
+                self?.addPhoto(with: url)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func addPhoto(with url: URL) {
+        
+        provider.addPhoto(in: group, from: user, with: url) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let url):
+                print("Success adding new photo with URL: \(url)")
+                self?.fetchAlbum()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -187,7 +257,7 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
         case 0: height = 135
         case 1: height = 90
         case 2: height = 44
-        case 3: height = 44
+        case 3: height = configurePhotoCellHeight()
         default: break
         }
         
@@ -241,9 +311,28 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
                                                                 for: indexPath) as? PhotoCell
             else { return cell }
             
+            photoCell.layoutCell(with: albums)
+            photoCell.callback = { [weak self] in
+                
+                self?.showPhotoAlert()
+            }
+            
             return photoCell
             
         default: return cell
         }
+    }
+}
+
+extension GroupDetailVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        
+        guard let selectedPhoto = info[.editedImage] as? UIImage else { return }
+        
+        uploadPhoto(with: selectedPhoto)
+        
+        dismiss(animated: true)
     }
 }
