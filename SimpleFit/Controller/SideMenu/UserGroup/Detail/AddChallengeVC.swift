@@ -39,6 +39,8 @@ class AddChallengeVC: BlurViewController {
     
     private func addChallenge() {
         
+        guard challengeContentTextField.text != "" else { return }
+        
         provider.addChallenge(in: group, with: challenge) { [weak self] result in
             
             switch result {

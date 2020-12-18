@@ -13,20 +13,17 @@ class UserGroupVC: UIViewController {
     
         static let addGroup = "SegueAddGroup"
         static let groupDetail = "SegueGroupDetail"
+        static let groupInvitation = "SegueGroupInvitation"
     }
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var inviteListButton: UIButton!
     
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
-    @IBAction func addButtonDidTap(_ sender: Any) {
-        
-        addButton.showButtonFeedbackAnimation { [weak self] in
-            
-            self?.performSegue(withIdentifier: Segue.addGroup, sender: nil)
-        }
-    }
+    @IBAction func addButtonDidTap(_ sender: Any) { showAddGroupPage() }
+    @IBAction func inviteListButtonDidTap(_ sender: Any) { showInvitePage() }
     
     let userProvider = UserProvider()
     let provider = GroupProvider()
@@ -54,12 +51,29 @@ class UserGroupVC: UIViewController {
     private func configureLayout() {
         
         titleLabel.applyBorder()
+        addButton.applyAddButton()
     }
     
     private func configureTableView() {
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func showInvitePage() {
+        
+        inviteListButton.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.performSegue(withIdentifier: Segue.groupInvitation, sender: nil)
+        }
+    }
+    
+    private func showAddGroupPage() {
+        
+        addButton.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.performSegue(withIdentifier: Segue.addGroup, sender: nil)
+        }
     }
     
     private func fetchGroup() {
