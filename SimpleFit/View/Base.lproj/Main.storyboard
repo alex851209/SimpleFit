@@ -1970,6 +1970,9 @@
                                                         <color key="titleColor" systemColor="systemGrayColor"/>
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="acceptButtonDidTap:" destination="ghw-Jh-dp7" eventType="touchUpInside" id="bQM-Dd-dXp"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q2u-9q-h2b">
                                                     <rect key="frame" x="347" y="22" width="12" height="12"/>

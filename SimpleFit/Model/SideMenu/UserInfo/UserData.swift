@@ -13,4 +13,5 @@ struct User: Codable {
     var name: String?
     var gender: String?
     var height: Double?
+    var groups: [String]?
 }

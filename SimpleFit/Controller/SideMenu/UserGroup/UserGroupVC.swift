@@ -39,7 +39,6 @@ class UserGroupVC: UIViewController {
 
         configureLayout()
         fetchUserInfo()
-        fetchGroup()
         configureTableView()
     }
     
@@ -47,6 +46,7 @@ class UserGroupVC: UIViewController {
         super.viewWillAppear(animated)
         
         fetchMemberCount()
+        fetchInvitations()
     }
     
     private func configureLayout() {
@@ -79,7 +79,7 @@ class UserGroupVC: UIViewController {
     
     private func fetchGroup() {
         
-        provider.fetchGroups { [weak self] result in
+        provider.fetchGroups(of: user) { [weak self] result in
             
             switch result {
             
@@ -139,7 +139,24 @@ class UserGroupVC: UIViewController {
                 self?.owner.name = name
                 self?.owner.avatar = avatar
                 
+                self?.fetchGroup()
                 self?.fetchInvitations()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func acceptInvitation(_ id: String) {
+        
+        provider.acceptInvitation(of: user, invitationID: id) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let invitationID):
+                self?.fetchInvitations()
+                print("Group: \(invitationID) successfully removed from group invitations!")
                 
             case .failure(let error):
                 print(error)
@@ -170,6 +187,11 @@ class UserGroupVC: UIViewController {
             guard let invitationVC = segue.destination as? InvitationVC else { return }
             
             invitationVC.invitationList = invitationList
+            invitationVC.callback = { [weak self] id in
+                
+                self?.acceptInvitation(id)
+                self?.fetchGroup()
+            }
             
         default: break
         }

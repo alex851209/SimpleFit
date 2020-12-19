@@ -66,9 +66,11 @@ class GroupProvider {
     var albumList = [Album]()
     var invitationList = [Invitation]()
     
-    func fetchGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
+    func fetchGroups(of user: User, completion: @escaping (Result<[Group], Error>) -> Void) {
         
         groupList.removeAll()
+        
+        guard let groups = user.groups else { return }
         
         let doc = database.collection("groups")
         
@@ -84,7 +86,7 @@ class GroupProvider {
                     do {
                         if let group = try document.data(as: Group.self, decoder: Firestore.Decoder()) {
                             
-                            self?.groupList.append(group)
+                            if groups.contains(group.id) { self?.groupList.append(group) }
                         }
                     } catch {
                         completion(.failure(error))
@@ -395,6 +397,38 @@ class GroupProvider {
                 }
                 guard let invitationList = self?.invitationList else { return }
                 completion(.success(invitationList))
+            }
+        }
+    }
+    
+    func acceptInvitation(of user: User,
+                          invitationID: String,
+                          completion: @escaping (Result<String, Error>) -> Void) {
+        
+        guard let name = user.name else { return }
+        
+        let usersDoc = database.collection("users").document(name)
+        let groupsDoc = database.collection("groups")
+        
+        usersDoc.collection("groupInvitations").document(invitationID).delete { error in
+            
+            if let error = error {
+                
+                print("Error removing document: \(error)")
+            } else {
+                
+                usersDoc.updateData([
+                    GroupField.groups.rawValue: FieldValue.arrayUnion([invitationID])
+                ])
+                
+                groupsDoc.document(invitationID).collection("members").document(name).setData([
+                    MemberField.name.rawValue: user.name as Any,
+                    MemberField.gender.rawValue: user.gender as Any,
+                    MemberField.height.rawValue: user.height as Any,
+                    MemberField.avatar.rawValue: user.avatar as Any
+                ])
+                
+                completion(.success(invitationID))
             }
         }
     }

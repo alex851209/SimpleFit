@@ -18,6 +18,7 @@ class InvitationVC: BlurViewController {
     
     let provider = GroupProvider()
     var invitationList = [Invitation]()
+    var callback: ((String) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,15 @@ class InvitationVC: BlurViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .clear
+    }
+    
+    private func removeInvitation(id: String) {
+        
+        if let index = invitationList.firstIndex(where: { $0.id == id }) {
+            
+            invitationList.remove(at: index)
+        }
+        tableView.reloadData()
     }
 }
 
@@ -61,6 +71,11 @@ extension InvitationVC: UITableViewDelegate, UITableViewDataSource {
         else { return cell }
         
         invitationCell.layoutCell(with: invitationList[indexPath.row])
+        invitationCell.callback = { [weak self] id in
+            
+            self?.callback?(id)
+            self?.removeInvitation(id: id)
+        }
         
         return invitationCell
     }
