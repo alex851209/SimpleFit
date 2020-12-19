@@ -794,7 +794,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FrU-Dm-NJb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4105" y="1004"/>
+            <point key="canvasLocation" x="3996" y="1003"/>
         </scene>
         <!--User GroupVC-->
         <scene sceneID="HHd-7N-htY">
@@ -1889,7 +1889,7 @@
                         <outlet property="tableView" destination="YA3-Y6-gxz" id="nl5-Fu-h06"/>
                         <outlet property="titleLabel" destination="tja-MJ-Fvt" id="Soj-zZ-EYg"/>
                         <segue destination="QG7-Yx-72i" kind="custom" identifier="SegueAddChallenge" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="3kx-JW-J23"/>
-                        <segue destination="Yh6-kx-Vb0" kind="custom" identifier="SegueAddMember" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="XSx-0k-M29"/>
+                        <segue destination="Yh6-kx-Vb0" kind="custom" identifier="SegueSendInvitation" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="XSx-0k-M29"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FkY-HD-XVF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1921,7 +1921,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="a68-xi-tLN">
-                                <rect key="frame" x="0.0" y="67" width="375" height="600"/>
+                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -1961,7 +1961,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UW4-Ur-dwm">
                                                     <rect key="frame" x="285" y="15.5" width="50" height="25"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="N6S-xf-sDv"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="N6S-xf-sDv"/>
                                                         <constraint firstAttribute="height" constant="25" id="yUN-2w-iHw"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -2010,12 +2010,15 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="acceptButton" destination="UW4-Ur-dwm" id="Ru4-Gt-NmB"/>
+                                            <outlet property="groupNameLabel" destination="UK5-Xn-Sux" id="m0K-sC-LQq"/>
+                                            <outlet property="inviterImage" destination="CRs-Ff-Gg3" id="WR8-KI-7uh"/>
+                                            <outlet property="inviterNameLabel" destination="kwg-7w-zdZ" id="R9j-dX-gJy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7C-bo-HLq" userLabel="Separator">
-                                <rect key="frame" x="16" y="66" width="343" height="1"/>
+                                <rect key="frame" x="16" y="75" width="343" height="1"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="HJV-sr-w6V"/>
@@ -2039,7 +2042,7 @@
                         <constraints>
                             <constraint firstItem="a68-xi-tLN" firstAttribute="leading" secondItem="MOz-Dz-gn9" secondAttribute="leading" id="3QP-rx-ISq"/>
                             <constraint firstItem="I7C-bo-HLq" firstAttribute="leading" secondItem="21C-zw-cv5" secondAttribute="leading" constant="16" id="A0v-W5-i7s"/>
-                            <constraint firstItem="a68-xi-tLN" firstAttribute="top" secondItem="aky-Ij-4GI" secondAttribute="bottom" constant="16" id="EDu-9u-aa0"/>
+                            <constraint firstItem="a68-xi-tLN" firstAttribute="top" secondItem="aky-Ij-4GI" secondAttribute="bottom" constant="25" id="EDu-9u-aa0"/>
                             <constraint firstItem="MOz-Dz-gn9" firstAttribute="trailing" secondItem="81s-0h-kTW" secondAttribute="trailing" constant="16" id="GV5-Ch-w9G"/>
                             <constraint firstItem="aky-Ij-4GI" firstAttribute="top" secondItem="MOz-Dz-gn9" secondAttribute="top" constant="16" id="IbJ-V2-4xU"/>
                             <constraint firstItem="MOz-Dz-gn9" firstAttribute="trailing" secondItem="J6M-lY-qGt" secondAttribute="trailing" id="JUh-HP-dlg"/>
@@ -2063,10 +2066,10 @@
             </objects>
             <point key="canvasLocation" x="5246" y="1751"/>
         </scene>
-        <!--Add MemberVC-->
+        <!--Send InvitationVC-->
         <scene sceneID="utT-yq-ksn">
             <objects>
-                <viewController id="Yh6-kx-Vb0" customClass="AddMemberVC" customModule="SimpleFit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Yh6-kx-Vb0" customClass="SendInvitationVC" customModule="SimpleFit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e8k-93-RJY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

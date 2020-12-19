@@ -19,7 +19,7 @@ class GroupCell: UITableViewCell {
     
     func layoutCell(with group: Group, memberCount: Int) {
         
-        titleLabel.text = group.title
+        titleLabel.text = group.name
         contentLabel.text = group.content
         categoryLabel.text = "# \(group.category)"
         memberCountLabel.text = "\(memberCount)"

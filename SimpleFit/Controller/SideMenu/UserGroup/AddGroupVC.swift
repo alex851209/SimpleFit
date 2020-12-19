@@ -20,10 +20,10 @@ class AddGroupVC: BlurViewController {
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
     @IBAction func confirmButtonDidTap(_ sender: Any) { uploadCoverPhoto() }
-    @IBAction func photoButtonDidTap(_ sender: Any) { showPhotoAlert() }
+    @IBAction func photoButtonDidTap(_ sender: UIButton) { showPhotoAlert(sender) }
     
     let provider = GroupProvider()
-    var newGroup = Group(id: "", coverPhoto: "", title: "", content: "", category: "")
+    var newGroup = Group(id: "", coverPhoto: "", name: "", content: "", category: "")
     var callback: (() -> Void)?
     var user = User()
     
@@ -62,10 +62,15 @@ class AddGroupVC: BlurViewController {
         coverPhotoButton.layer.cornerRadius = 10
     }
     
-    private func showPhotoAlert() {
+    private func showPhotoAlert(_ sender: UIButton) {
         
-        let alert = PhotoAlertVC(showAction: showImagePicker(type:))
-        present(alert, animated: true, completion: nil)
+        sender.showButtonFeedbackAnimation { [weak self] in
+            
+            guard let showImagePicker = self?.showImagePicker(type:) else { return }
+            
+            let alert = PhotoAlertVC(showAction: showImagePicker)
+            self?.present(alert, animated: true, completion: nil)
+        }
     }
     
     private func showImagePicker(type: UIImagePickerController.SourceType) {
@@ -158,7 +163,7 @@ extension AddGroupVC: UITextFieldDelegate {
             
         case groupTitleTextField:
             guard let title = groupTitleTextField.text else { return }
-            newGroup.title = title
+            newGroup.name = title
             
         default: break
         }

@@ -12,7 +12,7 @@ class GroupDetailVC: UIViewController {
     private struct Segue {
         
         static let addChallenge = "SegueAddChallenge"
-        static let addMember = "SegueAddMember"
+        static let sendInvitation = "SegueSendInvitation"
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -24,7 +24,7 @@ class GroupDetailVC: UIViewController {
     }
     
     let provider = GroupProvider()
-    var group = Group(id: "", coverPhoto: "", title: "", content: "", category: "")
+    var group = Group(id: "", coverPhoto: "", name: "", content: "", category: "")
     var members = [User]()
     var challenges = [Challenge]()
     var user = User()
@@ -54,7 +54,7 @@ class GroupDetailVC: UIViewController {
     
     private func fetchMember() {
         
-        provider.fetchMember(in: group) { [weak self] result in
+        provider.fetchMembers(in: group) { [weak self] result in
             
             switch result {
             
@@ -70,7 +70,7 @@ class GroupDetailVC: UIViewController {
     
     private func fetchChallenge() {
         
-        provider.fetchChallenge(in: group) { [weak self] result in
+        provider.fetchChallenges(in: group) { [weak self] result in
             
             switch result {
             
@@ -212,12 +212,12 @@ class GroupDetailVC: UIViewController {
                 self?.fetchChallenge()
             }
             
-        case Segue.addMember:
-            guard let addMemberVC = segue.destination as? AddMemberVC else { return }
+        case Segue.sendInvitation:
+            guard let sendInvitationVC = segue.destination as? SendInvitationVC else { return }
             
-            addMemberVC.user = user
-            addMemberVC.group = group
-            addMemberVC.callback = { [weak self] in
+            sendInvitationVC.user = user
+            sendInvitationVC.group = group
+            sendInvitationVC.callback = { [weak self] in
                 
                 self?.fetchMember()
             }
@@ -290,7 +290,7 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             memberCell.layoutCell(with: members)
             memberCell.callback = { [weak self] in
                 
-                self?.performSegue(withIdentifier: Segue.addMember, sender: nil)
+                self?.performSegue(withIdentifier: Segue.sendInvitation, sender: nil)
             }
             
             return memberCell

@@ -17,7 +17,7 @@ class InfoCell: UITableViewCell {
     
     func layoutCell(with group: Group) {
         
-        titleLabel.text = group.title
+        titleLabel.text = group.name
         contentLabel.text = group.content
         
         coverPhotoButton.clipsToBounds = true

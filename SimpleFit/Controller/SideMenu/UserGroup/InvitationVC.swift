@@ -16,9 +16,12 @@ class InvitationVC: BlurViewController {
     
     override var blurEffectStyle: UIBlurEffect.Style? { return .prominent }
     
+    let provider = GroupProvider()
+    var invitationList = [Invitation]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureLayout()
         configureTableView()
     }
@@ -38,7 +41,10 @@ class InvitationVC: BlurViewController {
 
 extension InvitationVC: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 5 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return invitationList.count
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -54,7 +60,7 @@ extension InvitationVC: UITableViewDelegate, UITableViewDataSource {
                                                                  for: indexPath) as? InvitationCell
         else { return cell }
         
-        invitationCell.layoutCel()
+        invitationCell.layoutCell(with: invitationList[indexPath.row])
         
         return invitationCell
     }

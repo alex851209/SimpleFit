@@ -12,10 +12,11 @@ enum GroupField: String {
     
     case id
     case category
-    case title
+    case name
     case content
     case coverPhoto
     case owner
+    case groups
     
     static let ownerName = "name"
     static let ownerAvatar = "avatar"
@@ -44,6 +45,16 @@ enum AlbumField: String {
     case url
 }
 
+enum GroupInvitationsField: String {
+    
+    case id
+    case name
+    case inviter
+    
+    static let inviterName = "name"
+    static let inviterAvatar = "avatar"
+}
+
 class GroupProvider {
     
     let database = Firestore.firestore()
@@ -53,12 +64,13 @@ class GroupProvider {
     var memberList = [User]()
     var challengeList = [Challenge]()
     var albumList = [Album]()
+    var invitationList = [Invitation]()
     
-    func fetchGroup(completion: @escaping (Result<[Group], Error>) -> Void) {
+    func fetchGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
         
         groupList.removeAll()
         
-        let doc = database.collection("users").document(userName).collection("group")
+        let doc = database.collection("groups")
         
         doc.getDocuments { [weak self] (querySnapshot, error) in
             
@@ -120,13 +132,14 @@ class GroupProvider {
     
     func addGroupWith(group: Group, user: User, completion: @escaping (Result<Group, Error>) -> Void) {
 
-        let doc = database.collection("users").document(userName).collection("group")
+        let doc = database.collection("groups")
+        let userDoc = database.collection("users").document(userName)
         let id = doc.document().documentID
         
         doc.document(id).setData([
             GroupField.id.rawValue: id,
             GroupField.category.rawValue: group.category,
-            GroupField.title.rawValue: group.title,
+            GroupField.name.rawValue: group.name,
             GroupField.content.rawValue: group.content,
             GroupField.coverPhoto.rawValue: group.coverPhoto,
             GroupField.owner.rawValue: [
@@ -142,24 +155,23 @@ class GroupProvider {
                 
                 guard let userName = self?.userName else { return }
                 
-                doc.document(id).collection("member").document(userName).setData([
+                doc.document(id).collection("members").document(userName).setData([
                     MemberField.name.rawValue: user.name as Any,
                     MemberField.gender.rawValue: user.gender as Any,
                     MemberField.height.rawValue: user.height as Any,
                     MemberField.avatar.rawValue: user.avatar as Any
                 ])
+                
+                userDoc.updateData([
+                    GroupField.groups.rawValue: FieldValue.arrayUnion([id])
+                ])
             }
         }
     }
     
-    func fetchMember(in group: Group, completion: @escaping (Result<[User], Error>) -> Void) {
+    func fetchMembers(in group: Group, completion: @escaping (Result<[User], Error>) -> Void) {
         
-        let doc = database
-                    .collection("users")
-                    .document(userName)
-                    .collection("group")
-                    .document(group.id)
-                    .collection("member")
+        let doc = database.collection("groups").document(group.id).collection("members")
         
         doc.getDocuments { [weak self] (querySnapshot, error) in
             
@@ -187,17 +199,11 @@ class GroupProvider {
         }
     }
     
-    func fetchChallenge(in group: Group, completion: @escaping (Result<[Challenge], Error>) -> Void) {
+    func fetchChallenges(in group: Group, completion: @escaping (Result<[Challenge], Error>) -> Void) {
         
         challengeList.removeAll()
         
-        let doc = database
-                    .collection("users")
-                    .document(userName)
-                    .collection("group")
-                    .document(group.id)
-                    .collection("challenge")
-                    .order(by: "date", descending: true)
+        let doc = database.collection("groups").document(group.id).collection("challenges")
         
         doc.getDocuments { [weak self] (querySnapshot, error) in
             
@@ -227,12 +233,7 @@ class GroupProvider {
                       with challenge: Challenge,
                       completion: @escaping (Result<Challenge, Error>) -> Void) {
         
-        let doc = database
-                    .collection("users")
-                    .document(userName)
-                    .collection("group")
-                    .document(group.id)
-                    .collection("challenge")
+        let doc = database.collection("groups").document(group.id).collection("challenges")
         
         let id = doc.document().documentID
         
@@ -251,38 +252,34 @@ class GroupProvider {
         }
     }
     
-    func addMember(_ user: User, in group: Group, completion: @escaping (Result<User, Error>) -> Void) {
+    func sendInvitaion(from inviter: User,
+                       to invitee: User,
+                       in group: Group,
+                       completion: @escaping (Result<User, Error>) -> Void) {
         
-        let doc = database
-                    .collection("users")
-                    .document(userName)
-                    .collection("group")
-                    .document(group.id)
-                    .collection("member")
+        guard let inviteeName = invitee.name else { return }
         
-        searchUser(user) { result in
+        let doc = database.collection("users").document(inviteeName).collection("groupInvitations")
+        
+        searchUser(invitee) { result in
             
             switch result {
             
-            case .success(let user):
+            case .success(let invitee):
                 
-                guard let name = user.name,
-                      let gender = user.gender,
-                      let height = user.height,
-                      let avatar = user.avatar
-                else { return }
-                
-                doc.document(name).setData([
-                    MemberField.name.rawValue: name,
-                    MemberField.gender.rawValue: gender,
-                    MemberField.height.rawValue: height,
-                    MemberField.avatar.rawValue: avatar
+                doc.document(group.id).setData([
+                    GroupInvitationsField.id.rawValue: group.id,
+                    GroupInvitationsField.name.rawValue: group.name,
+                    GroupInvitationsField.inviter.rawValue: [
+                        GroupInvitationsField.inviterName: inviter.name,
+                        GroupInvitationsField.inviterAvatar: inviter.avatar
+                    ]
                 ]) { error in
                     
                     if let error = error {
                         completion(.failure(error))
                     } else {
-                        completion(.success(user))
+                        completion(.success(invitee))
                     }
                 }
             case .failure(let error):
@@ -322,12 +319,7 @@ class GroupProvider {
                   with photo: URL,
                   completion: @escaping (Result<URL, Error>) -> Void) {
         
-        let doc = database
-                    .collection("users")
-                    .document(userName)
-                    .collection("group")
-                    .document(group.id)
-                    .collection("album")
+        let doc = database.collection("groups").document(group.id).collection("album")
         
         let id = doc.document().documentID
         
@@ -347,12 +339,7 @@ class GroupProvider {
     
     func fetchAlbum(in group: Group, completion: @escaping (Result<[Album], Error>) -> Void) {
         
-        let doc = database
-                    .collection("users")
-                    .document(userName)
-                    .collection("group")
-                    .document(group.id)
-                    .collection("album")
+        let doc = database.collection("groups").document(group.id).collection("album")
         
         doc.getDocuments { [weak self] (querySnapshot, error) in
             
@@ -376,6 +363,38 @@ class GroupProvider {
                 }
                 guard let albumList = self?.albumList else { return }
                 completion(.success(albumList))
+            }
+        }
+    }
+    
+    func fetchInvitations(of user: User, completion: @escaping (Result<[Invitation], Error>) -> Void) {
+        
+        guard let name = user.name else { return }
+        
+        let doc = database.collection("users").document(name).collection("groupInvitations")
+        
+        doc.getDocuments { [weak self] (querySnapshot, error) in
+            
+            self?.invitationList.removeAll()
+            
+            if let error = error {
+                
+                print("Error getting documents: \(error)")
+            } else {
+                
+                for document in querySnapshot!.documents {
+                    
+                    do {
+                        if let invitation = try document.data(as: Invitation.self, decoder: Firestore.Decoder()) {
+                            
+                            self?.invitationList.append(invitation)
+                        }
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+                guard let invitationList = self?.invitationList else { return }
+                completion(.success(invitationList))
             }
         }
     }

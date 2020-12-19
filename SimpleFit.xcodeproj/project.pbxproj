@@ -17,7 +17,7 @@
 		A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5191A84257BCB240031D333 /* PhotoAlertVC.swift */; };
 		A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A520C975257B6F1600215CC1 /* AddPhotoVC.swift */; };
 		A53725A7258BBB570061E64B /* AddChallengeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725A6258BBB570061E64B /* AddChallengeVC.swift */; };
-		A53725AA258C47600061E64B /* AddMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725A9258C47600061E64B /* AddMemberVC.swift */; };
+		A53725AA258C47600061E64B /* SendInvitationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725A9258C47600061E64B /* SendInvitationVC.swift */; };
 		A53725B1258C798D0061E64B /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725B0258C798D0061E64B /* PhotoCollectionCell.swift */; };
 		A53725B7258CAF8F0061E64B /* InvitationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725B6258CAF8F0061E64B /* InvitationVC.swift */; };
 		A53725D0258CB7D90061E64B /* InvitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725CF258CB7D90061E64B /* InvitationCell.swift */; };
@@ -93,7 +93,7 @@
 		A5191A84257BCB240031D333 /* PhotoAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlertVC.swift; sourceTree = "<group>"; };
 		A520C975257B6F1600215CC1 /* AddPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoVC.swift; sourceTree = "<group>"; };
 		A53725A6258BBB570061E64B /* AddChallengeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChallengeVC.swift; sourceTree = "<group>"; };
-		A53725A9258C47600061E64B /* AddMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberVC.swift; sourceTree = "<group>"; };
+		A53725A9258C47600061E64B /* SendInvitationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitationVC.swift; sourceTree = "<group>"; };
 		A53725B0258C798D0061E64B /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionCell.swift; sourceTree = "<group>"; };
 		A53725B6258CAF8F0061E64B /* InvitationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationVC.swift; sourceTree = "<group>"; };
 		A53725CF258CB7D90061E64B /* InvitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCell.swift; sourceTree = "<group>"; };
@@ -283,7 +283,7 @@
 			children = (
 				A59D2FFC258AFAEC00ABC2A2 /* GroupDetailVC.swift */,
 				A53725A6258BBB570061E64B /* AddChallengeVC.swift */,
-				A53725A9258C47600061E64B /* AddMemberVC.swift */,
+				A53725A9258C47600061E64B /* SendInvitationVC.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -777,7 +777,7 @@
 				A53725A7258BBB570061E64B /* AddChallengeVC.swift in Sources */,
 				A5C873CD257F7EA400EFCC86 /* CardView.swift in Sources */,
 				A555EBA02578C5B60099BCB7 /* UserFavoriteVC.swift in Sources */,
-				A53725AA258C47600061E64B /* AddMemberVC.swift in Sources */,
+				A53725AA258C47600061E64B /* SendInvitationVC.swift in Sources */,
 				A5D90FBC25820F5A00133735 /* UserProvider.swift in Sources */,
 				A5191A7D257BC4C20031D333 /* BlurVC.swift in Sources */,
 				A5180F5C2580A4D9002E9E1E /* UIStoryboard+Ext.swift in Sources */,

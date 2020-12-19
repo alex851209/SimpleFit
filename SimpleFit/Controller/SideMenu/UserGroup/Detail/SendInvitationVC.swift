@@ -7,18 +7,18 @@
 
 import UIKit
 
-class AddMemberVC: BlurViewController {
+class SendInvitationVC: BlurViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addMemberTextField: UITextField!
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
-    @IBAction func confirmButtonDidTap(_ sender: Any) { addMember() }
+    @IBAction func confirmButtonDidTap(_ sender: Any) { sendInvitation() }
     
     let provider = GroupProvider()
     var user = User()
-    var newMember = User()
-    var group = Group(id: "", coverPhoto: "", title: "", content: "", category: "")
+    var invitee = User()
+    var group = Group(id: "", coverPhoto: "", name: "", content: "", category: "")
     var callback: (() -> Void)?
     
     override func viewDidLoad() {
@@ -35,14 +35,14 @@ class AddMemberVC: BlurViewController {
         addMemberTextField.layer.borderColor = UIColor.systemGray4.cgColor
     }
     
-    private func addMember() {
+    private func sendInvitation() {
         
-        provider.addMember(newMember, in: group) { [weak self] result in
+        provider.sendInvitaion(from: user, to: invitee, in: group) { [weak self] result in
             
             switch result {
             
-            case .success(let newMember):
-                print("Success adding new member: \(newMember)")
+            case .success(let invitee):
+                print("Success sending invitation to: \(invitee)")
                 self?.callback?()
                 self?.dismiss(animated: true)
                 
@@ -53,7 +53,7 @@ class AddMemberVC: BlurViewController {
     }
 }
 
-extension AddMemberVC: UITextFieldDelegate {
+extension SendInvitationVC: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
@@ -67,6 +67,6 @@ extension AddMemberVC: UITextFieldDelegate {
         textField.layer.borderWidth = 1
         
         guard let name = textField.text else { return }
-        self.newMember.name = name
+        self.invitee.name = name
     }
 }

@@ -32,6 +32,7 @@ class UserGroupVC: UIViewController {
     var owner = Owner()
     var selectedGroup: Group?
     var user = User()
+    var invitationList = [Invitation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +79,7 @@ class UserGroupVC: UIViewController {
     
     private func fetchGroup() {
         
-        provider.fetchGroup { [weak self] result in
+        provider.fetchGroups { [weak self] result in
             
             switch result {
             
@@ -96,7 +97,7 @@ class UserGroupVC: UIViewController {
         
         for group in groupList {
             
-            provider.fetchMember(in: group) { [weak self] result in
+            provider.fetchMembers(in: group) { [weak self] result in
                 
                 switch result {
                 
@@ -107,6 +108,18 @@ class UserGroupVC: UIViewController {
                 case .failure(let error):
                     print(error)
                 }
+            }
+        }
+    }
+    
+    private func fetchInvitations() {
+        
+        provider.fetchInvitations(of: user) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let invitationList): self?.invitationList = invitationList
+            case .failure(let error): print(error)
             }
         }
     }
@@ -125,6 +138,8 @@ class UserGroupVC: UIViewController {
                 self?.user = user
                 self?.owner.name = name
                 self?.owner.avatar = avatar
+                
+                self?.fetchInvitations()
                 
             case .failure(let error):
                 print(error)
@@ -150,6 +165,11 @@ class UserGroupVC: UIViewController {
             
             groupDetailVC.group = selectedGroup
             groupDetailVC.user = user
+        
+        case Segue.groupInvitation:
+            guard let invitationVC = segue.destination as? InvitationVC else { return }
+            
+            invitationVC.invitationList = invitationList
             
         default: break
         }

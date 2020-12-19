@@ -11,7 +11,7 @@ struct Group: Codable {
     
     var id: String
     var coverPhoto: String
-    var title: String
+    var name: String
     var content: String
     var category: String
     var owner: Owner = Owner(name: "", avatar: "")
@@ -36,4 +36,17 @@ struct Album: Codable {
     var id: String
     var name: String
     var url: String
+}
+
+struct Inviter: Codable {
+    
+    var name: String
+    var avatar: String
+}
+
+struct Invitation: Codable {
+    
+    var id: String
+    var name: String
+    var inviter: Inviter
 }

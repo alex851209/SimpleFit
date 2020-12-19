@@ -15,7 +15,7 @@ class AddChallengeVC: BlurViewController {
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
     @IBAction func confirmButtonDidTap(_ sender: Any) { addChallenge() }
     
-    var group = Group(id: "", coverPhoto: "", title: "", content: "", category: "")
+    var group = Group(id: "", coverPhoto: "", name: "", content: "", category: "")
     var user = User()
     let provider = GroupProvider()
     var challenge = Challenge(id: "", content: "", date: "")
