@@ -13,7 +13,9 @@ class MemberCell: UITableViewCell {
     
     @IBAction func addButtonDidTap(_ sender: UIButton) { addMember(sender: sender) }
     
-    var callback: (() -> Void)?
+    var addMember: (() -> Void)?
+    var showMember: ((User) -> Void)?
+    var members = [User]()
     
     func layoutCell(with members: [User]) {
         
@@ -23,6 +25,7 @@ class MemberCell: UITableViewCell {
     private func configureMembers(with members: [User]) {
         
         var padding: CGFloat = 0
+        var tag = 0
         
         for member in members {
             
@@ -38,6 +41,7 @@ class MemberCell: UITableViewCell {
             avatarButton.clipsToBounds = true
             avatarButton.layer.cornerRadius = 20
             
+            avatarButton.tag = tag
             avatarButton.addTarget(self, action: #selector(showMember(sender:)), for: .touchUpInside)
             
             avatarButton.translatesAutoresizingMaskIntoConstraints = false
@@ -51,19 +55,27 @@ class MemberCell: UITableViewCell {
             ])
             
             padding += 50
+            tag += 1
         }
+        
+        self.members = members
     }
     
     @objc private func showMember(sender: UIButton) {
         
-        sender.showButtonFeedbackAnimation { }
+        sender.showButtonFeedbackAnimation { [weak self] in
+            
+            guard let member = self?.members[sender.tag] else { return }
+            
+            self?.showMember?(member)
+        }
     }
     
     private func addMember(sender: UIButton) {
         
         sender.showButtonFeedbackAnimation { [weak self] in
             
-            self?.callback?()
+            self?.addMember?()
         }
     }
 }

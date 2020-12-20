@@ -13,6 +13,7 @@ class GroupDetailVC: UIViewController {
         
         static let addChallenge = "SegueAddChallenge"
         static let sendInvitation = "SegueSendInvitation"
+        static let memberDetail = "SegueMemberDetail"
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -30,6 +31,7 @@ class GroupDetailVC: UIViewController {
     var user = User()
     var photosURL = [URL]()
     var albums = [Album]()
+    var selectedMember = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -222,6 +224,11 @@ class GroupDetailVC: UIViewController {
                 self?.fetchMember()
             }
             
+        case Segue.memberDetail:
+            guard let memberDetailVC = segue.destination as? MemberDetailVC else { return }
+            
+            memberDetailVC.member = selectedMember
+            
         default: break
         }
     }
@@ -288,9 +295,14 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             else { return cell }
             
             memberCell.layoutCell(with: members)
-            memberCell.callback = { [weak self] in
+            memberCell.addMember = { [weak self] in
                 
                 self?.performSegue(withIdentifier: Segue.sendInvitation, sender: nil)
+            }
+            memberCell.showMember = { [weak self] member in
+                
+                self?.selectedMember = member
+                self?.performSegue(withIdentifier: Segue.memberDetail, sender: nil)
             }
             
             return memberCell
