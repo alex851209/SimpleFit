@@ -76,7 +76,7 @@ class DateProvider {
     
     static func firstWeekDayInCurrentMonth() -> Int {
         
-        //星期和數字一一對應 星期日：7
+        // 星期和數字一一對應 星期日：7
         formatter.dateFormat = "yyyy-MM"
         formatter.locale = Locale(identifier: "zh_Hant_TW")
         formatter.timeZone = TimeZone(identifier: "Asia/Taipei")

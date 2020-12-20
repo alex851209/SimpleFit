@@ -77,6 +77,7 @@ class UserReviewVC: UIViewController {
                                  y: 0,
                                  width: chartViewWidth,
                                  height: chartViewHeight)
+        chartView.scrollEnabled = false
         chartBackgroundView.addSubview(chartView)
     }
     
@@ -97,7 +98,7 @@ class UserReviewVC: UIViewController {
                         .legendEnabled(false) // 是否啟用圖表的圖例(圖表底部的可點擊的小圓點)
                         .markerRadius(0) // 連接點大小
                         .series([AASeriesElement().name("體重").data(weightsDatas as [Any])])
-                        .tooltipValueSuffix("公斤")//浮動提示框單位後綴
+                        .tooltipValueSuffix("公斤")// 浮動提示框單位後綴
                         .xAxisLabelsEnabled(false)
                         .zoomType(.x) // x軸縮放
         

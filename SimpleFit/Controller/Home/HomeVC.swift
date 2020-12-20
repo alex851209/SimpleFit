@@ -99,6 +99,7 @@ class HomeVC: UIViewController {
         let chartViewHeight = view.frame.size.height - 80
         chartView.frame = CGRect(x: 0, y: 0, width: chartViewWidth, height: chartViewHeight)
         chartView.delegate = self
+        chartView.scrollEnabled = false
         view.addSubview(chartView)
     }
     
@@ -114,26 +115,27 @@ class HomeVC: UIViewController {
         else { return }
         
         chartModel = AAChartModel()
+            .animationDuration(500)
             .categories(categories)
-            .chartType(.spline)//圖表類型
+            .chartType(.spline)// 圖表類型
             .colorsTheme(["#c0c0c0"])
-            .dataLabelsEnabled(true)//數據標簽是否顯示
+            .dataLabelsEnabled(true)// 數據標簽是否顯示
             .dataLabelsFontColor("gray")
             .dataLabelsFontSize(18)
             .dataLabelsFontWeight(.bold)
-            .inverted(false)//是否翻轉圖形
-            .legendEnabled(false)//是否啟用圖表的圖例(圖表底部的可點擊的小圓點)
-            .markerRadius(10)//連接點大小
-            .markerSymbolStyle(.borderBlank)//折線或者曲線的連接點是否為空心的
+            .inverted(false)// 是否翻轉圖形
+            .legendEnabled(false)// 是否啟用圖表的圖例(圖表底部的可點擊的小圓點)
+            .markerRadius(10)// 連接點大小
+            .markerSymbolStyle(.borderBlank)// 折線或者曲線的連接點是否為空心
             .scrollablePlotArea(AAScrollablePlotArea().minWidth(2000).scrollPositionX(0))
             .series([
                 AASeriesElement().name("體重").data(weightsDatas as [Any]),
                 AASeriesElement().data(clearDatas as [Any])
             ])
-            .tooltipValueSuffix("公斤")//浮動提示框單位後綴
-            .tooltipEnabled(false)//是否顯示浮動提示框
-            .touchEventEnabled(true)//是否支持觸摸事件回調
-            .yAxisLabelsEnabled(false)//y 軸是否顯示數據
+            .tooltipValueSuffix("公斤")// 浮動提示框單位後綴
+            .tooltipEnabled(false)// 是否顯示浮動提示框
+            .touchEventEnabled(true)// 是否支持觸摸事件回調
+            .yAxisLabelsEnabled(false)// y 軸是否顯示數據
             .yAxisMin(min)
             .yAxisMax(max)
         

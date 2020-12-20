@@ -318,7 +318,7 @@ PODS:
   - nanopb/encode (1.30906.0)
   - PromisesObjC (1.2.11)
   - SideMenu (6.5.0)
-  - SwiftLint (0.41.0)
+  - SwiftLint (0.42.0)
 
 DEPENDENCIES:
   - AAInfographics (from `https://github.com/AAChartModel/AAChartKit-Swift.git`)
@@ -369,7 +369,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AAInfographics:
-    :commit: 7d4dcbf3959be8f718f1c78a1e9fa3836a75d198
+    :commit: 7917de1f4db9b854c508e369c0bf2016787ecbdd
     :git: https://github.com/AAChartModel/AAChartKit-Swift.git
   ADDatePicker:
     :commit: 66e721ef409a7aa9611371b675c21eab9d903a07
@@ -400,7 +400,7 @@ SPEC CHECKSUMS:
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
-  SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
+  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
 
 PODFILE CHECKSUM: 8cdd0158349a8f8cb55dee0330518a093e3b338f
 
