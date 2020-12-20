@@ -14,7 +14,6 @@ class SideMenuVC: UIViewController {
         
         static let userInfo = "SegueUserInfo"
         static let userGroup = "SegueUserGroup"
-//        static let userBoard = "SegueUserBoard"
         static let userFavorite = "SegueUserFavorite"
         static let userReview = "SegueUserReview"
         static let userGoal = "SegueUserGoal"

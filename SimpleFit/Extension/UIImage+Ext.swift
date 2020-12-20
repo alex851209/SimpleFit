@@ -28,18 +28,9 @@ enum ImageAsset: String {
     case person = "user_photo"
 }
 
-enum SystemImageAsset: String {
- 
-    // UserBoardVC
-    case time = "clock"
-    case heart = "heart.circle"
-}
-
 extension UIImage {
     
     static func asset(_ asset: ImageAsset) -> UIImage? { return UIImage(named: asset.rawValue) }
-    
-    static func systemAsset(_ asset: SystemImageAsset) -> UIImage? { return UIImage(systemName: asset.rawValue) }
     
     func scale(newWidth: CGFloat) -> UIImage {
         
