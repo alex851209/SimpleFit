@@ -12,16 +12,18 @@ class ReviewProvider {
 
     var weightDatas = [Double]()
     var categories = [String]()
+    let userID = Auth.auth().currentUser?.uid
     
     func fetchReviewDatas(from beginDate: Date,
                           to endDate: Date,
                           completion: @escaping (Result<Any, Error>) -> Void) {
         
+        guard let userID = userID else { return }
+        
         let database = Firestore.firestore()
-        let userName = "Alex"
         let beginDateString = DateProvider.dateToDateString(beginDate)
         let endDateString = DateProvider.dateToDateString(endDate)
-        let doc = database.collection("users").document(userName).collection("chartData")
+        let doc = database.collection("users").document(userID).collection("chartData")
         
         weightDatas.removeAll()
         categories.removeAll()

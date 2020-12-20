@@ -14,6 +14,8 @@ class AuthVC: UIViewController {
     
     static let identifier = "AuthVC"
     
+    let provider = UserProvider()
+    
     // Unhashed nonce.
     fileprivate var currentNonce: String?
     
@@ -145,7 +147,7 @@ extension AuthVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPr
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
             // Sign in with Firebase.
-            Auth.auth().signIn(with: credential) { (authResult, error) in
+            Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
                 
                 if let error = error {
                     print(error.localizedDescription)
@@ -155,7 +157,17 @@ extension AuthVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPr
                 if authResult?.user != nil {
                     // User is signed in to Firebase with Apple.
                     // ...
-                    print("Sign in with Apple Success")
+                    self?.provider.createUser { result in
+                        
+                        switch result {
+                        
+                        case .success(let userID):
+                            print("Success signing in with userID: \(userID)")
+                            
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
                     
                     let homeVC = UIStoryboard.main.instantiateViewController(withIdentifier: HomeVC.identifier)
                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?

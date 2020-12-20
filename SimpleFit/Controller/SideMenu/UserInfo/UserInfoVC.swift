@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import MIBlurPopup
 import FirebaseAuth
 
 class UserInfoVC: UIViewController {
@@ -75,11 +74,17 @@ class UserInfoVC: UIViewController {
     private func configureInfo(with user: User) {
         
         nameTextField.text = user.name
-        genderSegmentedControl.selectedSegmentIndex = user.gender == "男" ? 0 : 1
         heightTextField.text = ""
         avatarImage.loadImage(user.avatar)
         
         if let height = user.height { heightTextField.text = String(describing: height) }
+        
+        if user.gender == "男" || user.gender == nil {
+            genderSegmentedControl.selectedSegmentIndex = 0
+        } else {
+            genderSegmentedControl.selectedSegmentIndex = 1
+        }
+        
         self.user = user
     }
     

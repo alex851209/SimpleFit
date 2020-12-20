@@ -114,7 +114,7 @@ class UserGroupVC: UIViewController {
     
     private func fetchInvitations() {
         
-        provider.fetchInvitations(of: user) { [weak self] result in
+        provider.fetchInvitations { [weak self] result in
             
             switch result {
             
@@ -155,7 +155,7 @@ class UserGroupVC: UIViewController {
             switch result {
             
             case .success(let invitationID):
-                self?.fetchInvitations()
+                self?.fetchUserInfo()
                 print("Group: \(invitationID) successfully removed from group invitations!")
                 
             case .failure(let error):
@@ -173,7 +173,7 @@ class UserGroupVC: UIViewController {
             
             addGroupVC.newGroup.owner = owner
             addGroupVC.user = user
-            addGroupVC.callback = { self.fetchGroup() }
+            addGroupVC.callback = { self.fetchUserInfo() }
             
         case Segue.groupDetail:
             guard let groupDetailVC = segue.destination as? GroupDetailVC,
@@ -190,7 +190,6 @@ class UserGroupVC: UIViewController {
             invitationVC.callback = { [weak self] id in
                 
                 self?.acceptInvitation(id)
-                self?.fetchGroup()
             }
             
         default: break

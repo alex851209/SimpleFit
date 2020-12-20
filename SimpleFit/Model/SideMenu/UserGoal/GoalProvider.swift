@@ -20,12 +20,14 @@ enum GoalField: String {
 class GoalProvider {
     
     let database = Firestore.firestore()
-    let userName = "Alex"
+    let userID = Auth.auth().currentUser?.uid
     var goalList = [Goal]()
     
     func addDataWith(goal: Goal, completion: @escaping (Result<Any, Error>) -> Void) {
 
-        let doc = database.collection("users").document(userName).collection("goalList")
+        guard let userID = userID else { return }
+        
+        let doc = database.collection("users").document(userID).collection("goalList")
         let id = "~\(goal.endDate)"
         
         doc.document(id).setData([
@@ -47,7 +49,9 @@ class GoalProvider {
         
         goalList.removeAll()
         
-        let doc = database.collection("users").document(userName).collection("goalList")
+        guard let userID = userID else { return }
+        
+        let doc = database.collection("users").document(userID).collection("goalList")
         
         doc.getDocuments { [weak self] (querySnapshot, error) in
             
@@ -75,9 +79,11 @@ class GoalProvider {
     
     func fetchLatestWeight(completion: @escaping (Result<Double, Error>) -> Void) {
         
+        guard let userID = userID else { return }
+        
         let doc = database
                     .collection("users")
-                    .document(userName)
+                    .document(userID)
                     .collection("chartData")
                     .order(by: "date", descending: true)
                     .limit(to: 1)

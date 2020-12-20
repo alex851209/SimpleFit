@@ -1702,8 +1702,8 @@
                                                         <constraint firstAttribute="width" constant="30" id="hqp-rS-5cs"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="三個月減重10公斤大挑戰" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkJ-uz-YXH">
-                                                    <rect key="frame" x="64" y="13" width="169" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkJ-uz-YXH">
+                                                    <rect key="frame" x="64" y="13" width="26" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1733,8 +1733,8 @@
                                                 <constraint firstItem="ZYx-PW-9Vg" firstAttribute="centerY" secondItem="lbI-ma-ghc" secondAttribute="centerY" id="S3e-oB-2CE"/>
                                                 <constraint firstItem="ZYx-PW-9Vg" firstAttribute="leading" secondItem="8Dx-EY-taw" secondAttribute="trailing" constant="8" id="X6b-n3-GWs"/>
                                                 <constraint firstItem="8Dx-EY-taw" firstAttribute="leading" secondItem="lbI-ma-ghc" secondAttribute="leading" constant="16" id="aPw-Pk-YjS"/>
+                                                <constraint firstItem="gnr-iu-sbc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AkJ-uz-YXH" secondAttribute="trailing" constant="8" id="cgX-iQ-w8y"/>
                                                 <constraint firstItem="gnr-iu-sbc" firstAttribute="centerY" secondItem="AkJ-uz-YXH" secondAttribute="centerY" id="fbA-zr-wom"/>
-                                                <constraint firstItem="gnr-iu-sbc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AkJ-uz-YXH" secondAttribute="trailing" constant="63.5" id="p5j-U1-ksg"/>
                                                 <constraint firstAttribute="trailing" secondItem="gnr-iu-sbc" secondAttribute="trailing" constant="16" id="wKh-mv-tGL"/>
                                             </constraints>
                                         </tableViewCellContentView>

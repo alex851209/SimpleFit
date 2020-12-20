@@ -24,6 +24,7 @@ enum GroupField: String {
 
 enum MemberField: String {
     
+    case id
     case avatar
     case gender
     case height
@@ -59,7 +60,7 @@ class GroupProvider {
     
     let database = Firestore.firestore()
     let storageRef = Storage.storage().reference()
-    let userName = "Alex"
+    let userID = Auth.auth().currentUser?.uid
     var groupList = [Group]()
     var memberList = [User]()
     var challengeList = [Challenge]()
@@ -134,8 +135,10 @@ class GroupProvider {
     
     func addGroupWith(group: Group, user: User, completion: @escaping (Result<Group, Error>) -> Void) {
 
+        guard let userID = userID else { return }
+        
         let doc = database.collection("groups")
-        let userDoc = database.collection("users").document(userName)
+        let userDoc = database.collection("users").document(userID)
         let id = doc.document().documentID
         
         doc.document(id).setData([
@@ -155,9 +158,10 @@ class GroupProvider {
             } else {
                 completion(.success(group))
                 
-                guard let userName = self?.userName else { return }
+                guard let userID = self?.userID else { return }
                 
-                doc.document(id).collection("members").document(userName).setData([
+                doc.document(id).collection("members").document(userID).setData([
+                    MemberField.id.rawValue: userID,
                     MemberField.name.rawValue: user.name as Any,
                     MemberField.gender.rawValue: user.gender as Any,
                     MemberField.height.rawValue: user.height as Any,
@@ -259,17 +263,15 @@ class GroupProvider {
                        in group: Group,
                        completion: @escaping (Result<User, Error>) -> Void) {
         
-        guard let inviteeName = invitee.name else { return }
-        
-        let doc = database.collection("users").document(inviteeName).collection("groupInvitations")
-        
-        searchUser(invitee) { result in
+        searchUser(invitee) { [weak self] result in
             
             switch result {
             
             case .success(let invitee):
                 
-                doc.document(group.id).setData([
+                let doc = self?.database.collection("users").document(invitee.id).collection("groupInvitations")
+                
+                doc?.document(group.id).setData([
                     GroupInvitationsField.id.rawValue: group.id,
                     GroupInvitationsField.name.rawValue: group.name,
                     GroupInvitationsField.inviter.rawValue: [
@@ -369,11 +371,11 @@ class GroupProvider {
         }
     }
     
-    func fetchInvitations(of user: User, completion: @escaping (Result<[Invitation], Error>) -> Void) {
+    func fetchInvitations(completion: @escaping (Result<[Invitation], Error>) -> Void) {
         
-        guard let name = user.name else { return }
+        guard let userID = userID else { return }
         
-        let doc = database.collection("users").document(name).collection("groupInvitations")
+        let doc = database.collection("users").document(userID).collection("groupInvitations")
         
         doc.getDocuments { [weak self] (querySnapshot, error) in
             
@@ -405,9 +407,9 @@ class GroupProvider {
                           invitationID: String,
                           completion: @escaping (Result<String, Error>) -> Void) {
         
-        guard let name = user.name else { return }
+        guard let userID = userID else { return }
         
-        let usersDoc = database.collection("users").document(name)
+        let usersDoc = database.collection("users").document(userID)
         let groupsDoc = database.collection("groups")
         
         usersDoc.collection("groupInvitations").document(invitationID).delete { error in
@@ -421,7 +423,8 @@ class GroupProvider {
                     GroupField.groups.rawValue: FieldValue.arrayUnion([invitationID])
                 ])
                 
-                groupsDoc.document(invitationID).collection("members").document(name).setData([
+                groupsDoc.document(invitationID).collection("members").document(userID).setData([
+                    MemberField.id.rawValue: userID,
                     MemberField.name.rawValue: user.name as Any,
                     MemberField.gender.rawValue: user.gender as Any,
                     MemberField.height.rawValue: user.height as Any,

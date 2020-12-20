@@ -28,7 +28,7 @@ class ChartProvider {
     
     let database = Firestore.firestore()
     let storageRef = Storage.storage().reference()
-    let user = "Alex"
+    let userID = Auth.auth().currentUser?.uid
     var chartData = ChartData()
     var dailyDatas = [DailyData]()
     
@@ -37,10 +37,12 @@ class ChartProvider {
                      date: Date,
                      completion: @escaping (Result<Any, Error>) -> Void) {
 
+        guard let userID = userID else { return }
+        
         let dateString = DateProvider.dateToDateString(date)
         let month = DateProvider.dateToMonthString(date)
         let day = DateProvider.dateToDayString(date)
-        let doc = database.collection("users").document(user).collection("chartData")
+        let doc = database.collection("users").document(userID).collection("chartData")
         
         switch field {
         
@@ -135,7 +137,9 @@ class ChartProvider {
     
     func fetchDailyDatasFrom(year: Int, month: Int, completion: @escaping (Result<[DailyData], Error>) -> Void) {
         
-        let doc = database.collection("users").document(user).collection("chartData")
+        guard let userID = userID else { return }
+        
+        let doc = database.collection("users").document(userID).collection("chartData")
         let month = DateProvider.add0BeforeNumber(month)
         dailyDatas.removeAll()
         
@@ -163,7 +167,9 @@ class ChartProvider {
     
     func fetchFavoriteDatas(completion: @escaping (Result<[DailyData], Error>) -> Void) {
         
-        let doc = database.collection("users").document(user).collection("chartData")
+        guard let userID = userID else { return }
+        
+        let doc = database.collection("users").document(userID).collection("chartData")
         
         doc.whereField(ChartField.photoIsFavorite, isEqualTo: true).getDocuments { (querySnapshot, error) in
             
@@ -243,7 +249,9 @@ class ChartProvider {
     
     func updatePhoto(isFavorite: Bool, to date: String, completion: @escaping (Result<Any, Error>) -> Void) {
         
-        let doc = database.collection("users").document(user).collection("chartData").document(date)
+        guard let userID = userID else { return }
+        
+        let doc = database.collection("users").document(userID).collection("chartData").document(date)
         
         doc.updateData([
             ChartField.photoIsFavorite: isFavorite

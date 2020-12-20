@@ -7,7 +7,6 @@
 
 import Foundation
 import Firebase
-import FirebaseFirestoreSwift
 
 enum UserField: String {
     
@@ -15,17 +14,39 @@ enum UserField: String {
     case name
     case gender
     case height
+    case id
 }
 
 class UserProvider {
     
     let database = Firestore.firestore()
     let storageRef = Storage.storage().reference()
-    let userName = "Alex"
+    let userID = Auth.auth().currentUser?.uid
+    var user = User()
+    
+    func createUser(completion: @escaping (Result<String, Error>) -> Void) {
+        
+        guard let userID = userID else { return }
+        
+        let doc = database.collection("users").document(userID)
+        
+        doc.setData([
+            UserField.id.rawValue: userID
+        ], merge: true) { error in
+            
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(userID))
+            }
+        }
+    }
     
     func uploadInfoWith(user: User, completion: @escaping (Result<Any, Error>) -> Void) {
 
-        let doc = database.collection("users").document(userName)
+        guard let userID = userID else { return }
+        
+        let doc = database.collection("users").document(userID)
         
         let avatarURL = user.avatar as Any
         let name = user.name as Any
@@ -33,15 +54,17 @@ class UserProvider {
         let height = user.height as Any
         
         doc.setData([
+            UserField.id.rawValue: userID,
             UserField.avatar.rawValue: avatarURL,
             UserField.name.rawValue: name,
             UserField.gender.rawValue: gender,
             UserField.height.rawValue: height
-        ], merge: true) { error in
+        ], merge: true) { [weak self] error in
             
             if let error = error {
                 completion(.failure(error))
             } else {
+                self?.user = user
                 completion(.success(user))
             }
         }
@@ -49,9 +72,11 @@ class UserProvider {
     
     func fetchInfo(completion: @escaping (Result<User, Error>) -> Void) {
         
-        let doc = database.collection("users").document(userName)
+        guard let userID = userID else { return }
         
-        doc.getDocument { (document, error) in
+        let doc = database.collection("users").document(userID)
+        
+        doc.getDocument { [weak self] (document, error) in
             
             if let error = error {
                 
@@ -61,6 +86,7 @@ class UserProvider {
                 do {
                     if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
                         
+                        self?.user = user
                         completion(.success(user))
                     }
                 } catch {
