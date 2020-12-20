@@ -16,26 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Simple Fit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tf3-1M-26F">
-                                <rect key="frame" x="64" y="144" width="286.5" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" systemColor="systemGrayColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Simple Fit, Simple Life" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e71-mT-4na">
-                                <rect key="frame" x="123.5" y="210" width="167.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="systemGray2Color"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simplefit" translatesAutoresizingMaskIntoConstraints="NO" id="yf3-cZ-SXc">
+                                <rect key="frame" x="0.0" y="44" width="414" height="758"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="He5-EY-rOD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="tf3-1M-26F" firstAttribute="top" secondItem="He5-EY-rOD" secondAttribute="top" constant="100" id="aM6-w9-PZP"/>
-                            <constraint firstItem="tf3-1M-26F" firstAttribute="centerX" secondItem="mlZ-CS-P5f" secondAttribute="centerX" id="jyZ-zc-2BB"/>
-                            <constraint firstItem="e71-mT-4na" firstAttribute="top" secondItem="tf3-1M-26F" secondAttribute="bottom" constant="30" id="sZL-6f-jMi"/>
-                            <constraint firstItem="e71-mT-4na" firstAttribute="centerX" secondItem="mlZ-CS-P5f" secondAttribute="centerX" id="v1G-cG-EvH"/>
+                            <constraint firstItem="yf3-cZ-SXc" firstAttribute="leading" secondItem="He5-EY-rOD" secondAttribute="leading" id="1Ig-W3-UzD"/>
+                            <constraint firstItem="yf3-cZ-SXc" firstAttribute="trailing" secondItem="He5-EY-rOD" secondAttribute="trailing" id="3BY-ZR-JhC"/>
+                            <constraint firstItem="yf3-cZ-SXc" firstAttribute="top" secondItem="He5-EY-rOD" secondAttribute="top" id="cUb-AI-HkT"/>
+                            <constraint firstItem="He5-EY-rOD" firstAttribute="bottom" secondItem="yf3-cZ-SXc" secondAttribute="bottom" constant="60" id="g4z-9X-ZVQ"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -45,14 +36,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="simplefit" width="375" height="375"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
