@@ -33,7 +33,7 @@ class GoalCell: UITableViewCell {
         let isZeroGain = goal.endWeight > goal.beginWeight && currentWeight < goal.beginWeight
         let isZeroLoss = goal.endWeight < goal.beginWeight && currentWeight > goal.beginWeight
         
-        var progress = (abs(currentWeight - goal.beginWeight) / (goal.endWeight - goal.beginWeight)).round(to: 2)
+        var progress = (abs((currentWeight - goal.beginWeight) / (goal.endWeight - goal.beginWeight))).round(to: 2)
         
         if isZeroGain || isZeroLoss { progress = 0 }
         if progress > 1 { progress = 1 }
