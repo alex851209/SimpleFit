@@ -20,6 +20,7 @@ class DailyCell: GeminiCell {
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var noteTextView: UITextView!
     @IBOutlet weak var photoPlaceholderLabel: UILabel!
+    @IBOutlet weak var photoPlaceholderImage: UIImageView!
     @IBOutlet var notePlaceholderLabels: [UILabel]!
     @IBOutlet weak var notePlaceholderImage: UIImageView!
     
@@ -49,6 +50,7 @@ class DailyCell: GeminiCell {
         
         if hasPhoto { photoImage.loadImage(daily.photo?.url) }
         photoPlaceholderLabel.isHidden = hasPhoto
+        photoPlaceholderImage.isHidden = hasPhoto
         photoImage.isHidden = !hasPhoto
     }
     
