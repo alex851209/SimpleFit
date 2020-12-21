@@ -51,7 +51,7 @@ class UserInfoVC: UIViewController {
         super.viewDidLoad()
 
         configureLayout()
-        fetchInfo()
+        configureInfo(with: user)
     }
     
     private func configureLayout() {
@@ -112,20 +112,12 @@ class UserInfoVC: UIViewController {
     
     private func uploadInfo() {
         
-        provider.uploadInfoWith(user: user) { user in
-            
-            print(user)
-        }
-    }
-    
-    private func fetchInfo() {
-        
-        provider.fetchInfo { [weak self] result in
+        provider.uploadInfoWith(user: user) { result in
             
             switch result {
             
             case .success(let user):
-                self?.configureInfo(with: user)
+                print("Success uploading info for user: \(user)")
                 
             case .failure(let error):
                 print(error)

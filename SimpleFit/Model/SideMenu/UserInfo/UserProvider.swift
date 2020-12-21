@@ -42,7 +42,7 @@ class UserProvider {
         }
     }
     
-    func uploadInfoWith(user: User, completion: @escaping (Result<Any, Error>) -> Void) {
+    func uploadInfoWith(user: User, completion: @escaping (Result<User, Error>) -> Void) {
 
         guard let userID = userID else { return }
         

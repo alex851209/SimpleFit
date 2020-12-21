@@ -23,6 +23,8 @@ class SideMenuVC: UIViewController {
     
     let items = SideMenuItemManager.sideMenuItems
     let segues = [Segue.userInfo, Segue.userGroup, Segue.userFavorite, Segue.userReview, Segue.userGoal]
+    let provider = UserProvider()
+    var currentUser = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +32,38 @@ class SideMenuVC: UIViewController {
         configureTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchInfo()
+    }
+    
     private func configureTableView() {
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func fetchInfo() {
+        
+        provider.fetchInfo { [weak self] result in
+            
+            switch result {
+            
+            case .success(let user):
+                self?.currentUser = user
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let userInfoVC = segue.destination as? UserInfoVC else {return }
+        
+        userInfoVC.user = currentUser
     }
 }
 
