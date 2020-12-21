@@ -124,6 +124,7 @@ class DailyVC: BlurViewController {
         
         photoDetailVC.selectedPhoto = selectedPhoto
         photoDetailVC.selectedDaily = dailys[self.index]
+        photoDetailVC.blurCallback = { self.view.backgroundColor = .white }
         photoDetailVC.callback = { isFavorite in
             
             self.dailys[self.index].photo?.isFavorite = isFavorite

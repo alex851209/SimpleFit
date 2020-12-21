@@ -12,10 +12,15 @@ class PhotoDetailVC: BlurViewController {
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var favoriteButton: UIButton!
     
-    @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
+    @IBAction func dismiss(_ sender: Any) {
+        
+        blurCallback?()
+        dismiss(animated: true)
+    }
     @IBAction func favoriteButtonDidTap(_ sender: Any) { addFavorite() }
     
     var callback: ((Bool) -> Void)?
+    var blurCallback: (() -> Void)?
     let provider = ChartProvider()
     var selectedDaily: DailyData?
     var selectedPhoto: UIImage?
