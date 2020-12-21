@@ -353,7 +353,7 @@ extension HomeVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
-        guard let selectedPhoto = info[.originalImage] as? UIImage else { return }
+        guard let selectedPhoto = info[.editedImage] as? UIImage else { return }
         self.selectedPhoto = selectedPhoto
         
         dismiss(animated: true, completion: { [weak self] in

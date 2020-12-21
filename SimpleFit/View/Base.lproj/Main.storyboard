@@ -2051,19 +2051,19 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="JJS-yI-ydk">
                                                     <rect key="frame" x="44" y="458" width="187.5" height="33"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="體重" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeF-6h-71K">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="體重" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeF-6h-71K">
                                                             <rect key="frame" x="0.0" y="3" width="51" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                             <color key="textColor" systemColor="systemGrayColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="63.3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBn-Ih-ca7">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="63.3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBn-Ih-ca7">
                                                             <rect key="frame" x="59" y="0.0" width="83.5" height="33"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
                                                             <color key="textColor" systemColor="systemGrayColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="公斤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6h0-BM-qvI">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公斤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6h0-BM-qvI">
                                                             <rect key="frame" x="150.5" y="11.5" width="37" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <color key="textColor" systemColor="systemGrayColor"/>
@@ -3124,7 +3124,7 @@
                                 </constraints>
                             </view>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="y52-Kx-QW3">
-                                <rect key="frame" x="110.5" y="119" width="154" height="34.5"/>
+                                <rect key="frame" x="112" y="119" width="151" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <locale key="locale" localeIdentifier="zh_TW"/>
                             </datePicker>
@@ -3183,7 +3183,7 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="FNH-Kv-WUp">
-                                <rect key="frame" x="110.5" y="35" width="154" height="34.5"/>
+                                <rect key="frame" x="112" y="35" width="151" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34.5" id="giZ-Ml-Lj3"/>
@@ -3274,8 +3274,6 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dch-Dl-YXe">
                                         <rect key="frame" x="15" y="25" width="250" height="245"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <string key="text">2020/12/15
-請輸入筆記</string>
                                         <color key="textColor" systemColor="systemGrayColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -3317,7 +3315,7 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
                             </imageView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="xb2-s4-Apc">
-                                <rect key="frame" x="110.5" y="111.5" width="154" height="34.5"/>
+                                <rect key="frame" x="112" y="111.5" width="151" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <locale key="locale" localeIdentifier="zh_TW"/>
                             </datePicker>

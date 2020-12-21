@@ -28,11 +28,13 @@ class AddNoteVC: BlurViewController {
     var selectedDate = Date()
     var selectedYear = Date().year()
     var selectedMonth = Date().month()
+    var selectedDateString = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureLayout()
+        toggleTextView()
     }
     
     private func configureLayout() {
@@ -41,9 +43,26 @@ class AddNoteVC: BlurViewController {
         datePicker.applyBorder()
         datePicker.addTarget(self, action: #selector(dateDidPick), for: .valueChanged)
         
+        noteTextView.delegate = self
+        
         pinImage.transform = CGAffineTransform(rotationAngle: .pi * 0.2)
         cardView.transform = CGAffineTransform(rotationAngle: -.pi * 0.02)
         backgroundCardView.transform = CGAffineTransform(rotationAngle: .pi * 0.03)
+    }
+    
+    private func toggleTextView() {
+        
+        selectedDateString = DateProvider.dateToDateString(selectedDate)
+        
+        if noteTextView.textColor == UIColor.systemGray3 {
+            
+            noteTextView.textColor = .systemGray
+            noteTextView.text = nil
+        } else if noteTextView.text.isEmpty {
+            
+            noteTextView.textColor = .systemGray3
+            noteTextView.text = "\(selectedDateString)\n請輸入筆記"
+        }
     }
     
     private func addNote() {
@@ -69,5 +88,18 @@ class AddNoteVC: BlurViewController {
         selectedDate = sender.date
         selectedYear = selectedDate.year()
         selectedMonth = selectedDate.month()
+        
+        if noteTextView.textColor == .systemGray3 {
+            
+            selectedDateString = DateProvider.dateToDateString(selectedDate)
+            noteTextView.text = "\(selectedDateString)\n請輸入筆記"
+        }
     }
+}
+
+extension AddNoteVC: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) { toggleTextView() }
+    
+    func textViewDidEndEditing(_ textView: UITextView) { toggleTextView() }
 }
