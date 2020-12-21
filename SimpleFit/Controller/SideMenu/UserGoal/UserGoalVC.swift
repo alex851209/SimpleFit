@@ -36,8 +36,6 @@ class UserGoalVC: UIViewController {
 
         configureLayout()
         configureTableView()
-        fetchLatestWeight()
-        fetchGoalDatas()
     }
     
     private func configureTableView() {
@@ -59,22 +57,6 @@ class UserGoalVC: UIViewController {
             
             case .success(let goalList):
                 self?.goalList = goalList
-                self?.tableView.reloadData()
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    private func fetchLatestWeight() {
-        
-        provider.fetchLatestWeight { [weak self] result in
-            
-            switch result {
-            
-            case .success(let weight):
-                self?.currentWeight = weight
                 self?.tableView.reloadData()
                 
             case .failure(let error):

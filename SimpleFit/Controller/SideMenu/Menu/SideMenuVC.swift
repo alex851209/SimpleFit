@@ -26,10 +26,13 @@ class SideMenuVC: UIViewController {
     let userProvider = UserProvider()
     let groupProvider = GroupProvider()
     let chartProvider = ChartProvider()
+    let goalProvider = GoalProvider()
     var currentUser = User()
     var groupList = [Group]()
     var memberCounts = [String: Int]()
     var favorites = [DailyData]()
+    var goalList = [Goal]()
+    var currentWeight: Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +45,8 @@ class SideMenuVC: UIViewController {
         
         fetchInfo()
         configureFavoriteDaily()
+        fetchGoalDatas()
+        fetchLatestWeight()
     }
     
     private func configureTableView() {
@@ -100,6 +105,36 @@ class SideMenuVC: UIViewController {
         }
     }
     
+    private func fetchGoalDatas() {
+        
+        goalProvider.fetchGoalDatas { [weak self] result in
+            
+            switch result {
+            
+            case .success(let goalList):
+                self?.goalList = goalList
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func fetchLatestWeight() {
+        
+        goalProvider.fetchLatestWeight { [weak self] result in
+            
+            switch result {
+            
+            case .success(let weight):
+                self?.currentWeight = weight
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func configureFavoriteDaily() {
         
         chartProvider.fetchFavoriteDatas { [weak self] result in
@@ -132,6 +167,11 @@ class SideMenuVC: UIViewController {
         case Segue.userFavorite:
             guard let userFavoriteVC = segue.destination as? UserFavoriteVC else { return }
             userFavoriteVC.allFavorites = favorites
+            
+        case Segue.userGoal:
+            guard let userGoalVC = segue.destination as? UserGoalVC else { return }
+            userGoalVC.goalList = goalList
+            userGoalVC.currentWeight = currentWeight
             
         default: break
         }
