@@ -35,7 +35,7 @@ class UserFavoriteVC: UIViewController {
         super.viewDidLoad()
 
         configureLayout()
-        configureFavoriteDaily()
+        configureFavoriteOfmonth()
         configureTableView()
     }
     
@@ -57,23 +57,7 @@ class UserFavoriteVC: UIViewController {
             monthFavorites.append(Favorite(month: month, dailys: dailys))
         }
         monthFavorites = monthFavorites.reversed()
-    }
-    
-    private func configureFavoriteDaily() {
-        
-        provider.fetchFavoriteDatas { [weak self] result in
-            
-            switch result {
-            
-            case .success(let allFavorites):
-                self?.allFavorites = allFavorites
-                self?.configureFavoriteOfmonth()
-                self?.tableView.reloadData()
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

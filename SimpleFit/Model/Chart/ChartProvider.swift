@@ -167,6 +167,8 @@ class ChartProvider {
     
     func fetchFavoriteDatas(completion: @escaping (Result<[DailyData], Error>) -> Void) {
         
+        dailyDatas.removeAll()
+        
         guard let userID = userID else { return }
         
         let doc = database.collection("users").document(userID).collection("chartData")

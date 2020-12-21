@@ -25,9 +25,11 @@ class SideMenuVC: UIViewController {
     let segues = [Segue.userInfo, Segue.userGroup, Segue.userFavorite, Segue.userReview, Segue.userGoal]
     let userProvider = UserProvider()
     let groupProvider = GroupProvider()
+    let chartProvider = ChartProvider()
     var currentUser = User()
     var groupList = [Group]()
     var memberCounts = [String: Int]()
+    var favorites = [DailyData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,7 @@ class SideMenuVC: UIViewController {
         super.viewWillAppear(animated)
         
         fetchInfo()
+        configureFavoriteDaily()
     }
     
     private func configureTableView() {
@@ -97,6 +100,21 @@ class SideMenuVC: UIViewController {
         }
     }
     
+    private func configureFavoriteDaily() {
+        
+        chartProvider.fetchFavoriteDatas { [weak self] result in
+
+            switch result {
+
+            case .success(let allFavorites):
+                self?.favorites = allFavorites
+
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier {
@@ -110,6 +128,10 @@ class SideMenuVC: UIViewController {
             userGroupVC.user = currentUser
             userGroupVC.groupList = groupList
             userGroupVC.memberCounts = memberCounts
+            
+        case Segue.userFavorite:
+            guard let userFavoriteVC = segue.destination as? UserFavoriteVC else { return }
+            userFavoriteVC.allFavorites = favorites
             
         default: break
         }
