@@ -23,8 +23,11 @@ class SideMenuVC: UIViewController {
     
     let items = SideMenuItemManager.sideMenuItems
     let segues = [Segue.userInfo, Segue.userGroup, Segue.userFavorite, Segue.userReview, Segue.userGoal]
-    let provider = UserProvider()
+    let userProvider = UserProvider()
+    let groupProvider = GroupProvider()
     var currentUser = User()
+    var groupList = [Group]()
+    var memberCounts = [String: Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +49,13 @@ class SideMenuVC: UIViewController {
     
     private func fetchInfo() {
         
-        provider.fetchInfo { [weak self] result in
+        userProvider.fetchInfo { [weak self] result in
             
             switch result {
             
             case .success(let user):
                 self?.currentUser = user
+                self?.fetchGroup()
                 
             case .failure(let error):
                 print(error)
@@ -59,11 +63,56 @@ class SideMenuVC: UIViewController {
         }
     }
     
+    private func fetchGroup() {
+        
+        groupProvider.fetchGroups(of: currentUser) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let groupList):
+                self?.groupList = groupList
+                self?.fetchMemberCount()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func fetchMemberCount() {
+        
+        for group in groupList {
+            
+            groupProvider.fetchMembers(in: group) { [weak self] result in
+                
+                switch result {
+                
+                case .success(let memberList):
+                    self?.memberCounts[group.id] = memberList.count
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard let userInfoVC = segue.destination as? UserInfoVC else {return }
+        switch segue.identifier {
         
-        userInfoVC.user = currentUser
+        case Segue.userInfo:
+            guard let userInfoVC = segue.destination as? UserInfoVC else {return }
+            userInfoVC.user = currentUser
+            
+        case Segue.userGroup:
+            guard let userGroupVC = segue.destination as? UserGroupVC else { return }
+            userGroupVC.user = currentUser
+            userGroupVC.groupList = groupList
+            userGroupVC.memberCounts = memberCounts
+            
+        default: break
+        }
     }
 }
 

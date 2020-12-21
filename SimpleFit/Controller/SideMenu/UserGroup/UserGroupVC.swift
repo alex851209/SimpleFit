@@ -38,8 +38,9 @@ class UserGroupVC: UIViewController {
         super.viewDidLoad()
 
         configureLayout()
-        fetchUserInfo()
+        configureOwner()
         configureTableView()
+        fetchGroup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +60,16 @@ class UserGroupVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func configureOwner() {
+        
+        guard let avatar = user.avatar,
+              let name = user.name
+        else { return }
+        
+        owner.avatar = avatar
+        owner.name = name
     }
     
     private func showInvitePage() {
@@ -125,23 +136,23 @@ class UserGroupVC: UIViewController {
     }
     
     private func fetchUserInfo() {
-        
+
         userProvider.fetchInfo { [weak self] result in
-            
+
             switch result {
-            
+
             case .success(let user):
                 guard let name = user.name,
                       let avatar = user.avatar
                 else { return }
-                
+
                 self?.user = user
                 self?.owner.name = name
                 self?.owner.avatar = avatar
-                
+
                 self?.fetchGroup()
                 self?.fetchInvitations()
-                
+
             case .failure(let error):
                 print(error)
             }
