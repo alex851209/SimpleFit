@@ -15,8 +15,8 @@ class AddPhotoVC: BlurViewController {
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true, completion: nil) }
     @IBAction func confirmButtonDidTap(_ sender: Any) {
         
+        SFProgressHUD.showLoading()
         uploadPhoto()
-        dismiss(animated: true, completion: nil)
     }
     
     var callback: ((Int, Int) -> Void)?
@@ -72,8 +72,9 @@ class AddPhotoVC: BlurViewController {
             case .success(let photo):
                 let dateString = String(describing: self.selectedDate)
                 print("Success adding new photo: \(photo) on date: \(dateString)")
-                
                 self.callback?(self.selectedYear, self.selectedMonth)
+                SFProgressHUD.showSuccess()
+                self.dismiss(animated: true, completion: nil)
             case .failure(let error):
                 print(error.localizedDescription)
             }

@@ -38,9 +38,6 @@ class GroupDetailVC: UIViewController {
 
         configureLayout()
         configureTableView()
-        fetchMember()
-        fetchChallenge()
-        fetchAlbum()
     }
     
     private func configureLayout() {
@@ -52,22 +49,6 @@ class GroupDetailVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-    }
-    
-    private func fetchMember() {
-        
-        provider.fetchMembers(in: group) { [weak self] result in
-            
-            switch result {
-            
-            case .success(let members):
-                self?.members = members
-                self?.tableView.reloadData()
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
     
     private func fetchChallenge() {
@@ -219,10 +200,6 @@ class GroupDetailVC: UIViewController {
             
             sendInvitationVC.user = user
             sendInvitationVC.group = group
-            sendInvitationVC.callback = { [weak self] in
-                
-                self?.fetchMember()
-            }
             
         case Segue.memberDetail:
             guard let memberDetailVC = segue.destination as? MemberDetailVC else { return }

@@ -17,9 +17,8 @@ class AddGoalVC: BlurViewController {
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
     @IBAction func confirmButtonDidTap(_ sender: Any) {
         
+        SFProgressHUD.showLoading()
         addGoal()
-        callback?()
-        dismiss(animated: true)
     }
     
     var callback: (() -> Void)?
@@ -60,12 +59,15 @@ class AddGoalVC: BlurViewController {
     
     private func addGoal() {
         
-        provider.addDataWith(goal: goal) { result in
+        provider.addDataWith(goal: goal) { [weak self] result in
             
             switch result {
             
             case .success(let goal):
                 print("Success adding new goal: \(goal)")
+                SFProgressHUD.showSuccess()
+                self?.callback?()
+                self?.dismiss(animated: true)
                 
             case .failure(let error):
                 print(error)
@@ -95,6 +97,9 @@ class AddGoalVC: BlurViewController {
         let title = "# \(beginDateString) ~ \(endDateString)"
         
         goalTitleTextField.placeholder = title
+        
+        if goalTitleTextField.text == "" { goal.title = title }
+        
         goal.endDate = endDateString
     }
 }

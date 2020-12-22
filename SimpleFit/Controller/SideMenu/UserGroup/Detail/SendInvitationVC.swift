@@ -19,7 +19,6 @@ class SendInvitationVC: BlurViewController {
     var user = User()
     var invitee = User()
     var group = Group(id: "", coverPhoto: "", name: "", content: "", category: "")
-    var callback: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +42,6 @@ class SendInvitationVC: BlurViewController {
             
             case .success(let invitee):
                 print("Success sending invitation to: \(invitee)")
-                self?.callback?()
                 self?.dismiss(animated: true)
                 
             case .failure(let error):

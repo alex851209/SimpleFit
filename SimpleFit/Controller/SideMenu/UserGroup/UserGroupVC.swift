@@ -33,6 +33,9 @@ class UserGroupVC: UIViewController {
     var selectedGroup: Group?
     var user = User()
     var invitationList = [Invitation]()
+    var members = [User]()
+    var challenges = [Challenge]()
+    var albums = [Album]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,6 +162,61 @@ class UserGroupVC: UIViewController {
         }
     }
     
+    private func fetchMember() {
+        
+        guard let selectedGroup = self.selectedGroup else { return }
+        
+        provider.fetchMembers(in: selectedGroup) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let members):
+                self?.members = members
+                self?.fetchChallenge()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func fetchChallenge() {
+        
+        guard let selectedGroup = self.selectedGroup else { return }
+        
+        provider.fetchChallenges(in: selectedGroup) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let challenges):
+                self?.challenges = challenges
+                self?.fetchAlbum()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func fetchAlbum() {
+        
+        guard let selectedGroup = self.selectedGroup else { return }
+        
+        provider.fetchAlbum(in: selectedGroup) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let albums):
+                self?.albums = albums
+                SFProgressHUD.dismiss()
+                self?.performSegue(withIdentifier: Segue.groupDetail, sender: nil)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func acceptInvitation(_ id: String) {
         
         provider.acceptInvitation(of: user, invitationID: id) { [weak self] result in
@@ -188,11 +246,14 @@ class UserGroupVC: UIViewController {
             
         case Segue.groupDetail:
             guard let groupDetailVC = segue.destination as? GroupDetailVC,
-                  let selectedGroup = selectedGroup
+                  let selectedGroup = self.selectedGroup
             else { return }
             
             groupDetailVC.group = selectedGroup
             groupDetailVC.user = user
+            groupDetailVC.members = members
+            groupDetailVC.challenges = challenges
+            groupDetailVC.albums = albums
         
         case Segue.groupInvitation:
             guard let invitationVC = segue.destination as? InvitationVC else { return }
@@ -238,9 +299,8 @@ extension UserGroupVC: UITableViewDelegate, UITableViewDataSource {
         let selectedCell = tableView.cellForRow(at: indexPath)
         selectedGroup = groupList[indexPath.row]
         
-        selectedCell?.showButtonFeedbackAnimation { [weak self] in
-            
-            self?.performSegue(withIdentifier: Segue.groupDetail, sender: nil)
-        }
+        fetchMember()
+        
+        selectedCell?.showButtonFeedbackAnimation { SFProgressHUD.showLoading() }
     }
 }

@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.toolbarTintColor = .systemGray
         FirebaseApp.configure()
+        Thread.sleep(forTimeInterval: 3)
         
         return true
     }

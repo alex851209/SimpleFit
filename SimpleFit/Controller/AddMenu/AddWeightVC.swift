@@ -17,9 +17,8 @@ class AddWeightVC: BlurViewController {
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
     @IBAction func confirmButtonDidTap(_ sender: Any) {
         
+        SFProgressHUD.showLoading()
         addWeight()
-        callback?(selectedYear, selectedMonth)
-        dismiss(animated: true)
     }
     
     var callback: ((Int, Int) -> Void)?
@@ -64,6 +63,15 @@ class AddWeightVC: BlurViewController {
             case .success(let weight):
                 let dateString = String(describing: self?.selectedDate)
                 print("Success adding new weight: \(weight) on date: \(dateString)")
+                
+                SFProgressHUD.showSuccess()
+                
+                guard let selectedYear = self?.selectedYear,
+                      let selectedMonth = self?.selectedMonth
+                else { return }
+                
+                self?.callback?(selectedYear, selectedMonth)
+                self?.dismiss(animated: true)
             case .failure(let error):
                 print(error.localizedDescription)
             }

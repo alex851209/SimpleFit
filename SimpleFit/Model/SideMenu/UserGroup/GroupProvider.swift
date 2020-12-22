@@ -44,6 +44,7 @@ enum AlbumField: String {
     case id
     case name
     case url
+    case createdTime
 }
 
 enum GroupInvitationsField: String {
@@ -330,7 +331,8 @@ class GroupProvider {
         doc.document(id).setData([
             AlbumField.id.rawValue: id,
             AlbumField.name.rawValue: user.name as Any,
-            AlbumField.url.rawValue: "\(photo)"
+            AlbumField.url.rawValue: "\(photo)",
+            AlbumField.createdTime.rawValue: Date()
         ]) { error in
             
             if let error = error {
@@ -343,11 +345,15 @@ class GroupProvider {
     
     func fetchAlbum(in group: Group, completion: @escaping (Result<[Album], Error>) -> Void) {
         
-        let doc = database.collection("groups").document(group.id).collection("album")
+        albumList.removeAll()
+        
+        let doc = database
+                    .collection("groups")
+                    .document(group.id)
+                    .collection("album")
+                    .order(by: AlbumField.createdTime.rawValue, descending: true)
         
         doc.getDocuments { [weak self] (querySnapshot, error) in
-            
-            self?.albumList.removeAll()
             
             if let error = error {
                 

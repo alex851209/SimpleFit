@@ -51,7 +51,7 @@ class GoalProvider {
         
         guard let userID = userID else { return }
         
-        let doc = database.collection("users").document(userID).collection("goalList")
+        let doc = database.collection("users").document(userID).collection("goalList").order(by: "endDate")
         
         doc.getDocuments { [weak self] (querySnapshot, error) in
             

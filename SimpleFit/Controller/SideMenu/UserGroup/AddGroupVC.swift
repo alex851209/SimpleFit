@@ -19,7 +19,11 @@ class AddGroupVC: BlurViewController {
     @IBOutlet weak var coverPhotoButton: UIButton!
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
-    @IBAction func confirmButtonDidTap(_ sender: Any) { uploadCoverPhoto() }
+    @IBAction func confirmButtonDidTap(_ sender: Any) {
+        
+        SFProgressHUD.showLoading()
+        uploadCoverPhoto()
+    }
     @IBAction func photoButtonDidTap(_ sender: UIButton) { showPhotoAlert(sender) }
     
     let provider = GroupProvider()
@@ -121,6 +125,7 @@ class AddGroupVC: BlurViewController {
             
             case .success(let group):
                 print("Success adding new group: \(group)")
+                SFProgressHUD.showSuccess()
                 self?.callback?()
                 self?.dismiss(animated: true)
                 

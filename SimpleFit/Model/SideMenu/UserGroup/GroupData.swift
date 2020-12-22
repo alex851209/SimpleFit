@@ -36,6 +36,7 @@ struct Album: Codable {
     var id: String
     var name: String
     var url: String
+    var createdTime: Date
 }
 
 struct Inviter: Codable {

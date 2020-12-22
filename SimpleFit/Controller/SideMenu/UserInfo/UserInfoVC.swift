@@ -118,6 +118,7 @@ class UserInfoVC: UIViewController {
             
             case .success(let user):
                 print("Success uploading info for user: \(user)")
+                SFProgressHUD.showSuccess()
                 
             case .failure(let error):
                 print(error)
@@ -126,6 +127,8 @@ class UserInfoVC: UIViewController {
     }
     
     private func uploadAvatar() {
+        
+        SFProgressHUD.showLoading()
         
         guard let avatar = avatarImage.image else { return }
         provider.uploadAvatarWith(image: avatar) { [weak self] result in
