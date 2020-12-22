@@ -12,6 +12,7 @@ class PhotoCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: GeminiCollectionView!
     @IBOutlet weak var emptyLabel: UILabel!
+    @IBOutlet weak var photoCountLabel: UILabel!
     
     @IBAction func addButtonDidTap(_ sender: UIButton) { addPhoto(sender) }
     
@@ -21,6 +22,8 @@ class PhotoCell: UITableViewCell {
     func layoutCell(with albums: [Album]) {
         
         self.albums = albums
+        photoCountLabel.text = "1 / \(albums.count)"
+        photoCountLabel.isHidden = albums.isEmpty
         emptyLabel.isHidden = !albums.isEmpty
         configureCollectionView()
     }
@@ -48,6 +51,16 @@ class PhotoCell: UITableViewCell {
         layout.minimumLineSpacing = 10
         layout.scrollDirection = .horizontal
         return layout
+    }
+    
+    private func detectSelectedCell(_ scrollView: UIScrollView) {
+
+        let center = contentView.convert(collectionView.center, to: collectionView)
+        
+        if let indexPath = collectionView.indexPathForItem(at: center) {
+            
+            photoCountLabel.text = "\(indexPath.item + 1) / \(albums.count)"
+        }
     }
 }
 
@@ -82,4 +95,11 @@ extension PhotoCell: UICollectionViewDelegate, UICollectionViewDataSource {
         
         if let cell = cell as? GeminiCell { self.collectionView.animateCell(cell) }
     }
+}
+
+extension PhotoCell {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) { collectionView.animateVisibleCells() }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {  detectSelectedCell(scrollView) }
 }
