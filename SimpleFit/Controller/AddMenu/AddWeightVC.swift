@@ -53,7 +53,10 @@ class AddWeightVC: BlurViewController {
         
         guard let weightString = weightText.text,
               let weight = Double(weightString)
-        else { return }
+        else {
+            SFProgressHUD.showFailed(with: "請輸入體重")
+            return
+        }
         
         let daily = DailyData(weight: weight)
         provider.addDataWith(dailyData: daily, field: .weight, date: selectedDate, completion: { [weak self] result in

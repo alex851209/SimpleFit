@@ -13,7 +13,16 @@ class SendInvitationVC: BlurViewController {
     @IBOutlet weak var addMemberTextField: UITextField!
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
-    @IBAction func confirmButtonDidTap(_ sender: Any) { sendInvitation() }
+    @IBAction func confirmButtonDidTap(_ sender: Any) {
+        
+        guard invitee.name != "" && invitee.name != nil else {
+            SFProgressHUD.showFailed(with: "請輸入用戶暱稱")
+            return
+        }
+        
+        SFProgressHUD.showLoading()
+        sendInvitation()
+    }
     
     let provider = GroupProvider()
     var user = User()
@@ -42,6 +51,7 @@ class SendInvitationVC: BlurViewController {
             
             case .success(let invitee):
                 print("Success sending invitation to: \(invitee)")
+                SFProgressHUD.showSuccess()
                 self?.dismiss(animated: true)
                 
             case .failure(let error):

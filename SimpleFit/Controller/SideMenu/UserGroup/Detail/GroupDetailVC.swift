@@ -75,6 +75,7 @@ class GroupDetailVC: UIViewController {
             
             case .success(let albums):
                 self?.albums = albums
+                SFProgressHUD.showSuccess()
                 self?.tableView.reloadData()
                 
             case .failure(let error):
@@ -319,6 +320,8 @@ extension GroupDetailVC: UIImagePickerControllerDelegate, UINavigationController
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         guard let selectedPhoto = info[.editedImage] as? UIImage else { return }
+        
+        SFProgressHUD.showLoading()
         
         uploadPhoto(with: selectedPhoto)
         

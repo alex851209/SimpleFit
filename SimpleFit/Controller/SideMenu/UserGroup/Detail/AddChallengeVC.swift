@@ -18,7 +18,7 @@ class AddChallengeVC: BlurViewController {
     var group = Group(id: "", coverPhoto: "", name: "", content: "", category: "")
     var user = User()
     let provider = GroupProvider()
-    var challenge = Challenge(id: "", content: "", date: "")
+    var challenge = Challenge(id: "", content: "", date: "", createdTime: Date())
     let date = DateProvider.dateToDateString(Date())
     var callback: (() -> Void)?
     
@@ -39,7 +39,12 @@ class AddChallengeVC: BlurViewController {
     
     private func addChallenge() {
         
-        guard challengeContentTextField.text != "" else { return }
+        guard challengeContentTextField.text != "" else {
+            SFProgressHUD.showFailed(with: "請輸入挑戰內容")
+            return
+        }
+        
+        SFProgressHUD.showLoading()
         
         provider.addChallenge(in: group, with: challenge) { [weak self] result in
             
@@ -47,6 +52,7 @@ class AddChallengeVC: BlurViewController {
             
             case .success(let challenge):
                 print("Success adding new challenge: \(challenge)")
+                SFProgressHUD.showSuccess()
                 self?.callback?()
                 self?.dismiss(animated: true)
                 
@@ -72,6 +78,6 @@ extension AddChallengeVC: UITextFieldDelegate {
         
         guard let content = textField.text else { return }
         
-        challenge = Challenge(id: "", avatar: user.avatar, content: content, date: date)
+        challenge = Challenge(id: "", avatar: user.avatar, content: content, date: date, createdTime: Date())
     }
 }

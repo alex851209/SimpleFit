@@ -42,4 +42,11 @@ class SFProgressHUD {
         ProgressHUD.colorAnimation = .lightGray
         ProgressHUD.show("移除收藏", icon: .heart, interaction: true)
     }
+    
+    static func showFailed(with text: String) {
+        
+        ProgressHUD.colorStatus = .systemGray
+        ProgressHUD.colorAnimation = .lightGray
+        ProgressHUD.showFailed(text)
+    }
 }

@@ -37,6 +37,7 @@ enum ChallengeField: String {
     case avatar
     case content
     case date
+    case createdTime
 }
 
 enum AlbumField: String {
@@ -210,7 +211,7 @@ class GroupProvider {
         
         challengeList.removeAll()
         
-        let doc = database.collection("groups").document(group.id).collection("challenges")
+        let doc = database.collection("groups").document(group.id).collection("challenges").order(by: "createdTime", descending: true)
         
         doc.getDocuments { [weak self] (querySnapshot, error) in
             
@@ -248,7 +249,8 @@ class GroupProvider {
             ChallengeField.id.rawValue: id,
             ChallengeField.avatar.rawValue: challenge.avatar as Any,
             ChallengeField.content.rawValue: challenge.content,
-            ChallengeField.date.rawValue: challenge.date
+            ChallengeField.date.rawValue: challenge.date,
+            ChallengeField.createdTime.rawValue: Date()
         ]) { error in
             
             if let error = error {
@@ -303,6 +305,13 @@ class GroupProvider {
                 
                 print("Error getting documents: \(error)")
             } else {
+                
+                guard let isNoUser = querySnapshot?.documents.isEmpty,
+                      !isNoUser
+                else {
+                    SFProgressHUD.showFailed(with: "查無使用者")
+                    return
+                }
                 
                 for document in querySnapshot!.documents {
                     

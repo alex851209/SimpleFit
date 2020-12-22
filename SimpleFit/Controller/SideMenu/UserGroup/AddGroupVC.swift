@@ -99,7 +99,7 @@ class AddGroupVC: BlurViewController {
               !isEmptyTitle,
               !isEmptyContent
         else {
-            print("Please fill in all info")
+            SFProgressHUD.showFailed(with: "請填寫所有欄位")
             return
         }
         

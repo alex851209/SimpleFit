@@ -73,6 +73,7 @@ extension InvitationVC: UITableViewDelegate, UITableViewDataSource {
         invitationCell.layoutCell(with: invitationList[indexPath.row])
         invitationCell.callback = { [weak self] id in
             
+            SFProgressHUD.showSuccess()
             self?.callback?(id)
             self?.removeInvitation(id: id)
         }

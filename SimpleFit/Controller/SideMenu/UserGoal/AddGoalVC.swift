@@ -59,6 +59,11 @@ class AddGoalVC: BlurViewController {
     
     private func addGoal() {
         
+        guard goalWeightTextField.text != "" else {
+            SFProgressHUD.showFailed(with: "請輸入目標體重")
+            return
+        }
+        
         provider.addDataWith(goal: goal) { [weak self] result in
             
             switch result {

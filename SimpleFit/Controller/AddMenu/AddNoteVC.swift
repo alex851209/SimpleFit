@@ -66,7 +66,12 @@ class AddNoteVC: BlurViewController {
     
     private func addNote() {
         
-        guard let note = noteTextView.text else { return }
+        guard let note = noteTextView.text,
+              noteTextView.textColor == UIColor.systemGray
+        else {
+            SFProgressHUD.showFailed(with: "請輸入筆記")
+            return
+        }
         
         let daily = DailyData(note: note)
         provider.addDataWith(dailyData: daily, field: .note, date: selectedDate, completion: { [weak self] result in

@@ -29,6 +29,7 @@ struct Challenge: Codable {
     var avatar: String?
     var content: String
     var date: String
+    var createdTime: Date
 }
 
 struct Album: Codable {
