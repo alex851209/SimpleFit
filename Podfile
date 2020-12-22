@@ -18,5 +18,6 @@ target 'SimpleFit' do
   pod 'Firebase/Storage'
   pod 'Firebase/Auth'
   pod 'Kingfisher'
+  pod 'ProgressHUD'
   
 end
