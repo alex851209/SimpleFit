@@ -211,7 +211,11 @@ class GroupProvider {
         
         challengeList.removeAll()
         
-        let doc = database.collection("groups").document(group.id).collection("challenges").order(by: "createdTime", descending: true)
+        let doc = database
+                    .collection("groups")
+                    .document(group.id)
+                    .collection("challenges")
+                    .order(by: "createdTime", descending: true)
         
         doc.getDocuments { [weak self] (querySnapshot, error) in
             
@@ -328,10 +332,10 @@ class GroupProvider {
         }
     }
     
-    func addPhoto(in group: Group,
-                  from user: User,
-                  with photo: URL,
-                  completion: @escaping (Result<URL, Error>) -> Void) {
+    func addAlbumPhoto(in group: Group,
+                       from user: User,
+                       with photo: URL,
+                       completion: @escaping (Result<URL, Error>) -> Void) {
         
         let doc = database.collection("groups").document(group.id).collection("album")
         
@@ -344,6 +348,24 @@ class GroupProvider {
             AlbumField.createdTime.rawValue: Date()
         ]) { error in
             
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(photo))
+            }
+        }
+    }
+    
+    func addCoverPhoto(in group: Group,
+                       with photo: URL,
+                       completion: @escaping (Result<URL, Error>) -> Void) {
+
+        let doc = database.collection("groups").document(group.id)
+
+        doc.setData([
+            GroupField.coverPhoto.rawValue: "\(photo)"
+        ], merge: true) { error in
+
             if let error = error {
                 completion(.failure(error))
             } else {

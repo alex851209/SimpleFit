@@ -13,7 +13,9 @@ class InfoCell: UITableViewCell {
     @IBOutlet weak var coverPhotoButton: UIButton!
     @IBOutlet weak var contentLabel: UILabel!
     
-    @IBAction func coverPhotoButtonDidTap(_ sender: Any) { showPhotoAlert() }
+    @IBAction func coverPhotoButtonDidTap(_ sender: Any) { editCoverPhoto() }
+    
+    var callback: (() -> Void)?
     
     func layoutCell(with group: Group) {
         
@@ -22,12 +24,12 @@ class InfoCell: UITableViewCell {
         
         coverPhotoButton.clipsToBounds = true
         coverPhotoButton.layer.cornerRadius = 10
-        coverPhotoButton.loadImage(group.coverPhoto, placeHolder: UIImage.asset(.album))
+        coverPhotoButton.loadImage(group.coverPhoto)
         coverPhotoButton.imageView?.contentMode = .scaleAspectFill
     }
     
-    private func showPhotoAlert() {
+    private func editCoverPhoto() {
         
-        coverPhotoButton.showButtonFeedbackAnimation {}
+        coverPhotoButton.showButtonFeedbackAnimation { self.callback?() }
     }
 }

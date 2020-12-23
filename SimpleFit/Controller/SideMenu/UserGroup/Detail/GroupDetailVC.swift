@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum PhotoType {
+    
+    case album
+    case cover
+}
+
 class GroupDetailVC: UIViewController {
 
     private struct Segue {
@@ -32,6 +38,7 @@ class GroupDetailVC: UIViewController {
     var photosURL = [URL]()
     var albums = [Album]()
     var selectedMember = User()
+    var photoType: PhotoType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +56,27 @@ class GroupDetailVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func fetchGroup() {
+        
+        provider.fetchGroups(of: user) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let groupList):
+                let id = self?.group.id
+                
+                guard let group = groupList.first( where: { $0.id == id }) else { return }
+                self?.group = group
+                
+                SFProgressHUD.showSuccess()
+                self?.tableView.reloadData()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     private func fetchChallenge() {
@@ -158,7 +186,13 @@ class GroupDetailVC: UIViewController {
             switch result {
             
             case .success(let url):
-                self?.addPhoto(with: url)
+                
+                switch self?.photoType {
+                
+                case .album: self?.addAlbumPhoto(with: url)
+                case .cover: self?.addCoverPhoto(with: url)
+                default: break
+                }
                 
             case .failure(let error):
                 print(error)
@@ -166,14 +200,30 @@ class GroupDetailVC: UIViewController {
         }
     }
     
-    private func addPhoto(with url: URL) {
+    private func addCoverPhoto(with url: URL) {
         
-        provider.addPhoto(in: group, from: user, with: url) { [weak self] result in
+        provider.addCoverPhoto(in: group, with: url) { [weak self] result in
             
             switch result {
             
             case .success(let url):
-                print("Success adding new photo with URL: \(url)")
+                print("Success adding new cover photo with URL: \(url)")
+                self?.fetchGroup()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func addAlbumPhoto(with url: URL) {
+        
+        provider.addAlbumPhoto(in: group, from: user, with: url) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let url):
+                print("Success adding new photo to album with URL: \(url)")
                 self?.fetchAlbum()
                 
             case .failure(let error):
@@ -263,6 +313,11 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             else { return cell }
             
             infoCell.layoutCell(with: group)
+            infoCell.callback = { [weak self] in
+                
+                self?.photoType = .cover
+                self?.showPhotoAlert()
+            }
             
             return infoCell
             
@@ -304,6 +359,7 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             photoCell.layoutCell(with: albums)
             photoCell.callback = { [weak self] in
                 
+                self?.photoType = .album
                 self?.showPhotoAlert()
             }
             
@@ -322,7 +378,7 @@ extension GroupDetailVC: UIImagePickerControllerDelegate, UINavigationController
         guard let selectedPhoto = info[.editedImage] as? UIImage else { return }
         
         SFProgressHUD.showLoading()
-        
+
         uploadPhoto(with: selectedPhoto)
         
         dismiss(animated: true)

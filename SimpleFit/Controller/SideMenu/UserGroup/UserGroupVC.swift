@@ -43,13 +43,12 @@ class UserGroupVC: UIViewController {
         configureLayout()
         configureOwner()
         configureTableView()
-        fetchGroup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchMemberCount()
+        fetchGroup()
         fetchInvitations()
     }
     
