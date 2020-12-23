@@ -1600,6 +1600,19 @@
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Arb-GB-igz">
+                                <rect key="frame" x="152.5" y="551" width="70" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="CUo-DD-cq7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="移除">
+                                    <color key="titleColor" red="0.6588235294117647" green="0.26666666666666666" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="removeButtonDidTap:" destination="j1c-ku-DFJ" eventType="touchUpInside" id="u87-jc-Uab"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Pki-V4-S3o"/>
                         <constraints>
@@ -1609,6 +1622,8 @@
                             <constraint firstItem="KbV-65-FaT" firstAttribute="leading" secondItem="Pki-V4-S3o" secondAttribute="leading" id="Fnb-pN-k8A"/>
                             <constraint firstItem="UEO-1V-uB0" firstAttribute="centerX" secondItem="oMn-kv-Lv1" secondAttribute="centerX" id="SC4-p5-oG8"/>
                             <constraint firstItem="oMn-kv-Lv1" firstAttribute="centerX" secondItem="Hy3-gx-p07" secondAttribute="centerX" id="ZYu-uO-uF5"/>
+                            <constraint firstItem="Pki-V4-S3o" firstAttribute="bottom" secondItem="Arb-GB-igz" secondAttribute="bottom" constant="80" id="bkk-r6-BP9"/>
+                            <constraint firstItem="Arb-GB-igz" firstAttribute="centerX" secondItem="iK8-D1-6e2" secondAttribute="centerX" id="icv-oL-J8r"/>
                             <constraint firstItem="Hy3-gx-p07" firstAttribute="centerY" secondItem="iK8-D1-6e2" secondAttribute="centerY" constant="-60" id="jp7-4z-l3V"/>
                             <constraint firstItem="Pki-V4-S3o" firstAttribute="bottom" secondItem="KbV-65-FaT" secondAttribute="bottom" id="u9f-T8-k7u"/>
                             <constraint firstItem="KbV-65-FaT" firstAttribute="top" secondItem="Pki-V4-S3o" secondAttribute="top" id="vKA-2X-tTI"/>
@@ -1619,6 +1634,7 @@
                         <outlet property="avatarImage" destination="Hy3-gx-p07" id="2Ev-JN-czl"/>
                         <outlet property="genderLabel" destination="UEO-1V-uB0" id="JGI-dt-Scq"/>
                         <outlet property="nameLabel" destination="oMn-kv-Lv1" id="ZjE-zO-eRN"/>
+                        <outlet property="removeButton" destination="Arb-GB-igz" id="Nh1-Yp-SNh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gY8-iz-wsd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3135,7 +3151,7 @@
                                 </constraints>
                             </view>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="y52-Kx-QW3">
-                                <rect key="frame" x="111" y="119" width="153.5" height="34.5"/>
+                                <rect key="frame" x="110.5" y="119" width="154" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <locale key="locale" localeIdentifier="zh_TW"/>
                             </datePicker>
@@ -3194,7 +3210,7 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="FNH-Kv-WUp">
-                                <rect key="frame" x="111" y="35" width="153.5" height="34.5"/>
+                                <rect key="frame" x="110.5" y="35" width="154" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34.5" id="giZ-Ml-Lj3"/>
@@ -3326,7 +3342,7 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
                             </imageView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="xb2-s4-Apc">
-                                <rect key="frame" x="111" y="111.5" width="153.5" height="34.5"/>
+                                <rect key="frame" x="110.5" y="111.5" width="154" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <locale key="locale" localeIdentifier="zh_TW"/>
                             </datePicker>

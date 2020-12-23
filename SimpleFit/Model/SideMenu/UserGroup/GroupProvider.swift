@@ -472,4 +472,33 @@ class GroupProvider {
             }
         }
     }
+    
+    func removeMember(of user: User,
+                      in group: Group,
+                      completion: @escaping (Result<String, Error>) -> Void) {
+        
+        let usersDoc = database.collection("users").document(user.id)
+        let groupsDoc = database
+                            .collection("groups")
+                            .document(group.id)
+                            .collection("members")
+                            .document(user.id)
+        
+        usersDoc.updateData([
+            GroupField.groups.rawValue: FieldValue.arrayRemove([group.id])
+        ]) { error in
+            
+            if let error = error {
+                
+                print("Error removing field: \(error)")
+            } else {
+                
+                groupsDoc.delete()
+                
+                guard let name = user.name else { return }
+                
+                completion(.success(name))
+            }
+        }
+    }
 }

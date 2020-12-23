@@ -79,6 +79,23 @@ class GroupDetailVC: UIViewController {
         }
     }
     
+    private func fetchMember() {
+        
+        provider.fetchMembers(in: group) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let members):
+                self?.members = members
+                SFProgressHUD.showSuccess()
+                self?.tableView.reloadData()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func fetchChallenge() {
         
         provider.fetchChallenges(in: group) { [weak self] result in
@@ -256,6 +273,11 @@ class GroupDetailVC: UIViewController {
             guard let memberDetailVC = segue.destination as? MemberDetailVC else { return }
             
             memberDetailVC.member = selectedMember
+            memberDetailVC.group = group
+            memberDetailVC.callback = { [weak self] in
+                
+                self?.fetchMember()
+            }
             
         default: break
         }
