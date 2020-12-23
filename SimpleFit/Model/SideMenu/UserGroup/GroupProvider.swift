@@ -276,23 +276,43 @@ class GroupProvider {
             
             case .success(let invitee):
                 
-                let doc = self?.database.collection("users").document(invitee.id).collection("groupInvitations")
-                
-                doc?.document(group.id).setData([
-                    GroupInvitationsField.id.rawValue: group.id,
-                    GroupInvitationsField.name.rawValue: group.name,
-                    GroupInvitationsField.inviter.rawValue: [
-                        GroupInvitationsField.inviterName: inviter.name,
-                        GroupInvitationsField.inviterAvatar: inviter.avatar
-                    ]
-                ]) { error in
+                self?.fetchMembers(in: group, completion: { result in
                     
-                    if let error = error {
-                        completion(.failure(error))
-                    } else {
-                        completion(.success(invitee))
+                    switch result {
+                    
+                    case .success(let users):
+                        if users.contains(where: { $0.id == invitee.id }) {
+                            
+                            SFProgressHUD.showFailed(with: "使用者已存在群組")
+                        } else {
+                            
+                            let doc = self?
+                                        .database
+                                        .collection("users")
+                                        .document(invitee.id)
+                                        .collection("groupInvitations")
+
+                            doc?.document(group.id).setData([
+                                GroupInvitationsField.id.rawValue: group.id,
+                                GroupInvitationsField.name.rawValue: group.name,
+                                GroupInvitationsField.inviter.rawValue: [
+                                    GroupInvitationsField.inviterName: inviter.name,
+                                    GroupInvitationsField.inviterAvatar: inviter.avatar
+                                ]
+                            ]) { error in
+
+                                if let error = error {
+                                    completion(.failure(error))
+                                } else {
+                                    completion(.success(invitee))
+                                }
+                            }
+                        }
+                        
+                    case .failure(let error):
+                        print(error)
                     }
-                }
+                })
             case .failure(let error):
                 print(error)
             }
