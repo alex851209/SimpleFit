@@ -45,7 +45,7 @@ class AlbumDetailVC: BlurViewController {
     
     private func showRemoveAlert() {
         
-        let alert = RemoveAlbumAlertVC(showAction: remove)
+        let alert = SFAlertVC(title: "移除？", showAction: remove)
         present(alert, animated: true)
     }
     

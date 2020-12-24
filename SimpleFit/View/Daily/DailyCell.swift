@@ -11,6 +11,8 @@ import Gemini
 protocol DailyCellDelegate: AnyObject {
     
     func photoDidTap(with image: UIImage)
+    
+    func removeDaily()
 }
 
 class DailyCell: GeminiCell {
@@ -29,6 +31,7 @@ class DailyCell: GeminiCell {
     func layoutCell(with daily: DailyData, averageWeight: Double) {
         
         configureTapGesture()
+        configureLongPressGesture()
         
         layer.cornerRadius = 25
         applyShadow()
@@ -80,6 +83,13 @@ class DailyCell: GeminiCell {
         noteTextView.addGestureRecognizer(noteRecognizer)
     }
 
+    private func configureLongPressGesture() {
+        
+        let longPress = UILongPressGestureRecognizer(target: self,
+                                                     action: #selector(longPress(gesture:)))
+        addGestureRecognizer(longPress)
+    }
+    
     @objc private func photoDidTap() {
 
         photoImage.showButtonFeedbackAnimation { [weak self] in
@@ -92,5 +102,16 @@ class DailyCell: GeminiCell {
     @objc private func noteDidTap() {
 
         noteTextView.showButtonFeedbackAnimation {}
+    }
+    
+    @objc func longPress(gesture: UILongPressGestureRecognizer) {
+        
+        if gesture.state == UIGestureRecognizer.State.began {
+
+            showButtonFeedbackAnimation { [weak self] in
+                
+                self?.delegate?.removeDaily()
+            }
+        }
     }
 }

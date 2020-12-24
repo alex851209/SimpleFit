@@ -308,6 +308,14 @@ class HomeVC: UIViewController {
                 
                 self.dailys[index].photo?.isFavorite = isFavorite
             }
+            dailyVC.removeDailyCallback = { [weak self] in
+                
+                guard let selectedYear = self?.selectedYear,
+                      let selectedMonth = self?.selectedMonth
+                else { return }
+                
+                self?.configureChartWith(year: selectedYear, month: selectedMonth)
+            }
             
         case Segue.datePicker:
             guard let datePickerVC = segue.destination as? DatePickerVC else { return }

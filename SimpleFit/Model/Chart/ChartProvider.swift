@@ -206,6 +206,28 @@ class ChartProvider {
         }
     }
     
+    func removeDailyData(for date: String, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        guard let userID = userID else { return }
+        
+        let doc = database
+                    .collection("users")
+                    .document(userID)
+                    .collection("chartData")
+                    .document(date)
+        
+        doc.delete { error in
+            
+            if let error = error {
+                
+                print("Error removing daily: \(error)")
+            } else {
+                
+                completion(.success(date))
+            }
+        }
+    }
+    
     func fetchFavoriteDatas(completion: @escaping (Result<[DailyData], Error>) -> Void) {
         
         dailyDatas.removeAll()

@@ -20,11 +20,13 @@ class DailyVC: BlurViewController {
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
     
+    let provider = ChartProvider()
     var selectedDaily = DailyData()
     var dailys = [DailyData]()
     var isFirstShow = true
     var selectedPhoto: UIImage?
     var callback: ((Bool, Int) -> Void)?
+    var removeDailyCallback: (() -> Void)?
     var index = 0
     
     override func viewDidLoad() {
@@ -118,6 +120,32 @@ class DailyVC: BlurViewController {
         }
     }
     
+    private func showRemoveAlert() {
+        
+        let alert = SFAlertVC(title: "移除？", showAction: remove)
+        present(alert, animated: true)
+    }
+    
+    private func remove() {
+        
+        SFProgressHUD.showLoading()
+        
+        provider.removeDailyData(for: selectedDaily.date) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let date):
+                print("Success removing daily: \(date)")
+                self?.removeDailyCallback?()
+                SFProgressHUD.showSuccess()
+                self?.dismiss(animated: true)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let photoDetailVC = segue.destination as? PhotoDetailVC else { return }
@@ -181,4 +209,6 @@ extension DailyVC: DailyCellDelegate {
         selectedPhoto = photo
         performSegue(withIdentifier: Segue.photoDetail, sender: nil)
     }
+    
+    func removeDaily() { showRemoveAlert() }
 }

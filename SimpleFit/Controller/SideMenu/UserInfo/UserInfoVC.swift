@@ -164,7 +164,7 @@ class UserInfoVC: UIViewController {
     
     private func showSignOutAlert() {
         
-        let alert = SignOutAlertVC(showAction: signOut)
+        let alert = SFAlertVC(title: "登出？", showAction: signOut)
         present(alert, animated: true)
     }
     

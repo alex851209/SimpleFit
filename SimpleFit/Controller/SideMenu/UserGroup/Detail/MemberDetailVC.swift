@@ -42,7 +42,7 @@ class MemberDetailVC: BlurViewController {
     
     private func showRemoveAlert() {
         
-        let alert = RemoveMemberAlertVC(showAction: remove)
+        let alert = SFAlertVC(title: "移除？", showAction: remove)
         present(alert, animated: true)
     }
     
