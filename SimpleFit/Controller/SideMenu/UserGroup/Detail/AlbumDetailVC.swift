@@ -12,16 +12,23 @@ class AlbumDetailVC: BlurViewController {
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var createdTimeLabel: UILabel!
+    @IBOutlet weak var removeButton: UIButton!
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
+    @IBAction func removeButtonDidTap(_ sender: Any) { removeAlbum() }
+    
+    override var blurEffectStyle: UIBlurEffect.Style? { return .prominent }
+    
+    let provider = GroupProvider()
+    var album: Album?
+    var group: Group?
+    var callback: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureLayout()
     }
-    
-    var album: Album?
     
     private func configureLayout() {
         
@@ -30,7 +37,46 @@ class AlbumDetailVC: BlurViewController {
         
         nameLabel.text = album?.name
         
+        removeButton.applyBorder()
+        
         guard let createdTime = album?.createdTime else { return }
         createdTimeLabel.text = DateProvider.dateToDateString(createdTime)
+    }
+    
+    private func showRemoveAlert() {
+        
+        let alert = RemoveAlbumAlertVC(showAction: remove)
+        present(alert, animated: true)
+    }
+    
+    private func removeAlbum() {
+        
+        removeButton.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.showRemoveAlert()
+        }
+    }
+    
+    private func remove() {
+        
+        guard let group = group,
+              let id = album?.id
+        else { return }
+        
+        SFProgressHUD.showLoading()
+        
+        provider.removeAlbum(of: id, in: group) { [weak self] result in
+            
+            switch result {
+            
+            case .success(let id):
+                print("Success removing album: \(id)")
+                self?.callback?()
+                self?.dismiss(animated: true)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

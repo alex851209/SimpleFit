@@ -17,6 +17,8 @@ class MemberDetailVC: BlurViewController {
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
     @IBAction func removeButtonDidTap(_ sender: Any) { removeMember() }
     
+    override var blurEffectStyle: UIBlurEffect.Style? { return .prominent }
+    
     let provider = GroupProvider()
     var member = User()
     var group = Group(id: "", coverPhoto: "", name: "", content: "", category: "")

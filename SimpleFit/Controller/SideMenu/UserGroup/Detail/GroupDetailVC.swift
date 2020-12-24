@@ -285,6 +285,11 @@ class GroupDetailVC: UIViewController {
             guard let albumDetailVC = segue.destination as? AlbumDetailVC else { return }
             
             albumDetailVC.album = albums[selectedAlbumIndex]
+            albumDetailVC.group = group
+            albumDetailVC.callback = { [weak self] in
+                
+                self?.fetchAlbum()
+            }
             
         default: break
         }

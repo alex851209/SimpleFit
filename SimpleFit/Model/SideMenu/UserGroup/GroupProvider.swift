@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 
 enum GroupField: String {
     
@@ -518,6 +519,26 @@ class GroupProvider {
                 guard let name = user.name else { return }
                 
                 completion(.success(name))
+            }
+        }
+    }
+    
+    func removeAlbum(of id: String, in group: Group, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        let doc = database
+                    .collection("groups")
+                    .document(group.id)
+                    .collection("album")
+                    .document(id)
+        
+        doc.delete { error in
+            
+            if let error = error {
+                
+                print("Error removing Album: \(error)")
+            } else {
+                
+                completion(.success(id))
             }
         }
     }
