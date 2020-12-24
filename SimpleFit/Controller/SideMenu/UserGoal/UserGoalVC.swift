@@ -65,6 +65,24 @@ class UserGoalVC: UIViewController {
         }
     }
     
+    private func removeGoal(with goalID: String) {
+        
+        SFProgressHUD.showLoading()
+        
+        provider.removeGoal(with: goalID) { result in
+            
+            switch result {
+            
+            case .success:
+                print("Success removing goal: \(goalID)")
+                SFProgressHUD.showSuccess()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == Segue.addGoal {
@@ -97,5 +115,23 @@ extension UserGoalVC: UITableViewDelegate, UITableViewDataSource {
         goalCell.layoutCell(with: goalList[indexPath.row], currentWeight: currentWeight)
         
         return goalCell
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let contextItem = UIContextualAction(style: .destructive,
+                                             title: "刪除") { [weak self] (_, _, completion) in
+            
+            guard let goalID = self?.goalList[indexPath.row].id else { return }
+            self?.goalList.remove(at: indexPath.item)
+            self?.tableView.reloadData()
+            self?.removeGoal(with: goalID)
+            completion(true)
+        }
+        
+        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+
+        return swipeActions
     }
 }

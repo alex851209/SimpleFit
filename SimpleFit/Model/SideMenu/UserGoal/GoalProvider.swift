@@ -7,9 +7,11 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 
 enum GoalField: String {
     
+    case id
     case title
     case beginDate
     case beginWeight
@@ -28,9 +30,10 @@ class GoalProvider {
         guard let userID = userID else { return }
         
         let doc = database.collection("users").document(userID).collection("goalList")
-        let id = "~\(goal.endDate)"
+        let id = doc.document().documentID
         
         doc.document(id).setData([
+            GoalField.id.rawValue: id,
             GoalField.title.rawValue: goal.title,
             GoalField.beginDate.rawValue: goal.beginDate,
             GoalField.beginWeight.rawValue: goal.beginWeight,
@@ -74,6 +77,10 @@ class GoalProvider {
                     completion(.success(goalList))
                 }
             }
+            
+            guard let emptyGoalList = self?.goalList else { return }
+            
+            completion(.success(emptyGoalList))
         }
     }
     
@@ -107,6 +114,27 @@ class GoalProvider {
                         completion(.failure(error))
                     }
                 }
+            }
+        }
+    }
+    
+    func removeGoal(with goalId: String, completion: @escaping (Result<Any, Error>) -> Void) {
+
+        guard let userID = userID else { return }
+
+        let doc = database
+                    .collection("users")
+                    .document(userID)
+                    .collection("goalList")
+
+        doc.document(goalId).delete { error in
+            
+            if let error = error {
+                
+                print("Error removing Goal: \(error)")
+            } else {
+                
+                completion(.success(()))
             }
         }
     }

@@ -9,6 +9,7 @@ import Foundation
 
 struct Goal: Codable {
     
+    var id: String = ""
     var title: String = ""
     var beginDate: String = ""
     var endDate: String = ""
