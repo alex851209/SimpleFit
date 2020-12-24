@@ -15,13 +15,13 @@ class SFProgressHUD {
         ProgressHUD.colorStatus = .systemGray
         ProgressHUD.colorAnimation = .lightGray
         ProgressHUD.animationType = .circleStrokeSpin
-        ProgressHUD.show("載入中...")
+        ProgressHUD.show("載入中...", interaction: false)
     }
     
     static func showSuccess() {
         
         ProgressHUD.colorAnimation = .lightGray
-        ProgressHUD.showSucceed("成功")
+        ProgressHUD.showSucceed("成功", interaction: false)
     }
     
     static func dismiss() {
@@ -33,20 +33,20 @@ class SFProgressHUD {
         
         ProgressHUD.colorStatus = .systemGray
         ProgressHUD.colorAnimation = UIColor(red: 168/255, green: 63/255, blue: 57/255, alpha: 1)
-        ProgressHUD.show("加入收藏", icon: .heart, interaction: true)
+        ProgressHUD.show("加入收藏", icon: .heart, interaction: false)
     }
     
     static func removeHeart() {
         
         ProgressHUD.colorStatus = .systemGray
         ProgressHUD.colorAnimation = .lightGray
-        ProgressHUD.show("移除收藏", icon: .heart, interaction: true)
+        ProgressHUD.show("移除收藏", icon: .heart, interaction: false)
     }
     
     static func showFailed(with text: String) {
         
         ProgressHUD.colorStatus = .systemGray
         ProgressHUD.colorAnimation = .lightGray
-        ProgressHUD.showFailed(text)
+        ProgressHUD.showFailed(text, interaction: false)
     }
 }
