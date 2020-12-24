@@ -2720,15 +2720,15 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.63" translatesAutoresizingMaskIntoConstraints="NO" id="esP-Ow-fAs">
-                                                            <rect key="frame" x="76" y="30" width="191" height="6"/>
+                                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.63" translatesAutoresizingMaskIntoConstraints="NO" id="esP-Ow-fAs" customClass="SFProgressView" customModule="SimpleFit" customModuleProvider="target">
+                                                            <rect key="frame" x="76" y="30" width="191" height="8"/>
                                                             <color key="tintColor" systemColor="systemGrayColor"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="6" id="sbP-5E-u8F"/>
+                                                                <constraint firstAttribute="height" constant="8" id="sbP-5E-u8F"/>
                                                             </constraints>
                                                         </progressView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="63%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dT-Dl-hem">
-                                                            <rect key="frame" x="154.5" y="42" width="34" height="19.5"/>
+                                                            <rect key="frame" x="154.5" y="44" width="34" height="19.5"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <color key="textColor" systemColor="systemGray2Color"/>

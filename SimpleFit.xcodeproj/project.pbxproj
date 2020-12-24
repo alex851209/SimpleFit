@@ -77,6 +77,7 @@
 		A5D90FBC25820F5A00133735 /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90FBB25820F5A00133735 /* UserProvider.swift */; };
 		A5E46D48257615C400ADF4DA /* DailyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E46D47257615C400ADF4DA /* DailyVC.swift */; };
 		A5F0FAA1257FDFD200FAD8EB /* AddGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0FAA0257FDFD200FAD8EB /* AddGoalVC.swift */; };
+		A5FDB9792594958500DDF4D0 /* SFProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FDB9782594958500DDF4D0 /* SFProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,6 +154,7 @@
 		A5D90FBB25820F5A00133735 /* UserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
 		A5E46D47257615C400ADF4DA /* DailyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyVC.swift; sourceTree = "<group>"; };
 		A5F0FAA0257FDFD200FAD8EB /* AddGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalVC.swift; sourceTree = "<group>"; };
+		A5FDB9782594958500DDF4D0 /* SFProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFProgressView.swift; sourceTree = "<group>"; };
 		C36156E5D1AC9ABF93F780A1 /* Pods-SimpleFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.release.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.release.xcconfig"; sourceTree = "<group>"; };
 		EB59C87BB5903418AC729B9E /* Pods-SimpleFit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleFit.debug.xcconfig"; path = "Target Support Files/Pods-SimpleFit/Pods-SimpleFit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -402,6 +404,7 @@
 				A53DAF6C2587197F00788FF4 /* Daily */,
 				A5C873CB257F7E9400EFCC86 /* CardView */,
 				A5BDFD9F25729481004D3F57 /* SideMenu */,
+				A5FDB9772594955F00DDF4D0 /* Custom */,
 				A548A78C256FFC6400782A0E /* Main.storyboard */,
 				A5C873BD257E5DCB00EFCC86 /* Auth.storyboard */,
 			);
@@ -561,6 +564,14 @@
 			path = Daily;
 			sourceTree = "<group>";
 		};
+		A5FDB9772594955F00DDF4D0 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				A5FDB9782594958500DDF4D0 /* SFProgressView.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
 		CB03E58534FB18C16EDACF34 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -715,6 +726,7 @@
 				A5BDFDB925738C4E004D3F57 /* DateProvider.swift in Sources */,
 				A5C620162591C02400C1C271 /* ProgressHUDWrapper.swift in Sources */,
 				A5BDFD9C2572938F004D3F57 /* SideMenuVC.swift in Sources */,
+				A5FDB9792594958500DDF4D0 /* SFProgressView.swift in Sources */,
 				A53725B7258CAF8F0061E64B /* InvitationVC.swift in Sources */,
 				A51CBCB32594290000634853 /* AlbumDetailVC.swift in Sources */,
 				A5C8739F257E5D8A00EFCC86 /* AuthVC.swift in Sources */,

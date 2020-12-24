@@ -14,7 +14,7 @@ class GoalCell: UITableViewCell {
     @IBOutlet weak var endDate: UILabel!
     @IBOutlet weak var beginWeight: UILabel!
     @IBOutlet weak var endWeight: UILabel!
-    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var progressView: SFProgressView!
     @IBOutlet weak var progressTitleLabel: UILabel!
     
     func layoutCell(with goal: Goal, currentWeight: Double) {
