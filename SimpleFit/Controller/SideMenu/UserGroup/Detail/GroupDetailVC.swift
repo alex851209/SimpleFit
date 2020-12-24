@@ -49,10 +49,7 @@ class GroupDetailVC: UIViewController {
         configureTableView()
     }
     
-    private func configureLayout() {
-        
-        titleLabel.applyBorder()
-    }
+    private func configureLayout() { titleLabel.applyBorder() }
     
     private func configureTableView() {
         
@@ -139,49 +136,7 @@ class GroupDetailVC: UIViewController {
         }
     }
     
-    private func configureHeaderView() -> UIView? {
-        
-        let view = UIView()
-        let titleLabel = UILabel()
-        let addButton = UIButton()
-        
-        titleLabel.text = "挑戰"
-        titleLabel.font = UIFont.systemFont(ofSize: 20)
-        titleLabel.textColor = .systemGray
-        titleLabel.frame = CGRect(x: 16, y: 2, width: 50, height: 35)
-        
-        addButton.setImage(UIImage.asset(.add), for: .normal)
-        addButton.tintColor = .systemGray3
-        addButton.frame = CGRect(x: UIScreen.main.bounds.maxX - 38, y: 8, width: 22, height: 22)
-        addButton.addTarget(self, action: #selector(addChallenge(sender:)), for: .touchUpInside)
-        
-        view.addSubview(titleLabel)
-        view.addSubview(addButton)
-        
-        if challenges.isEmpty {
-            
-            let emptyLabel = UILabel()
-            let separator = UIView()
-            
-            emptyLabel.text = "目前尚無挑戰"
-            emptyLabel.font = UIFont.systemFont(ofSize: 16)
-            emptyLabel.textColor = .systemGray2
-            emptyLabel.frame = CGRect(x: 16, y: 40, width: 100, height: 35)
-            
-            separator.backgroundColor = UIColor.black.withAlphaComponent(0.05)
-            separator.frame = CGRect(x: 16, y: 70, width: UIScreen.main.bounds.width - 32, height: 1)
-            
-            view.addSubview(emptyLabel)
-            view.addSubview(separator)
-        }
-        
-        return view
-    }
-    
-    private func configurePhotoCellHeight() -> CGFloat {
-        
-        return albums.isEmpty ? 70 : 250
-    }
+    private func configurePhotoCellHeight() -> CGFloat { return albums.isEmpty ? 70 : 250 }
     
     private func showPhotoAlert() {
         
@@ -307,7 +262,9 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        return section == 2 ? configureHeaderView() : UIView()
+        let headerView = ChallengeHeaderView(selector: #selector(addChallenge(sender:)), challenges: challenges)
+        
+        return section == 2 ? headerView : UIView()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

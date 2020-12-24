@@ -49,6 +49,7 @@
 		A59D3006258B293E00ABC2A2 /* ChallengeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59D3005258B293E00ABC2A2 /* ChallengeCell.swift */; };
 		A59D3009258B294A00ABC2A2 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59D3008258B294A00ABC2A2 /* PhotoCell.swift */; };
 		A5AE22862594CF640040B117 /* RemoveAlbumAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AE22852594CF640040B117 /* RemoveAlbumAlertVC.swift */; };
+		A5AE22892594D0B00040B117 /* ChallengeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AE22882594D0B00040B117 /* ChallengeHeaderView.swift */; };
 		A5BDFD7E25723137004D3F57 /* ChartProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFD7D25723137004D3F57 /* ChartProvider.swift */; };
 		A5BDFD8125723362004D3F57 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFD8025723362004D3F57 /* ChartData.swift */; };
 		A5BDFD9625724AA6004D3F57 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BDFD9525724AA6004D3F57 /* UIImage+Ext.swift */; };
@@ -126,6 +127,7 @@
 		A59D3005258B293E00ABC2A2 /* ChallengeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCell.swift; sourceTree = "<group>"; };
 		A59D3008258B294A00ABC2A2 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		A5AE22852594CF640040B117 /* RemoveAlbumAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAlbumAlertVC.swift; sourceTree = "<group>"; };
+		A5AE22882594D0B00040B117 /* ChallengeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeHeaderView.swift; sourceTree = "<group>"; };
 		A5BDFD7D25723137004D3F57 /* ChartProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartProvider.swift; sourceTree = "<group>"; };
 		A5BDFD8025723362004D3F57 /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		A5BDFD9525724AA6004D3F57 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				A59D3005258B293E00ABC2A2 /* ChallengeCell.swift */,
 				A59D3008258B294A00ABC2A2 /* PhotoCell.swift */,
 				A53725B0258C798D0061E64B /* PhotoCollectionCell.swift */,
+				A5AE22882594D0B00040B117 /* ChallengeHeaderView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -766,6 +769,7 @@
 				A5191A7D257BC4C20031D333 /* BlurVC.swift in Sources */,
 				A5180F5C2580A4D9002E9E1E /* UIStoryboard+Ext.swift in Sources */,
 				A555EBD62578E6810099BCB7 /* PagingFlowLayout.swift in Sources */,
+				A5AE22892594D0B00040B117 /* ChallengeHeaderView.swift in Sources */,
 				A5C873C1257F173400EFCC86 /* SignOutAlertVC.swift in Sources */,
 				A53725B1258C798D0061E64B /* PhotoCollectionCell.swift in Sources */,
 				A5D90FB825820ED500133735 /* UserData.swift in Sources */,
