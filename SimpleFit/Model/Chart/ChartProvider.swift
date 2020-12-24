@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseStorage
+import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 enum ChartField: String {
@@ -78,17 +79,27 @@ class ChartProvider {
                 }
             }
         case .note:
-            guard let note = dailyData.note else { return }
-            doc.document(dateString).setData([
-                field.rawValue: note,
-                ChartField.date: dateString,
-                ChartField.month: month,
-                ChartField.day: day
-            ], merge: true) { error in
-                if let error = error {
-                    completion(.failure(error))
-                } else {
-                    completion(.success(note))
+            
+            fetchDailyDataFrom(date: dateString) { hasWeight in
+                
+                switch hasWeight {
+                
+                case true:
+                    guard let note = dailyData.note else { return }
+                    doc.document(dateString).setData([
+                        field.rawValue: note,
+                        ChartField.date: dateString,
+                        ChartField.month: month,
+                        ChartField.day: day
+                    ], merge: true) { error in
+                        if let error = error {
+                            completion(.failure(error))
+                        } else {
+                            completion(.success(note))
+                        }
+                    }
+                    
+                case false: SFProgressHUD.showFailed(with: "請先記錄當日體重")
                 }
             }
         }
@@ -96,34 +107,46 @@ class ChartProvider {
     
     func uploadPhotoWith(image: UIImage, date: Date, completion: @escaping (Result<URL, Error>) -> Void) {
         
-        // 自動產生一組 ID，方便上傳圖片的命名
-        let uniqueString = UUID().uuidString
+        let dateString = DateProvider.dateToDateString(date)
         
-        let fileRef = storageRef.child("SimpleFitPhotoUpload").child("\(uniqueString).jpg")
-        // 轉成 data
-        
-        let compressedImage = image.scale(newWidth: 600)
-        
-        guard let uploadData = compressedImage.jpegData(compressionQuality: 0.7) else { return }
-        
-        fileRef.putData(uploadData, metadata: nil) { (_, error) in
+        fetchDailyDataFrom(date: dateString) { [weak self] hasWeight in
             
-            if let error = error {
-                
-                print("Error: \(error.localizedDescription)")
-                return
-            }
+            switch hasWeight {
             
-            // 取得URL
-            fileRef.downloadURL { (url, error) in
+            case true:
                 
-                if let error = error {
+                // 自動產生一組 ID，方便上傳圖片的命名
+                let uniqueString = UUID().uuidString
+                
+                let fileRef = self?.storageRef.child("SimpleFitPhotoUpload").child("\(uniqueString).jpg")
+                // 轉成 data
+                
+                let compressedImage = image.scale(newWidth: 600)
+                
+                guard let uploadData = compressedImage.jpegData(compressionQuality: 0.7) else { return }
+                
+                fileRef?.putData(uploadData, metadata: nil) { (_, error) in
                     
-                    print("Error: \(error.localizedDescription)")
-                    return
+                    if let error = error {
+                        
+                        print("Error: \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    // 取得URL
+                    fileRef?.downloadURL { (url, error) in
+                        
+                        if let error = error {
+                            
+                            print("Error: \(error.localizedDescription)")
+                            return
+                        }
+                        guard let downloadURL = url else { return }
+                        completion(.success(downloadURL))
+                    }
                 }
-                guard let downloadURL = url else { return }
-                completion(.success(downloadURL))
+                
+            case false: SFProgressHUD.showFailed(with: "請先記錄當日體重")
             }
         }
     }
@@ -133,6 +156,24 @@ class ChartProvider {
         getWeightFrom(year: year, month: month)
         getCategoriesFrom(year: year, month: month)
         return chartData
+    }
+    
+    func fetchDailyDataFrom(date: String, completion: @escaping (Bool) -> Void) {
+        
+        guard let userID = userID else { return }
+        
+        let doc = database.collection("users").document(userID).collection("chartData").document(date)
+        
+        doc.getDocument { (document, _) in
+            
+            if let document = document, document.exists {
+                
+                completion(true)
+            } else {
+                
+                completion(false)
+            }
+        }
     }
     
     func fetchDailyDatasFrom(year: Int, month: Int, completion: @escaping (Result<[DailyData], Error>) -> Void) {
