@@ -15,6 +15,7 @@
 		A5180F6F25811FB6002E9E1E /* PickPeriodVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5180F6E25811FB6002E9E1E /* PickPeriodVC.swift */; };
 		A5191A7D257BC4C20031D333 /* BlurVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5191A7C257BC4C20031D333 /* BlurVC.swift */; };
 		A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5191A84257BCB240031D333 /* PhotoAlertVC.swift */; };
+		A51CBCB32594290000634853 /* AlbumDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51CBCB22594290000634853 /* AlbumDetailVC.swift */; };
 		A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A520C975257B6F1600215CC1 /* AddPhotoVC.swift */; };
 		A53725A7258BBB570061E64B /* AddChallengeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725A6258BBB570061E64B /* AddChallengeVC.swift */; };
 		A53725AA258C47600061E64B /* SendInvitationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725A9258C47600061E64B /* SendInvitationVC.swift */; };
@@ -87,6 +88,7 @@
 		A5180F6E25811FB6002E9E1E /* PickPeriodVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPeriodVC.swift; sourceTree = "<group>"; };
 		A5191A7C257BC4C20031D333 /* BlurVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurVC.swift; sourceTree = "<group>"; };
 		A5191A84257BCB240031D333 /* PhotoAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlertVC.swift; sourceTree = "<group>"; };
+		A51CBCB22594290000634853 /* AlbumDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailVC.swift; sourceTree = "<group>"; };
 		A520C975257B6F1600215CC1 /* AddPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoVC.swift; sourceTree = "<group>"; };
 		A53725A6258BBB570061E64B /* AddChallengeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChallengeVC.swift; sourceTree = "<group>"; };
 		A53725A9258C47600061E64B /* SendInvitationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitationVC.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				A53725A6258BBB570061E64B /* AddChallengeVC.swift */,
 				A53725A9258C47600061E64B /* SendInvitationVC.swift */,
 				A5842292258F2C9600F0BD7A /* MemberDetailVC.swift */,
+				A51CBCB22594290000634853 /* AlbumDetailVC.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 				A5C620162591C02400C1C271 /* ProgressHUDWrapper.swift in Sources */,
 				A5BDFD9C2572938F004D3F57 /* SideMenuVC.swift in Sources */,
 				A53725B7258CAF8F0061E64B /* InvitationVC.swift in Sources */,
+				A51CBCB32594290000634853 /* AlbumDetailVC.swift in Sources */,
 				A5C8739F257E5D8A00EFCC86 /* AuthVC.swift in Sources */,
 				A5C8732C257E0B7100EFCC86 /* KingfisherWrapper.swift in Sources */,
 				A5C873D1257F808F00EFCC86 /* GoalCell.swift in Sources */,

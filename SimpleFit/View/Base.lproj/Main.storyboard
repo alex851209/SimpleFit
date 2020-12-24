@@ -1392,6 +1392,7 @@
                         <segue destination="QG7-Yx-72i" kind="custom" identifier="SegueAddChallenge" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="3kx-JW-J23"/>
                         <segue destination="Yh6-kx-Vb0" kind="custom" identifier="SegueSendInvitation" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="XSx-0k-M29"/>
                         <segue destination="j1c-ku-DFJ" kind="custom" identifier="SegueMemberDetail" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="4dJ-4X-D9F"/>
+                        <segue destination="RHx-oZ-fb0" kind="custom" identifier="SegueAlbumDetail" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="74x-JH-dcO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FkY-HD-XVF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1571,6 +1572,65 @@
             </objects>
             <point key="canvasLocation" x="5246" y="1751"/>
         </scene>
+        <!--Album DetailVC-->
+        <scene sceneID="Kdl-Yv-hfa">
+            <objects>
+                <viewController id="RHx-oZ-fb0" customClass="AlbumDetailVC" customModule="SimpleFit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GOJ-ae-Rzs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBD-vG-F8u">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <action selector="dismiss:" destination="RHx-oZ-fb0" eventType="touchUpInside" id="WhS-Qg-Jq8"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FjB-Zs-3OD">
+                                <rect key="frame" x="50" y="196" width="275" height="275"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="FjB-Zs-3OD" secondAttribute="height" id="e1m-eV-hp5"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAg-M6-R36">
+                                <rect key="frame" x="167.5" y="554" width="40" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8q-8V-5GI">
+                                <rect key="frame" x="156.5" y="504" width="62" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yWD-0b-NME"/>
+                        <constraints>
+                            <constraint firstItem="yWD-0b-NME" firstAttribute="trailing" secondItem="yBD-vG-F8u" secondAttribute="trailing" id="0a3-Rv-0xk"/>
+                            <constraint firstItem="X8q-8V-5GI" firstAttribute="centerX" secondItem="GOJ-ae-Rzs" secondAttribute="centerX" id="1BF-fN-j5G"/>
+                            <constraint firstItem="FjB-Zs-3OD" firstAttribute="leading" secondItem="yWD-0b-NME" secondAttribute="leading" constant="50" id="4AJ-Mg-gKo"/>
+                            <constraint firstItem="X8q-8V-5GI" firstAttribute="top" secondItem="FjB-Zs-3OD" secondAttribute="bottom" constant="33" id="DLe-YJ-mUd"/>
+                            <constraint firstItem="yWD-0b-NME" firstAttribute="trailing" secondItem="FjB-Zs-3OD" secondAttribute="trailing" constant="50" id="Huf-0I-iK6"/>
+                            <constraint firstItem="jAg-M6-R36" firstAttribute="centerX" secondItem="GOJ-ae-Rzs" secondAttribute="centerX" id="ILF-hj-IU7"/>
+                            <constraint firstItem="yBD-vG-F8u" firstAttribute="top" secondItem="yWD-0b-NME" secondAttribute="top" id="NPW-Kf-dLK"/>
+                            <constraint firstItem="FjB-Zs-3OD" firstAttribute="centerX" secondItem="GOJ-ae-Rzs" secondAttribute="centerX" id="U7P-jR-Y5n"/>
+                            <constraint firstItem="yWD-0b-NME" firstAttribute="bottom" secondItem="yBD-vG-F8u" secondAttribute="bottom" id="buz-h9-0hW"/>
+                            <constraint firstItem="yBD-vG-F8u" firstAttribute="leading" secondItem="yWD-0b-NME" secondAttribute="leading" id="fc1-zk-rsp"/>
+                            <constraint firstItem="FjB-Zs-3OD" firstAttribute="centerY" secondItem="GOJ-ae-Rzs" secondAttribute="centerY" id="nmQ-jJ-IK9"/>
+                            <constraint firstItem="jAg-M6-R36" firstAttribute="top" secondItem="X8q-8V-5GI" secondAttribute="bottom" constant="20" id="qkb-lX-hDW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="albumImageView" destination="FjB-Zs-3OD" id="l7g-HI-njB"/>
+                        <outlet property="createdTimeLabel" destination="jAg-M6-R36" id="Kvi-kF-rlZ"/>
+                        <outlet property="nameLabel" destination="X8q-8V-5GI" id="fDj-J9-jkn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1r1-0p-B3j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3001" y="2524"/>
+        </scene>
         <!--Member DetailVC-->
         <scene sceneID="daW-kJ-0oO">
             <objects>
@@ -1643,7 +1703,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gY8-iz-wsd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3418" y="2524"/>
+            <point key="canvasLocation" x="3825" y="2524"/>
         </scene>
         <!--Send InvitationVC-->
         <scene sceneID="utT-yq-ksn">
@@ -1712,7 +1772,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aEc-DJ-X6E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4241" y="2524"/>
+            <point key="canvasLocation" x="4654" y="2524"/>
         </scene>
         <!--Add ChallengeVC-->
         <scene sceneID="jpf-fj-XFV">
@@ -1782,7 +1842,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rog-Wz-G3w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5060" y="2524"/>
+            <point key="canvasLocation" x="5473" y="2524"/>
         </scene>
         <!--Add GroupVC-->
         <scene sceneID="Hpa-At-mS3">

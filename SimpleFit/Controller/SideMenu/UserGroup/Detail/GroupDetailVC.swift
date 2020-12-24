@@ -20,6 +20,7 @@ class GroupDetailVC: UIViewController {
         static let addChallenge = "SegueAddChallenge"
         static let sendInvitation = "SegueSendInvitation"
         static let memberDetail = "SegueMemberDetail"
+        static let albumDetail = "SegueAlbumDetail"
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -39,6 +40,7 @@ class GroupDetailVC: UIViewController {
     var albums = [Album]()
     var selectedMember = User()
     var photoType: PhotoType?
+    var selectedAlbumIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -278,6 +280,11 @@ class GroupDetailVC: UIViewController {
                 
                 self?.fetchMember()
             }
+        
+        case Segue.albumDetail:
+            guard let albumDetailVC = segue.destination as? AlbumDetailVC else { return }
+            
+            albumDetailVC.album = albums[selectedAlbumIndex]
             
         default: break
         }
@@ -379,10 +386,16 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             else { return cell }
             
             photoCell.layoutCell(with: albums)
+            photoCell.collectionView.reloadData()
             photoCell.callback = { [weak self] in
                 
                 self?.photoType = .album
                 self?.showPhotoAlert()
+            }
+            photoCell.showDetail = { [weak self] index in
+                
+                self?.selectedAlbumIndex = index
+                self?.performSegue(withIdentifier: Segue.albumDetail, sender: nil)
             }
             
             return photoCell

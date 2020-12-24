@@ -16,6 +16,7 @@ class PhotoCell: UITableViewCell {
     
     @IBAction func addButtonDidTap(_ sender: UIButton) { addPhoto(sender) }
     
+    var showDetail: ((Int) -> Void)?
     var callback: (() -> Void)?
     var albums = [Album]()
     
@@ -94,6 +95,14 @@ extension PhotoCell: UICollectionViewDelegate, UICollectionViewDataSource {
                         forItemAt indexPath: IndexPath) {
         
         if let cell = cell as? GeminiCell { self.collectionView.animateCell(cell) }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+        collectionView.cellForItem(at: indexPath)?.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.showDetail?(indexPath.item)
+        }
     }
 }
 
