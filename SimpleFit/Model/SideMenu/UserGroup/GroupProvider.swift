@@ -511,7 +511,7 @@ class GroupProvider {
             
             if let error = error {
                 
-                print("Error removing field: \(error)")
+                print("Error removing member: \(error)")
             } else {
                 
                 groupsDoc.delete()
@@ -535,7 +535,27 @@ class GroupProvider {
             
             if let error = error {
                 
-                print("Error removing Album: \(error)")
+                print("Error removing album: \(error)")
+            } else {
+                
+                completion(.success(id))
+            }
+        }
+    }
+    
+    func removeChallenge(of id: String, in group: Group, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        let doc = database
+                    .collection("groups")
+                    .document(group.id)
+                    .collection("challenges")
+                    .document(id)
+        
+        doc.delete { error in
+            
+            if let error = error {
+                
+                print("Error removing challenge: \(error)")
             } else {
                 
                 completion(.success(id))

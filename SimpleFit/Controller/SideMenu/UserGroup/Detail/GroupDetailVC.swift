@@ -206,6 +206,24 @@ class GroupDetailVC: UIViewController {
         }
     }
     
+    private func removeChallenge(of id: String) {
+        
+        SFProgressHUD.showLoading()
+        
+        provider.removeChallenge(of: id, in: group) { result in
+            
+            switch result {
+            
+            case .success:
+                print("Success removing challenge: \(id)")
+                SFProgressHUD.showSuccess()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier {
@@ -364,6 +382,26 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             
         default: return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        guard indexPath.section == 2 else { return nil }
+        
+        let contextItem = UIContextualAction(style: .destructive,
+                                             title: "刪除") { [weak self] (_, _, completion) in
+            
+            guard let challengeID = self?.challenges[indexPath.row].id else { return }
+            self?.challenges.remove(at: indexPath.item)
+            self?.tableView.reloadData()
+            self?.removeChallenge(of: challengeID)
+            completion(true)
+        }
+        
+        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+
+        return swipeActions
     }
 }
 
