@@ -43,13 +43,13 @@ class UserGroupVC: UIViewController {
         configureLayout()
         configureOwner()
         configureTableView()
+        listenInvitations()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         fetchGroup()
-        fetchInvitations()
     }
     
     private func configureLayout() {
@@ -125,9 +125,9 @@ class UserGroupVC: UIViewController {
         }
     }
     
-    private func fetchInvitations() {
+    private func listenInvitations() {
         
-        provider.fetchInvitations { [weak self] result in
+        provider.listenInvitations { [weak self] result in
             
             switch result {
             
@@ -153,7 +153,6 @@ class UserGroupVC: UIViewController {
                 self?.owner.avatar = avatar
 
                 self?.fetchGroup()
-                self?.fetchInvitations()
 
             case .failure(let error):
                 print(error)

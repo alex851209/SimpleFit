@@ -429,35 +429,33 @@ class GroupProvider {
         }
     }
     
-    func fetchInvitations(completion: @escaping (Result<[Invitation], Error>) -> Void) {
+    func listenInvitations(completion: @escaping (Result<[Invitation], Error>) -> Void) {
         
         guard let userID = userID else { return }
         
         let doc = database.collection("users").document(userID).collection("groupInvitations")
         
-        doc.getDocuments { [weak self] (querySnapshot, error) in
+        doc.addSnapshotListener { [weak self] querySnapshot, error in
+            
+            guard let snapshot = querySnapshot else {
+                
+                print("Error listening invitations: \(String(describing: error))")
+                return
+            }
             
             self?.invitationList.removeAll()
             
-            if let error = error {
-                
-                print("Error getting documents: \(error)")
-            } else {
-                
-                for document in querySnapshot!.documents {
-                    
-                    do {
-                        if let invitation = try document.data(as: Invitation.self, decoder: Firestore.Decoder()) {
-                            
-                            self?.invitationList.append(invitation)
-                        }
-                    } catch {
-                        completion(.failure(error))
-                    }
-                }
-                guard let invitationList = self?.invitationList else { return }
-                completion(.success(invitationList))
+            _ = snapshot.documentChanges.map {
+
+                guard let invitation = try? $0.document.data(as: Invitation.self,
+                                                             decoder: Firestore.Decoder())
+                else { return }
+
+                self?.invitationList.append(invitation)
             }
+            
+            guard let invitationList = self?.invitationList else { return }
+            completion(.success(invitationList))
         }
     }
     
