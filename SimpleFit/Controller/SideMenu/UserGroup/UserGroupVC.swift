@@ -14,6 +14,7 @@ class UserGroupVC: UIViewController {
         static let addGroup = "SegueAddGroup"
         static let groupDetail = "SegueGroupDetail"
         static let groupInvitation = "SegueGroupInvitation"
+        static let newInvitation = "SegueNewInvitation"
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -36,6 +37,7 @@ class UserGroupVC: UIViewController {
     var members = [User]()
     var challenges = [Challenge]()
     var albums = [Album]()
+    var hasNewInvitation = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +74,15 @@ class UserGroupVC: UIViewController {
         
         owner.avatar = avatar
         owner.name = name
+    }
+    
+    private func configureNewInvitation() {
+        
+        if hasNewInvitation {
+            
+            hasNewInvitation = false
+            self.performSegue(withIdentifier: Segue.newInvitation, sender: nil)
+        }
     }
     
     private func showInvitePage() {
@@ -131,7 +142,18 @@ class UserGroupVC: UIViewController {
             
             switch result {
             
-            case .success(let invitationList): self?.invitationList = invitationList
+            case .success(let invitationList):
+                
+                if self?.invitationList != invitationList && !invitationList.isEmpty {
+                    
+                    self?.hasNewInvitation = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+
+                        self?.configureNewInvitation()
+                    }
+                }
+                self?.invitationList = invitationList
+                
             case .failure(let error): print(error)
             }
         }
@@ -261,6 +283,11 @@ class UserGroupVC: UIViewController {
                 
                 self?.acceptInvitation(id)
             }
+            
+        case Segue.newInvitation:
+            guard let newInvitationVC = segue.destination as? NewInvitationVC else { return }
+            
+            newInvitationVC.invitationsCount = invitationList.count
             
         default: break
         }

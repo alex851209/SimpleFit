@@ -40,13 +40,13 @@ struct Album: Codable {
     var createdTime: Date
 }
 
-struct Inviter: Codable {
+struct Inviter: Codable, Equatable {
     
     var name: String
     var avatar: String
 }
 
-struct Invitation: Codable {
+struct Invitation: Codable, Equatable {
     
     var id: String
     var name: String

@@ -39,6 +39,8 @@
 		A5536CC2257A045D00BE60BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5536CC1257A045D00BE60BC /* GoogleService-Info.plist */; };
 		A555EBA02578C5B60099BCB7 /* UserFavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EB9F2578C5B60099BCB7 /* UserFavoriteVC.swift */; };
 		A555EBD62578E6810099BCB7 /* PagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EBD52578E6810099BCB7 /* PagingFlowLayout.swift */; };
+		A567B69025958F91003DAB31 /* lf30_editor_6cc6svy5.json in Resources */ = {isa = PBXBuildFile; fileRef = A567B68F25958F91003DAB31 /* lf30_editor_6cc6svy5.json */; };
+		A567B69425959115003DAB31 /* NewInvitationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A567B69325959115003DAB31 /* NewInvitationVC.swift */; };
 		A57297BA2577230600A892D4 /* AddWeightVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57297B92577230600A892D4 /* AddWeightVC.swift */; };
 		A5842293258F2C9600F0BD7A /* MemberDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5842292258F2C9600F0BD7A /* MemberDetailVC.swift */; };
 		A5863E0F25752EB30017F09C /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5863E0E25752EB30017F09C /* UIButton+Ext.swift */; };
@@ -115,6 +117,8 @@
 		A5536CC1257A045D00BE60BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A555EB9F2578C5B60099BCB7 /* UserFavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoriteVC.swift; sourceTree = "<group>"; };
 		A555EBD52578E6810099BCB7 /* PagingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingFlowLayout.swift; sourceTree = "<group>"; };
+		A567B68F25958F91003DAB31 /* lf30_editor_6cc6svy5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_6cc6svy5.json; sourceTree = "<group>"; };
+		A567B69325959115003DAB31 /* NewInvitationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewInvitationVC.swift; sourceTree = "<group>"; };
 		A57297B92577230600A892D4 /* AddWeightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWeightVC.swift; sourceTree = "<group>"; };
 		A5842292258F2C9600F0BD7A /* MemberDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailVC.swift; sourceTree = "<group>"; };
 		A5863E0E25752EB30017F09C /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
@@ -305,6 +309,7 @@
 				A53DAF62258700FD00788FF4 /* UserGroupVC.swift */,
 				A53DAF692587037700788FF4 /* AddGroupVC.swift */,
 				A53725B6258CAF8F0061E64B /* InvitationVC.swift */,
+				A567B69325959115003DAB31 /* NewInvitationVC.swift */,
 			);
 			path = UserGroup;
 			sourceTree = "<group>";
@@ -380,6 +385,14 @@
 			path = SimpleFit;
 			sourceTree = "<group>";
 		};
+		A567B686259589D3003DAB31 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				A567B68F25958F91003DAB31 /* lf30_editor_6cc6svy5.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		A57297B7257721BB00A892D4 /* AddMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +406,7 @@
 		A5BDFD5225721F3E004D3F57 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				A567B686259589D3003DAB31 /* Lottie */,
 				A548A78F256FFC6600782A0E /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -645,6 +659,7 @@
 				A548A790256FFC6600782A0E /* Assets.xcassets in Resources */,
 				A5C873BE257E5DCB00EFCC86 /* Auth.storyboard in Resources */,
 				A5536CC2257A045D00BE60BC /* GoogleService-Info.plist in Resources */,
+				A567B69025958F91003DAB31 /* lf30_editor_6cc6svy5.json in Resources */,
 				A548A78E256FFC6400782A0E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -750,6 +765,7 @@
 				A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */,
 				A548A789256FFC6400782A0E /* SceneDelegate.swift in Sources */,
 				A5C70DDA2588FA1800DE59B5 /* UserFavoriteCell.swift in Sources */,
+				A567B69425959115003DAB31 /* NewInvitationVC.swift in Sources */,
 				A544D6582584794E00A43A66 /* GoalProvider.swift in Sources */,
 				A5C70DE32589DD9900DE59B5 /* MonthFavoriteCell.swift in Sources */,
 				A5863E0F25752EB30017F09C /* UIButton+Ext.swift in Sources */,

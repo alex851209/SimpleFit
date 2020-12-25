@@ -1042,11 +1042,40 @@
                         <segue destination="fi5-82-Dy7" kind="custom" identifier="SegueAddGroup" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="AQh-WN-DiB"/>
                         <segue destination="f4f-xY-BbO" kind="show" identifier="SegueGroupDetail" id="6OU-f3-0Uv"/>
                         <segue destination="cvI-Bl-u1Q" kind="custom" identifier="SegueGroupInvitation" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="8H4-ed-CAJ"/>
+                        <segue destination="vvc-zj-LNh" kind="custom" identifier="SegueNewInvitation" customClass="MIBlurPopupSegue" customModule="MIBlurPopup" id="xJD-0Z-VHT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qe3-Ns-IjM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5245.6000000000004" y="1002.5487256371815"/>
+        </scene>
+        <!--New InvitationVC-->
+        <scene sceneID="ymd-pK-IFg">
+            <objects>
+                <viewController id="vvc-zj-LNh" customClass="NewInvitationVC" customModule="SimpleFit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tpU-md-djv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8h-3s-HPH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <action selector="dismiss:" destination="vvc-zj-LNh" eventType="touchUpInside" id="qkC-KC-gR2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="A3f-he-ksP"/>
+                        <constraints>
+                            <constraint firstItem="A3f-he-ksP" firstAttribute="bottom" secondItem="d8h-3s-HPH" secondAttribute="bottom" id="BP4-Kb-9Ww"/>
+                            <constraint firstItem="d8h-3s-HPH" firstAttribute="leading" secondItem="A3f-he-ksP" secondAttribute="leading" id="EYv-hn-JyA"/>
+                            <constraint firstItem="A3f-he-ksP" firstAttribute="trailing" secondItem="d8h-3s-HPH" secondAttribute="trailing" id="QPK-JH-fBr"/>
+                            <constraint firstItem="d8h-3s-HPH" firstAttribute="top" secondItem="A3f-he-ksP" secondAttribute="top" id="Uyy-cQ-J2E"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ObN-kC-3R0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6081" y="1003"/>
         </scene>
         <!--Group DetailVC-->
         <scene sceneID="pzl-MJ-gme">
@@ -3231,7 +3260,7 @@
                                 </constraints>
                             </view>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="y52-Kx-QW3">
-                                <rect key="frame" x="110.5" y="119" width="154" height="34.5"/>
+                                <rect key="frame" x="111" y="119" width="153.5" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <locale key="locale" localeIdentifier="zh_TW"/>
                             </datePicker>
@@ -3290,7 +3319,7 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="FNH-Kv-WUp">
-                                <rect key="frame" x="110.5" y="35" width="154" height="34.5"/>
+                                <rect key="frame" x="111" y="35" width="153.5" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34.5" id="giZ-Ml-Lj3"/>
@@ -3422,7 +3451,7 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
                             </imageView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="xb2-s4-Apc">
-                                <rect key="frame" x="110.5" y="111.5" width="154" height="34.5"/>
+                                <rect key="frame" x="111" y="111.5" width="153.5" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <locale key="locale" localeIdentifier="zh_TW"/>
                             </datePicker>
