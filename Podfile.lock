@@ -310,6 +310,7 @@ PODS:
     - Kingfisher/Core (= 5.15.8)
   - Kingfisher/Core (5.15.8)
   - leveldb-library (1.22)
+  - lottie-ios (3.1.9)
   - MIBlurPopup (1.0.0)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
@@ -331,6 +332,7 @@ DEPENDENCIES:
   - Gemini
   - IQKeyboardManagerSwift
   - Kingfisher
+  - lottie-ios
   - MIBlurPopup
   - ProgressHUD
   - SideMenu (~> 6.0)
@@ -356,6 +358,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - Kingfisher
     - leveldb-library
+    - lottie-ios
     - MIBlurPopup
     - nanopb
     - ProgressHUD
@@ -399,6 +402,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
   MIBlurPopup: 7e855df6a79d13bc0840519c2ec9bac50b1ac01a
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   ProgressHUD: 137a7fc677487c5581668f4490563124fb35c232
@@ -406,6 +410,6 @@ SPEC CHECKSUMS:
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
 
-PODFILE CHECKSUM: 1752d2ff38b65b1cc35d58cb36b646cc0379d6bd
+PODFILE CHECKSUM: 5895338613061cbc95c0fc4c885808a159315f62
 
 COCOAPODS: 1.10.0

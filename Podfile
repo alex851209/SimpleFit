@@ -19,6 +19,7 @@ target 'SimpleFit' do
   pod 'Firebase/Auth'
   pod 'Kingfisher'
   pod 'ProgressHUD'
+  pod 'lottie-ios'
   
   post_install do |installer|
       installer.pods_project.targets.each do |target|
