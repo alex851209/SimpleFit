@@ -21,7 +21,10 @@ class UserFavoriteVC: UIViewController {
         static let monthFavorite = "SegueMonthFavorite"
     }
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel! {
+        
+        didSet { titleLabel.applyBorder() }
+    }
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
@@ -30,16 +33,27 @@ class UserFavoriteVC: UIViewController {
     var allFavorites = [DailyData]()
     var monthFavorites = [Favorite]()
     var selectedMonthIndex: Int?
+    let emptyView = SFEmptyView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureLayout()
         configureFavoriteOfmonth()
         configureTableView()
+        configureEmptyView()
     }
     
-    private func configureLayout() { titleLabel.applyBorder() }
+    private func configureEmptyView() {
+        
+        emptyView.frame = CGRect(x: 0,
+                                 y: tableView.frame.minY,
+                                 width: tableView.frame.width,
+                                 height: tableView.frame.height)
+        emptyView.arrowAnimationView.isHidden = true
+        emptyView.emptyTitleLabel.text = "快去新增收藏吧！"
+        
+        if allFavorites.isEmpty { view.addSubview(emptyView) }
+    }
     
     private func configureTableView() {
         

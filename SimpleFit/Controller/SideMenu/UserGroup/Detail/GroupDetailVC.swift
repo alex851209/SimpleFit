@@ -24,7 +24,10 @@ class GroupDetailVC: UIViewController {
     }
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel! {
+        
+        didSet { titleLabel.applyBorder() }
+    }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
         
@@ -45,11 +48,8 @@ class GroupDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureLayout()
         configureTableView()
     }
-    
-    private func configureLayout() { titleLabel.applyBorder() }
     
     private func configureTableView() {
         

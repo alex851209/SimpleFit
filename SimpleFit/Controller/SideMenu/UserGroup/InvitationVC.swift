@@ -10,26 +10,41 @@ import UIKit
 class InvitationVC: BlurViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel! {
+        
+        didSet { titleLabel.applyBorder() }
+    }
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
     
     override var blurEffectStyle: UIBlurEffect.Style? { return .prominent }
     
-    let provider = GroupProvider()
     var invitationList = [Invitation]()
     var callback: ((String) -> Void)?
+    let emptyView = SFEmptyView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureLayout()
+        configureEmptyView()
         configureTableView()
     }
     
-    private func configureLayout() {
+    private func configureEmptyView() {
         
-        titleLabel.applyBorder()
+        emptyView.frame = CGRect(x: 0,
+                                 y: tableView.frame.minY,
+                                 width: tableView.frame.width,
+                                 height: tableView.frame.height)
+        
+        emptyView.arrowAnimationView.isHidden = true
+        emptyView.emptyTitleLabel.text = "目前沒有群組邀請！"
+        
+        if invitationList.isEmpty {
+            view.addSubview(emptyView)
+        } else {
+            emptyView.removeFromSuperview()
+        }
     }
     
     private func configureTableView() {
@@ -44,6 +59,7 @@ class InvitationVC: BlurViewController {
         if let index = invitationList.firstIndex(where: { $0.id == id }) {
             
             invitationList.remove(at: index)
+            configureEmptyView()
         }
         tableView.reloadData()
     }

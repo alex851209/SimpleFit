@@ -18,8 +18,14 @@ class UserGroupVC: UIViewController {
     }
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel! {
+        
+        didSet { titleLabel.applyBorder() }
+    }
+    @IBOutlet weak var addButton: UIButton! {
+        
+        didSet { addButton.applyAddButton() }
+    }
     @IBOutlet weak var inviteListButton: UIButton!
     
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
@@ -38,11 +44,12 @@ class UserGroupVC: UIViewController {
     var challenges = [Challenge]()
     var albums = [Album]()
     var hasNewInvitation = true
+    let emptyView = SFEmptyView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureLayout()
+        configureEmptyView()
         configureOwner()
         configureTableView()
         listenInvitations()
@@ -54,10 +61,21 @@ class UserGroupVC: UIViewController {
         fetchGroup()
     }
     
-    private func configureLayout() {
+    private func configureEmptyView() {
         
-        titleLabel.applyBorder()
-        addButton.applyAddButton()
+        emptyView.frame = CGRect(x: 0,
+                                 y: tableView.frame.minY,
+                                 width: tableView.frame.width,
+                                 height: tableView.frame.height)
+        
+        emptyView.arrowAnimationView.isHidden = true
+        emptyView.emptyTitleLabel.text = "快去新增群組吧！"
+        
+        if groupList.isEmpty {
+            view.insertSubview(emptyView, aboveSubview: tableView)
+        } else {
+            emptyView.removeFromSuperview()
+        }
     }
     
     private func configureTableView() {
@@ -110,6 +128,7 @@ class UserGroupVC: UIViewController {
             case .success(let groupList):
                 self?.groupList = groupList
                 self?.fetchMemberCount()
+                self?.configureEmptyView()
                 
             case .failure(let error):
                 print(error)

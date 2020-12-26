@@ -48,6 +48,7 @@ class PhotoDetailVC: BlurViewController {
     
     private func addFavorite() {
         
+        SFProgressHUD.showLoading()
         isFavorite = !isFavorite
         
         favoriteButton.showButtonFeedbackAnimation { [weak self] in

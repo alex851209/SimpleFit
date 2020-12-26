@@ -15,7 +15,10 @@ class UserReviewVC: UIViewController {
         static let pickPeriod = "SeguePickPeriod"
     }
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel! {
+        
+        didSet { titleLabel.applyBorder() }
+    }
     @IBOutlet weak var periodButton: UIButton!
     @IBOutlet weak var calendarButton: UIButton!
     @IBOutlet weak var chartBackgroundView: UIView!
@@ -45,7 +48,6 @@ class UserReviewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureLayout()
         configurePeriodButton()
         fetchReview()
     }
@@ -140,11 +142,6 @@ class UserReviewVC: UIViewController {
         
         changeSymbolImge.transform = CGAffineTransform(scaleX: 1, y: transformY)
         changeSymbolImge.tintColor = symbolColor
-    }
-    
-    private func configureLayout() {
-        
-        titleLabel.applyBorder()
     }
     
     private func configurePeriodButton() {

@@ -9,8 +9,14 @@ import UIKit
 
 class PickPeriodVC: BlurViewController {
     
-    @IBOutlet weak var cardView: CardView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var cardView: CardView! {
+        
+        didSet { cardView.cornerRadius = 25 }
+    }
+    @IBOutlet weak var titleLabel: UILabel! {
+        
+        didSet { titleLabel.applyBorder() }
+    }
     @IBOutlet weak var beginDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
     
@@ -28,14 +34,7 @@ class PickPeriodVC: BlurViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureLayout()
         configureDatePicker()
-    }
-    
-    private func configureLayout() {
-        
-        cardView.cornerRadius = 25
-        titleLabel.applyBorder()
     }
     
     private func configureDatePicker() {

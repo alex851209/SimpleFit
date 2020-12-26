@@ -15,7 +15,10 @@ class UserGoalVC: UIViewController {
     }
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel! {
+        
+        didSet { titleLabel.applyBorder() }
+    }
     @IBOutlet weak var addButton: UIButton!
     
     @IBAction func backButtonDidTap(_ sender: Any) { navigationController?.popViewController(animated: true) }
@@ -30,12 +33,13 @@ class UserGoalVC: UIViewController {
     let provider = GoalProvider()
     var goalList = [Goal]()
     var currentWeight: Double = 0
+    let emptyView = SFEmptyView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureLayout()
         configureTableView()
+        configureEmptyView()
     }
     
     private func configureTableView() {
@@ -44,9 +48,18 @@ class UserGoalVC: UIViewController {
         tableView.dataSource = self
     }
     
-    private func configureLayout() {
+    private func configureEmptyView() {
         
-        titleLabel.applyBorder()
+        emptyView.frame = CGRect(x: 0,
+                                 y: tableView.frame.minY,
+                                 width: tableView.frame.width,
+                                 height: tableView.frame.height)
+        
+        if goalList.isEmpty {
+            view.addSubview(emptyView)
+        } else {
+            emptyView.removeFromSuperview()
+        }
     }
     
     private func fetchGoalDatas() {
@@ -58,6 +71,7 @@ class UserGoalVC: UIViewController {
             case .success(let goalList):
                 self?.goalList = goalList
                 self?.tableView.reloadData()
+                self?.configureEmptyView()
                 
             case .failure(let error):
                 print(error)
@@ -69,13 +83,14 @@ class UserGoalVC: UIViewController {
         
         SFProgressHUD.showLoading()
         
-        provider.removeGoal(with: goalID) { result in
+        provider.removeGoal(with: goalID) { [weak self] result in
             
             switch result {
             
             case .success:
                 print("Success removing goal: \(goalID)")
                 SFProgressHUD.showSuccess()
+                self?.configureEmptyView()
                 
             case .failure(let error):
                 print(error)

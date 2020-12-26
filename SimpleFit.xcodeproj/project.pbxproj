@@ -17,6 +17,9 @@
 		A5191A85257BCB240031D333 /* PhotoAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5191A84257BCB240031D333 /* PhotoAlertVC.swift */; };
 		A51CBCB32594290000634853 /* AlbumDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51CBCB22594290000634853 /* AlbumDetailVC.swift */; };
 		A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A520C975257B6F1600215CC1 /* AddPhotoVC.swift */; };
+		A5264CC92597090000DBDB76 /* 330-empty-status.json in Resources */ = {isa = PBXBuildFile; fileRef = A5264CC82597090000DBDB76 /* 330-empty-status.json */; };
+		A5264CCC25970CE000DBDB76 /* lf30_editor_fzr8opl3.json in Resources */ = {isa = PBXBuildFile; fileRef = A5264CCB25970CE000DBDB76 /* lf30_editor_fzr8opl3.json */; };
+		A5264CD025973F2100DBDB76 /* SFEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5264CCF25973F2100DBDB76 /* SFEmptyView.swift */; };
 		A53725A7258BBB570061E64B /* AddChallengeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725A6258BBB570061E64B /* AddChallengeVC.swift */; };
 		A53725AA258C47600061E64B /* SendInvitationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725A9258C47600061E64B /* SendInvitationVC.swift */; };
 		A53725B1258C798D0061E64B /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53725B0258C798D0061E64B /* PhotoCollectionCell.swift */; };
@@ -93,6 +96,9 @@
 		A5191A84257BCB240031D333 /* PhotoAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlertVC.swift; sourceTree = "<group>"; };
 		A51CBCB22594290000634853 /* AlbumDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailVC.swift; sourceTree = "<group>"; };
 		A520C975257B6F1600215CC1 /* AddPhotoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoVC.swift; sourceTree = "<group>"; };
+		A5264CC82597090000DBDB76 /* 330-empty-status.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "330-empty-status.json"; sourceTree = "<group>"; };
+		A5264CCB25970CE000DBDB76 /* lf30_editor_fzr8opl3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_fzr8opl3.json; sourceTree = "<group>"; };
+		A5264CCF25973F2100DBDB76 /* SFEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFEmptyView.swift; sourceTree = "<group>"; };
 		A53725A6258BBB570061E64B /* AddChallengeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChallengeVC.swift; sourceTree = "<group>"; };
 		A53725A9258C47600061E64B /* SendInvitationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitationVC.swift; sourceTree = "<group>"; };
 		A53725B0258C798D0061E64B /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionCell.swift; sourceTree = "<group>"; };
@@ -278,6 +284,14 @@
 			path = Alert;
 			sourceTree = "<group>";
 		};
+		A5264CCE25973F0800DBDB76 /* EmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				A5264CCF25973F2100DBDB76 /* SFEmptyView.swift */,
+			);
+			path = EmptyView;
+			sourceTree = "<group>";
+		};
 		A53725B3258CAF5A0061E64B /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,7 +402,9 @@
 		A567B686259589D3003DAB31 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				A5264CC82597090000DBDB76 /* 330-empty-status.json */,
 				A567B68F25958F91003DAB31 /* lf30_editor_6cc6svy5.json */,
+				A5264CCB25970CE000DBDB76 /* lf30_editor_fzr8opl3.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -418,7 +434,8 @@
 				A53DAF6C2587197F00788FF4 /* Daily */,
 				A5C873CB257F7E9400EFCC86 /* CardView */,
 				A5BDFD9F25729481004D3F57 /* SideMenu */,
-				A5FDB9772594955F00DDF4D0 /* Custom */,
+				A5264CCE25973F0800DBDB76 /* EmptyView */,
+				A5FDB9772594955F00DDF4D0 /* ProgressBar */,
 				A548A78C256FFC6400782A0E /* Main.storyboard */,
 				A5C873BD257E5DCB00EFCC86 /* Auth.storyboard */,
 			);
@@ -578,12 +595,12 @@
 			path = Daily;
 			sourceTree = "<group>";
 		};
-		A5FDB9772594955F00DDF4D0 /* Custom */ = {
+		A5FDB9772594955F00DDF4D0 /* ProgressBar */ = {
 			isa = PBXGroup;
 			children = (
 				A5FDB9782594958500DDF4D0 /* SFProgressView.swift */,
 			);
-			path = Custom;
+			path = ProgressBar;
 			sourceTree = "<group>";
 		};
 		CB03E58534FB18C16EDACF34 /* Pods */ = {
@@ -656,7 +673,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A548A793256FFC6600782A0E /* LaunchScreen.storyboard in Resources */,
+				A5264CC92597090000DBDB76 /* 330-empty-status.json in Resources */,
 				A548A790256FFC6600782A0E /* Assets.xcassets in Resources */,
+				A5264CCC25970CE000DBDB76 /* lf30_editor_fzr8opl3.json in Resources */,
 				A5C873BE257E5DCB00EFCC86 /* Auth.storyboard in Resources */,
 				A5536CC2257A045D00BE60BC /* GoogleService-Info.plist in Resources */,
 				A567B69025958F91003DAB31 /* lf30_editor_6cc6svy5.json in Resources */,
@@ -790,6 +809,7 @@
 				A5C9F681257896AB00558C98 /* UIView+Ext.swift in Sources */,
 				A5C70DD6258880C000DE59B5 /* PhotoDetailVC.swift in Sources */,
 				A5C9F67E2578758E00558C98 /* UserInfoVC.swift in Sources */,
+				A5264CD025973F2100DBDB76 /* SFEmptyView.swift in Sources */,
 				A5E46D48257615C400ADF4DA /* DailyVC.swift in Sources */,
 				A57297BA2577230600A892D4 /* AddWeightVC.swift in Sources */,
 				A520C976257B6F1600215CC1 /* AddPhotoVC.swift in Sources */,
