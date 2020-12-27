@@ -323,7 +323,7 @@ class UserGroupVC: UIViewController {
 
 extension UserGroupVC: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return memberCounts.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return groupList.count }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 180 }
     

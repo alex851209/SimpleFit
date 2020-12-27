@@ -17,6 +17,7 @@ class UserInfoVC: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var heightTextField: UITextField!
+    @IBOutlet weak var introTextView: UITextView!
     @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
     
     @IBAction func editButtonDidTap(_ sender: Any) {
@@ -58,11 +59,17 @@ class UserInfoVC: UIViewController {
         
         titleLabel.applyBorder()
         signOutButton.applyBorder()
+        introTextView.applyBorder()
         
         nameTextField.delegate = self
         heightTextField.delegate = self
+        introTextView.delegate = self
         
+        nameTextField.layer.borderColor = UIColor.systemGray4.cgColor
+        heightTextField.layer.borderColor = UIColor.systemGray4.cgColor
         avatarImage.layer.cornerRadius = avatarImage.frame.height / 2
+        introTextView.layer.cornerRadius = 5
+        introTextView.layer.borderColor = UIColor.systemGray4.cgColor
         
         genderSegmentedControl.addTarget(self, action: #selector(genderDidSelect), for: .valueChanged)
         let normalAttribute = [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
@@ -78,6 +85,10 @@ class UserInfoVC: UIViewController {
         avatarImage.loadImage(user.avatar)
         
         if let height = user.height { heightTextField.text = String(describing: height) }
+        if let intro = user.intro {
+            introTextView.text = intro
+            introTextView.textColor = .systemGray
+        }
         
         if user.gender == "男" || user.gender == nil {
             genderSegmentedControl.selectedSegmentIndex = 0
@@ -104,6 +115,7 @@ class UserInfoVC: UIViewController {
         nameTextField.isEnabled = isEdit
         genderSegmentedControl.isEnabled = isEdit
         heightTextField.isEnabled = isEdit
+        introTextView.isEditable = isEdit
         avatarEditButton.isHidden = !isEdit
         
         nameTextField.borderStyle = isEdit ? .roundedRect : .none
@@ -111,6 +123,8 @@ class UserInfoVC: UIViewController {
     }
     
     private func uploadInfo() {
+        
+        if user.gender == nil { user.gender = "男" }
         
         provider.uploadInfoWith(user: user) { result in
             
@@ -204,7 +218,7 @@ extension UserInfoVC: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        textField.layer.borderColor = UIColor.systemGray2.cgColor
+        textField.layer.borderColor = UIColor.systemGray.cgColor
         textField.layer.borderWidth = 2
         textField.layer.cornerRadius = 5
     }
@@ -228,5 +242,37 @@ extension UserInfoVC: UITextFieldDelegate {
         }
         
         textField.layer.borderWidth = 0
+    }
+}
+
+extension UserInfoVC: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        textView.layer.borderColor = UIColor.systemGray.cgColor
+        textView.layer.borderWidth = 2
+        
+        if textView.textColor == .systemGray3 {
+            
+            textView.text = nil
+            textView.textColor = .systemGray
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+        textView.layer.borderColor = UIColor.systemGray4.cgColor
+        textView.layer.borderWidth = 1
+        
+        if textView.text.isEmpty {
+            
+            textView.textColor = .systemGray3
+            textView.text = "請輸入個人簡介"
+            
+            user.intro = nil
+        } else {
+            
+            user.intro = textView.text
+        }
     }
 }

@@ -30,6 +30,7 @@ enum MemberField: String {
     case gender
     case height
     case name
+    case intro
 }
 
 enum ChallengeField: String {
@@ -168,7 +169,8 @@ class GroupProvider {
                     MemberField.name.rawValue: user.name as Any,
                     MemberField.gender.rawValue: user.gender as Any,
                     MemberField.height.rawValue: user.height as Any,
-                    MemberField.avatar.rawValue: user.avatar as Any
+                    MemberField.avatar.rawValue: user.avatar as Any,
+                    MemberField.intro.rawValue: user.intro as Any
                 ])
                 
                 userDoc.updateData([
@@ -484,7 +486,8 @@ class GroupProvider {
                     MemberField.name.rawValue: user.name as Any,
                     MemberField.gender.rawValue: user.gender as Any,
                     MemberField.height.rawValue: user.height as Any,
-                    MemberField.avatar.rawValue: user.avatar as Any
+                    MemberField.avatar.rawValue: user.avatar as Any,
+                    MemberField.intro.rawValue: user.intro as Any
                 ])
                 
                 completion(.success(invitationID))

@@ -15,4 +15,5 @@ struct User: Codable {
     var height: Double?
     var groups: [String]?
     var id: String = ""
+    var intro: String?
 }

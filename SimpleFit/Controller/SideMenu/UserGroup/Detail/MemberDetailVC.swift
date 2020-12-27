@@ -12,6 +12,7 @@ class MemberDetailVC: BlurViewController {
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var genderLabel: UILabel!
+    @IBOutlet weak var introLabel: UILabel!
     @IBOutlet weak var removeButton: UIButton!
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
@@ -38,6 +39,7 @@ class MemberDetailVC: BlurViewController {
         avatarImage.loadImage(member.avatar)
         nameLabel.text = member.name
         genderLabel.text = member.gender
+        introLabel.text = member.intro
     }
     
     private func showRemoveAlert() {

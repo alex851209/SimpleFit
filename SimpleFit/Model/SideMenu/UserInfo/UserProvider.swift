@@ -15,6 +15,7 @@ enum UserField: String {
     case gender
     case height
     case id
+    case intro
 }
 
 class UserProvider {
@@ -52,13 +53,15 @@ class UserProvider {
         let name = user.name as Any
         let gender = user.gender as Any
         let height = user.height as Any
+        let intro = user.intro as Any
         
         doc.setData([
             UserField.id.rawValue: userID,
             UserField.avatar.rawValue: avatarURL,
             UserField.name.rawValue: name,
             UserField.gender.rawValue: gender,
-            UserField.height.rawValue: height
+            UserField.height.rawValue: height,
+            UserField.intro.rawValue: intro
         ], merge: true) { [weak self] error in
             
             if let error = error {
