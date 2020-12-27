@@ -15,7 +15,7 @@ class MemberDetailVC: BlurViewController {
     @IBOutlet weak var removeButton: UIButton!
     
     @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
-    @IBAction func removeButtonDidTap(_ sender: Any) { removeMember() }
+    @IBAction func removeButtonDidTap(_ sender: Any) { showRemoveAlert() }
     
     override var blurEffectStyle: UIBlurEffect.Style? { return .prominent }
     
@@ -42,8 +42,12 @@ class MemberDetailVC: BlurViewController {
     
     private func showRemoveAlert() {
         
-        let alert = SFAlertVC(title: "移除？", showAction: remove)
-        present(alert, animated: true)
+        let alert = SFAlertVC(title: "移除成員？", showAction: remove)
+        
+        removeButton.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.present(alert, animated: true)
+        }
     }
     
     private func remove() {
@@ -62,14 +66,6 @@ class MemberDetailVC: BlurViewController {
             case .failure(let error):
                 print(error)
             }
-        }
-    }
-    
-    private func removeMember() {
-        
-        removeButton.showButtonFeedbackAnimation { [weak self] in
-            
-            self?.showRemoveAlert()
         }
     }
 }

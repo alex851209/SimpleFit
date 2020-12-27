@@ -138,6 +138,10 @@ class UserGroupVC: UIViewController {
     
     private func fetchMemberCount() {
         
+        memberCounts.removeAll()
+        
+        if groupList.isEmpty { tableView.reloadData() }
+        
         for group in groupList {
             
             provider.fetchMembers(in: group) { [weak self] result in
@@ -293,6 +297,10 @@ class UserGroupVC: UIViewController {
             groupDetailVC.members = members
             groupDetailVC.challenges = challenges
             groupDetailVC.albums = albums
+            groupDetailVC.callback = { [weak self] user in
+                
+                self?.user = user
+            }
         
         case Segue.groupInvitation:
             guard let invitationVC = segue.destination as? InvitationVC else { return }

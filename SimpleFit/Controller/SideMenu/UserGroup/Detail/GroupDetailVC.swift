@@ -33,6 +33,7 @@ class GroupDetailVC: UIViewController {
         
         navigationController?.popViewController(animated: true)
     }
+    @IBAction func exitButtonDidTap(_ sender: UIButton) { showExitAlert(sender) }
     
     let provider = GroupProvider()
     var group = Group(id: "", coverPhoto: "", name: "", content: "", category: "")
@@ -44,6 +45,7 @@ class GroupDetailVC: UIViewController {
     var selectedMember = User()
     var photoType: PhotoType?
     var selectedAlbumIndex = 0
+    var callback: ((User) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +123,41 @@ class GroupDetailVC: UIViewController {
                 self?.albums = albums
                 SFProgressHUD.showSuccess()
                 self?.tableView.reloadData()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func showExitAlert(_ sender: UIButton) {
+                
+        let alert = SFAlertVC(title: "退出群組？", showAction: exitGroup)
+        
+        sender.showButtonFeedbackAnimation { [weak self] in
+            
+            self?.present(alert, animated: true)
+        }
+    }
+    
+    private func exitGroup() {
+        
+        SFProgressHUD.showLoading()
+        
+        guard let groupIndex = user.groups?.firstIndex(of: group.id) else { return }
+        
+        user.groups?.remove(at: groupIndex)
+        
+        provider.removeMember(of: user, in: group) { [weak self] result in
+            
+            switch result {
+            
+            case .success:
+                print("Success exit group: \(String(describing: self?.group))")
+                SFProgressHUD.showSuccess()
+                self?.navigationController?.popViewController(animated: true)
+                guard let user = self?.user else { return }
+                self?.callback?(user)
                 
             case .failure(let error):
                 print(error)

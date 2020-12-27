@@ -1397,12 +1397,28 @@
                                     <constraint firstAttribute="height" constant="1" id="UVX-Hz-u8V"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Jm-wq-E2f">
+                                <rect key="frame" x="334" y="21" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="7q9-zS-HL6"/>
+                                    <constraint firstAttribute="height" constant="25" id="hae-8c-D6o"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <state key="normal" image="exit">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
+                                </state>
+                                <connections>
+                                    <action selector="exitButtonDidTap:" destination="f4f-xY-BbO" eventType="touchUpInside" id="yND-IR-Utm"/>
+                                    <action selector="inviteListButtonDidTap:" destination="Qyx-SK-ax9" eventType="touchUpInside" id="vzG-WK-Vg7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vPy-jh-Qez"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="T4Z-wv-17e" firstAttribute="leading" secondItem="rQQ-jt-k64" secondAttribute="leading" constant="16" id="3R5-YG-dIT"/>
                             <constraint firstItem="YA3-Y6-gxz" firstAttribute="top" secondItem="T4Z-wv-17e" secondAttribute="bottom" id="6jt-nM-op1"/>
+                            <constraint firstItem="4Jm-wq-E2f" firstAttribute="centerY" secondItem="tja-MJ-Fvt" secondAttribute="centerY" id="AhL-k6-ePa"/>
                             <constraint firstItem="YA3-Y6-gxz" firstAttribute="top" secondItem="tja-MJ-Fvt" secondAttribute="bottom" constant="16" id="ILc-KQ-kOh"/>
                             <constraint firstAttribute="trailing" secondItem="T4Z-wv-17e" secondAttribute="trailing" constant="16" id="KSi-Xc-Eom"/>
                             <constraint firstItem="a45-kP-JVf" firstAttribute="centerY" secondItem="tja-MJ-Fvt" secondAttribute="centerY" id="Mad-nE-2bS"/>
@@ -1412,6 +1428,7 @@
                             <constraint firstItem="tja-MJ-Fvt" firstAttribute="top" secondItem="vPy-jh-Qez" secondAttribute="top" constant="16" id="V69-6v-9t3"/>
                             <constraint firstItem="tja-MJ-Fvt" firstAttribute="centerX" secondItem="rQQ-jt-k64" secondAttribute="centerX" id="g6b-AJ-kZy"/>
                             <constraint firstItem="YA3-Y6-gxz" firstAttribute="leading" secondItem="vPy-jh-Qez" secondAttribute="leading" id="k3z-cL-5Hi"/>
+                            <constraint firstItem="vPy-jh-Qez" firstAttribute="trailing" secondItem="4Jm-wq-E2f" secondAttribute="trailing" constant="16" id="wUA-kn-oic"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aej-ZN-lN0"/>
@@ -2187,19 +2204,19 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="JJS-yI-ydk">
                                                     <rect key="frame" x="44" y="458" width="187.5" height="33"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="體重" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeF-6h-71K">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="體重" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeF-6h-71K">
                                                             <rect key="frame" x="0.0" y="3" width="51" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                             <color key="textColor" systemColor="systemGrayColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="63.3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBn-Ih-ca7">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="63.3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBn-Ih-ca7">
                                                             <rect key="frame" x="59" y="0.0" width="83.5" height="33"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
                                                             <color key="textColor" systemColor="systemGrayColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="公斤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6h0-BM-qvI">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公斤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6h0-BM-qvI">
                                                             <rect key="frame" x="150.5" y="11.5" width="37" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <color key="textColor" systemColor="systemGrayColor"/>
@@ -3260,7 +3277,7 @@
                                 </constraints>
                             </view>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="y52-Kx-QW3">
-                                <rect key="frame" x="111" y="119" width="153.5" height="34.5"/>
+                                <rect key="frame" x="110.5" y="119" width="154" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <locale key="locale" localeIdentifier="zh_TW"/>
                             </datePicker>
@@ -3319,7 +3336,7 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="FNH-Kv-WUp">
-                                <rect key="frame" x="111" y="35" width="153.5" height="34.5"/>
+                                <rect key="frame" x="110.5" y="35" width="154" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34.5" id="giZ-Ml-Lj3"/>
@@ -3451,7 +3468,7 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
                             </imageView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="xb2-s4-Apc">
-                                <rect key="frame" x="111" y="111.5" width="153.5" height="34.5"/>
+                                <rect key="frame" x="110.5" y="111.5" width="154" height="34.5"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <locale key="locale" localeIdentifier="zh_TW"/>
                             </datePicker>
@@ -3514,6 +3531,7 @@
         <image name="cross" width="259" height="259"/>
         <image name="edit" width="401" height="401"/>
         <image name="envelope" catalog="system" width="128" height="93"/>
+        <image name="exit" width="490.6669921875" height="490.6669921875"/>
         <image name="finish" width="384" height="384"/>
         <image name="foot" width="700" height="610"/>
         <image name="gender" width="384" height="384"/>
