@@ -39,12 +39,14 @@ class AddWeightVC: BlurViewController {
         datePicker.applyBorder()
         datePicker.addTarget(self, action: #selector(dateDidPick), for: .valueChanged)
         
+        let borderColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
+        
         weightText.layer.cornerRadius = 15
         weightText.layer.borderWidth = 1
-        weightText.layer.borderColor = UIColor.systemGray6.cgColor
+        weightText.layer.borderColor = borderColor.cgColor
         
         addWeightView.layer.borderWidth = 2
-        addWeightView.layer.borderColor = UIColor.systemGray6.cgColor
+        addWeightView.layer.borderColor = borderColor.cgColor
         addWeightView.layer.cornerRadius = 40
         addWeightView.applyShadow()
     }

@@ -100,6 +100,7 @@ class HomeVC: UIViewController {
         chartView.frame = CGRect(x: 0, y: 0, width: chartViewWidth, height: chartViewHeight)
         chartView.delegate = self
         chartView.scrollEnabled = false
+        chartView.isClearBackgroundColor = true
         view.addSubview(chartView)
     }
     

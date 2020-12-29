@@ -457,7 +457,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SideMenuCell" rowHeight="100" id="6aO-pV-51M" customClass="SideMenuCell" customModule="SimpleFit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SideMenuCell" rowHeight="100" id="6aO-pV-51M" customClass="SideMenuCell" customModule="SimpleFit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6aO-pV-51M" id="KYx-vC-c8Y">
@@ -3293,19 +3293,19 @@
                                             <constraint firstAttribute="height" constant="50" id="2JU-4n-CaF"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="dfE-Ln-pa6"/>
                                         </constraints>
-                                        <color key="textColor" systemColor="systemGray2Color"/>
+                                        <color key="textColor" red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="45"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foot" translatesAutoresizingMaskIntoConstraints="NO" id="Xhw-D7-ggi">
                                         <rect key="frame" x="0.0" y="92.5" width="320" height="200"/>
-                                        <color key="tintColor" systemColor="systemGray6Color"/>
+                                        <color key="tintColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="dco-y4-SRT"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="fHd-Fz-iSZ" firstAttribute="top" secondItem="xgY-cM-nwr" secondAttribute="top" constant="25" id="6Mg-h3-ONi"/>
                                     <constraint firstItem="Xhw-D7-ggi" firstAttribute="centerX" secondItem="xgY-cM-nwr" secondAttribute="centerX" id="8xJ-Zt-rho"/>
@@ -3436,7 +3436,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LBs-9z-7qd" customClass="CardView" customModule="SimpleFit" customModuleProvider="target">
                                 <rect key="frame" x="35" y="204" width="275" height="275"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="0.0"/>

@@ -77,7 +77,7 @@ extension UIButton {
         contentHorizontalAlignment = .fill
         contentVerticalAlignment = .fill
         
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         tintColor = .systemGray
         
         layer.cornerRadius = 20

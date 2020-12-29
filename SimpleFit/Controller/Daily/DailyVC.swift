@@ -85,7 +85,7 @@ class DailyVC: BlurViewController {
         dailyCollectionView.collectionViewLayout = layout(withParentView: view)
         dailyCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         
-        let background = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        let background = UIColor.systemGray6
         
         dailyCollectionView.gemini
             .customAnimation()

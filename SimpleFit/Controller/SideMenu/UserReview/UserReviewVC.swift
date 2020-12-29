@@ -80,6 +80,7 @@ class UserReviewVC: UIViewController {
                                  width: chartViewWidth,
                                  height: chartViewHeight)
         chartView.scrollEnabled = false
+        chartView.isClearBackgroundColor = true
         chartBackgroundView.addSubview(chartView)
     }
     
