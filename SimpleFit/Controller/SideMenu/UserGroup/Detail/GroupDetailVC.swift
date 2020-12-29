@@ -173,7 +173,7 @@ class GroupDetailVC: UIViewController {
         }
     }
     
-    private func configurePhotoCellHeight() -> CGFloat { return albums.isEmpty ? 70 : 250 }
+    private func configurePhotoCellHeight() -> CGFloat { return albums.isEmpty ? 70 : 350 }
     
     private func showPhotoAlert() {
         

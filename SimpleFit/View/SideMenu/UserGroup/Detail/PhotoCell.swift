@@ -41,13 +41,21 @@ class PhotoCell: UITableViewCell {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.collectionViewLayout = layout(withParentView: self)
         collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
+        
+        collectionView.gemini
+            .customAnimation()
+            .translation(x: 0, y: 30, z: 0)
+            .rotationAngle(x: 0, y: 13, z: 0)
+            .ease(.easeOutExpo)
     }
     
     private func layout(withParentView parentView: UIView) -> UICollectionViewFlowLayout {
         
         let layout = PagingFlowLayout()
         let width = parentView.frame.width - 80
-        layout.itemSize = CGSize(width: width, height: 250)
+        let height = parentView.frame.height
+        
+        layout.itemSize = CGSize(width: width, height: height)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 40)
         layout.minimumLineSpacing = 10
         layout.scrollDirection = .horizontal
