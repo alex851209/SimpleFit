@@ -138,8 +138,10 @@ class AddGroupVC: BlurViewController {
 
 extension AddGroupVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
         
         guard let selectedPhoto = info[.editedImage] as? UIImage else { return }
         coverPhotoButton.setImage(selectedPhoto, for: .normal)

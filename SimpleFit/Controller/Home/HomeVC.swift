@@ -49,7 +49,7 @@ class HomeVC: UIViewController {
         configureSideMenu()
     }
     
-    private func configureLayout() {
+    private func configureButton() {
         
         sideMenuButton.setImage(UIImage.asset(.sideMenu), for: .normal)
         sideMenuButton.addTarget(self, action: #selector(showSideMenu), for: .touchUpInside)
@@ -78,9 +78,11 @@ class HomeVC: UIViewController {
                 self?.selectedYear = year
                 self?.selectedMonth = month
                 self?.pickMonthButton.setTitle("\(month)月", for: .normal)
+                
                 self?.configureChartModel()
                 self?.configureChartView()
-                self?.configureLayout()
+                self?.configureButton()
+                
                 guard let chartOptions = self?.chartOptions else { return }
                 self?.chartView.aa_drawChartWithChartOptions(chartOptions)
                 self?.dailys = dailys
@@ -162,7 +164,6 @@ class HomeVC: UIViewController {
         picker.sourceType = type
         picker.allowsEditing = true
         picker.delegate = self
-        
         present(picker, animated: true, completion: nil)
     }
     
@@ -194,8 +195,6 @@ class HomeVC: UIViewController {
         buttons.forEach {
             view.addSubview($0)
             $0.applyAddMenuButton()
-            
-            $0.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
                 $0.centerXAnchor.constraint(equalTo: addMenuButton.centerXAnchor),
@@ -359,8 +358,10 @@ extension HomeVC: AAChartViewDelegate {
 
 extension HomeVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
         
         guard let selectedPhoto = info[.editedImage] as? UIImage else { return }
         self.selectedPhoto = selectedPhoto

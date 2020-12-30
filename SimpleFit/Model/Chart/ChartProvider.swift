@@ -289,8 +289,8 @@ class ChartProvider {
             return
         }
 
-        chartData.min = min - 5
-        chartData.max = max + 5
+        chartData.min = min - 2
+        chartData.max = max + 2
     }
     
     private func getCategoriesFrom(year: Int, month: Int) {

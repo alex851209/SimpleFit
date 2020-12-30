@@ -97,9 +97,10 @@ extension UserFavoriteVC: UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell()
         let reuseID = String(describing: UserFavoriteCell.self)
         
-        guard let favoriteMonthCell = tableView.dequeueReusableCell(withIdentifier: reuseID,
-                                                                    for: indexPath) as? UserFavoriteCell
-        else { return cell }
+        guard let favoriteMonthCell = tableView.dequeueReusableCell(
+                withIdentifier: reuseID,
+                for: indexPath
+        ) as? UserFavoriteCell else { return cell }
         
         favoriteMonthCell.layoutCell(with: monthFavorites[indexPath.row])
         

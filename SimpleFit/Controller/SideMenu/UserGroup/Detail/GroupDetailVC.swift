@@ -67,10 +67,8 @@ class GroupDetailVC: UIViewController {
             
             case .success(let groupList):
                 let id = self?.group.id
-                
                 guard let group = groupList.first( where: { $0.id == id }) else { return }
                 self?.group = group
-                
                 SFProgressHUD.showSuccess()
                 self?.tableView.reloadData()
                 
@@ -197,7 +195,6 @@ class GroupDetailVC: UIViewController {
             switch result {
             
             case .success(let url):
-                
                 switch self?.photoType {
                 
                 case .album: self?.addAlbumPhoto(with: url)
@@ -317,7 +314,9 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = ChallengeHeaderView(selector: #selector(addChallenge(sender:)), challenges: challenges)
+        let headerView = ChallengeHeaderView(
+            selector: #selector(addChallenge(sender:)),
+            challenges: challenges)
         
         return section == 2 ? headerView : UIView()
     }
@@ -354,9 +353,10 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
         
         case 0:
             reuseID = String(describing: InfoCell.self)
-            guard let infoCell = tableView.dequeueReusableCell(withIdentifier: reuseID,
-                                                               for: indexPath) as? InfoCell
-            else { return cell }
+            guard let infoCell = tableView.dequeueReusableCell(
+                    withIdentifier: reuseID,
+                    for: indexPath
+            ) as? InfoCell else { return cell }
             
             infoCell.layoutCell(with: group)
             infoCell.callback = { [weak self] in
@@ -369,9 +369,10 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             
         case 1:
             reuseID = String(describing: MemberCell.self)
-            guard let memberCell = tableView.dequeueReusableCell(withIdentifier: reuseID,
-                                                                 for: indexPath) as? MemberCell
-            else { return cell }
+            guard let memberCell = tableView.dequeueReusableCell(
+                    withIdentifier: reuseID,
+                    for: indexPath
+            ) as? MemberCell else { return cell }
             
             memberCell.layoutCell(with: members)
             memberCell.addMember = { [weak self] in
@@ -388,9 +389,10 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             
         case 2:
             reuseID = String(describing: ChallengeCell.self)
-            guard let challengeCell = tableView.dequeueReusableCell(withIdentifier: reuseID,
-                                                                    for: indexPath) as? ChallengeCell
-            else { return cell }
+            guard let challengeCell = tableView.dequeueReusableCell(
+                    withIdentifier: reuseID,
+                    for: indexPath
+            ) as? ChallengeCell else { return cell }
             
             challengeCell.layoutCell(with: challenges[indexPath.row])
             
@@ -398,9 +400,10 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             
         case 3:
             reuseID = String(describing: PhotoCell.self)
-            guard let photoCell = tableView.dequeueReusableCell(withIdentifier: reuseID,
-                                                                for: indexPath) as? PhotoCell
-            else { return cell }
+            guard let photoCell = tableView.dequeueReusableCell(
+                    withIdentifier: reuseID,
+                    for: indexPath
+            ) as? PhotoCell else { return cell }
             
             photoCell.layoutCell(with: albums)
             photoCell.collectionView.reloadData()
@@ -421,13 +424,17 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView,
-                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
         
         guard indexPath.section == 2 else { return nil }
         
-        let contextItem = UIContextualAction(style: .destructive,
-                                             title: "刪除") { [weak self] (_, _, completion) in
+        let contextItem = UIContextualAction(
+            style: .destructive,
+            title: "刪除"
+        ) { [weak self] (_, _, completion) in
             
             guard let challengeID = self?.challenges[indexPath.row].id else { return }
             self?.challenges.remove(at: indexPath.item)
@@ -444,8 +451,10 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
 
 extension GroupDetailVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
         
         guard let selectedPhoto = info[.editedImage] as? UIImage else { return }
         

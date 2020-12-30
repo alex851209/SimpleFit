@@ -53,6 +53,7 @@ class AddPhotoVC: BlurViewController {
             case .success(let url):
                 print("Success uploading new photo with url: \(url)")
                 self.addPhoto(with: url)
+                
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -75,6 +76,7 @@ class AddPhotoVC: BlurViewController {
                 self.callback?(self.selectedYear, self.selectedMonth)
                 SFProgressHUD.showSuccess()
                 self.dismiss(animated: true, completion: nil)
+                
             case .failure(let error):
                 print(error.localizedDescription)
             }

@@ -102,12 +102,10 @@ class UserInfoVC: UIViewController {
     private func switchMode() {
         
         if isEdit {
-            
             editButton.setImage(UIImage.asset(.edit), for: .normal)
             isEdit = false
             uploadAvatar()
         } else {
-            
             editButton.setImage(UIImage.asset(.confirm), for: .normal)
             isEdit = true
         }

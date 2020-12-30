@@ -82,9 +82,10 @@ extension InvitationVC: UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell()
         let reuseID = String(describing: InvitationCell.self)
         
-        guard let invitationCell = tableView.dequeueReusableCell(withIdentifier: reuseID,
-                                                                 for: indexPath) as? InvitationCell
-        else { return cell }
+        guard let invitationCell = tableView.dequeueReusableCell(
+                withIdentifier: reuseID,
+                for: indexPath
+        ) as? InvitationCell else { return cell }
         
         invitationCell.layoutCell(with: invitationList[indexPath.row])
         invitationCell.callback = { [weak self] id in

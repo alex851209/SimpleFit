@@ -57,11 +57,12 @@ class DailyVC: BlurViewController {
         
         if isFirstShow {
             
-            dailyCollectionView.scrollToItem(at: IndexPath(item: index, section: 0),
-                                             at: .centeredHorizontally, animated: false)
+            dailyCollectionView.scrollToItem(
+                at: IndexPath(item: index, section: 0),
+                at: .centeredHorizontally, animated: false
+            )
             isFirstShow = false
         }
-        
         self.index = index
     }
     
@@ -165,19 +166,23 @@ extension DailyVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int { return 1 }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int { return dailys.count }
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int { return dailys.count }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         
         let cell = UICollectionViewCell()
         let reuseID = String(describing: DailyCell.self)
         
         guard let dailyCell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: reuseID,
-                for: indexPath) as? DailyCell
-        else { return cell }
+            withReuseIdentifier: reuseID,
+            for: indexPath
+        ) as? DailyCell else { return cell }
         
         let averageWeight = calculateAverageWeight()
         
@@ -188,9 +193,12 @@ extension DailyVC: UICollectionViewDelegate, UICollectionViewDataSource {
         return dailyCell
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        willDisplay cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        
         if let cell = cell as? GeminiCell { self.dailyCollectionView.animateCell(cell) }
     }
 }
@@ -199,7 +207,7 @@ extension DailyVC {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) { dailyCollectionView.animateVisibleCells() }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {  detectSelectedCell(scrollView) }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) { detectSelectedCell(scrollView) }
 }
 
 extension DailyVC: DailyCellDelegate {

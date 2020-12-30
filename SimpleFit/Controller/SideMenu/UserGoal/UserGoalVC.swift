@@ -132,11 +132,15 @@ extension UserGoalVC: UITableViewDelegate, UITableViewDataSource {
         return goalCell
     }
     
-    func tableView(_ tableView: UITableView,
-                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
         
-        let contextItem = UIContextualAction(style: .destructive,
-                                             title: "刪除") { [weak self] (_, _, completion) in
+        let contextItem = UIContextualAction(
+            style: .destructive,
+            title: "刪除"
+        ) { [weak self] (_, _, completion) in
             
             guard let goalID = self?.goalList[indexPath.row].id else { return }
             self?.goalList.remove(at: indexPath.item)

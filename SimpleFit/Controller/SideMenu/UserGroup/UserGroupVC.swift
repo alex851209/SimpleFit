@@ -332,9 +332,10 @@ extension UserGroupVC: UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell()
         let reuseID = String(describing: GroupCell.self)
         
-        guard let groupCell = tableView.dequeueReusableCell(withIdentifier: reuseID,
-                                                            for: indexPath) as? GroupCell
-        else { return cell }
+        guard let groupCell = tableView.dequeueReusableCell(
+                withIdentifier: reuseID,
+                for: indexPath
+        ) as? GroupCell else { return cell }
         
         let group = groupList[indexPath.row]
         

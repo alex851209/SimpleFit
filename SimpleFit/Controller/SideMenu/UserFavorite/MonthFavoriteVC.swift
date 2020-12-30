@@ -71,28 +71,35 @@ extension MonthFavoriteVC: UICollectionViewDelegate, UICollectionViewDataSource 
     
     func numberOfSections(in collectionView: UICollectionView) -> Int { return 1 }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int { return favorite.dailys.count }
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int { return favorite.dailys.count }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         
         let cell = UICollectionViewCell()
         let reuseID = String(describing: MonthFavoriteCell.self)
         
         guard let favoriteCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: reuseID,
-                for: indexPath) as? MonthFavoriteCell
-        else { return cell }
+                for: indexPath
+        ) as? MonthFavoriteCell else { return cell }
         
         favoriteCell.layoutCell(with: favorite.dailys[indexPath.row])
         
         return favoriteCell
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        willDisplay cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        
         if let cell = cell as? GeminiCell { self.collectionView.animateCell(cell) }
     }
 }
