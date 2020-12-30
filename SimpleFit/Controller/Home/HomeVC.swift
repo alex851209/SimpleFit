@@ -26,17 +26,13 @@ class HomeVC: UIViewController {
     let chartView = AAChartView()
     var chartModel = AAChartModel()
     var chartOptions = AAOptions()
+    let addMenuView = AddMenuView()
+    let maskView = UIView()
     let provider = ChartProvider()
     var selectedYear = Date().year()
     var selectedMonth = Date().month()
     let pickMonthButton = UIButton()
     let sideMenuButton = UIButton()
-    var addMenuButton = UIButton()
-    var weightButton = UIButton()
-    var cameraButton = UIButton()
-    var albumButton = UIButton()
-    var noteButton = UIButton()
-    var isAddMenuOpen = false
     var selectedPhoto = UIImage()
     var dailys = [DailyData]()
     var selectedDaily = DailyData()
@@ -44,6 +40,8 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureMaskView()
+        configureAddMenu()
         configureNC()
         configureChartWith(year: selectedYear, month: selectedMonth)
         configureSideMenu()
@@ -56,16 +54,41 @@ class HomeVC: UIViewController {
         
         pickMonthButton.addTarget(self, action: #selector(showPickMonthPage), for: .touchUpInside)
         
-        addMenuButton.setImage(UIImage.asset(.add), for: .normal)
-        addMenuButton.addTarget(self, action: #selector(toggleAddMenu), for: .touchUpInside)
-        
         view.addSubview(pickMonthButton)
         view.addSubview(sideMenuButton)
-        view.addSubview(addMenuButton)
         
-        addMenuButton.applyAddButton()
         sideMenuButton.applySideMenuButton()
         pickMonthButton.applyPickMonthButtonFor(month: selectedMonth)
+    }
+    
+    private func configureMaskView() {
+        
+        maskView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        maskView.isHidden = true
+        maskView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(maskView)
+        
+        NSLayoutConstraint.activate([
+            maskView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            maskView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            maskView.topAnchor.constraint(equalTo: view.topAnchor),
+            maskView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    private func configureAddMenu() {
+        
+        view.addSubview(addMenuView)
+        
+        addMenuView.delegate = self
+        
+        NSLayoutConstraint.activate([
+            addMenuView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            addMenuView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            addMenuView.widthAnchor.constraint(equalToConstant: 70),
+            addMenuView.heightAnchor.constraint(equalToConstant: 350)
+        ])
     }
     
     private func configureChartWith(year: Int, month: Int) {
@@ -103,7 +126,7 @@ class HomeVC: UIViewController {
         chartView.delegate = self
         chartView.scrollEnabled = false
         chartView.isClearBackgroundColor = true
-        view.addSubview(chartView)
+        view.insertSubview(chartView, belowSubview: maskView)
     }
     
     private func configureChartModel() {
@@ -171,59 +194,7 @@ class HomeVC: UIViewController {
         
         sideMenuButton.showButtonFeedbackAnimation { [weak self] in
             
-            guard let isAddMenuOpen = self?.isAddMenuOpen else { return }
-            if isAddMenuOpen { self?.toggleAddMenu() }
             self?.performSegue(withIdentifier: Segue.sideMenuNC, sender: nil)
-        }
-    }
-    
-    @objc private func toggleAddMenu() {
-        
-        let buttons = [noteButton, albumButton, cameraButton, weightButton]
-        var padding: CGFloat = 70
-        
-        weightButton.setImage(UIImage.asset(.weight), for: .normal)
-        cameraButton.setImage(UIImage.asset(.camera), for: .normal)
-        albumButton.setImage(UIImage.asset(.album), for: .normal)
-        noteButton.setImage(UIImage.asset(.note), for: .normal)
-        
-        weightButton.addTarget(self, action: #selector(showAddWeight), for: .touchUpInside)
-        cameraButton.addTarget(self, action: #selector(showCamera), for: .touchUpInside)
-        albumButton.addTarget(self, action: #selector(showAlbum), for: .touchUpInside)
-        noteButton.addTarget(self, action: #selector(showAddNote), for: .touchUpInside)
-        
-        buttons.forEach {
-            view.addSubview($0)
-            $0.applyAddMenuButton()
-            
-            NSLayoutConstraint.activate([
-                $0.centerXAnchor.constraint(equalTo: addMenuButton.centerXAnchor),
-                $0.centerYAnchor.constraint(equalTo: addMenuButton.centerYAnchor)
-            ])
-        }
-        
-        if isAddMenuOpen {
-            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, animations: { [weak self] in
-                self?.addMenuButton.transform = .identity
-                
-                buttons.forEach {
-                    $0.alpha = 0
-                    $0.transform = CGAffineTransform(translationX: 0, y: padding)
-                    padding += 70
-                }
-            })
-            isAddMenuOpen = false
-        } else {
-            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, animations: { [weak self] in
-                self?.addMenuButton.transform = CGAffineTransform(rotationAngle: .pi * 1.25)
-                
-                buttons.forEach {
-                    $0.alpha = 1
-                    $0.transform = CGAffineTransform(translationX: 0, y: -padding)
-                    padding += 70
-                }
-            })
-            isAddMenuOpen = true
         }
     }
     
@@ -231,34 +202,8 @@ class HomeVC: UIViewController {
         
         pickMonthButton.showButtonFeedbackAnimation { [weak self] in
             
-            guard let isAddMenuOpen = self?.isAddMenuOpen else { return }
-            if isAddMenuOpen { self?.toggleAddMenu() }
             self?.performSegue(withIdentifier: Segue.datePicker, sender: nil)
         }
-    }
-    
-    @objc private func showAddWeight() {
-        
-        toggleAddMenu()
-        performSegue(withIdentifier: Segue.addWeight, sender: nil)
-    }
-    
-    @objc private func showCamera() {
-        
-        toggleAddMenu()
-        if UIImagePickerController.isSourceTypeAvailable(.camera) { showImagePicker(type: .camera) }
-    }
-    
-    @objc private func showAlbum() {
-        
-        toggleAddMenu()
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) { showImagePicker(type: .photoLibrary) }
-    }
-    
-    @objc private func showAddNote() {
-        
-        toggleAddMenu()
-        performSegue(withIdentifier: Segue.addNote, sender: nil)
     }
     
     private func makeSettings() -> SideMenuSettings {
@@ -345,11 +290,27 @@ class HomeVC: UIViewController {
     }
 }
 
+extension HomeVC: AddMenuViewDelegate {
+    
+    func showAddWeight() { performSegue(withIdentifier: Segue.addWeight, sender: nil) }
+    
+    func showCamera() {
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) { showImagePicker(type: .camera) }
+    }
+    
+    func showAlbum() {
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) { showImagePicker(type: .photoLibrary) }
+    }
+    
+    func showAddNote() { performSegue(withIdentifier: Segue.addNote, sender: nil) }
+}
+
 extension HomeVC: AAChartViewDelegate {
     
     func aaChartView(_ aaChartView: AAChartView, moveOverEventMessage: AAMoveOverEventMessageModel) {
         
-        if isAddMenuOpen { toggleAddMenu() }
         guard let selectedDay = moveOverEventMessage.category else { return }
         configureSelectedDaily(with: selectedDay)
         performSegue(withIdentifier: Segue.daily, sender: nil)
