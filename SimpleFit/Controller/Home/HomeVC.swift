@@ -27,7 +27,6 @@ class HomeVC: UIViewController {
     var chartModel = AAChartModel()
     var chartOptions = AAOptions()
     let addMenuView = AddMenuView()
-    let maskView = UIView()
     let provider = ChartProvider()
     var selectedYear = Date().year()
     var selectedMonth = Date().month()
@@ -40,7 +39,6 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureMaskView()
         configureAddMenu()
         configureNC()
         configureChartWith(year: selectedYear, month: selectedMonth)
@@ -54,41 +52,18 @@ class HomeVC: UIViewController {
         
         pickMonthButton.addTarget(self, action: #selector(showPickMonthPage), for: .touchUpInside)
         
-        view.addSubview(pickMonthButton)
-        view.addSubview(sideMenuButton)
+        view.insertSubview(pickMonthButton, aboveSubview: chartView)
+        view.insertSubview(sideMenuButton, aboveSubview: chartView)
         
         sideMenuButton.applySideMenuButton()
         pickMonthButton.applyPickMonthButtonFor(month: selectedMonth)
     }
     
-    private func configureMaskView() {
-        
-        maskView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        maskView.isHidden = true
-        maskView.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(maskView)
-        
-        NSLayoutConstraint.activate([
-            maskView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            maskView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            maskView.topAnchor.constraint(equalTo: view.topAnchor),
-            maskView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
-    
     private func configureAddMenu() {
         
-        view.addSubview(addMenuView)
-        
         addMenuView.delegate = self
-        
-        NSLayoutConstraint.activate([
-            addMenuView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            addMenuView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            addMenuView.widthAnchor.constraint(equalToConstant: 70),
-            addMenuView.heightAnchor.constraint(equalToConstant: 350)
-        ])
+        addMenuView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        view.addSubview(addMenuView)
     }
     
     private func configureChartWith(year: Int, month: Int) {
@@ -126,7 +101,7 @@ class HomeVC: UIViewController {
         chartView.delegate = self
         chartView.scrollEnabled = false
         chartView.isClearBackgroundColor = true
-        view.insertSubview(chartView, belowSubview: maskView)
+        view.insertSubview(chartView, belowSubview: addMenuView)
     }
     
     private func configureChartModel() {

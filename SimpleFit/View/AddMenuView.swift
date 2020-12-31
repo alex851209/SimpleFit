@@ -20,6 +20,7 @@ protocol AddMenuViewDelegate: AnyObject {
 
 class AddMenuView: UIView {
 
+    let customMask = UIView()
     var addMenuButton = UIButton()
     var weightButton = UIButton()
     var cameraButton = UIButton()
@@ -33,14 +34,43 @@ class AddMenuView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        configureMaskView()
         configure()
+    }
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        
+        for subview in subviews as [UIView] {
+            
+            if !subview.isHidden && subview.point(inside: convert(point, to: subview), with: event) {
+                return true
+            }
+        }
+        return false
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    private func configure() {
+    private func configureMaskView() {
         
-        translatesAutoresizingMaskIntoConstraints = false
+        customMask.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+        customMask.translatesAutoresizingMaskIntoConstraints = false
+        customMask.isHidden = true
+        addSubview(customMask)
+
+        NSLayoutConstraint.activate([
+            customMask.leadingAnchor.constraint(equalTo: leadingAnchor),
+            customMask.trailingAnchor.constraint(equalTo: trailingAnchor),
+            customMask.topAnchor.constraint(equalTo: topAnchor),
+            customMask.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
+        let maskRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleMenu))
+        customMask.isUserInteractionEnabled = true
+        customMask.addGestureRecognizer(maskRecognizer)
+    }
+    
+    private func configure() {
         
         addSubview(addMenuButton)
         addMenuButton.applyAddButton()
@@ -77,6 +107,9 @@ class AddMenuView: UIView {
         var padding: CGFloat = 70
         
         if isAddMenuOpen {
+            
+            customMask.isHidden = true
+            
             UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, animations: { [weak self] in
                 self?.addMenuButton.transform = .identity
                 
@@ -88,6 +121,9 @@ class AddMenuView: UIView {
             })
             isAddMenuOpen = false
         } else {
+            
+            customMask.isHidden = false
+            
             UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, animations: { [weak self] in
                 self?.addMenuButton.transform = CGAffineTransform(rotationAngle: .pi * 1.25)
                 
