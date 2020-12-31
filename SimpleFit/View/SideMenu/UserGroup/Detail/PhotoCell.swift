@@ -41,7 +41,6 @@ class PhotoCell: UITableViewCell {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.collectionViewLayout = layout(withParentView: self)
         collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
-        
         collectionView.gemini
             .customAnimation()
             .translation(x: 0, y: 30, z: 0)
@@ -82,25 +81,29 @@ extension PhotoCell: UICollectionViewDelegate, UICollectionViewDataSource {
         return albums.count
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         
         let cell = UICollectionViewCell()
         let reuseID = String(describing: PhotoCollectionCell.self)
         
         guard let photoCollectionCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: reuseID,
-                for: indexPath) as? PhotoCollectionCell
-        else { return cell }
+                for: indexPath
+        ) as? PhotoCollectionCell else { return cell }
         
         photoCollectionCell.layoutCell(with: albums[indexPath.item])
         
         return photoCollectionCell
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        willDisplay cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
         
         if let cell = cell as? GeminiCell { self.collectionView.animateCell(cell) }
     }
@@ -118,5 +121,5 @@ extension PhotoCell {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) { collectionView.animateVisibleCells() }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {  detectSelectedCell(scrollView) }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) { detectSelectedCell(scrollView) }
 }

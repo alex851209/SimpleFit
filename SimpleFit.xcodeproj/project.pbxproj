@@ -421,6 +421,14 @@
 			path = AddMenu;
 			sourceTree = "<group>";
 		};
+		A5880FB3259D97DD0003A221 /* AddMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A5952233259CC7B700B61F2B /* AddMenuView.swift */,
+			);
+			path = AddMenu;
+			sourceTree = "<group>";
+		};
 		A5BDFD5225721F3E004D3F57 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,10 +445,10 @@
 				A5C873CB257F7E9400EFCC86 /* CardView */,
 				A5BDFD9F25729481004D3F57 /* SideMenu */,
 				A5264CCE25973F0800DBDB76 /* EmptyView */,
+				A5880FB3259D97DD0003A221 /* AddMenu */,
 				A5FDB9772594955F00DDF4D0 /* ProgressBar */,
 				A548A78C256FFC6400782A0E /* Main.storyboard */,
 				A5C873BD257E5DCB00EFCC86 /* Auth.storyboard */,
-				A5952233259CC7B700B61F2B /* AddMenuView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

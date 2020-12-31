@@ -17,10 +17,7 @@ class MemberCell: UITableViewCell {
     var showMember: ((User) -> Void)?
     var members = [User]()
     
-    func layoutCell(with members: [User]) {
-        
-        configureMembers(with: members)
-    }
+    func layoutCell(with members: [User]) { configureMembers(with: members) }
     
     private func configureMembers(with members: [User]) {
         
@@ -40,7 +37,6 @@ class MemberCell: UITableViewCell {
             avatarButton.tintColor = .systemGray2
             avatarButton.clipsToBounds = true
             avatarButton.layer.cornerRadius = 20
-            
             avatarButton.tag = tag
             avatarButton.addTarget(self, action: #selector(showMember(sender:)), for: .touchUpInside)
             

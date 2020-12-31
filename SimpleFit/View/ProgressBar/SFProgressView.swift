@@ -12,9 +12,14 @@ class SFProgressView: UIProgressView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let gradientImage = UIImage.gradientImage(with: frame,
-                                                  colors: [UIColor.systemGray4.cgColor, UIColor.systemGray.cgColor],
-                                                  locations: nil)
+        let gradientImage = UIImage.gradientImage(
+            with: frame,
+            colors: [
+                UIColor.systemGray4.cgColor,
+                UIColor.systemGray.cgColor
+            ],
+            locations: nil)
+        
         progressImage = gradientImage
         
         subviews.forEach { subview in

@@ -85,8 +85,9 @@ class DailyCell: GeminiCell {
 
     private func configureLongPressGesture() {
         
-        let longPress = UILongPressGestureRecognizer(target: self,
-                                                     action: #selector(longPress(gesture:)))
+        let longPress = UILongPressGestureRecognizer(
+            target: self,
+            action: #selector(longPress(gesture:)))
         addGestureRecognizer(longPress)
     }
     
@@ -99,14 +100,11 @@ class DailyCell: GeminiCell {
         }
     }
     
-    @objc private func noteDidTap() {
-
-        noteTextView.showButtonFeedbackAnimation {}
-    }
+    @objc private func noteDidTap() { noteTextView.showButtonFeedbackAnimation {} }
     
     @objc func longPress(gesture: UILongPressGestureRecognizer) {
         
-        if gesture.state == UIGestureRecognizer.State.began {
+        if gesture.state == .began {
 
             showButtonFeedbackAnimation { [weak self] in
                 

@@ -17,11 +17,13 @@ class MonthFavoriteCell: GeminiCell {
     func layoutCell(with daily: DailyData) {
         
         guard let weight = daily.weight else { return }
+        
         let weightString = String(describing: weight)
         weightNumberLabel.text = weightString
         weightNumberLabel.applyShadow()
         weightNumberLabel.layer.shadowOpacity = 0.2
         weightNumberLabel.layer.shadowOffset = CGSize(width: 2, height: 5)
+        
         weightLabels.forEach {
             
             $0.applyShadow()

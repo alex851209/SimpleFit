@@ -18,7 +18,6 @@ class UserFavoriteCell: UITableViewCell {
         monthLabel.text = favorite.month
         photoCountLabel.text = "\(favorite.dailys.count)"
         photoImage.loadImage(favorite.dailys.first?.photo?.url)
-        
         photoImage.clipsToBounds = true
         photoImage.layer.cornerRadius = 15
     }
