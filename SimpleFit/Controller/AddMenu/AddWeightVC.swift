@@ -60,6 +60,11 @@ class AddWeightVC: BlurViewController {
             return
         }
         
+        guard weight <= 300 else {
+            SFProgressHUD.showFailed(with: "請輸入小於 300 的值")
+            return
+        }
+        
         let daily = DailyData(weight: weight)
         provider.addDataWith(dailyData: daily, field: .weight, date: selectedDate, completion: { [weak self] result in
             
