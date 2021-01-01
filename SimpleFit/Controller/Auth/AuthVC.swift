@@ -37,7 +37,7 @@ class AuthVC: UIViewController {
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
+            button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90),
             button.heightAnchor.constraint(equalToConstant: 40)
         ])
     }

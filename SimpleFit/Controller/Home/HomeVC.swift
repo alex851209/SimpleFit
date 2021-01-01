@@ -39,7 +39,6 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureAddMenu()
         configureNC()
         configureChartWith(year: selectedYear, month: selectedMonth)
         configureSideMenu()
@@ -77,6 +76,7 @@ class HomeVC: UIViewController {
                 self?.selectedMonth = month
                 self?.pickMonthButton.setTitle("\(month)月", for: .normal)
                 
+                self?.configureAddMenu()
                 self?.configureChartModel()
                 self?.configureChartView()
                 self?.configureButton()
