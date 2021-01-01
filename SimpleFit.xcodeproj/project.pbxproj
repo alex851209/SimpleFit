@@ -47,6 +47,7 @@
 		A57297BA2577230600A892D4 /* AddWeightVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57297B92577230600A892D4 /* AddWeightVC.swift */; };
 		A5842293258F2C9600F0BD7A /* MemberDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5842292258F2C9600F0BD7A /* MemberDetailVC.swift */; };
 		A5863E0F25752EB30017F09C /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5863E0E25752EB30017F09C /* UIButton+Ext.swift */; };
+		A5880FDD259DA9480003A221 /* SimpleFitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5880FDC259DA9480003A221 /* SimpleFitTests.swift */; };
 		A5952234259CC7B700B61F2B /* AddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5952233259CC7B700B61F2B /* AddMenuView.swift */; };
 		A59D2FFD258AFAEC00ABC2A2 /* GroupDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59D2FFC258AFAEC00ABC2A2 /* GroupDetailVC.swift */; };
 		A59D3000258B292000ABC2A2 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59D2FFF258B292000ABC2A2 /* InfoCell.swift */; };
@@ -85,6 +86,16 @@
 		A5F0FAA1257FDFD200FAD8EB /* AddGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F0FAA0257FDFD200FAD8EB /* AddGoalVC.swift */; };
 		A5FDB9792594958500DDF4D0 /* SFProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FDB9782594958500DDF4D0 /* SFProgressView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A5880FDF259DA9480003A221 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A548A77B256FFC6400782A0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A548A782256FFC6400782A0E;
+			remoteInfo = SimpleFit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		02FDABE50893208936BB35BB /* Pods_SimpleFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +140,9 @@
 		A57297B92577230600A892D4 /* AddWeightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWeightVC.swift; sourceTree = "<group>"; };
 		A5842292258F2C9600F0BD7A /* MemberDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailVC.swift; sourceTree = "<group>"; };
 		A5863E0E25752EB30017F09C /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
+		A5880FDA259DA9480003A221 /* SimpleFitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleFitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5880FDC259DA9480003A221 /* SimpleFitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleFitTests.swift; sourceTree = "<group>"; };
+		A5880FDE259DA9480003A221 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5952233259CC7B700B61F2B /* AddMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuView.swift; sourceTree = "<group>"; };
 		A59D2FFC258AFAEC00ABC2A2 /* GroupDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailVC.swift; sourceTree = "<group>"; };
 		A59D2FFF258B292000ABC2A2 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
@@ -177,6 +191,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4052DD655D816F8F8765AD5 /* Pods_SimpleFit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5880FD7259DA9480003A221 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				A548A785256FFC6400782A0E /* SimpleFit */,
+				A5880FDB259DA9480003A221 /* SimpleFitTests */,
 				A548A784256FFC6400782A0E /* Products */,
 				CB03E58534FB18C16EDACF34 /* Pods */,
 				6BF5BE1B237C83D0CE7AC839 /* Frameworks */,
@@ -380,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				A548A783256FFC6400782A0E /* SimpleFit.app */,
+				A5880FDA259DA9480003A221 /* SimpleFitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -427,6 +450,15 @@
 				A5952233259CC7B700B61F2B /* AddMenuView.swift */,
 			);
 			path = AddMenu;
+			sourceTree = "<group>";
+		};
+		A5880FDB259DA9480003A221 /* SimpleFitTests */ = {
+			isa = PBXGroup;
+			children = (
+				A5880FDC259DA9480003A221 /* SimpleFitTests.swift */,
+				A5880FDE259DA9480003A221 /* Info.plist */,
+			);
+			path = SimpleFitTests;
 			sourceTree = "<group>";
 		};
 		A5BDFD5225721F3E004D3F57 /* Resource */ = {
@@ -546,11 +578,11 @@
 		A5BDFDA82572A3D7004D3F57 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
-				A50A2577258A0BB8007139BB /* UserGroup */,
-				A544D6522584789300A43A66 /* UserGoal */,
-				A544D647258324E000A43A66 /* UserReview */,
-				A5D90FB625820E8600133735 /* UserInfo */,
 				A5D90FB425820E7E00133735 /* Menu */,
+				A5D90FB625820E8600133735 /* UserInfo */,
+				A50A2577258A0BB8007139BB /* UserGroup */,
+				A544D647258324E000A43A66 /* UserReview */,
+				A544D6522584789300A43A66 /* UserGoal */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -647,17 +679,39 @@
 			productReference = A548A783256FFC6400782A0E /* SimpleFit.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A5880FD9259DA9480003A221 /* SimpleFitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5880FE3259DA9480003A221 /* Build configuration list for PBXNativeTarget "SimpleFitTests" */;
+			buildPhases = (
+				A5880FD6259DA9480003A221 /* Sources */,
+				A5880FD7259DA9480003A221 /* Frameworks */,
+				A5880FD8259DA9480003A221 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5880FE0259DA9480003A221 /* PBXTargetDependency */,
+			);
+			name = SimpleFitTests;
+			productName = SimpleFitTests;
+			productReference = A5880FDA259DA9480003A221 /* SimpleFitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		A548A77B256FFC6400782A0E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					A548A782256FFC6400782A0E = {
 						CreatedOnToolsVersion = 12.2;
+					};
+					A5880FD9259DA9480003A221 = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = A548A782256FFC6400782A0E;
 					};
 				};
 			};
@@ -675,6 +729,7 @@
 			projectRoot = "";
 			targets = (
 				A548A782256FFC6400782A0E /* SimpleFit */,
+				A5880FD9259DA9480003A221 /* SimpleFitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -692,6 +747,13 @@
 				A5536CC2257A045D00BE60BC /* GoogleService-Info.plist in Resources */,
 				A567B69025958F91003DAB31 /* lf30_editor_6cc6svy5.json in Resources */,
 				A548A78E256FFC6400782A0E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5880FD8259DA9480003A221 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,7 +914,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5880FD6259DA9480003A221 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5880FDD259DA9480003A221 /* SimpleFitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A5880FE0259DA9480003A221 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A548A782256FFC6400782A0E /* SimpleFit */;
+			targetProxy = A5880FDF259DA9480003A221 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A548A78C256FFC6400782A0E /* Main.storyboard */ = {
@@ -1033,6 +1111,50 @@
 			};
 			name = Release;
 		};
+		A5880FE1259DA9480003A221 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RFKB25HZB5;
+				"HEADER_SEARCH_PATHS[arch=*]" = "\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"";
+				INFOPLIST_FILE = SimpleFitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.SimpleFitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpleFit.app/SimpleFit";
+			};
+			name = Debug;
+		};
+		A5880FE2259DA9480003A221 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RFKB25HZB5;
+				"HEADER_SEARCH_PATHS[arch=*]" = "\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"";
+				INFOPLIST_FILE = SimpleFitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.SimpleFitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpleFit.app/SimpleFit";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1050,6 +1172,15 @@
 			buildConfigurations = (
 				A548A798256FFC6600782A0E /* Debug */,
 				A548A799256FFC6600782A0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5880FE3259DA9480003A221 /* Build configuration list for PBXNativeTarget "SimpleFitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5880FE1259DA9480003A221 /* Debug */,
+				A5880FE2259DA9480003A221 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
