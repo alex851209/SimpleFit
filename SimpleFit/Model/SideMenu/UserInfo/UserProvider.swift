@@ -82,13 +82,10 @@ class UserProvider {
         doc.getDocument { [weak self] (document, error) in
             
             if let error = error {
-                
                 print("Error getting document: \(error)")
             } else if let document = document, document.exists {
-                
                 do {
                     if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
-                        
                         self?.user = user
                         completion(.success(user))
                     }
@@ -113,7 +110,6 @@ class UserProvider {
         fileRef.putData(uploadData, metadata: nil) { (_, error) in
             
             if let error = error {
-                
                 print("Error: \(error.localizedDescription)")
                 return
             }
@@ -122,7 +118,6 @@ class UserProvider {
             fileRef.downloadURL { (url, error) in
                 
                 if let error = error {
-                    
                     print("Error: \(error.localizedDescription)")
                     return
                 }

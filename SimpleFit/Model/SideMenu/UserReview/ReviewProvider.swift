@@ -14,9 +14,11 @@ class ReviewProvider {
     var categories = [String]()
     let userID = Auth.auth().currentUser?.uid
     
-    func fetchReviewDatas(from beginDate: Date,
-                          to endDate: Date,
-                          completion: @escaping (Result<Any, Error>) -> Void) {
+    func fetchReviewDatas(
+        from beginDate: Date,
+        to endDate: Date,
+        completion: @escaping (Result<Any, Error>) -> Void
+    ) {
         
         guard let userID = userID else { return }
         
@@ -33,15 +35,14 @@ class ReviewProvider {
            .getDocuments { [weak self] (querySnapshot, error) in
             
             if let error = error {
-                
                 print("Error getting documents: \(error)")
             } else {
-                
                 for document in querySnapshot!.documents {
-                    
                     do {
-                        if let daily = try document.data(as: DailyData.self, decoder: Firestore.Decoder()) {
-                            
+                        if let daily = try document.data(
+                            as: DailyData.self,
+                            decoder: Firestore.Decoder()
+                        ) {
                             guard let weight = daily.weight else { return }
                             
                             self?.weightDatas.append(weight)
@@ -53,7 +54,7 @@ class ReviewProvider {
                 }
                 completion(.success(()))
             }
-           }
+        }
     }
     
     func getChartData() -> ChartData {
@@ -65,7 +66,6 @@ class ReviewProvider {
 
         if let min = weightDatas.compactMap({ $0 }).min(),
            let max = weightDatas.compactMap({ $0 }).max() {
-            
             chartData.min = min
             chartData.max = max
         }

@@ -54,20 +54,20 @@ class GoalProvider {
         
         guard let userID = userID else { return }
         
-        let doc = database.collection("users").document(userID).collection("goalList").order(by: "endDate")
+        let doc = database
+            .collection("users")
+            .document(userID)
+            .collection("goalList")
+            .order(by: "endDate")
         
         doc.getDocuments { [weak self] (querySnapshot, error) in
             
             if let error = error {
-                
                 print("Error getting documents: \(error)")
             } else {
-                
                 for document in querySnapshot!.documents {
-                    
                     do {
                         if let goal = try document.data(as: Goal.self, decoder: Firestore.Decoder()) {
-                            
                             self?.goalList.append(goal)
                         }
                     } catch {
@@ -89,25 +89,23 @@ class GoalProvider {
         guard let userID = userID else { return }
         
         let doc = database
-                    .collection("users")
-                    .document(userID)
-                    .collection("chartData")
-                    .order(by: "date", descending: true)
-                    .limit(to: 1)
+            .collection("users")
+            .document(userID)
+            .collection("chartData")
+            .order(by: "date", descending: true)
+            .limit(to: 1)
         
         doc.getDocuments { (querySnapshot, error) in
             
             if let error = error {
-                
                 print("Error getting documents: \(error)")
             } else {
-                
                 for document in querySnapshot!.documents {
-                    
                     do {
-                        if let daily = try document.data(as: DailyData.self, decoder: Firestore.Decoder()),
+                        if let daily = try document.data(
+                            as: DailyData.self,
+                            decoder: Firestore.Decoder()),
                            let weight = daily.weight {
-                            
                             completion(.success(weight))
                         }
                     } catch {
@@ -123,17 +121,15 @@ class GoalProvider {
         guard let userID = userID else { return }
 
         let doc = database
-                    .collection("users")
-                    .document(userID)
-                    .collection("goalList")
+            .collection("users")
+            .document(userID)
+            .collection("goalList")
 
         doc.document(goalId).delete { error in
             
             if let error = error {
-                
                 print("Error removing Goal: \(error)")
             } else {
-                
                 completion(.success(()))
             }
         }

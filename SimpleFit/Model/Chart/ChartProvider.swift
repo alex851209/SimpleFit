@@ -33,10 +33,12 @@ class ChartProvider {
     var chartData = ChartData()
     var dailyDatas = [DailyData]()
     
-    func addDataWith(dailyData: DailyData,
-                     field: ChartField,
-                     date: Date,
-                     completion: @escaping (Result<Any, Error>) -> Void) {
+    func addDataWith(
+        dailyData: DailyData,
+        field: ChartField,
+        date: Date,
+        completion: @escaping (Result<Any, Error>) -> Void
+    ) {
 
         guard let userID = userID else { return }
         
@@ -114,21 +116,19 @@ class ChartProvider {
             switch hasWeight {
             
             case true:
-                
                 // 自動產生一組 ID，方便上傳圖片的命名
                 let uniqueString = UUID().uuidString
                 
                 let fileRef = self?.storageRef.child("SimpleFitPhotoUpload").child("\(uniqueString).jpg")
-                // 轉成 data
                 
                 let compressedImage = image.scale(newWidth: 600)
                 
+                // 轉成 data
                 guard let uploadData = compressedImage.jpegData(compressionQuality: 0.7) else { return }
                 
                 fileRef?.putData(uploadData, metadata: nil) { (_, error) in
                     
                     if let error = error {
-                        
                         print("Error: \(error.localizedDescription)")
                         return
                     }
@@ -137,7 +137,6 @@ class ChartProvider {
                     fileRef?.downloadURL { (url, error) in
                         
                         if let error = error {
-                            
                             print("Error: \(error.localizedDescription)")
                             return
                         }
@@ -167,16 +166,18 @@ class ChartProvider {
         doc.getDocument { (document, _) in
             
             if let document = document, document.exists {
-                
                 completion(true)
             } else {
-                
                 completion(false)
             }
         }
     }
     
-    func fetchDailyDatasFrom(year: Int, month: Int, completion: @escaping (Result<[DailyData], Error>) -> Void) {
+    func fetchDailyDatasFrom(
+        year: Int,
+        month: Int,
+        completion: @escaping (Result<[DailyData], Error>) -> Void
+    ) {
         
         guard let userID = userID else { return }
         
@@ -187,14 +188,14 @@ class ChartProvider {
         doc.whereField(ChartField.month, isEqualTo: "\(year)-\(month)").getDocuments { (querySnapshot, error) in
             
             if let error = error {
-                
                 print("Error getting documents: \(error)")
             } else {
-                
                 for document in querySnapshot!.documents {
-                    
                     do {
-                        if let daily = try document.data(as: DailyData.self, decoder: Firestore.Decoder()) {
+                        if let daily = try document.data(
+                            as: DailyData.self,
+                            decoder: Firestore.Decoder()
+                        ) {
                             self.dailyDatas.append(daily)
                         }
                     } catch {
@@ -211,18 +212,16 @@ class ChartProvider {
         guard let userID = userID else { return }
         
         let doc = database
-                    .collection("users")
-                    .document(userID)
-                    .collection("chartData")
-                    .document(date)
+            .collection("users")
+            .document(userID)
+            .collection("chartData")
+            .document(date)
         
         doc.delete { error in
             
             if let error = error {
-                
                 print("Error removing daily: \(error)")
             } else {
-                
                 completion(.success(date))
             }
         }
@@ -239,14 +238,14 @@ class ChartProvider {
         doc.whereField(ChartField.photoIsFavorite, isEqualTo: true).getDocuments { (querySnapshot, error) in
             
             if let error = error {
-                
                 print("Error getting favorites: \(error)")
             } else {
-                
                 for document in querySnapshot!.documents {
-                    
                     do {
-                        if let daily = try document.data(as: DailyData.self, decoder: Firestore.Decoder()) {
+                        if let daily = try document.data(
+                            as: DailyData.self,
+                            decoder: Firestore.Decoder()
+                        ) {
                             self.dailyDatas.append(daily)
                         }
                     } catch {
@@ -266,7 +265,6 @@ class ChartProvider {
         let days = dailyDatas.map { $0.day }
 
         for count in 1 ... countOfDays {
-
             let day = DateProvider.add0BeforeNumber(count)
 
             if days.contains(day) {
@@ -300,7 +298,6 @@ class ChartProvider {
         var categories = [String]()
         
         for count in 1 ... countOfDays {
-            
             let date = DateProvider.add0BeforeNumber(count)
             let chineseDay = DateProvider.chineseDays[firstDay].day
             let category = "\(chineseDay)<br>\(date)"
@@ -308,11 +305,14 @@ class ChartProvider {
             firstDay += firstDay != 6 ? 1 : -6
             categories.append(category)
         }
-        
         chartData.categories = categories
     }
     
-    func updatePhoto(isFavorite: Bool, to date: String, completion: @escaping (Result<Any, Error>) -> Void) {
+    func updatePhoto(
+        isFavorite: Bool,
+        to date: String,
+        completion: @escaping (Result<Any, Error>) -> Void
+    ) {
         
         guard let userID = userID else { return }
         

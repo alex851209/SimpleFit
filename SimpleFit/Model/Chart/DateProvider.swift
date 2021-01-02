@@ -70,7 +70,10 @@ class DateProvider {
     static func countOfDaysInCurrentMonth() -> Int {
         
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-        let range = (calendar as NSCalendar?)?.range(of: NSCalendar.Unit.day, in: NSCalendar.Unit.month, for: Date())
+        let range = (calendar as NSCalendar?)?.range(
+            of: NSCalendar.Unit.day,
+            in: NSCalendar.Unit.month,
+            for: Date())
         return (range?.length)!
     }
     
@@ -95,7 +98,10 @@ class DateProvider {
         formatter.timeZone = TimeZone(identifier: "Asia/Taipei")
         let date = formatter.date(from: String(year)+"-"+String(month))
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-        let range = (calendar as NSCalendar?)?.range(of: NSCalendar.Unit.day, in: NSCalendar.Unit.month, for: date!)
+        let range = (calendar as NSCalendar?)?.range(
+            of: NSCalendar.Unit.day,
+            in: NSCalendar.Unit.month,
+            for: date!)
         return (range?.length)!
     }
     
@@ -156,7 +162,9 @@ class DateProvider {
         
         var dateComponent = DateComponents()
         dateComponent.month = -1
-        guard let lastMonth = Calendar.current.date(byAdding: dateComponent, to: date) else { return date }
+        guard let lastMonth = Calendar.current.date(byAdding: dateComponent, to: date)
+        else { return date }
+        
         return lastMonth
     }
     
@@ -164,7 +172,9 @@ class DateProvider {
         
         var dateComponent = DateComponents()
         dateComponent.month = 1
-        guard let nextMonth = Calendar.current.date(byAdding: dateComponent, to: Date()) else { return Date() }
+        guard let nextMonth = Calendar.current.date(byAdding: dateComponent, to: Date())
+        else { return Date() }
+        
         return nextMonth
     }
 }
