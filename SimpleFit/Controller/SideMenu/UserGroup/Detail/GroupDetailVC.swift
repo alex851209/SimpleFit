@@ -146,7 +146,7 @@ class GroupDetailVC: UIViewController {
         
         user.groups?.remove(at: groupIndex)
         
-        provider.removeMember(of: user, in: group) { [weak self] result in
+        provider.remove(object: .members, of: user.id, in: group) { [weak self] result in
             
             switch result {
             
@@ -244,7 +244,7 @@ class GroupDetailVC: UIViewController {
         
         SFProgressHUD.showLoading()
         
-        provider.removeChallenge(of: id, in: group) { result in
+        provider.remove(object: .challenges, of: id, in: group) { result in
             
             switch result {
             

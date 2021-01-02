@@ -9,6 +9,13 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 
+enum GroupObject: String {
+    
+    case album
+    case challenges
+    case members
+}
+
 enum GroupField: String {
     
     case id
@@ -448,34 +455,8 @@ class GroupProvider {
         }
     }
     
-    func removeMember(
-        of user: User,
-        in group: Group,
-        completion: @escaping (Result<String, Error>) -> Void
-    ) {
-        
-        let usersDoc = database.collection("users").document(user.id)
-        let groupsDoc = database
-            .collection("groups")
-            .document(group.id)
-            .collection("members")
-            .document(user.id)
-        
-        usersDoc.updateData([
-            GroupField.groups.rawValue: FieldValue.arrayRemove([group.id])
-        ]) { error in
-            
-            if let error = error {
-                print("Error removing member: \(error)")
-            } else {
-                groupsDoc.delete()
-                guard let name = user.name else { return }
-                completion(.success(name))
-            }
-        }
-    }
-    
-    func removeAlbum(
+    func remove(
+        object: GroupObject,
         of id: String,
         in group: Group,
         completion: @escaping (Result<String, Error>) -> Void
@@ -484,37 +465,36 @@ class GroupProvider {
         let doc = database
             .collection("groups")
             .document(group.id)
-            .collection("album")
+            .collection(object.rawValue)
             .document(id)
         
-        doc.delete { error in
+        switch object {
+        
+        case .album, .challenges:
             
-            if let error = error {
-                print("Error removing album: \(error)")
-            } else {
-                completion(.success(id))
+            doc.delete { error in
+                
+                if let error = error {
+                    print("Error removing: \(error)")
+                } else {
+                    completion(.success(id))
+                }
             }
-        }
-    }
-    
-    func removeChallenge(
-        of id: String,
-        in group: Group,
-        completion: @escaping (Result<String, Error>) -> Void
-    ) {
-        
-        let doc = database
-            .collection("groups")
-            .document(group.id)
-            .collection("challenges")
-            .document(id)
-        
-        doc.delete { error in
             
-            if let error = error {
-                print("Error removing challenge: \(error)")
-            } else {
-                completion(.success(id))
+        case .members:
+            
+            let usersDoc = database.collection("users").document(id)
+            
+            usersDoc.updateData([
+                GroupField.groups.rawValue: FieldValue.arrayRemove([group.id])
+            ]) { error in
+                
+                if let error = error {
+                    print("Error removing member: \(error)")
+                } else {
+                    doc.delete()
+                    completion(.success(id))
+                }
             }
         }
     }
