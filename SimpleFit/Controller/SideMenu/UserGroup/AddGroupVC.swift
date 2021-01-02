@@ -103,14 +103,14 @@ class AddGroupVC: BlurViewController {
             return
         }
         
-        provider.uploadPhotoWith(image: coverPhotoImage) { [weak self] result in
+        PhotoManager.shared.uploadPhoto(to: .group, with: coverPhotoImage) { [weak self] result in
             
             switch result {
-            
+
             case .success(let url):
                 self?.newGroup.coverPhoto = "\(url)"
                 self?.addGroup()
-                
+
             case .failure(let error):
                 print(error)
             }

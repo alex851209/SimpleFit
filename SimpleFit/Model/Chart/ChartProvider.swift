@@ -111,37 +111,18 @@ class ChartProvider {
         
         let dateString = DateProvider.dateToDateString(date)
         
-        fetchDailyDataFrom(date: dateString) { [weak self] hasWeight in
+        fetchDailyDataFrom(date: dateString) { hasWeight in
             
             switch hasWeight {
             
             case true:
-                // 自動產生一組 ID，方便上傳圖片的命名
-                let uniqueString = UUID().uuidString
-                
-                let fileRef = self?.storageRef.child("SimpleFitPhotoUpload").child("\(uniqueString).jpg")
-                
-                let compressedImage = image.scale(newWidth: 600)
-                
-                // 轉成 data
-                guard let uploadData = compressedImage.jpegData(compressionQuality: 0.7) else { return }
-                
-                fileRef?.putData(uploadData, metadata: nil) { (_, error) in
+                PhotoManager.shared.uploadPhoto(to: .photo, with: image) { result in
                     
-                    if let error = error {
-                        print("Error: \(error.localizedDescription)")
-                        return
-                    }
+                    switch result {
                     
-                    // 取得URL
-                    fileRef?.downloadURL { (url, error) in
+                    case .success(let url): completion(.success(url))
                         
-                        if let error = error {
-                            print("Error: \(error.localizedDescription)")
-                            return
-                        }
-                        guard let downloadURL = url else { return }
-                        completion(.success(downloadURL))
+                    case .failure(let error): print(error.localizedDescription)
                     }
                 }
                 

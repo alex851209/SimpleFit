@@ -47,15 +47,14 @@ class AddPhotoVC: BlurViewController {
     private func uploadPhoto() {
         
         provider.uploadPhotoWith(image: selectedPhoto, date: selectedDate) { result in
-            
+
             switch result {
-            
+
             case .success(let url):
                 print("Success uploading new photo with url: \(url)")
                 self.addPhoto(with: url)
-                
-            case .failure(let error):
-                print(error.localizedDescription)
+
+            case .failure(let error): print(error.localizedDescription)
             }
         }
     }

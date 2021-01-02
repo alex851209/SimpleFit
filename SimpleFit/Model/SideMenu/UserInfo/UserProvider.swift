@@ -95,35 +95,4 @@ class UserProvider {
             }
         }
     }
-    
-    func uploadAvatarWith(image: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
-        
-        // 自動產生一組 ID，方便上傳圖片的命名
-        let uniqueString = UUID().uuidString
-        
-        let fileRef = storageRef.child("SimpleFitAvatarUpload").child("\(uniqueString).jpg")
-        
-        let compressedImage = image.scale(newWidth: 600)
-        // 轉成 data
-        guard let uploadData = compressedImage.jpegData(compressionQuality: 0.7) else { return }
-        
-        fileRef.putData(uploadData, metadata: nil) { (_, error) in
-            
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-                return
-            }
-            
-            // 取得URL
-            fileRef.downloadURL { (url, error) in
-                
-                if let error = error {
-                    print("Error: \(error.localizedDescription)")
-                    return
-                }
-                guard let downloadURL = url else { return }
-                completion(.success(downloadURL))
-            }
-        }
-    }
 }

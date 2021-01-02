@@ -143,7 +143,7 @@ class UserInfoVC: UIViewController {
         SFProgressHUD.showLoading()
         
         guard let avatar = avatarImage.image else { return }
-        provider.uploadAvatarWith(image: avatar) { [weak self] result in
+        PhotoManager.shared.uploadPhoto(to: .avatar, with: avatar) { [weak self] result in
             
             switch result {
             
@@ -153,8 +153,7 @@ class UserInfoVC: UIViewController {
                 self?.user.avatar = urlString
                 self?.uploadInfo()
                 
-            case .failure(let error):
-                print(error)
+            case .failure(let error): print(error)
             }
         }
     }

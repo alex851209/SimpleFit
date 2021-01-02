@@ -190,7 +190,7 @@ class GroupDetailVC: UIViewController {
     
     private func uploadPhoto(with image: UIImage) {
         
-        provider.uploadPhotoWith(image: image) { [weak self] result in
+        PhotoManager.shared.uploadPhoto(to: .group, with: image) { [weak self] result in
             
             switch result {
             
