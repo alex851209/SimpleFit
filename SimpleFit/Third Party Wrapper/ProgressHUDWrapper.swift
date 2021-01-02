@@ -24,10 +24,7 @@ class SFProgressHUD {
         ProgressHUD.showSucceed("成功", interaction: false)
     }
     
-    static func dismiss() {
-        
-        ProgressHUD.dismiss()
-    }
+    static func dismiss() { ProgressHUD.dismiss() }
     
     static func showHeart() {
         

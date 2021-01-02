@@ -24,6 +24,10 @@ extension UIButton {
 
         guard urlString != nil else { return }
         let url = URL(string: urlString!)
-        self.kf.setImage(with: url, for: .normal, placeholder: placeHolder, options: [.transition(.fade(0.4))])
+        self.kf.setImage(
+            with: url,
+            for: .normal,
+            placeholder: placeHolder,
+            options: [.transition(.fade(0.4))])
     }
 }

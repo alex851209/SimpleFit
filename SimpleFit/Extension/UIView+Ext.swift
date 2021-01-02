@@ -28,30 +28,34 @@ extension UIView {
     
     private func feedbackEndingAnimation(_ completion: @escaping () -> Void) {
         
-        UIViewPropertyAnimator
-            .runningPropertyAnimator(withDuration: 0.1,
-                                     delay: 0,
-                                     options: .curveLinear,
-                                     animations: { [weak self] in
-                                        self?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
-                                     },
-                                     completion: { [weak self] _ in
-                                        self?.isUserInteractionEnabled = true
-                                        completion()
-                                     })
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: 0.1,
+            delay: 0,
+            options: .curveLinear,
+            animations: { [weak self] in
+                
+                self?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+            },
+            completion: { [weak self] _ in
+                
+                self?.isUserInteractionEnabled = true
+                completion()
+            })
     }
     
     func showButtonFeedbackAnimation(_ completion: @escaping () -> Void) {
         
-        UIViewPropertyAnimator
-            .runningPropertyAnimator(withDuration: 0.1,
-                                     delay: 0,
-                                     options: .curveLinear,
-                                     animations: { [weak self] in
-                                        self?.transform = CGAffineTransform.init(scaleX: 0.85, y: 0.85)
-                                        },
-                                     completion: { _ in
-                                        self.feedbackEndingAnimation(completion)
-                                     })
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: 0.1,
+            delay: 0,
+            options: .curveLinear,
+            animations: { [weak self] in
+                
+                self?.transform = CGAffineTransform.init(scaleX: 0.85, y: 0.85)
+            },
+            completion: { [weak self] _ in
+                
+                self?.feedbackEndingAnimation(completion)
+            })
     }
 }
