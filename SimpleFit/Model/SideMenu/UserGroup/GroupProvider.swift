@@ -149,61 +149,78 @@ class GroupProvider {
         }
     }
     
-    func fetchMembers(in group: Group, completion: @escaping (Result<[User], Error>) -> Void) {
+    func fetch(object: GroupObject, in group: Group, completion: @escaping (Result<[Any], Error>) -> Void) {
         
-        let doc = database.collection("groups").document(group.id).collection("members")
+        let doc = database.collection("groups").document(group.id)
         
-        doc.getDocuments { [weak self] (querySnapshot, error) in
+        switch object {
+        
+        case .album:
+            albumList.removeAll()
             
-            self?.memberList.removeAll()
-            
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in querySnapshot!.documents {
-                    do {
-                        if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
-                            self?.memberList.append(user)
+            doc.collection(object.rawValue)
+               .order(by: "createdTime", descending: true)
+               .getDocuments { [weak self] (querySnapshot, error) in
+                
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        do {
+                            if let album = try document.data(as: Album.self, decoder: Firestore.Decoder()) {
+                                self?.albumList.append(album)
+                            }
+                        } catch {
+                            completion(.failure(error))
                         }
-                    } catch {
-                        completion(.failure(error))
                     }
+                    guard let albumList = self?.albumList else { return }
+                    completion(.success(albumList))
                 }
-                guard let memberList = self?.memberList else { return }
-                completion(.success(memberList))
             }
-        }
-    }
-    
-    func fetchChallenges(in group: Group, completion: @escaping (Result<[Challenge], Error>) -> Void) {
-        
-        challengeList.removeAll()
-        
-        let doc = database
-            .collection("groups")
-            .document(group.id)
-            .collection("challenges")
-            .order(by: "createdTime", descending: true)
-        
-        doc.getDocuments { [weak self] (querySnapshot, error) in
+        case .challenges:
+            challengeList.removeAll()
             
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in querySnapshot!.documents {
-                    do {
-                        if let challenge = try document.data(
-                            as: Challenge.self,
-                            decoder: Firestore.Decoder()
-                        ) {
-                            self?.challengeList.append(challenge)
+            doc.collection(object.rawValue)
+               .order(by: "createdTime", descending: true)
+               .getDocuments { [weak self] (querySnapshot, error) in
+                
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        do {
+                            if let challenge = try document.data(as: Challenge.self, decoder: Firestore.Decoder()) {
+                                self?.challengeList.append(challenge)
+                            }
+                        } catch {
+                            completion(.failure(error))
                         }
-                    } catch {
-                        completion(.failure(error))
                     }
+                    guard let challengeList = self?.challengeList else { return }
+                    completion(.success(challengeList))
                 }
-                guard let challengeList = self?.challengeList else { return }
-                completion(.success(challengeList))
+            }
+        case .members:
+            doc.collection(object.rawValue).getDocuments { [weak self] (querySnapshot, error) in
+                
+                self?.memberList.removeAll()
+                
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        do {
+                            if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                                self?.memberList.append(user)
+                            }
+                        } catch {
+                            completion(.failure(error))
+                        }
+                    }
+                    guard let memberList = self?.memberList else { return }
+                    completion(.success(memberList))
+                }
             }
         }
     }
@@ -247,11 +264,13 @@ class GroupProvider {
             
             case .success(let invitee):
                 
-                self?.fetchMembers(in: group, completion: { result in
+                self?.fetch(object: .members, in: group, completion: { result in
                     
                     switch result {
                     
                     case .success(let users):
+                        guard let users = users as? [User] else { return }
+                        
                         if users.contains(where: { $0.id == invitee.id }) {
                             SFProgressHUD.showFailed(with: "使用者已存在群組")
                         } else {
@@ -358,36 +377,6 @@ class GroupProvider {
                 completion(.failure(error))
             } else {
                 completion(.success(photo))
-            }
-        }
-    }
-    
-    func fetchAlbum(in group: Group, completion: @escaping (Result<[Album], Error>) -> Void) {
-        
-        albumList.removeAll()
-        
-        let doc = database
-            .collection("groups")
-            .document(group.id)
-            .collection("album")
-            .order(by: AlbumField.createdTime.rawValue, descending: true)
-        
-        doc.getDocuments { [weak self] (querySnapshot, error) in
-            
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in querySnapshot!.documents {
-                    do {
-                        if let album = try document.data(as: Album.self, decoder: Firestore.Decoder()) {
-                            self?.albumList.append(album)
-                        }
-                    } catch {
-                        completion(.failure(error))
-                    }
-                }
-                guard let albumList = self?.albumList else { return }
-                completion(.success(albumList))
             }
         }
     }

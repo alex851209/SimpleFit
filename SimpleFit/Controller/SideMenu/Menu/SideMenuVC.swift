@@ -91,15 +91,13 @@ class SideMenuVC: UIViewController {
         
         for group in groupList {
             
-            groupProvider.fetchMembers(in: group) { [weak self] result in
+            groupProvider.fetch(object: .members, in: group) { [weak self] result in
                 
                 switch result {
                 
-                case .success(let memberList):
-                    self?.memberCounts[group.id] = memberList.count
+                case .success(let memberList): self?.memberCounts[group.id] = memberList.count
                     
-                case .failure(let error):
-                    print(error)
+                case .failure(let error): print(error)
                 }
             }
         }

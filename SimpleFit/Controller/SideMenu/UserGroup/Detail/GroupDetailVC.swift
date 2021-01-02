@@ -80,11 +80,12 @@ class GroupDetailVC: UIViewController {
     
     private func fetchMember() {
         
-        provider.fetchMembers(in: group) { [weak self] result in
+        provider.fetch(object: .members, in: group) { [weak self] result in
             
             switch result {
             
             case .success(let members):
+                guard let members = members as? [User] else { return }
                 self?.members = members
                 SFProgressHUD.showSuccess()
                 self?.tableView.reloadData()
@@ -97,11 +98,12 @@ class GroupDetailVC: UIViewController {
     
     private func fetchChallenge() {
         
-        provider.fetchChallenges(in: group) { [weak self] result in
+        provider.fetch(object: .challenges, in: group) { [weak self] result in
             
             switch result {
             
             case .success(let challenges):
+                guard let challenges = challenges as? [Challenge] else { return }
                 self?.challenges = challenges
                 self?.tableView.reloadData()
                 
@@ -113,11 +115,12 @@ class GroupDetailVC: UIViewController {
     
     private func fetchAlbum() {
         
-        provider.fetchAlbum(in: group) { [weak self] result in
+        provider.fetch(object: .album, in: group) { [weak self] result in
             
             switch result {
             
             case .success(let albums):
+                guard let albums = albums as? [Album] else { return }
                 self?.albums = albums
                 SFProgressHUD.showSuccess()
                 self?.tableView.reloadData()

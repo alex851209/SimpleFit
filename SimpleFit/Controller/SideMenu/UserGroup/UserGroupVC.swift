@@ -144,7 +144,7 @@ class UserGroupVC: UIViewController {
         
         for group in groupList {
             
-            provider.fetchMembers(in: group) { [weak self] result in
+            provider.fetch(object: .members, in: group) { [weak self] result in
                 
                 switch result {
                 
@@ -209,11 +209,12 @@ class UserGroupVC: UIViewController {
         
         guard let selectedGroup = self.selectedGroup else { return }
         
-        provider.fetchMembers(in: selectedGroup) { [weak self] result in
+        provider.fetch(object: .members, in: selectedGroup) { [weak self] result in
             
             switch result {
             
             case .success(let members):
+                guard let members = members as? [User] else { return }
                 self?.members = members
                 self?.fetchChallenge()
                 
@@ -227,11 +228,12 @@ class UserGroupVC: UIViewController {
         
         guard let selectedGroup = self.selectedGroup else { return }
         
-        provider.fetchChallenges(in: selectedGroup) { [weak self] result in
+        provider.fetch(object: .challenges, in: selectedGroup) { [weak self] result in
             
             switch result {
             
             case .success(let challenges):
+                guard let challenges = challenges as? [Challenge] else { return }
                 self?.challenges = challenges
                 self?.fetchAlbum()
                 
@@ -245,11 +247,12 @@ class UserGroupVC: UIViewController {
         
         guard let selectedGroup = self.selectedGroup else { return }
         
-        provider.fetchAlbum(in: selectedGroup) { [weak self] result in
+        provider.fetch(object: .album, in: selectedGroup) { [weak self] result in
             
             switch result {
             
             case .success(let albums):
+                guard let albums = albums as? [Album] else { return }
                 self?.albums = albums
                 SFProgressHUD.dismiss()
                 self?.performSegue(withIdentifier: Segue.groupDetail, sender: nil)
