@@ -30,20 +30,30 @@ class GoalCell: UITableViewCell {
         endDate.text = goal.endDate
         endWeight.text = "\(goal.endWeight)"
         
+        let progress = calculateProgress(with: goal, currentWeight: currentWeight)
+        
+        progressTitleLabel.text = String(format: "%.0f", progress * 100) + "%"
+        triggerProgressView(with: progress)
+    }
+    
+    func calculateProgress(with goal: Goal, currentWeight: Double) -> Float {
+        
         let isZeroGain = goal.endWeight > goal.beginWeight && currentWeight < goal.beginWeight
         let isZeroLoss = goal.endWeight < goal.beginWeight && currentWeight > goal.beginWeight
         
-        var progress = (abs((currentWeight - goal.beginWeight) / (goal.endWeight - goal.beginWeight))).round(to: 2)
+        let currentProgress = currentWeight - goal.beginWeight
+        let totalProgress = goal.endWeight - goal.beginWeight
+        
+        var progress = Float((abs(currentProgress / totalProgress)).round(to: 2))
         
         if isZeroGain || isZeroLoss { progress = 0 }
         if progress > 1 { progress = 1 }
         
-        progressTitleLabel.text = String(format: "%.0f", progress * 100) + "%"
-        triggerProgressView(with: Float(progress))
+        return progress
     }
     
     private func triggerProgressView(with progress: Float) {
-
+        
         UIViewPropertyAnimator.runningPropertyAnimator(
             withDuration: 1,
             delay: 0,
