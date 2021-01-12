@@ -1,6 +1,6 @@
 # SimpleFit <a href="https://apps.apple.com/us/app/simplefit/id1546583862"><img src="https://github.com/Volorf/Badges/blob/master/App%20Store/App%20Store%20Badge.png" alt="drawing" width="100" align="center" /> </a>
 
-SimpleFit 是一款體態管理的 App，每天只需要記錄體重、照片和筆記就能持續追蹤體態。主要以圖像化的呈現，提供簡易且直觀的操作介面，讓每一位使用者都能快速上手，達到體態管理的目的。
+SimpleFit 是一款以使用者需求為中心而打造的體態管理 App，每天只需要記錄體重、照片和筆記就能持續追蹤體態。主要以圖像化的呈現，提供簡易且直覺的操作介面，讓每一位使用者都能快速上手，達到體態管理的目的。
 <br>
 <img src="https://github.com/alex851209/SimpleFit/blob/master/Screenshots/home.png" width="200" align="center" />
 <img src="https://github.com/alex851209/SimpleFit/blob/master/Screenshots/favorite.png" width="200" align="center" />
@@ -18,31 +18,31 @@ SimpleFit 是一款體態管理的 App，每天只需要記錄體重、照片和
 
 ## Demo
 #### 每日紀錄
-* 新增
-* 查看
-* 刪除
+* 每日紀錄(體重、相片及筆記)
+* 新增、查看及移除過往紀錄
 <br><img src="https://github.com/alex851209/SimpleFit/blob/master/Screenshots/gif/pick_date.gif" width="250" align="center" /><img src="https://github.com/alex851209/SimpleFit/blob/master/Screenshots/gif/add_weight.gif" width="250" align="center" /><img src="https://github.com/alex851209/SimpleFit/blob/master/Screenshots/gif/daily.gif" width="250" align="center" />
 
 #### 群組
 * 新增、退出群組
-* 群組邀請
-* 成員
-* 挑戰
-* 相簿
+* 即時群組邀請通知
+* 新增、查看及移除群組資料(成員、挑戰及相簿)
 <br><img src="https://github.com/alex851209/SimpleFit/blob/master/Screenshots/gif/group.gif" width="250" align="center" /><img src="https://github.com/alex851209/SimpleFit/blob/master/Screenshots/gif/group_2.gif" width="250" align="center" />
 
 #### 收藏
 * 照片收藏
+* 年、月份排序
 * 查看收藏
 <br><img src="https://github.com/alex851209/SimpleFit/blob/master/Screenshots/gif/favorite_1.gif" width="250" align="center" /><img src="https://github.com/alex851209/SimpleFit/blob/master/Screenshots/gif/favorite_2.gif" width="250" align="center" />
 
 #### 回顧
-* 圖表
-* 數據
+* 互動式圖表
+* 重要數據動態呈現
 <br><img src="https://github.com/alex851209/SimpleFit/blob/master/Screenshots/gif/review.gif" width="250" align="center" />
 
 #### 目標
-* 進度追蹤
+* 新增及移除目標
+* 自訂目標期間及目標體重
+* 自動進度追蹤
 <br><img src="https://github.com/alex851209/SimpleFit/blob/master/Screenshots/gif/goal.gif" width="250" align="center" /><img src="https://github.com/alex851209/SimpleFit/blob/master/Screenshots/gif/goal_2.gif" width="250" align="center" />
 
 ## Technologies
@@ -51,8 +51,13 @@ SimpleFit 是一款體態管理的 App，每天只需要記錄體重、照片和
 * iOS 14.0
 ## Skills
 * 使用 Storyboard 和 Programmatically 實現 Auto Layout
-* 結合可互動的 line chart 與 swiping card layout Collection View
+* 使用 AAInfographics 套件實現可滑動的互動式圖表
+* 使用 Gemini 套件實現 swiping card layout 樣式的 Collection View
 * 使用 Firebase 達到 User 驗證和 Data 儲存
-* 客製可覆用的 UI 元件(Card View, Gradient View, Floating Action Button...)
+* 客製可複用的 UI 元件(Card View, Gradient View, Floating Action Button...)
+* 使用 UITapGestureRecognizer 實現點擊、長按與滑動手勢
 * 使用 Lottie 和 UIViewPropertyAnimator 製作動畫
 * 實現 Apple 登入
+## Contacts
+* E-mail: alex851007@gmail.com
+* LinkedIn: https://www.linkedin.com/in/alex-chen-ba283b1a0/
