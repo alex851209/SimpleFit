@@ -20,9 +20,7 @@ class DateProvider {
         case sat
 
         var day: String {
-
             switch self {
-            
             case .sun: return "週日"
             case .mon: return "週一"
             case .tue: return "週二"
@@ -35,7 +33,6 @@ class DateProvider {
     }
     
     static let formatter = DateFormatter()
-    
     static let chineseDays: [ChineseDay] = [.sun, .mon, .tue, .wed, .thu, .fri, .sat]
     
     static func currentYear() -> Int {

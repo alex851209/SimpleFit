@@ -34,7 +34,6 @@ class UserProvider {
         doc.setData([
             UserField.id.rawValue: userID
         ], merge: true) { error in
-            
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -63,7 +62,6 @@ class UserProvider {
             UserField.height.rawValue: height,
             UserField.intro.rawValue: intro
         ], merge: true) { [weak self] error in
-            
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -80,7 +78,6 @@ class UserProvider {
         let doc = database.collection("users").document(userID)
         
         doc.getDocument { [weak self] (document, error) in
-            
             if let error = error {
                 print("Error getting document: \(error)")
             } else if let document = document, document.exists {

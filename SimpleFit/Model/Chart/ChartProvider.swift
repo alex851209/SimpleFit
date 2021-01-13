@@ -28,7 +28,6 @@ enum ChartField: String {
 class ChartProvider {
     
     let database = Firestore.firestore()
-    let storageRef = Storage.storage().reference()
     let userID = Auth.auth().currentUser?.uid
     var chartData = ChartData()
     var dailyDatas = [DailyData]()
@@ -48,9 +47,9 @@ class ChartProvider {
         let doc = database.collection("users").document(userID).collection("chartData")
         
         switch field {
-        
         case .weight:
             guard let weight = dailyData.weight else { return }
+            
             doc.document(dateString).setData([
                 field.rawValue: weight,
                 ChartField.date: dateString,
@@ -65,6 +64,7 @@ class ChartProvider {
             }
         case .photo:
             guard let photo = dailyData.photo else { return }
+            
             doc.document(dateString).setData([
                 field.rawValue: [
                     ChartField.photoUrl: photo.url,
@@ -81,13 +81,11 @@ class ChartProvider {
                 }
             }
         case .note:
-            
             fetchDailyDataFrom(date: dateString) { hasWeight in
-                
                 switch hasWeight {
-                
                 case true:
                     guard let note = dailyData.note else { return }
+                    
                     doc.document(dateString).setData([
                         field.rawValue: note,
                         ChartField.date: dateString,
@@ -100,7 +98,6 @@ class ChartProvider {
                             completion(.success(note))
                         }
                     }
-                    
                 case false: SFProgressHUD.showFailed(with: "請先記錄當日體重")
                 }
             }
@@ -112,20 +109,14 @@ class ChartProvider {
         let dateString = DateProvider.dateToDateString(date)
         
         fetchDailyDataFrom(date: dateString) { hasWeight in
-            
             switch hasWeight {
-            
             case true:
                 PhotoManager.shared.uploadPhoto(to: .photo, with: image) { result in
-                    
                     switch result {
-                    
                     case .success(let url): completion(.success(url))
-                        
                     case .failure(let error): print(error.localizedDescription)
                     }
                 }
-                
             case false: SFProgressHUD.showFailed(with: "請先記錄當日體重")
             }
         }
@@ -145,7 +136,6 @@ class ChartProvider {
         let doc = database.collection("users").document(userID).collection("chartData").document(date)
         
         doc.getDocument { (document, _) in
-            
             if let document = document, document.exists {
                 completion(true)
             } else {
@@ -160,14 +150,14 @@ class ChartProvider {
         completion: @escaping (Result<[DailyData], Error>) -> Void
     ) {
         
+        dailyDatas.removeAll()
+        
         guard let userID = userID else { return }
         
         let doc = database.collection("users").document(userID).collection("chartData")
         let month = DateProvider.add0BeforeNumber(month)
-        dailyDatas.removeAll()
         
         doc.whereField(ChartField.month, isEqualTo: "\(year)-\(month)").getDocuments { (querySnapshot, error) in
-            
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
@@ -199,7 +189,6 @@ class ChartProvider {
             .document(date)
         
         doc.delete { error in
-            
             if let error = error {
                 print("Error removing daily: \(error)")
             } else {
@@ -217,7 +206,6 @@ class ChartProvider {
         let doc = database.collection("users").document(userID).collection("chartData")
         
         doc.whereField(ChartField.photoIsFavorite, isEqualTo: true).getDocuments { (querySnapshot, error) in
-            
             if let error = error {
                 print("Error getting favorites: \(error)")
             } else {
@@ -249,7 +237,7 @@ class ChartProvider {
             let day = DateProvider.add0BeforeNumber(count)
 
             if days.contains(day) {
-                let daily = dailyDatas.first( where: { $0.day == day })
+                let daily = dailyDatas.first(where: { $0.day == day })
                 weightDatas.append(daily?.weight)
             } else {
                 weightDatas.append(nil)
@@ -267,7 +255,6 @@ class ChartProvider {
             chartData.max = 100
             return
         }
-
         chartData.min = min - 2
         chartData.max = max + 2
     }

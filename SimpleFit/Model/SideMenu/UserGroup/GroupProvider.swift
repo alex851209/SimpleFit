@@ -76,15 +76,12 @@ class GroupProvider {
     func fetchGroups(of user: User, completion: @escaping (Result<[Group], Error>) -> Void) {
         
         guard let groups = user.groups else { return }
-
         let doc = database.collection("groups")
         
         doc.getDocuments { (querySnapshot, error) in
-            
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
-                
                 var groupList = [Group]()
                 
                 for document in querySnapshot!.documents {
@@ -120,7 +117,6 @@ class GroupProvider {
                 GroupField.ownerAvatar: group.owner.avatar
             ]
         ]) { [weak self] error in
-            
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -136,7 +132,6 @@ class GroupProvider {
                     MemberField.avatar.rawValue: user.avatar as Any,
                     MemberField.intro.rawValue: user.intro as Any
                 ])
-                
                 userDoc.updateData([
                     GroupField.groups.rawValue: FieldValue.arrayUnion([id])
                 ])
@@ -149,16 +144,13 @@ class GroupProvider {
         let doc = database.collection("groups").document(group.id)
         
         switch object {
-        
         case .album:
             doc.collection(object.rawValue)
                .order(by: "createdTime", descending: true)
                .getDocuments { (querySnapshot, error) in
-                
                 if let error = error {
                     print("Error getting documents: \(error)")
                 } else {
-                    
                     var albumList = [Album]()
                     
                     for document in querySnapshot!.documents {
@@ -177,11 +169,9 @@ class GroupProvider {
             doc.collection(object.rawValue)
                .order(by: "createdTime", descending: true)
                .getDocuments { (querySnapshot, error) in
-                
                 if let error = error {
                     print("Error getting documents: \(error)")
                 } else {
-                    
                     var challengeList = [Challenge]()
                     
                     for document in querySnapshot!.documents {
@@ -198,11 +188,9 @@ class GroupProvider {
             }
         case .members:
             doc.collection(object.rawValue).getDocuments { (querySnapshot, error) in
-                
                 if let error = error {
                     print("Error getting documents: \(error)")
                 } else {
-                    
                     var memberList = [User]()
                     
                     for document in querySnapshot!.documents {
@@ -227,7 +215,6 @@ class GroupProvider {
     ) {
         
         let doc = database.collection("groups").document(group.id).collection("challenges")
-        
         let id = doc.document().documentID
         
         doc.document(id).setData([
@@ -237,7 +224,6 @@ class GroupProvider {
             ChallengeField.date.rawValue: challenge.date,
             ChallengeField.createdTime.rawValue: Date()
         ]) { error in
-            
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -254,15 +240,10 @@ class GroupProvider {
     ) {
         
         searchUser(invitee) { [weak self] result in
-            
             switch result {
-            
             case .success(let invitee):
-                
                 self?.fetch(object: .members, in: group, completion: { result in
-                    
                     switch result {
-                    
                     case .success(let users):
                         guard let users = users as? [User] else { return }
                         
@@ -283,7 +264,6 @@ class GroupProvider {
                                     GroupInvitationsField.inviterAvatar: inviter.avatar
                                 ]
                             ]) { error in
-
                                 if let error = error {
                                     completion(.failure(error))
                                 } else {
@@ -291,12 +271,10 @@ class GroupProvider {
                                 }
                             }
                         }
-                        
                     case .failure(let error):
                         print(error)
                     }
                 })
-                
             case .failure(let error):
                 print(error)
             }
@@ -308,7 +286,6 @@ class GroupProvider {
         let doc = database.collection("users").whereField("name", isEqualTo: user.name as Any)
         
         doc.getDocuments { (querySnapshot, error) in
-            
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
@@ -316,7 +293,6 @@ class GroupProvider {
                     SFProgressHUD.showFailed(with: "查無使用者")
                     return
                 }
-                
                 for document in querySnapshot!.documents {
                     do {
                         if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
@@ -338,7 +314,6 @@ class GroupProvider {
     ) {
         
         let doc = database.collection("groups").document(group.id).collection("album")
-        
         let id = doc.document().documentID
         
         doc.document(id).setData([
@@ -347,7 +322,6 @@ class GroupProvider {
             AlbumField.url.rawValue: "\(photo)",
             AlbumField.createdTime.rawValue: Date()
         ]) { error in
-            
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -367,7 +341,6 @@ class GroupProvider {
         doc.setData([
             GroupField.coverPhoto.rawValue: "\(photo)"
         ], merge: true) { error in
-
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -383,12 +356,10 @@ class GroupProvider {
         let doc = database.collection("users").document(userID).collection("groupInvitations")
         
         doc.addSnapshotListener { querySnapshot, error in
-            
             guard let snapshot = querySnapshot else {
                 print("Error listening invitations: \(String(describing: error))")
                 return
             }
-            
             var invitationList = [Invitation]()
             
             _ = snapshot.documentChanges.map {
@@ -415,14 +386,12 @@ class GroupProvider {
         let groupsDoc = database.collection("groups")
         
         usersDoc.collection("groupInvitations").document(invitationID).delete { error in
-            
             if let error = error {
                 print("Error removing document: \(error)")
             } else {
                 usersDoc.updateData([
                     GroupField.groups.rawValue: FieldValue.arrayUnion([invitationID])
                 ])
-                
                 groupsDoc.document(invitationID).collection("members").document(userID).setData([
                     MemberField.id.rawValue: userID,
                     MemberField.name.rawValue: user.name as Any,
@@ -451,26 +420,20 @@ class GroupProvider {
             .document(id)
         
         switch object {
-        
         case .album, .challenges:
-            
             doc.delete { error in
-                
                 if let error = error {
                     print("Error removing: \(error)")
                 } else {
                     completion(.success(id))
                 }
             }
-            
         case .members:
-            
             let usersDoc = database.collection("users").document(id)
             
             usersDoc.updateData([
                 GroupField.groups.rawValue: FieldValue.arrayRemove([group.id])
             ]) { error in
-                
                 if let error = error {
                     print("Error removing member: \(error)")
                 } else {

@@ -8,7 +8,7 @@
 import UIKit
 
 enum SideMenuItem {
-
+    
     case user
     case group
     case favorite
@@ -16,9 +16,7 @@ enum SideMenuItem {
     case goal
 
     var image: UIImage? {
-
         switch self {
-        
         case .user: return UIImage(named: "user")
         case .group: return UIImage(named: "friend")
         case .favorite: return UIImage(named: "favorite")
@@ -26,11 +24,8 @@ enum SideMenuItem {
         case .goal: return UIImage(named: "goal")
         }
     }
-
     var title: String {
-
         switch self {
-        
         case .user: return "個 人"
         case .group: return "群 組"
         case .favorite: return "收 藏"

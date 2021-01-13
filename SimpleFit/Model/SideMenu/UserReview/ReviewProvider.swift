@@ -10,9 +10,9 @@ import Firebase
 
 class ReviewProvider {
 
+    let userID = Auth.auth().currentUser?.uid
     var weightDatas = [Double]()
     var categories = [String]()
-    let userID = Auth.auth().currentUser?.uid
     
     func fetchReviewDatas(
         from beginDate: Date,
@@ -33,7 +33,6 @@ class ReviewProvider {
         doc.whereField(ChartField.date, isGreaterThanOrEqualTo: beginDateString)
            .whereField(ChartField.date, isLessThanOrEqualTo: endDateString)
            .getDocuments { [weak self] (querySnapshot, error) in
-            
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
@@ -69,7 +68,6 @@ class ReviewProvider {
             chartData.min = min
             chartData.max = max
         }
-
         return chartData
     }
 }

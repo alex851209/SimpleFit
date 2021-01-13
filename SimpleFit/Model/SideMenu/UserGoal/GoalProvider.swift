@@ -23,7 +23,6 @@ class GoalProvider {
     
     let database = Firestore.firestore()
     let userID = Auth.auth().currentUser?.uid
-    var goalList = [Goal]()
     
     func addDataWith(goal: Goal, completion: @escaping (Result<Any, Error>) -> Void) {
 
@@ -50,9 +49,9 @@ class GoalProvider {
     
     func fetchGoalDatas(completion: @escaping (Result<[Goal], Error>) -> Void) {
         
-        goalList.removeAll()
-        
         guard let userID = userID else { return }
+        
+        var goalList = [Goal]()
         
         let doc = database
             .collection("users")
@@ -60,27 +59,21 @@ class GoalProvider {
             .collection("goalList")
             .order(by: "endDate")
         
-        doc.getDocuments { [weak self] (querySnapshot, error) in
-            
+        doc.getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
                 for document in querySnapshot!.documents {
                     do {
                         if let goal = try document.data(as: Goal.self, decoder: Firestore.Decoder()) {
-                            self?.goalList.append(goal)
+                            goalList.append(goal)
                         }
                     } catch {
                         completion(.failure(error))
                     }
-                    guard let goalList = self?.goalList else { return }
-                    completion(.success(goalList))
                 }
             }
-            
-            guard let emptyGoalList = self?.goalList else { return }
-            
-            completion(.success(emptyGoalList))
+            completion(.success(goalList))
         }
     }
     
@@ -96,7 +89,6 @@ class GoalProvider {
             .limit(to: 1)
         
         doc.getDocuments { (querySnapshot, error) in
-            
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
@@ -126,7 +118,6 @@ class GoalProvider {
             .collection("goalList")
 
         doc.document(goalId).delete { error in
-            
             if let error = error {
                 print("Error removing Goal: \(error)")
             } else {
