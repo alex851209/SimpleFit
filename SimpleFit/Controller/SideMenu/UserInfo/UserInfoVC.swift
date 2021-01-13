@@ -23,14 +23,12 @@ class UserInfoVC: UIViewController {
     @IBAction func editButtonDidTap(_ sender: Any) {
         
         editButton.showButtonFeedbackAnimation { [weak self] in
-            
             self?.switchMode()
         }
     }
     @IBAction func avatarEditButtonDidtap(_ sender: Any) {
         
         avatarEditButton.showButtonFeedbackAnimation { [weak self] in
-            
             self?.showAvatarAlert()
         }
     }
@@ -38,7 +36,6 @@ class UserInfoVC: UIViewController {
     @IBAction func signOutButtonDidTap(_ sender: Any) {
         
         signOutButton.showButtonFeedbackAnimation { [weak self] in
-            
             self?.showSignOutAlert()
         }
     }
@@ -125,13 +122,10 @@ class UserInfoVC: UIViewController {
         if user.gender == nil { user.gender = "男" }
         
         provider.uploadInfoWith(user: user) { result in
-            
             switch result {
-            
             case .success(let user):
                 print("Success uploading info for user: \(user)")
                 SFProgressHUD.showSuccess()
-                
             case .failure(let error):
                 print(error)
             }
@@ -143,16 +137,14 @@ class UserInfoVC: UIViewController {
         SFProgressHUD.showLoading()
         
         guard let avatar = avatarImage.image else { return }
+        
         PhotoManager.shared.uploadPhoto(to: .avatar, with: avatar) { [weak self] result in
-            
             switch result {
-            
             case .success(let avatarURL):
                 print("Success uploading new avatar with url: \(avatarURL)")
                 let urlString = "\(avatarURL)"
                 self?.user.avatar = urlString
                 self?.uploadInfo()
-                
             case .failure(let error): print(error)
             }
         }
@@ -161,7 +153,7 @@ class UserInfoVC: UIViewController {
     private func showAvatarAlert() {
         
         let alert = PhotoAlertVC(showAction: showImagePicker(type:))
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true)
     }
     
     private func showImagePicker(type: UIImagePickerController.SourceType) {
@@ -170,7 +162,7 @@ class UserInfoVC: UIViewController {
         picker.sourceType = type
         picker.allowsEditing = true
         picker.delegate = self
-        present(picker, animated: true, completion: nil)
+        present(picker, animated: true)
     }
     
     private func showSignOutAlert() {
@@ -202,8 +194,10 @@ class UserInfoVC: UIViewController {
 
 extension UserInfoVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
         
         guard let selectedPhoto = info[.editedImage] as? UIImage else { return }
         avatarImage.image = selectedPhoto
@@ -223,18 +217,15 @@ extension UserInfoVC: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         switch textField {
-        
         case nameTextField:
             guard let isEmptyName = textField.text?.isEmpty else { return }
             user.name = isEmptyName ? nil : textField.text
-            
         case heightTextField:
             if let heightString = textField.text, let height = Double(heightString) {
                 user.height = height
             } else {
                 user.height = nil
             }
-            
         default: break
         }
         
@@ -250,7 +241,6 @@ extension UserInfoVC: UITextViewDelegate {
         textView.layer.borderWidth = 2
         
         if textView.textColor == .systemGray3 {
-            
             textView.text = nil
             textView.textColor = .systemGray
         }
@@ -262,13 +252,11 @@ extension UserInfoVC: UITextViewDelegate {
         textView.layer.borderWidth = 1
         
         if textView.text.isEmpty {
-            
             textView.textColor = .systemGray3
             textView.text = "請輸入個人簡介"
             
             user.intro = nil
         } else {
-            
             user.intro = textView.text
         }
     }

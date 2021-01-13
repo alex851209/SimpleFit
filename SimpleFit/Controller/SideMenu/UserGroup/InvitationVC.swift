@@ -26,8 +26,13 @@ class InvitationVC: BlurViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureEmptyView()
         configureTableView()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        configureEmptyView()
     }
     
     private func configureEmptyView() {
@@ -40,11 +45,7 @@ class InvitationVC: BlurViewController {
         emptyView.arrowAnimationView.isHidden = true
         emptyView.emptyTitleLabel.text = "目前沒有群組邀請！"
         
-        if invitationList.isEmpty {
-            view.addSubview(emptyView)
-        } else {
-            emptyView.removeFromSuperview()
-        }
+        invitationList.isEmpty ? view.addSubview(emptyView) : emptyView.removeFromSuperview()
     }
     
     private func configureTableView() {
@@ -57,7 +58,6 @@ class InvitationVC: BlurViewController {
     private func removeInvitation(id: String) {
         
         if let index = invitationList.firstIndex(where: { $0.id == id }) {
-            
             invitationList.remove(at: index)
             configureEmptyView()
         }
@@ -67,15 +67,9 @@ class InvitationVC: BlurViewController {
 
 extension InvitationVC: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return invitationList.count
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return invitationList.count }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 60
-    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 60 }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -89,12 +83,10 @@ extension InvitationVC: UITableViewDelegate, UITableViewDataSource {
         
         invitationCell.layoutCell(with: invitationList[indexPath.row])
         invitationCell.callback = { [weak self] id in
-            
             SFProgressHUD.showSuccess()
             self?.callback?(id)
             self?.removeInvitation(id: id)
         }
-        
         return invitationCell
     }
 }

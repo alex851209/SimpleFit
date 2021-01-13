@@ -102,7 +102,6 @@ class UserGroupVC: UIViewController {
     private func configureNewInvitation() {
         
         if hasNewInvitation {
-            
             hasNewInvitation = false
             self.performSegue(withIdentifier: Segue.newInvitation, sender: nil)
         }
@@ -111,7 +110,6 @@ class UserGroupVC: UIViewController {
     private func showInvitePage() {
         
         inviteListButton.showButtonFeedbackAnimation { [weak self] in
-            
             self?.performSegue(withIdentifier: Segue.groupInvitation, sender: nil)
         }
     }
@@ -119,7 +117,6 @@ class UserGroupVC: UIViewController {
     private func showAddGroupPage() {
         
         addButton.showButtonFeedbackAnimation { [weak self] in
-            
             self?.performSegue(withIdentifier: Segue.addGroup, sender: nil)
         }
     }
@@ -127,14 +124,11 @@ class UserGroupVC: UIViewController {
     private func fetchGroup() {
         
         provider.fetchGroups(of: user) { [weak self] result in
-            
             switch result {
-            
             case .success(let groupList):
                 self?.groupList = groupList
                 self?.fetchMemberCount()
                 self?.configureEmptyView()
-                
             case .failure(let error):
                 print(error)
             }
@@ -148,15 +142,11 @@ class UserGroupVC: UIViewController {
         if groupList.isEmpty { tableView.reloadData() }
         
         for group in groupList {
-            
             provider.fetch(object: .members, in: group) { [weak self] result in
-                
                 switch result {
-                
                 case .success(let memberList):
                     self?.memberCounts[group.id] = memberList.count
                     self?.tableView.reloadData()
-                    
                 case .failure(let error):
                     print(error)
                 }
@@ -167,21 +157,15 @@ class UserGroupVC: UIViewController {
     private func listenInvitations() {
         
         provider.listenInvitations { [weak self] result in
-            
             switch result {
-            
             case .success(let invitationList):
-                
                 if self?.invitationList != invitationList && !invitationList.isEmpty {
-                    
                     self?.hasNewInvitation = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-
                         self?.configureNewInvitation()
                     }
                 }
                 self?.invitationList = invitationList
-                
             case .failure(let error): print(error)
             }
         }
@@ -190,9 +174,7 @@ class UserGroupVC: UIViewController {
     private func fetchUserInfo() {
 
         userProvider.fetchInfo { [weak self] result in
-
             switch result {
-
             case .success(let user):
                 guard let name = user.name,
                       let avatar = user.avatar
@@ -203,7 +185,6 @@ class UserGroupVC: UIViewController {
                 self?.owner.avatar = avatar
 
                 self?.fetchGroup()
-
             case .failure(let error):
                 print(error)
             }
@@ -215,14 +196,11 @@ class UserGroupVC: UIViewController {
         guard let selectedGroup = self.selectedGroup else { return }
         
         provider.fetch(object: .members, in: selectedGroup) { [weak self] result in
-            
             switch result {
-            
             case .success(let members):
                 guard let members = members as? [User] else { return }
                 self?.members = members
                 self?.fetchChallenge()
-                
             case .failure(let error):
                 print(error)
             }
@@ -234,14 +212,11 @@ class UserGroupVC: UIViewController {
         guard let selectedGroup = self.selectedGroup else { return }
         
         provider.fetch(object: .challenges, in: selectedGroup) { [weak self] result in
-            
             switch result {
-            
             case .success(let challenges):
                 guard let challenges = challenges as? [Challenge] else { return }
                 self?.challenges = challenges
                 self?.fetchAlbum()
-                
             case .failure(let error):
                 print(error)
             }
@@ -253,15 +228,12 @@ class UserGroupVC: UIViewController {
         guard let selectedGroup = self.selectedGroup else { return }
         
         provider.fetch(object: .album, in: selectedGroup) { [weak self] result in
-            
             switch result {
-            
             case .success(let albums):
                 guard let albums = albums as? [Album] else { return }
                 self?.albums = albums
                 SFProgressHUD.dismiss()
                 self?.performSegue(withIdentifier: Segue.groupDetail, sender: nil)
-                
             case .failure(let error):
                 print(error)
             }
@@ -271,13 +243,10 @@ class UserGroupVC: UIViewController {
     private func acceptInvitation(_ id: String) {
         
         provider.acceptInvitation(of: user, invitationID: id) { [weak self] result in
-            
             switch result {
-            
             case .success(let invitationID):
                 self?.fetchUserInfo()
                 print("Group: \(invitationID) successfully removed from group invitations!")
-                
             case .failure(let error):
                 print(error)
             }
@@ -287,14 +256,12 @@ class UserGroupVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier {
-        
         case Segue.addGroup:
             guard let addGroupVC = segue.destination as? AddGroupVC else { return }
             
             addGroupVC.newGroup.owner = owner
             addGroupVC.user = user
             addGroupVC.callback = { self.fetchUserInfo() }
-            
         case Segue.groupDetail:
             guard let groupDetailVC = segue.destination as? GroupDetailVC,
                   let selectedGroup = self.selectedGroup
@@ -306,24 +273,19 @@ class UserGroupVC: UIViewController {
             groupDetailVC.challenges = challenges
             groupDetailVC.albums = albums
             groupDetailVC.callback = { [weak self] user in
-                
                 self?.user = user
             }
-        
         case Segue.groupInvitation:
             guard let invitationVC = segue.destination as? InvitationVC else { return }
             
             invitationVC.invitationList = invitationList
             invitationVC.callback = { [weak self] id in
-                
                 self?.acceptInvitation(id)
             }
-            
         case Segue.newInvitation:
             guard let newInvitationVC = segue.destination as? NewInvitationVC else { return }
             
             newInvitationVC.invitationsCount = invitationList.count
-            
         default: break
         }
     }
@@ -348,7 +310,6 @@ extension UserGroupVC: UITableViewDelegate, UITableViewDataSource {
         let group = groupList[indexPath.row]
         
         if let memberCount = memberCounts[group.id] {
-            
             groupCell.layoutCell(with: group, memberCount: memberCount)
         }
 
@@ -361,7 +322,6 @@ extension UserGroupVC: UITableViewDelegate, UITableViewDataSource {
         selectedGroup = groupList[indexPath.row]
         
         fetchMember()
-        
         selectedCell?.showButtonFeedbackAnimation { SFProgressHUD.showLoading() }
     }
 }

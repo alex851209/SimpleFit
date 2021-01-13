@@ -29,8 +29,8 @@ class AuthVC: UIViewController {
         
         let button = ASAuthorizationAppleIDButton()
         button.addTarget(self, action: #selector(signInButtonDidTap), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.cornerRadius = 20
+        button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
         
         NSLayoutConstraint.activate([
@@ -51,7 +51,6 @@ class AuthVC: UIViewController {
         
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
-        
         authorizationController.performRequests()
     }
     
@@ -71,36 +70,28 @@ class AuthVC: UIViewController {
         
       precondition(length > 0)
         
-      let charset: [Character] =
-          Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+      let charset: [Character] = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
       var result = ""
       var remainingLength = length
 
       while remainingLength > 0 {
-        
         let randoms: [UInt8] = (0 ..< 16).map { _ in
-            
           var random: UInt8 = 0
           let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
           if errorCode != errSecSuccess {
-            
             fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
           }
           return random
         }
 
         randoms.forEach { random in
-            
           if remainingLength == 0 { return }
-
           if random < charset.count {
-            
             result.append(charset[Int(random)])
             remainingLength -= 1
           }
         }
       }
-
       return result
     }
 
@@ -124,8 +115,10 @@ extension AuthVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPr
         return self.view.window!
     }
     
-    func authorizationController(controller: ASAuthorizationController,
-                                 didCompleteWithAuthorization authorization: ASAuthorization) {
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
@@ -143,12 +136,12 @@ extension AuthVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPr
                 return
             }
             // Initialize a Firebase credential.
-            let credential = OAuthProvider.credential(withProviderID: "apple.com",
-                                                      idToken: idTokenString,
-                                                      rawNonce: nonce)
+            let credential = OAuthProvider.credential(
+                withProviderID: "apple.com",
+                idToken: idTokenString,
+                rawNonce: nonce)
             // Sign in with Firebase.
             Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
-                
                 if let error = error {
                     print(error.localizedDescription)
                     return
@@ -158,14 +151,9 @@ extension AuthVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPr
                     // User is signed in to Firebase with Apple.
                     // ...
                     self?.provider.createUser { result in
-                        
                         switch result {
-                        
-                        case .success(let userID):
-                            print("Success signing in with userID: \(userID)")
-                            
-                        case .failure(let error):
-                            print(error)
+                        case .success(let userID): print("Success signing in with userID: \(userID)")
+                        case .failure(let error): print(error)
                         }
                     }
                     

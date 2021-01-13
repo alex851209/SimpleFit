@@ -52,20 +52,16 @@ class PhotoDetailVC: BlurViewController {
         isFavorite = !isFavorite
         
         favoriteButton.showButtonFeedbackAnimation { [weak self] in
-            
             guard let selectedDate = self?.selectedDaily?.date,
                   let isFavorite = self?.isFavorite
             else { return }
             
             self?.provider.updatePhoto(isFavorite: isFavorite, to: selectedDate) { [weak self] result in
-                
                 switch result {
-                
                 case .success:
                     self?.favoriteButton.tintColor = isFavorite ? self?.heartColor : .systemGray
                     !isFavorite ? SFProgressHUD.removeHeart() : SFProgressHUD.showHeart()
                     self?.callback?(isFavorite)
-                
                 case .failure(let error):
                     print(error)
                 }

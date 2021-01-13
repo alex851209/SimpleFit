@@ -25,7 +25,6 @@ class UserGoalVC: UIViewController {
     @IBAction func addButtonDidTap(_ sender: Any) {
         
         addButton.showButtonFeedbackAnimation { [weak self] in
-            
             self?.performSegue(withIdentifier: Segue.addGoal, sender: nil)
         }
     }
@@ -60,24 +59,17 @@ class UserGoalVC: UIViewController {
                                  width: tableView.frame.width,
                                  height: tableView.frame.height)
         
-        if goalList.isEmpty {
-            view.addSubview(emptyView)
-        } else {
-            emptyView.removeFromSuperview()
-        }
+        goalList.isEmpty ? view.addSubview(emptyView) : emptyView.removeFromSuperview()
     }
     
     private func fetchGoalDatas() {
         
         provider.fetchGoalDatas { [weak self] result in
-            
             switch result {
-            
             case .success(let goalList):
                 self?.goalList = goalList
                 self?.tableView.reloadData()
                 self?.configureEmptyView()
-                
             case .failure(let error):
                 print(error)
             }
@@ -89,14 +81,11 @@ class UserGoalVC: UIViewController {
         SFProgressHUD.showLoading()
         
         provider.removeGoal(with: goalID) { [weak self] result in
-            
             switch result {
-            
             case .success:
                 print("Success removing goal: \(goalID)")
                 SFProgressHUD.showSuccess()
                 self?.configureEmptyView()
-                
             case .failure(let error):
                 print(error)
             }
@@ -106,10 +95,8 @@ class UserGoalVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == Segue.addGoal {
-            
             guard let addGoalVC = segue.destination as? AddGoalVC else { return }
             addGoalVC.callback = { [weak self] in
-                
                 self?.fetchGoalDatas()
             }
         }
@@ -146,16 +133,13 @@ extension UserGoalVC: UITableViewDelegate, UITableViewDataSource {
             style: .destructive,
             title: "刪除"
         ) { [weak self] (_, _, completion) in
-            
             guard let goalID = self?.goalList[indexPath.row].id else { return }
             self?.goalList.remove(at: indexPath.item)
             self?.tableView.reloadData()
             self?.removeGoal(with: goalID)
             completion(true)
         }
-        
         let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
-
         return swipeActions
     }
 }

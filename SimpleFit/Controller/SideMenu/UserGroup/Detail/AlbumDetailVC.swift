@@ -48,7 +48,6 @@ class AlbumDetailVC: BlurViewController {
         let alert = SFAlertVC(title: "移除照片？", showAction: remove)
         
         removeButton.showButtonFeedbackAnimation { [weak self] in
-            
             self?.present(alert, animated: true)
         }
     }
@@ -62,14 +61,11 @@ class AlbumDetailVC: BlurViewController {
         SFProgressHUD.showLoading()
         
         provider.remove(object: .album, of: id, in: group) { [weak self] result in
-            
             switch result {
-            
             case .success(let id):
                 print("Success removing album: \(id)")
                 self?.callback?()
                 self?.dismiss(animated: true)
-                
             case .failure(let error):
                 print(error)
             }

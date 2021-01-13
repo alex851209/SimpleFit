@@ -69,11 +69,10 @@ class AddGroupVC: BlurViewController {
     private func showPhotoAlert(_ sender: UIButton) {
         
         sender.showButtonFeedbackAnimation { [weak self] in
-            
             guard let showImagePicker = self?.showImagePicker(type:) else { return }
             
             let alert = PhotoAlertVC(showAction: showImagePicker)
-            self?.present(alert, animated: true, completion: nil)
+            self?.present(alert, animated: true)
         }
     }
     
@@ -83,7 +82,7 @@ class AddGroupVC: BlurViewController {
         picker.sourceType = type
         picker.allowsEditing = true
         picker.delegate = self
-        present(picker, animated: true, completion: nil)
+        present(picker, animated: true)
     }
     
     private func uploadCoverPhoto() {
@@ -104,13 +103,10 @@ class AddGroupVC: BlurViewController {
         }
         
         PhotoManager.shared.uploadPhoto(to: .group, with: coverPhotoImage) { [weak self] result in
-            
             switch result {
-
             case .success(let url):
                 self?.newGroup.coverPhoto = "\(url)"
                 self?.addGroup()
-
             case .failure(let error):
                 print(error)
             }
@@ -120,15 +116,12 @@ class AddGroupVC: BlurViewController {
     private func addGroup() {
         
         provider.addGroupWith(group: newGroup, user: user) { [weak self] result in
-            
             switch result {
-            
             case .success(let group):
                 print("Success adding new group: \(group)")
                 SFProgressHUD.showSuccess()
                 self?.callback?()
                 self?.dismiss(animated: true)
-                
             case .failure(let error):
                 print(error)
             }
@@ -163,15 +156,12 @@ extension AddGroupVC: UITextFieldDelegate {
         textField.layer.borderWidth = 1
         
         switch textField {
-        
         case categoryTextField:
             guard let category = categoryTextField.text else { return }
             newGroup.category = category
-            
         case groupTitleTextField:
             guard let title = groupTitleTextField.text else { return }
             newGroup.name = title
-            
         default: break
         }
     }
@@ -185,7 +175,6 @@ extension AddGroupVC: UITextViewDelegate {
         textView.layer.borderWidth = 2
         
         if textView.textColor == UIColor.systemGray3 {
-            
             textView.text = nil
             textView.textColor = .systemGray
         }
@@ -197,7 +186,6 @@ extension AddGroupVC: UITextViewDelegate {
         textView.layer.borderWidth = 1
         
         if textView.text.isEmpty {
-            
             textView.textColor = UIColor.systemGray3
             textView.text = "請輸入介紹"
         }

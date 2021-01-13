@@ -62,16 +62,13 @@ class GroupDetailVC: UIViewController {
     private func fetchGroup() {
         
         provider.fetchGroups(of: user) { [weak self] result in
-            
             switch result {
-            
             case .success(let groupList):
                 let id = self?.group.id
                 guard let group = groupList.first( where: { $0.id == id }) else { return }
                 self?.group = group
                 SFProgressHUD.showSuccess()
                 self?.tableView.reloadData()
-                
             case .failure(let error):
                 print(error)
             }
@@ -81,15 +78,12 @@ class GroupDetailVC: UIViewController {
     private func fetchMember() {
         
         provider.fetch(object: .members, in: group) { [weak self] result in
-            
             switch result {
-            
             case .success(let members):
                 guard let members = members as? [User] else { return }
                 self?.members = members
                 SFProgressHUD.showSuccess()
                 self?.tableView.reloadData()
-                
             case .failure(let error):
                 print(error)
             }
@@ -99,14 +93,11 @@ class GroupDetailVC: UIViewController {
     private func fetchChallenge() {
         
         provider.fetch(object: .challenges, in: group) { [weak self] result in
-            
             switch result {
-            
             case .success(let challenges):
                 guard let challenges = challenges as? [Challenge] else { return }
                 self?.challenges = challenges
                 self?.tableView.reloadData()
-                
             case .failure(let error):
                 print(error)
             }
@@ -116,15 +107,12 @@ class GroupDetailVC: UIViewController {
     private func fetchAlbum() {
         
         provider.fetch(object: .album, in: group) { [weak self] result in
-            
             switch result {
-            
             case .success(let albums):
                 guard let albums = albums as? [Album] else { return }
                 self?.albums = albums
                 SFProgressHUD.showSuccess()
                 self?.tableView.reloadData()
-                
             case .failure(let error):
                 print(error)
             }
@@ -136,7 +124,6 @@ class GroupDetailVC: UIViewController {
         let alert = SFAlertVC(title: "退出群組？", showAction: exitGroup)
         
         sender.showButtonFeedbackAnimation { [weak self] in
-            
             self?.present(alert, animated: true)
         }
     }
@@ -150,16 +137,13 @@ class GroupDetailVC: UIViewController {
         user.groups?.remove(at: groupIndex)
         
         provider.remove(object: .members, of: user.id, in: group) { [weak self] result in
-            
             switch result {
-            
             case .success:
                 print("Success exit group: \(String(describing: self?.group))")
                 SFProgressHUD.showSuccess()
                 self?.navigationController?.popViewController(animated: true)
                 guard let user = self?.user else { return }
                 self?.callback?(user)
-                
             case .failure(let error):
                 print(error)
             }
@@ -169,7 +153,6 @@ class GroupDetailVC: UIViewController {
     @objc private func addChallenge(sender: UIButton) {
         
         sender.showButtonFeedbackAnimation { [weak self] in
-            
             self?.performSegue(withIdentifier: Segue.addChallenge, sender: nil)
         }
     }
@@ -179,7 +162,7 @@ class GroupDetailVC: UIViewController {
     private func showPhotoAlert() {
         
         let alert = PhotoAlertVC(showAction: showImagePicker(type:))
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true)
     }
     
     private func showImagePicker(type: UIImagePickerController.SourceType) {
@@ -188,23 +171,19 @@ class GroupDetailVC: UIViewController {
         picker.sourceType = type
         picker.allowsEditing = true
         picker.delegate = self
-        present(picker, animated: true, completion: nil)
+        present(picker, animated: true)
     }
     
     private func uploadPhoto(with image: UIImage) {
         
         PhotoManager.shared.uploadPhoto(to: .group, with: image) { [weak self] result in
-            
             switch result {
-            
             case .success(let url):
                 switch self?.photoType {
-                
                 case .album: self?.addAlbumPhoto(with: url)
                 case .cover: self?.addCoverPhoto(with: url)
                 default: break
                 }
-                
             case .failure(let error):
                 print(error)
             }
@@ -214,13 +193,10 @@ class GroupDetailVC: UIViewController {
     private func addCoverPhoto(with url: URL) {
         
         provider.addCoverPhoto(in: group, with: url) { [weak self] result in
-            
             switch result {
-            
             case .success(let url):
                 print("Success adding new cover photo with URL: \(url)")
                 self?.fetchGroup()
-                
             case .failure(let error):
                 print(error)
             }
@@ -230,13 +206,10 @@ class GroupDetailVC: UIViewController {
     private func addAlbumPhoto(with url: URL) {
         
         provider.addAlbumPhoto(in: group, from: user, with: url) { [weak self] result in
-            
             switch result {
-            
             case .success(let url):
                 print("Success adding new photo to album with URL: \(url)")
                 self?.fetchAlbum()
-                
             case .failure(let error):
                 print(error)
             }
@@ -248,13 +221,10 @@ class GroupDetailVC: UIViewController {
         SFProgressHUD.showLoading()
         
         provider.remove(object: .challenges, of: id, in: group) { result in
-            
             switch result {
-            
             case .success:
                 print("Success removing challenge: \(id)")
                 SFProgressHUD.showSuccess()
-                
             case .failure(let error):
                 print(error)
             }
@@ -264,43 +234,35 @@ class GroupDetailVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier {
-        
         case Segue.addChallenge:
             guard let addChallengeVC = segue.destination as? AddChallengeVC else { return }
             
             addChallengeVC.user = user
             addChallengeVC.group = group
             addChallengeVC.callback = { [weak self] in
-                
                 self?.fetchChallenge()
             }
-            
         case Segue.sendInvitation:
             guard let sendInvitationVC = segue.destination as? SendInvitationVC else { return }
             
             sendInvitationVC.user = user
             sendInvitationVC.group = group
-            
         case Segue.memberDetail:
             guard let memberDetailVC = segue.destination as? MemberDetailVC else { return }
             
             memberDetailVC.member = selectedMember
             memberDetailVC.group = group
             memberDetailVC.callback = { [weak self] in
-                
                 self?.fetchMember()
             }
-        
         case Segue.albumDetail:
             guard let albumDetailVC = segue.destination as? AlbumDetailVC else { return }
             
             albumDetailVC.album = albums[selectedAlbumIndex]
             albumDetailVC.group = group
             albumDetailVC.callback = { [weak self] in
-                
                 self?.fetchAlbum()
             }
-            
         default: break
         }
     }
@@ -336,7 +298,6 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
         var height: CGFloat = 0
         
         switch indexPath.section {
-        
         case 0: height = 135
         case 1: height = 90
         case 2: height = 44
@@ -353,7 +314,6 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
         var reuseID = ""
         
         switch indexPath.section {
-        
         case 0:
             reuseID = String(describing: InfoCell.self)
             guard let infoCell = tableView.dequeueReusableCell(
@@ -363,13 +323,11 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             
             infoCell.layoutCell(with: group)
             infoCell.callback = { [weak self] in
-                
                 self?.photoType = .cover
                 self?.showPhotoAlert()
             }
             
             return infoCell
-            
         case 1:
             reuseID = String(describing: MemberCell.self)
             guard let memberCell = tableView.dequeueReusableCell(
@@ -379,17 +337,14 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             
             memberCell.layoutCell(with: members)
             memberCell.addMember = { [weak self] in
-                
                 self?.performSegue(withIdentifier: Segue.sendInvitation, sender: nil)
             }
             memberCell.showMember = { [weak self] member in
-                
                 self?.selectedMember = member
                 self?.performSegue(withIdentifier: Segue.memberDetail, sender: nil)
             }
             
             return memberCell
-            
         case 2:
             reuseID = String(describing: ChallengeCell.self)
             guard let challengeCell = tableView.dequeueReusableCell(
@@ -400,7 +355,6 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             challengeCell.layoutCell(with: challenges[indexPath.row])
             
             return challengeCell
-            
         case 3:
             reuseID = String(describing: PhotoCell.self)
             guard let photoCell = tableView.dequeueReusableCell(
@@ -411,18 +365,15 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             photoCell.layoutCell(with: albums)
             photoCell.collectionView.reloadData()
             photoCell.callback = { [weak self] in
-                
                 self?.photoType = .album
                 self?.showPhotoAlert()
             }
             photoCell.showDetail = { [weak self] index in
-                
                 self?.selectedAlbumIndex = index
                 self?.performSegue(withIdentifier: Segue.albumDetail, sender: nil)
             }
             
             return photoCell
-            
         default: return cell
         }
     }
@@ -438,7 +389,6 @@ extension GroupDetailVC: UITableViewDelegate, UITableViewDataSource {
             style: .destructive,
             title: "刪除"
         ) { [weak self] (_, _, completion) in
-            
             guard let challengeID = self?.challenges[indexPath.row].id else { return }
             self?.challenges.remove(at: indexPath.item)
             self?.tableView.reloadData()
@@ -464,7 +414,6 @@ extension GroupDetailVC: UIImagePickerControllerDelegate, UINavigationController
         SFProgressHUD.showLoading()
 
         uploadPhoto(with: selectedPhoto)
-        
         dismiss(animated: true)
     }
 }

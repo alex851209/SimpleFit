@@ -56,7 +56,6 @@ class DailyVC: BlurViewController {
         guard let index = dailys.firstIndex(of: selectedDaily) else { return }
         
         if isFirstShow {
-            
             dailyCollectionView.scrollToItem(
                 at: IndexPath(item: index, section: 0),
                 at: .centeredHorizontally, animated: false
@@ -71,7 +70,6 @@ class DailyVC: BlurViewController {
         var sum: Double = 0
         
         dailys.forEach {
-            
             guard let weight = $0.weight else { return }
             sum += weight
         }
@@ -102,10 +100,12 @@ class DailyVC: BlurViewController {
         
         let layout = PagingFlowLayout()
         let width = parentView.frame.width - 100
+        
         layout.itemSize = CGSize(width: width, height: 520)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 50)
         layout.minimumLineSpacing = 10
         layout.scrollDirection = .horizontal
+        
         return layout
     }
     
@@ -114,7 +114,6 @@ class DailyVC: BlurViewController {
         let center = view.convert(dailyCollectionView.center, to: dailyCollectionView)
         
         if let indexPath = dailyCollectionView.indexPathForItem(at: center) {
-            
             dateLabel.text = dailys[indexPath.item].date
             selectedDaily = dailys[indexPath.item]
             self.index = indexPath.item
@@ -132,15 +131,12 @@ class DailyVC: BlurViewController {
         SFProgressHUD.showLoading()
         
         provider.removeDailyData(for: selectedDaily.date) { [weak self] result in
-            
             switch result {
-            
             case .success(let date):
                 print("Success removing daily: \(date)")
                 self?.removeDailyCallback?()
                 SFProgressHUD.showSuccess()
                 self?.dismiss(animated: true)
-                
             case .failure(let error):
                 print(error)
             }
@@ -155,7 +151,6 @@ class DailyVC: BlurViewController {
         photoDetailVC.selectedDaily = dailys[self.index]
         photoDetailVC.blurCallback = { self.view.backgroundColor = .white }
         photoDetailVC.callback = { isFavorite in
-            
             self.dailys[self.index].photo?.isFavorite = isFavorite
             self.callback?(isFavorite, self.index)
         }

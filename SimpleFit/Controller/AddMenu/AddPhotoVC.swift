@@ -12,7 +12,7 @@ class AddPhotoVC: BlurViewController {
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    @IBAction func dismiss(_ sender: Any) { dismiss(animated: true, completion: nil) }
+    @IBAction func dismiss(_ sender: Any) { dismiss(animated: true) }
     @IBAction func confirmButtonDidTap(_ sender: Any) {
         
         SFProgressHUD.showLoading()
@@ -47,14 +47,12 @@ class AddPhotoVC: BlurViewController {
     private func uploadPhoto() {
         
         provider.uploadPhotoWith(image: selectedPhoto, date: selectedDate) { result in
-
             switch result {
-
             case .success(let url):
                 print("Success uploading new photo with url: \(url)")
                 self.addPhoto(with: url)
-
-            case .failure(let error): print(error.localizedDescription)
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
@@ -65,21 +63,18 @@ class AddPhotoVC: BlurViewController {
         let photo = Photo(url: urlString, isFavorite: false)
         let daily = DailyData(photo: photo)
 
-        provider.addDataWith(dailyData: daily, field: .photo, date: selectedDate, completion: { result in
-
+        provider.addDataWith(dailyData: daily, field: .photo, date: selectedDate) { result in
             switch result {
-
             case .success(let photo):
                 let dateString = String(describing: self.selectedDate)
                 print("Success adding new photo: \(photo) on date: \(dateString)")
                 self.callback?(self.selectedYear, self.selectedMonth)
                 SFProgressHUD.showSuccess()
-                self.dismiss(animated: true, completion: nil)
-                
+                self.dismiss(animated: true)
             case .failure(let error):
                 print(error.localizedDescription)
             }
-        })
+        }
     }
     
     @objc private func dateDidPick(sender: UIDatePicker) {

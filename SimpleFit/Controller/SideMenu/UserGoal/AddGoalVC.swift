@@ -65,15 +65,12 @@ class AddGoalVC: BlurViewController {
         }
         
         provider.addDataWith(goal: goal) { [weak self] result in
-            
             switch result {
-            
             case .success(let goal):
                 print("Success adding new goal: \(goal)")
                 SFProgressHUD.showSuccess()
                 self?.callback?()
                 self?.dismiss(animated: true)
-                
             case .failure(let error):
                 print(error)
             }
@@ -83,14 +80,9 @@ class AddGoalVC: BlurViewController {
     private func fetchLatestWeight() {
         
         provider.fetchLatestWeight { [weak self] result in
-            
             switch result {
-            
-            case .success(let weight):
-                self?.goal.beginWeight = weight
-                
-            case .failure(let error):
-                print(error)
+            case .success(let weight): self?.goal.beginWeight = weight
+            case .failure(let error): print(error)
             }
         }
     }
@@ -114,17 +106,14 @@ extension AddGoalVC: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         switch textField {
-        
         case goalTitleTextField:
             guard let title = goalTitleTextField.text else { return }
             goal.title = "# \(title)"
-            
         case goalWeightTextField:
             guard let endWeightString = goalWeightTextField.text,
                   let endWeight = Double(endWeightString)
             else { return }
             goal.endWeight = endWeight
-            
         default: break
         }
     }

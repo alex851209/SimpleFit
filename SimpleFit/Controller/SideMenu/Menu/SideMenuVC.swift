@@ -58,13 +58,10 @@ class SideMenuVC: UIViewController {
     private func fetchInfo() {
         
         userProvider.fetchInfo { [weak self] result in
-            
             switch result {
-            
             case .success(let user):
                 self?.currentUser = user
                 self?.fetchGroup()
-                
             case .failure(let error):
                 print(error)
             }
@@ -74,13 +71,10 @@ class SideMenuVC: UIViewController {
     private func fetchGroup() {
         
         groupProvider.fetchGroups(of: currentUser) { [weak self] result in
-            
             switch result {
-            
             case .success(let groupList):
                 self?.groupList = groupList
                 self?.fetchMemberCount()
-                
             case .failure(let error):
                 print(error)
             }
@@ -90,13 +84,9 @@ class SideMenuVC: UIViewController {
     private func fetchMemberCount() {
         
         for group in groupList {
-            
             groupProvider.fetch(object: .members, in: group) { [weak self] result in
-                
                 switch result {
-                
                 case .success(let memberList): self?.memberCounts[group.id] = memberList.count
-                    
                 case .failure(let error): print(error)
                 }
             }
@@ -106,14 +96,9 @@ class SideMenuVC: UIViewController {
     private func fetchGoalDatas() {
         
         goalProvider.fetchGoalDatas { [weak self] result in
-            
             switch result {
-            
-            case .success(let goalList):
-                self?.goalList = goalList
-                
-            case .failure(let error):
-                print(error)
+            case .success(let goalList): self?.goalList = goalList
+            case .failure(let error): print(error)
             }
         }
     }
@@ -121,14 +106,9 @@ class SideMenuVC: UIViewController {
     private func fetchLatestWeight() {
         
         goalProvider.fetchLatestWeight { [weak self] result in
-            
             switch result {
-            
-            case .success(let weight):
-                self?.currentWeight = weight
-                
-            case .failure(let error):
-                print(error)
+            case .success(let weight): self?.currentWeight = weight
+            case .failure(let error): print(error)
             }
         }
     }
@@ -136,14 +116,9 @@ class SideMenuVC: UIViewController {
     private func configureFavoriteDaily() {
         
         chartProvider.fetchFavoriteDatas { [weak self] result in
-
             switch result {
-
-            case .success(let allFavorites):
-                self?.favorites = allFavorites
-
-            case .failure(let error):
-                print(error)
+            case .success(let allFavorites): self?.favorites = allFavorites
+            case .failure(let error): print(error)
             }
         }
     }
@@ -151,26 +126,21 @@ class SideMenuVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier {
-        
         case Segue.userInfo:
             guard let userInfoVC = segue.destination as? UserInfoVC else {return }
             userInfoVC.user = currentUser
-            
         case Segue.userGroup:
             guard let userGroupVC = segue.destination as? UserGroupVC else { return }
             userGroupVC.user = currentUser
             userGroupVC.groupList = groupList
             userGroupVC.memberCounts = memberCounts
-            
         case Segue.userFavorite:
             guard let userFavoriteVC = segue.destination as? UserFavoriteVC else { return }
             userFavoriteVC.allFavorites = favorites
-            
         case Segue.userGoal:
             guard let userGoalVC = segue.destination as? UserGoalVC else { return }
             userGoalVC.goalList = goalList
             userGoalVC.currentWeight = currentWeight
-            
         default: break
         }
     }
@@ -201,10 +171,9 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let reuseID = segues[indexPath.row]
-        
         let selectedCell = tableView.cellForRow(at: indexPath)
+        
         selectedCell?.showButtonFeedbackAnimation { [weak self] in
-            
             self?.performSegue(withIdentifier: reuseID, sender: nil)
         }
     }

@@ -33,7 +33,6 @@ class UserReviewVC: UIViewController {
     @IBAction func calendarButtonDidTap(_ sender: Any) {
         
         calendarButton.showButtonFeedbackAnimation { [weak self] in
-                        
             self?.performSegue(withIdentifier: Segue.pickPeriod, sender: nil)
         }
     }
@@ -55,9 +54,7 @@ class UserReviewVC: UIViewController {
     private func fetchReview() {
         
         provider.fetchReviewDatas(from: beginDate, to: endDate) { [weak self] result in
-            
             switch result {
-            
             case .success: self?.configureChart()
             case .failure(let error): print(error)
             }
@@ -157,21 +154,18 @@ class UserReviewVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == Segue.pickPeriod {
-            
             guard let pickPeriodVC = segue.destination as? PickPeriodVC else { return }
             
             pickPeriodVC.beginDate = beginDate
             pickPeriodVC.endDate = endDate
-            
             pickPeriodVC.selectedDateCallback = { [weak self] (beginDate, endDate) in
-                
                 self?.beginDate = beginDate
                 self?.endDate = endDate
                 
                 let beginDateString = DateProvider.dateToDateString(beginDate)
                 let endDateString = DateProvider.dateToDateString(endDate)
-                
                 let periodButtonTitle = "\(beginDateString) ~ \(endDateString)"
+                
                 self?.periodButton.setTitle(periodButtonTitle, for: .normal)
                 self?.fetchReview()
             }

@@ -39,12 +39,10 @@ class PhotoAlertVC: UIAlertController {
         
         let cancleAction = UIAlertAction(title: "取消", style: .cancel)
         let cameraAction = UIAlertAction(title: "相機", style: .default) { _ in
-            
             guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
             self.showAction?(.camera)
         }
         let albumAction = UIAlertAction(title: "從相簿選取", style: .default) { _ in
-            
             guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
             self.showAction?(.photoLibrary)
         }

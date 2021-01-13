@@ -71,7 +71,6 @@ class UserFavoriteVC: UIViewController {
         let months = allFavorites.map({ $0.month }).removingDuplicates()
         
         for month in months {
-            
             let dailys = allFavorites.filter { $0.month == month }
             monthFavorites.append(Favorite(month: month, dailys: dailys))
         }
@@ -90,10 +89,7 @@ class UserFavoriteVC: UIViewController {
 
 extension UserFavoriteVC: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return monthFavorites.count
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return monthFavorites.count }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 210 }
     
@@ -118,7 +114,6 @@ extension UserFavoriteVC: UITableViewDelegate, UITableViewDataSource {
         
         let selectedCell = tableView.cellForRow(at: indexPath)
         selectedCell?.showButtonFeedbackAnimation { [weak self] in
-            
             self?.performSegue(withIdentifier: Segue.monthFavorite, sender: nil)
         }
     }

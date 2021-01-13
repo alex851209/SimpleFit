@@ -68,9 +68,7 @@ class HomeVC: UIViewController {
     private func configureChartWith(year: Int, month: Int) {
         
         provider.fetchDailyDatasFrom(year: year, month: month) { [weak self] (result) in
-            
             switch result {
-            
             case .success(let dailys):
                 self?.selectedYear = year
                 self?.selectedMonth = month
@@ -84,7 +82,6 @@ class HomeVC: UIViewController {
                 guard let chartOptions = self?.chartOptions else { return }
                 self?.chartView.aa_drawChartWithChartOptions(chartOptions)
                 self?.dailys = dailys
-                
             case .failure(let error):
                 print(error)
             }
@@ -97,10 +94,12 @@ class HomeVC: UIViewController {
         
         let chartViewWidth  = view.frame.size.width
         let chartViewHeight = view.frame.size.height - 80
+        
         chartView.frame = CGRect(x: 0, y: 0, width: chartViewWidth, height: chartViewHeight)
         chartView.delegate = self
         chartView.scrollEnabled = false
         chartView.isClearBackgroundColor = true
+        
         view.insertSubview(chartView, belowSubview: addMenuView)
     }
     
@@ -162,13 +161,12 @@ class HomeVC: UIViewController {
         picker.sourceType = type
         picker.allowsEditing = true
         picker.delegate = self
-        present(picker, animated: true, completion: nil)
+        present(picker, animated: true)
     }
     
     @objc private func showSideMenu() {
         
         sideMenuButton.showButtonFeedbackAnimation { [weak self] in
-            
             self?.performSegue(withIdentifier: Segue.sideMenuNC, sender: nil)
         }
     }
@@ -176,7 +174,6 @@ class HomeVC: UIViewController {
     @objc private func showPickMonthPage() {
         
         pickMonthButton.showButtonFeedbackAnimation { [weak self] in
-            
             self?.performSegue(withIdentifier: Segue.datePicker, sender: nil)
         }
     }
@@ -206,7 +203,6 @@ class HomeVC: UIViewController {
     private func updateChart() -> (Int, Int) -> Void {
         
         return { [weak self] (selectedYear, selectedMonth) in
-            
             let isSameMonth = self?.selectedYear == selectedYear && self?.selectedMonth == selectedMonth
             if isSameMonth { self?.configureChartWith(year: selectedYear, month: selectedMonth) }
         }
@@ -215,51 +211,41 @@ class HomeVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier {
-        
         case Segue.sideMenuNC:
             guard let sideMenuNC = segue.destination as? SideMenuNavigationController else { return }
             sideMenuNC.settings = makeSettings()
-            
         case Segue.daily:
             guard let dailyVC = segue.destination as? DailyVC else { return }
             dailyVC.dailys = dailys
             dailyVC.selectedDaily = selectedDaily
             dailyVC.callback = { (isFavorite, index) in
-                
                 self.dailys[index].photo?.isFavorite = isFavorite
             }
             dailyVC.removeDailyCallback = { [weak self] in
-                
                 guard let selectedYear = self?.selectedYear,
                       let selectedMonth = self?.selectedMonth
                 else { return }
                 
                 self?.configureChartWith(year: selectedYear, month: selectedMonth)
             }
-            
         case Segue.datePicker:
             guard let datePickerVC = segue.destination as? DatePickerVC else { return }
             datePickerVC.selectedYear = self.selectedYear
             datePickerVC.selectedMonth = self.selectedMonth
             datePickerVC.callback = { [weak self] (selectedYear, selectedMonth) in
-                
                 let isDifferentDate = self?.selectedYear != selectedYear || self?.selectedMonth != selectedMonth
                 if isDifferentDate { self?.configureChartWith(year: selectedYear, month: selectedMonth) }
             }
-            
         case Segue.addWeight:
             guard let addWeightVC = segue.destination as? AddWeightVC else { return }
             addWeightVC.callback = updateChart()
-
         case Segue.addNote:
             guard let addNoteVC = segue.destination as? AddNoteVC else { return }
             addNoteVC.callback = updateChart()
-            
         case Segue.addPhoto:
             guard let addPhotoVC = segue.destination as? AddPhotoVC else { return }
             addPhotoVC.selectedPhoto = selectedPhoto
             addPhotoVC.callback = updateChart()
-            
         default: break
         }
     }
@@ -302,9 +288,8 @@ extension HomeVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
         guard let selectedPhoto = info[.editedImage] as? UIImage else { return }
         self.selectedPhoto = selectedPhoto
         
-        dismiss(animated: true, completion: { [weak self] in
-            
+        dismiss(animated: true) { [weak self] in
             self?.performSegue(withIdentifier: Segue.addPhoto, sender: nil)
-        })
+        }
     }
 }

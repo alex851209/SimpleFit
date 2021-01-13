@@ -47,7 +47,6 @@ class MemberDetailVC: BlurViewController {
         let alert = SFAlertVC(title: "移除成員？", showAction: remove)
         
         removeButton.showButtonFeedbackAnimation { [weak self] in
-            
             self?.present(alert, animated: true)
         }
     }
@@ -57,14 +56,11 @@ class MemberDetailVC: BlurViewController {
         SFProgressHUD.showLoading()
         
         provider.remove(object: .members, of: member.id, in: group) { [weak self] result in
-            
             switch result {
-            
             case .success(let id):
                 print("Success removing member: \(id) in group: \(String(describing: self?.group.name))")
                 self?.callback?()
                 self?.dismiss(animated: true)
-                
             case .failure(let error):
                 print(error)
             }

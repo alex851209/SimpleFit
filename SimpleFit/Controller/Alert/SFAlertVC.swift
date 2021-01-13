@@ -41,7 +41,6 @@ class SFAlertVC: UIAlertController {
         setValue(titleString, forKey: "attributedTitle")
         
         let confirmAction = UIAlertAction(title: "確定", style: .default) { _ in
-            
             self.showAction?()
         }
         let confirmColor = UIColor(red: 156/255, green: 39/255, blue: 6/255, alpha: 1.0)

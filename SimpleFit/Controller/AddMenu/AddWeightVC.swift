@@ -66,10 +66,8 @@ class AddWeightVC: BlurViewController {
         }
         
         let daily = DailyData(weight: weight)
-        provider.addDataWith(dailyData: daily, field: .weight, date: selectedDate, completion: { [weak self] result in
-            
+        provider.addDataWith(dailyData: daily, field: .weight, date: selectedDate) { [weak self] result in
             switch result {
-            
             case .success(let weight):
                 let dateString = String(describing: self?.selectedDate)
                 print("Success adding new weight: \(weight) on date: \(dateString)")
@@ -85,7 +83,7 @@ class AddWeightVC: BlurViewController {
             case .failure(let error):
                 print(error.localizedDescription)
             }
-        })
+        }
     }
     
     @objc private func dateDidPick(sender: UIDatePicker) {

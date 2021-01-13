@@ -54,11 +54,9 @@ class AddNoteVC: BlurViewController {
         selectedDateString = DateProvider.dateToDateString(selectedDate)
         
         if noteTextView.textColor == UIColor.systemGray3 {
-            
             noteTextView.textColor = .systemGray
             noteTextView.text = nil
         } else if noteTextView.text.isEmpty {
-            
             noteTextView.textColor = .systemGray3
             noteTextView.text = "\(selectedDateString)\n請輸入筆記"
         }
@@ -74,10 +72,9 @@ class AddNoteVC: BlurViewController {
         }
         
         let daily = DailyData(note: note)
-        provider.addDataWith(dailyData: daily, field: .note, date: selectedDate, completion: { [weak self] result in
-            
+        
+        provider.addDataWith(dailyData: daily, field: .note, date: selectedDate) { [weak self] result in
             switch result {
-            
             case .success(let note):
                 let dateString = String(describing: self?.selectedDate)
                 print("Success adding new note: \(note) on date: \(dateString)")
@@ -90,11 +87,10 @@ class AddNoteVC: BlurViewController {
                 
                 self?.callback?(selectedYear, selectedMonth)
                 self?.dismiss(animated: true)
-                
             case .failure(let error):
                 print(error.localizedDescription)
             }
-        })
+        }
     }
     
     @objc private func dateDidPick(sender: UIDatePicker) {
@@ -104,7 +100,6 @@ class AddNoteVC: BlurViewController {
         selectedMonth = selectedDate.month()
         
         if noteTextView.textColor == .systemGray3 {
-            
             selectedDateString = DateProvider.dateToDateString(selectedDate)
             noteTextView.text = "\(selectedDateString)\n請輸入筆記"
         }

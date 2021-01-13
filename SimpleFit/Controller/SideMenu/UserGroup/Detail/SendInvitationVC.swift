@@ -46,14 +46,11 @@ class SendInvitationVC: BlurViewController {
     private func sendInvitation() {
         
         provider.sendInvitaion(from: user, to: invitee, in: group) { [weak self] result in
-            
             switch result {
-            
             case .success(let invitee):
                 print("Success sending invitation to: \(invitee)")
                 SFProgressHUD.showSuccess()
                 self?.dismiss(animated: true)
-                
             case .failure(let error):
                 print(error)
             }

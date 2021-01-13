@@ -47,15 +47,12 @@ class AddChallengeVC: BlurViewController {
         SFProgressHUD.showLoading()
         
         provider.addChallenge(in: group, with: challenge) { [weak self] result in
-            
             switch result {
-            
             case .success(let challenge):
                 print("Success adding new challenge: \(challenge)")
                 SFProgressHUD.showSuccess()
                 self?.callback?()
                 self?.dismiss(animated: true)
-                
             case .failure(let error):
                 print(error)
             }

@@ -28,7 +28,6 @@ class MonthFavoriteVC: UIViewController {
     private func configureDateLabel(with index: Int) {
         
         let date = favorite.dailys[index].date
-        
         dateLabel.text = date
         dateLabel.applyBorder()
     }
@@ -40,7 +39,6 @@ class MonthFavoriteVC: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.collectionViewLayout = layout(withParentView: view)
         collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
-        
         collectionView.gemini
             .customAnimation()
             .translation(x: 0, y: 50, z: 0)
@@ -62,7 +60,6 @@ class MonthFavoriteVC: UIViewController {
     private func detectSelectedCell(_ scrollView: UIScrollView) {
 
         let center = view.convert(collectionView.center, to: collectionView)
-        
         if let indexPath = collectionView.indexPathForItem(at: center) { self.index = indexPath.item }
     }
 }
