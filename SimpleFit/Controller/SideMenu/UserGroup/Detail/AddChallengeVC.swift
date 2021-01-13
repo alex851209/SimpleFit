@@ -16,8 +16,7 @@ class AddChallengeVC: BlurViewController {
     @IBAction func confirmButtonDidTap(_ sender: Any) { addChallenge() }
     
     var group = Group(id: "", coverPhoto: "", name: "", content: "", category: "")
-    var user = User()
-    let provider = GroupProvider()
+    var provider: GroupProvider?
     var challenge = Challenge(id: "", content: "", date: "", createdTime: Date())
     let date = DateProvider.dateToDateString(Date())
     var callback: (() -> Void)?
@@ -46,7 +45,7 @@ class AddChallengeVC: BlurViewController {
         
         SFProgressHUD.showLoading()
         
-        provider.addChallenge(in: group, with: challenge) { [weak self] result in
+        provider?.addChallenge(in: group, with: challenge) { [weak self] result in
             switch result {
             case .success(let challenge):
                 print("Success adding new challenge: \(challenge)")
@@ -75,6 +74,6 @@ extension AddChallengeVC: UITextFieldDelegate {
         
         guard let content = textField.text else { return }
         
-        challenge = Challenge(id: "", avatar: user.avatar, content: content, date: date, createdTime: Date())
+        challenge = Challenge(id: "", avatar: provider?.user.avatar, content: content, date: date, createdTime: Date())
     }
 }

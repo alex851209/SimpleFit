@@ -26,10 +26,9 @@ class AddGroupVC: BlurViewController {
     }
     @IBAction func photoButtonDidTap(_ sender: UIButton) { showPhotoAlert(sender) }
     
-    let provider = GroupProvider()
+    var provider: GroupProvider?
     var newGroup = Group(id: "", coverPhoto: "", name: "", content: "", category: "")
     var callback: (() -> Void)?
-    var user = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,7 +117,7 @@ class AddGroupVC: BlurViewController {
     
     private func addGroup() {
         
-        provider.addGroupWith(group: newGroup, user: user) { [weak self] result in
+        provider?.addGroupWith(group: newGroup) { [weak self] result in
             switch result {
             case .success(let group):
                 print("Success adding new group: \(group)")

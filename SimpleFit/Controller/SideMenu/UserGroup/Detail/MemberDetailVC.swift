@@ -20,7 +20,7 @@ class MemberDetailVC: BlurViewController {
     
     override var blurEffectStyle: UIBlurEffect.Style? { return .prominent }
     
-    let provider = GroupProvider()
+    var provider: GroupProvider?
     var member = User()
     var group = Group(id: "", coverPhoto: "", name: "", content: "", category: "")
     var callback: (() -> Void)?
@@ -55,7 +55,7 @@ class MemberDetailVC: BlurViewController {
         
         SFProgressHUD.showLoading()
         
-        provider.removeMember(of: member.id, in: group) { [weak self] result in
+        provider?.removeMember(of: member.id, in: group) { [weak self] result in
             switch result {
             case .success(let id):
                 print("Success removing member: \(id) in group: \(String(describing: self?.group.name))")

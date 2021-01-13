@@ -64,39 +64,41 @@ class GroupProvider {
     
     let database = Firestore.firestore()
     let storageRef = Storage.storage().reference()
-    let userID = Auth.auth().currentUser?.uid
+    var user: User
     
-    func fetchGroups(of user: User, completion: @escaping (Result<[Group], Error>) -> Void) {
+    init(user: User) {
+        self.user = user
+    }
+    
+    func fetchGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
         
-        guard let groups = user.groups else { return }
+        guard let groupIDs = user.groups else { return }
         let doc = database.collection("groups")
         
         doc.getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
-            } else {
-                var groupList = [Group]()
-                
-                for document in querySnapshot!.documents {
-                    do {
-                        if let group = try document.data(as: Group.self, decoder: Firestore.Decoder()) {
-                            if groups.contains(group.id) { groupList.append(group) }
-                        }
-                    } catch {
-                        completion(.failure(error))
-                    }
-                }
-                completion(.success(groupList))
+                return
             }
+            
+            var groupList = [Group]()
+            for document in querySnapshot!.documents {
+                do {
+                    if let group = try document.data(as: Group.self, decoder: Firestore.Decoder()) {
+                        if groupIDs.contains(group.id) { groupList.append(group) }
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            completion(.success(groupList))
         }
     }
     
-    func addGroupWith(group: Group, user: User, completion: @escaping (Result<Group, Error>) -> Void) {
-
-        guard let userID = userID else { return }
+    func addGroupWith(group: Group, completion: @escaping (Result<Group, Error>) -> Void) {
         
         let doc = database.collection("groups")
-        let userDoc = database.collection("users").document(userID)
+        let userDoc = database.collection("users").document(user.id)
         let id = doc.document().documentID
         
         doc.document(id).setData([
@@ -113,12 +115,13 @@ class GroupProvider {
             if let error = error {
                 completion(.failure(error))
             } else {
-                completion(.success(group))
                 
-                guard let userID = self?.userID else { return }
+                self?.user.groups?.append(id)
                 
-                doc.document(id).collection("members").document(userID).setData([
-                    MemberField.id.rawValue: userID,
+                guard let user = self?.user else { return }
+                
+                doc.document(id).collection("members").document(user.id).setData([
+                    MemberField.id.rawValue: user.id,
                     MemberField.name.rawValue: user.name as Any,
                     MemberField.gender.rawValue: user.gender as Any,
                     MemberField.height.rawValue: user.height as Any,
@@ -128,6 +131,8 @@ class GroupProvider {
                 userDoc.updateData([
                     GroupField.groups.rawValue: FieldValue.arrayUnion([id])
                 ])
+                
+                completion(.success(group))
             }
         }
     }
@@ -233,7 +238,6 @@ class GroupProvider {
     }
     
     func sendInvitaion(
-        from inviter: User,
         to invitee: User,
         in group: Group,
         completion: @escaping (Result<User, Error>) -> Void
@@ -250,6 +254,9 @@ class GroupProvider {
                         if users.contains(where: { $0.id == invitee.id }) {
                             SFProgressHUD.showFailed(with: "使用者已存在群組")
                         } else {
+                            
+                            guard let user = self?.user else { return }
+                            
                             let doc = self?
                                 .database
                                 .collection("users")
@@ -260,8 +267,8 @@ class GroupProvider {
                                 GroupInvitationsField.id.rawValue: group.id,
                                 GroupInvitationsField.name.rawValue: group.name,
                                 GroupInvitationsField.inviter.rawValue: [
-                                    GroupInvitationsField.inviterName: inviter.name,
-                                    GroupInvitationsField.inviterAvatar: inviter.avatar
+                                    GroupInvitationsField.inviterName: user.name,
+                                    GroupInvitationsField.inviterAvatar: user.avatar
                                 ]
                             ]) { error in
                                 if let error = error {
@@ -308,7 +315,6 @@ class GroupProvider {
     
     func addAlbumPhoto(
         in group: Group,
-        from user: User,
         with photo: URL,
         completion: @escaping (Result<URL, Error>) -> Void
     ) {
@@ -351,9 +357,7 @@ class GroupProvider {
     
     func listenInvitations(completion: @escaping (Result<[Invitation], Error>) -> Void) {
         
-        guard let userID = userID else { return }
-        
-        let doc = database.collection("users").document(userID).collection("groupInvitations")
+        let doc = database.collection("users").document(user.id).collection("groupInvitations")
         
         doc.addSnapshotListener { querySnapshot, error in
             guard let snapshot = querySnapshot else {
@@ -375,25 +379,25 @@ class GroupProvider {
     }
     
     func acceptInvitation(
-        of user: User,
         invitationID: String,
         completion: @escaping (Result<String, Error>) -> Void
     ) {
         
-        guard let userID = userID else { return }
-        
-        let usersDoc = database.collection("users").document(userID)
+        let usersDoc = database.collection("users").document(user.id)
         let groupsDoc = database.collection("groups")
         
-        usersDoc.collection("groupInvitations").document(invitationID).delete { error in
+        usersDoc.collection("groupInvitations").document(invitationID).delete { [weak self] error in
             if let error = error {
                 print("Error removing document: \(error)")
             } else {
+                
+                guard let user = self?.user else { return }
+                
                 usersDoc.updateData([
                     GroupField.groups.rawValue: FieldValue.arrayUnion([invitationID])
                 ])
-                groupsDoc.document(invitationID).collection("members").document(userID).setData([
-                    MemberField.id.rawValue: userID,
+                groupsDoc.document(invitationID).collection("members").document(user.id).setData([
+                    MemberField.id.rawValue: user.id,
                     MemberField.name.rawValue: user.name as Any,
                     MemberField.gender.rawValue: user.gender as Any,
                     MemberField.height.rawValue: user.height as Any,

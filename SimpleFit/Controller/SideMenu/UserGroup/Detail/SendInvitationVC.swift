@@ -24,8 +24,7 @@ class SendInvitationVC: BlurViewController {
         sendInvitation()
     }
     
-    let provider = GroupProvider()
-    var user = User()
+    var provider: GroupProvider?
     var invitee = User()
     var group = Group(id: "", coverPhoto: "", name: "", content: "", category: "")
     
@@ -45,7 +44,7 @@ class SendInvitationVC: BlurViewController {
     
     private func sendInvitation() {
         
-        provider.sendInvitaion(from: user, to: invitee, in: group) { [weak self] result in
+        provider?.sendInvitaion(to: invitee, in: group) { [weak self] result in
             switch result {
             case .success(let invitee):
                 print("Success sending invitation to: \(invitee)")

@@ -35,17 +35,16 @@ class GroupDetailVC: UIViewController {
     }
     @IBAction func exitButtonDidTap(_ sender: UIButton) { showExitAlert(sender) }
     
-    let provider = GroupProvider()
+    var provider: GroupProvider?
     var group = Group(id: "", coverPhoto: "", name: "", content: "", category: "")
     var members = [User]()
     var challenges = [Challenge]()
-    var user = User()
     var photosURL = [URL]()
     var albums = [Album]()
     var selectedMember = User()
     var photoType: PhotoType?
     var selectedAlbumIndex = 0
-    var callback: ((User) -> Void)?
+    var callback: ((GroupProvider) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +60,7 @@ class GroupDetailVC: UIViewController {
     
     private func fetchGroup() {
         
-        provider.fetchGroups(of: user) { [weak self] result in
+        provider?.fetchGroups { [weak self] result in
             switch result {
             case .success(let groupList):
                 let id = self?.group.id
@@ -77,7 +76,7 @@ class GroupDetailVC: UIViewController {
     
     private func fetchMember() {
         
-        provider.fetchMembers(in: group) { [weak self] result in
+        provider?.fetchMembers(in: group) { [weak self] result in
             switch result {
             case .success(let members):
                 guard let members = members as? [User] else { return }
@@ -92,7 +91,7 @@ class GroupDetailVC: UIViewController {
     
     private func fetchChallenge() {
         
-        provider.fetchChallenges(in: group) { [weak self] result in
+        provider?.fetchChallenges(in: group) { [weak self] result in
             switch result {
             case .success(let challenges):
                 guard let challenges = challenges as? [Challenge] else { return }
@@ -106,7 +105,7 @@ class GroupDetailVC: UIViewController {
     
     private func fetchAlbum() {
         
-        provider.fetchAlbum(in: group) { [weak self] result in
+        provider?.fetchAlbum(in: group) { [weak self] result in
             switch result {
             case .success(let albums):
                 guard let albums = albums as? [Album] else { return }
@@ -132,18 +131,19 @@ class GroupDetailVC: UIViewController {
         
         SFProgressHUD.showLoading()
         
-        guard let groupIndex = user.groups?.firstIndex(of: group.id) else { return }
+        guard let groupIndex = provider?.user.groups?.firstIndex(of: group.id),
+              let provider = self.provider
+        else { return }
         
-        user.groups?.remove(at: groupIndex)
+        provider.user.groups?.remove(at: groupIndex)
         
-        provider.removeMember(of: user.id, in: group) { [weak self] result in
+        provider.removeMember(of: provider.user.id, in: group) { [weak self] result in
             switch result {
             case .success:
                 print("Success exit group: \(String(describing: self?.group))")
                 SFProgressHUD.showSuccess()
                 self?.navigationController?.popViewController(animated: true)
-                guard let user = self?.user else { return }
-                self?.callback?(user)
+                self?.callback?(provider)
             case .failure(let error):
                 print(error)
             }
@@ -192,7 +192,7 @@ class GroupDetailVC: UIViewController {
     
     private func addCoverPhoto(with url: URL) {
         
-        provider.addCoverPhoto(in: group, with: url) { [weak self] result in
+        provider?.addCoverPhoto(in: group, with: url) { [weak self] result in
             switch result {
             case .success(let url):
                 print("Success adding new cover photo with URL: \(url)")
@@ -205,7 +205,7 @@ class GroupDetailVC: UIViewController {
     
     private func addAlbumPhoto(with url: URL) {
         
-        provider.addAlbumPhoto(in: group, from: user, with: url) { [weak self] result in
+        provider?.addAlbumPhoto(in: group, with: url) { [weak self] result in
             switch result {
             case .success(let url):
                 print("Success adding new photo to album with URL: \(url)")
@@ -220,7 +220,7 @@ class GroupDetailVC: UIViewController {
         
         SFProgressHUD.showLoading()
         
-        provider.removeChallenge(of: id, in: group) { result in
+        provider?.removeChallenge(of: id, in: group) { result in
             switch result {
             case .success:
                 print("Success removing challenge: \(id)")
@@ -237,7 +237,7 @@ class GroupDetailVC: UIViewController {
         case Segue.addChallenge:
             guard let addChallengeVC = segue.destination as? AddChallengeVC else { return }
             
-            addChallengeVC.user = user
+            addChallengeVC.provider = provider
             addChallengeVC.group = group
             addChallengeVC.callback = { [weak self] in
                 self?.fetchChallenge()
@@ -245,11 +245,12 @@ class GroupDetailVC: UIViewController {
         case Segue.sendInvitation:
             guard let sendInvitationVC = segue.destination as? SendInvitationVC else { return }
             
-            sendInvitationVC.user = user
+            sendInvitationVC.provider = provider
             sendInvitationVC.group = group
         case Segue.memberDetail:
             guard let memberDetailVC = segue.destination as? MemberDetailVC else { return }
             
+            memberDetailVC.provider = provider
             memberDetailVC.member = selectedMember
             memberDetailVC.group = group
             memberDetailVC.callback = { [weak self] in
@@ -258,6 +259,7 @@ class GroupDetailVC: UIViewController {
         case Segue.albumDetail:
             guard let albumDetailVC = segue.destination as? AlbumDetailVC else { return }
             
+            albumDetailVC.provider = provider
             albumDetailVC.album = albums[selectedAlbumIndex]
             albumDetailVC.group = group
             albumDetailVC.callback = { [weak self] in

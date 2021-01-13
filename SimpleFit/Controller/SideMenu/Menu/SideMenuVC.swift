@@ -24,7 +24,7 @@ class SideMenuVC: UIViewController {
     let items = SideMenuItemManager.sideMenuItems
     let segues = [Segue.userInfo, Segue.userGroup, Segue.userFavorite, Segue.userReview, Segue.userGoal]
     let userProvider = UserProvider()
-    let groupProvider = GroupProvider()
+    var groupProvider: GroupProvider?
     let chartProvider = ChartProvider()
     let goalProvider = GoalProvider()
     var currentUser = User()
@@ -61,6 +61,7 @@ class SideMenuVC: UIViewController {
             switch result {
             case .success(let user):
                 self?.currentUser = user
+                self?.groupProvider = GroupProvider(user: user)
                 self?.fetchGroup()
             case .failure(let error):
                 print(error)
@@ -70,7 +71,7 @@ class SideMenuVC: UIViewController {
     
     private func fetchGroup() {
         
-        groupProvider.fetchGroups(of: currentUser) { [weak self] result in
+        groupProvider?.fetchGroups { [weak self] result in
             switch result {
             case .success(let groupList):
                 self?.groupList = groupList
@@ -84,7 +85,7 @@ class SideMenuVC: UIViewController {
     private func fetchMemberCount() {
         
         for group in groupList {
-            groupProvider.fetchMembers(in: group) { [weak self] result in
+            groupProvider?.fetchMembers(in: group) { [weak self] result in
                 switch result {
                 case .success(let memberList): self?.memberCounts[group.id] = memberList.count
                 case .failure(let error): print(error)
@@ -131,7 +132,7 @@ class SideMenuVC: UIViewController {
             userInfoVC.user = currentUser
         case Segue.userGroup:
             guard let userGroupVC = segue.destination as? UserGroupVC else { return }
-            userGroupVC.user = currentUser
+            userGroupVC.provider = groupProvider
             userGroupVC.groupList = groupList
             userGroupVC.memberCounts = memberCounts
         case Segue.userFavorite:

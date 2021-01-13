@@ -19,7 +19,7 @@ class AlbumDetailVC: BlurViewController {
     
     override var blurEffectStyle: UIBlurEffect.Style? { return .prominent }
     
-    let provider = GroupProvider()
+    var provider: GroupProvider?
     var album: Album?
     var group: Group?
     var callback: (() -> Void)?
@@ -60,7 +60,7 @@ class AlbumDetailVC: BlurViewController {
         
         SFProgressHUD.showLoading()
         
-        provider.removeAlbum(of: id, in: group) { [weak self] result in
+        provider?.removeAlbum(of: id, in: group) { [weak self] result in
             switch result {
             case .success(let id):
                 print("Success removing album: \(id)")
