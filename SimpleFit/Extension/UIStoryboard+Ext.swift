@@ -18,8 +18,5 @@ extension UIStoryboard {
     static var main: UIStoryboard { return sfStoryboard(name: StoryboardCategory.main) }
     static var auth: UIStoryboard { return sfStoryboard(name: StoryboardCategory.auth) }
 
-    private static func sfStoryboard(name: String) -> UIStoryboard {
-
-        return UIStoryboard(name: name, bundle: nil)
-    }
+    private static func sfStoryboard(name: String) -> UIStoryboard { return UIStoryboard(name: name, bundle: nil) }
 }

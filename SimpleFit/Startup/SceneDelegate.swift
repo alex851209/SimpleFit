@@ -24,10 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         var rootVC: UIViewController
         
         if Auth.auth().currentUser != nil {
-
             rootVC = UIStoryboard.main.instantiateViewController(withIdentifier: HomeVC.identifier)
         } else {
-
             rootVC = UIStoryboard.auth.instantiateViewController(withIdentifier: AuthVC.identifier)
         }
         self.window?.rootViewController = rootVC

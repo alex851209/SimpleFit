@@ -18,8 +18,6 @@ extension UIButton {
         
         guard let superview = superview else { return }
         
-        translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -20),
             trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -20),
@@ -32,8 +30,6 @@ extension UIButton {
         
         configureMenuButton()
         
-        translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             widthAnchor.constraint(equalToConstant: 40),
             heightAnchor.constraint(equalToConstant: 40)
@@ -45,8 +41,6 @@ extension UIButton {
         configureMenuButton()
         
         guard let superview = superview else { return }
-        
-        translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             topAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor, constant: 8),
@@ -84,5 +78,7 @@ extension UIButton {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 1, height: 1)
         layer.shadowOpacity = 0.3
+        
+        translatesAutoresizingMaskIntoConstraints = false
     }
 }

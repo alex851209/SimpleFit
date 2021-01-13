@@ -33,11 +33,9 @@ extension UIView {
             delay: 0,
             options: .curveLinear,
             animations: { [weak self] in
-                
                 self?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
             },
             completion: { [weak self] _ in
-                
                 self?.isUserInteractionEnabled = true
                 completion()
             })
@@ -50,11 +48,9 @@ extension UIView {
             delay: 0,
             options: .curveLinear,
             animations: { [weak self] in
-                
                 self?.transform = CGAffineTransform.init(scaleX: 0.85, y: 0.85)
             },
             completion: { [weak self] _ in
-                
                 self?.feedbackEndingAnimation(completion)
             })
     }
