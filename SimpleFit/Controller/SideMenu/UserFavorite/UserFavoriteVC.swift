@@ -40,6 +40,11 @@ class UserFavoriteVC: UIViewController {
 
         configureFavoriteOfmonth()
         configureTableView()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
         configureEmptyView()
     }
     

@@ -49,10 +49,15 @@ class UserGroupVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureEmptyView()
         configureOwner()
         configureTableView()
         listenInvitations()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        configureEmptyView()
     }
     
     override func viewWillAppear(_ animated: Bool) {

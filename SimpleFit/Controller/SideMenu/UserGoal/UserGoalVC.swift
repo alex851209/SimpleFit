@@ -39,6 +39,11 @@ class UserGoalVC: UIViewController {
         super.viewDidLoad()
 
         configureTableView()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
         configureEmptyView()
     }
     
