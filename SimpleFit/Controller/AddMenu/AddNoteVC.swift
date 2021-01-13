@@ -73,7 +73,7 @@ class AddNoteVC: BlurViewController {
         
         let daily = DailyData(note: note)
         
-        provider.addDataWith(dailyData: daily, field: .note, date: selectedDate) { [weak self] result in
+        provider.addNoteWith(dailyData: daily, date: selectedDate) { [weak self] result in
             switch result {
             case .success(let note):
                 let dateString = String(describing: self?.selectedDate)

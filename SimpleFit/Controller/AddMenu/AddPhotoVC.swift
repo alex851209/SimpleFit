@@ -63,7 +63,7 @@ class AddPhotoVC: BlurViewController {
         let photo = Photo(url: urlString, isFavorite: false)
         let daily = DailyData(photo: photo)
 
-        provider.addDataWith(dailyData: daily, field: .photo, date: selectedDate) { result in
+        provider.addPhotoWith(dailyData: daily, date: selectedDate) { result in
             switch result {
             case .success(let photo):
                 let dateString = String(describing: self.selectedDate)

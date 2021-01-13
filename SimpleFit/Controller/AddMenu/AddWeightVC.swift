@@ -66,7 +66,7 @@ class AddWeightVC: BlurViewController {
         }
         
         let daily = DailyData(weight: weight)
-        provider.addDataWith(dailyData: daily, field: .weight, date: selectedDate) { [weak self] result in
+        provider.addWeightWith(dailyData: daily, date: selectedDate) { [weak self] result in
             switch result {
             case .success(let weight):
                 let dateString = String(describing: self?.selectedDate)

@@ -32,74 +32,98 @@ class ChartProvider {
     var chartData = ChartData()
     var dailyDatas = [DailyData]()
     
-    func addDataWith(
+    func addWeightWith(
         dailyData: DailyData,
-        field: ChartField,
         date: Date,
         completion: @escaping (Result<Any, Error>) -> Void
     ) {
-
-        guard let userID = userID else { return }
+        
+        guard let userID = userID,
+              let weight = dailyData.weight
+        else { return }
         
         let dateString = DateProvider.dateToDateString(date)
         let month = DateProvider.dateToMonthString(date)
         let day = DateProvider.dateToDayString(date)
         let doc = database.collection("users").document(userID).collection("chartData")
         
-        switch field {
-        case .weight:
-            guard let weight = dailyData.weight else { return }
-            
-            doc.document(dateString).setData([
-                field.rawValue: weight,
-                ChartField.date: dateString,
-                ChartField.month: month,
-                ChartField.day: day
+        doc.document(dateString).setData([
+            ChartField.weight.rawValue: weight,
+            ChartField.date: dateString,
+            ChartField.month: month,
+            ChartField.day: day
+        ], merge: true) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(weight))
+            }
+        }
+    }
+    
+    func addPhotoWith(
+        dailyData: DailyData,
+        date: Date,
+        completion: @escaping (Result<Any, Error>) -> Void
+    ) {
+        
+        guard let userID = userID,
+              let photo = dailyData.photo
+        else { return }
+        
+        let dateString = DateProvider.dateToDateString(date)
+        let month = DateProvider.dateToMonthString(date)
+        let day = DateProvider.dateToDayString(date)
+        let doc = database.collection("users").document(userID).collection("chartData")
+        
+        doc.document(dateString).setData([
+            ChartField.photo.rawValue: [
+                ChartField.photoUrl: photo.url,
+                ChartField.isFavorite: photo.isFavorite
+            ],
+            ChartField.date: dateString,
+            ChartField.month: month,
+            ChartField.day: day
+        ], merge: true) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(photo))
+            }
+        }
+    }
+    
+    func addNoteWith(
+        dailyData: DailyData,
+        date: Date,
+        completion: @escaping (Result<Any, Error>) -> Void
+    ) {
+        
+        guard let userID = userID,
+              let note = dailyData.note
+        else { return }
+        
+        let dateString = DateProvider.dateToDateString(date)
+        let month = DateProvider.dateToMonthString(date)
+        let day = DateProvider.dateToDayString(date)
+        let doc = database.collection("users").document(userID).collection("chartData")
+        
+        fetchDailyDataFrom(date: dateString) { hasWeight in
+            switch hasWeight {
+            case true:
+                doc.document(dateString).setData([
+                    ChartField.note.rawValue: note,
+                    ChartField.date: dateString,
+                    ChartField.month: month,
+                    ChartField.day: day
                 ], merge: true) { error in
-                if let error = error {
-                    completion(.failure(error))
-                } else {
-                    completion(.success(weight))
-                }
-            }
-        case .photo:
-            guard let photo = dailyData.photo else { return }
-            
-            doc.document(dateString).setData([
-                field.rawValue: [
-                    ChartField.photoUrl: photo.url,
-                    ChartField.isFavorite: photo.isFavorite
-                ],
-                ChartField.date: dateString,
-                ChartField.month: month,
-                ChartField.day: day
-            ], merge: true) { error in
-                if let error = error {
-                    completion(.failure(error))
-                } else {
-                    completion(.success(photo))
-                }
-            }
-        case .note:
-            fetchDailyDataFrom(date: dateString) { hasWeight in
-                switch hasWeight {
-                case true:
-                    guard let note = dailyData.note else { return }
-                    
-                    doc.document(dateString).setData([
-                        field.rawValue: note,
-                        ChartField.date: dateString,
-                        ChartField.month: month,
-                        ChartField.day: day
-                    ], merge: true) { error in
-                        if let error = error {
-                            completion(.failure(error))
-                        } else {
-                            completion(.success(note))
-                        }
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(note))
                     }
-                case false: SFProgressHUD.showFailed(with: "請先記錄當日體重")
                 }
+            case false: SFProgressHUD.showFailed(with: "請先記錄當日體重")
             }
         }
     }
@@ -118,6 +142,27 @@ class ChartProvider {
                     }
                 }
             case false: SFProgressHUD.showFailed(with: "請先記錄當日體重")
+            }
+        }
+    }
+    
+    func updatePhoto(
+        isFavorite: Bool,
+        to date: String,
+        completion: @escaping (Result<Any, Error>) -> Void
+    ) {
+        
+        guard let userID = userID else { return }
+        
+        let doc = database.collection("users").document(userID).collection("chartData").document(date)
+        
+        doc.updateData([
+            ChartField.photoIsFavorite: isFavorite
+        ]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
             }
         }
     }
@@ -274,26 +319,5 @@ class ChartProvider {
             categories.append(category)
         }
         chartData.categories = categories
-    }
-    
-    func updatePhoto(
-        isFavorite: Bool,
-        to date: String,
-        completion: @escaping (Result<Any, Error>) -> Void
-    ) {
-        
-        guard let userID = userID else { return }
-        
-        let doc = database.collection("users").document(userID).collection("chartData").document(date)
-        
-        doc.updateData([
-            ChartField.photoIsFavorite: isFavorite
-        ]) { error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(()))
-            }
-        }
     }
 }
