@@ -28,8 +28,5 @@ class InfoCell: UITableViewCell {
         coverPhotoButton.imageView?.contentMode = .scaleAspectFill
     }
     
-    private func editCoverPhoto() {
-        
-        coverPhotoButton.showButtonFeedbackAnimation { self.callback?() }
-    }
+    private func editCoverPhoto() { coverPhotoButton.showButtonFeedbackAnimation { self.callback?() } }
 }

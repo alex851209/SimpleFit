@@ -23,7 +23,6 @@ class SFProgressView: UIProgressView {
         progressImage = gradientImage
         
         subviews.forEach { subview in
-            
             subview.clipsToBounds = true
             subview.layer.cornerRadius = frame.height / 2
         }

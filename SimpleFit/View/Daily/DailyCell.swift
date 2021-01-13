@@ -52,6 +52,7 @@ class DailyCell: GeminiCell {
         let hasPhoto = daily.photo != nil ? true : false
         
         if hasPhoto { photoImage.loadImage(daily.photo?.url) }
+        
         photoPlaceholderLabel.isHidden = hasPhoto
         photoPlaceholderImage.isHidden = hasPhoto
         photoImage.isHidden = !hasPhoto
@@ -85,16 +86,13 @@ class DailyCell: GeminiCell {
 
     private func configureLongPressGesture() {
         
-        let longPress = UILongPressGestureRecognizer(
-            target: self,
-            action: #selector(longPress(gesture:)))
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPress(gesture:)))
         addGestureRecognizer(longPress)
     }
     
     @objc private func photoDidTap() {
 
         photoImage.showButtonFeedbackAnimation { [weak self] in
-            
             guard let image = self?.photoImage.image else { return }
             self?.delegate?.photoDidTap(with: image)
         }
@@ -105,9 +103,7 @@ class DailyCell: GeminiCell {
     @objc func longPress(gesture: UILongPressGestureRecognizer) {
         
         if gesture.state == .began {
-
             showButtonFeedbackAnimation { [weak self] in
-                
                 self?.delegate?.removeDaily()
             }
         }

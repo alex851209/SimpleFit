@@ -25,7 +25,6 @@ class MonthFavoriteCell: GeminiCell {
         weightNumberLabel.layer.shadowOffset = CGSize(width: 2, height: 5)
         
         weightLabels.forEach {
-            
             $0.applyShadow()
             $0.layer.shadowOffset = CGSize(width: 2, height: 5)
             $0.layer.shadowOpacity = 0.2

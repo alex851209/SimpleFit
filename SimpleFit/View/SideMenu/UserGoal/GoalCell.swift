@@ -20,8 +20,8 @@ class GoalCell: UITableViewCell {
     func layoutCell(with goal: Goal, currentWeight: Double) {
         
         beginWeight.applyBorder()
-        beginWeight.layer.borderWidth = 0
         endWeight.applyBorder()
+        beginWeight.layer.borderWidth = 0
         endWeight.layer.borderWidth = 0
         
         titleLabel.text = goal.title
@@ -59,7 +59,6 @@ class GoalCell: UITableViewCell {
             delay: 0,
             options: [.curveLinear, .beginFromCurrentState, .preferredFramesPerSecond60]
         ) { [weak self] in
-
             self?.progressView.setProgress(progress, animated: true)
         }
     }

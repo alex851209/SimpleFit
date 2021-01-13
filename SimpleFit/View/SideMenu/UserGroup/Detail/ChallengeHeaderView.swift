@@ -45,7 +45,6 @@ class ChallengeHeaderView: UIView {
         addSubview(addButton)
         
         if challenges.isEmpty {
-            
             let emptyLabel = UILabel()
             let separator = UIView()
             

@@ -25,7 +25,6 @@ class MemberCell: UITableViewCell {
         var tag = 0
         
         for member in members {
-            
             let avatarButton = UIButton()
             
             if member.avatar == "" {
@@ -53,16 +52,13 @@ class MemberCell: UITableViewCell {
             padding += 50
             tag += 1
         }
-        
         self.members = members
     }
     
     @objc private func showMember(sender: UIButton) {
         
         sender.showButtonFeedbackAnimation { [weak self] in
-            
             guard let member = self?.members[sender.tag] else { return }
-            
             self?.showMember?(member)
         }
     }
@@ -70,7 +66,6 @@ class MemberCell: UITableViewCell {
     private func addMember(sender: UIButton) {
         
         sender.showButtonFeedbackAnimation { [weak self] in
-            
             self?.addMember?()
         }
     }

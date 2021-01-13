@@ -66,7 +66,6 @@ class PhotoCell: UITableViewCell {
         let center = contentView.convert(collectionView.center, to: collectionView)
         
         if let indexPath = collectionView.indexPathForItem(at: center) {
-            
             photoCountLabel.text = "\(indexPath.item + 1) / \(albums.count)"
         }
     }
@@ -95,7 +94,6 @@ extension PhotoCell: UICollectionViewDelegate, UICollectionViewDataSource {
         ) as? PhotoCollectionCell else { return cell }
         
         photoCollectionCell.layoutCell(with: albums[indexPath.item])
-        
         return photoCollectionCell
     }
     
@@ -111,7 +109,6 @@ extension PhotoCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
         collectionView.cellForItem(at: indexPath)?.showButtonFeedbackAnimation { [weak self] in
-            
             self?.showDetail?(indexPath.item)
         }
     }

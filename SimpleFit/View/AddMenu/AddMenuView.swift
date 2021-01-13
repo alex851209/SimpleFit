@@ -41,10 +41,7 @@ class AddMenuView: UIView {
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         
         for subview in subviews as [UIView] {
-            
-            if !subview.isHidden && subview.point(inside: convert(point, to: subview), with: event) {
-                return true
-            }
+            if !subview.isHidden && subview.point(inside: convert(point, to: subview), with: event) { return true }
         }
         return false
     }
@@ -54,8 +51,9 @@ class AddMenuView: UIView {
     private func configureMaskView() {
         
         customMask.backgroundColor = UIColor.black.withAlphaComponent(0.1)
-        customMask.translatesAutoresizingMaskIntoConstraints = false
         customMask.isHidden = true
+        
+        customMask.translatesAutoresizingMaskIntoConstraints = false
         addSubview(customMask)
 
         NSLayoutConstraint.activate([
@@ -107,7 +105,6 @@ class AddMenuView: UIView {
         var padding: CGFloat = 70
         
         if isAddMenuOpen {
-            
             customMask.isHidden = true
             
             UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, animations: { [weak self] in
@@ -121,7 +118,6 @@ class AddMenuView: UIView {
             })
             isAddMenuOpen = false
         } else {
-            
             customMask.isHidden = false
             
             UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, animations: { [weak self] in
