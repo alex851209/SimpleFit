@@ -46,6 +46,9 @@ class AddGoalVC: BlurViewController {
         goalWeightTextField.delegate = self
         goalTitleTextField.placeholder = title
         
+        goalTitleTextField.backgroundColor = .clear
+        goalWeightTextField.backgroundColor = .clear
+        
         datePicker.minimumDate = Date()
         datePicker.date = DateProvider.getNextMonth()
         datePicker.applyBorder()

@@ -55,7 +55,7 @@ class MemberDetailVC: BlurViewController {
         
         SFProgressHUD.showLoading()
         
-        provider.remove(object: .members, of: member.id, in: group) { [weak self] result in
+        provider.removeMember(of: member.id, in: group) { [weak self] result in
             switch result {
             case .success(let id):
                 print("Success removing member: \(id) in group: \(String(describing: self?.group.name))")

@@ -142,7 +142,7 @@ class UserGroupVC: UIViewController {
         if groupList.isEmpty { tableView.reloadData() }
         
         for group in groupList {
-            provider.fetch(object: .members, in: group) { [weak self] result in
+            provider.fetchMembers(in: group) { [weak self] result in
                 switch result {
                 case .success(let memberList):
                     self?.memberCounts[group.id] = memberList.count
@@ -195,7 +195,7 @@ class UserGroupVC: UIViewController {
         
         guard let selectedGroup = self.selectedGroup else { return }
         
-        provider.fetch(object: .members, in: selectedGroup) { [weak self] result in
+        provider.fetchMembers(in: selectedGroup) { [weak self] result in
             switch result {
             case .success(let members):
                 guard let members = members as? [User] else { return }
@@ -211,7 +211,7 @@ class UserGroupVC: UIViewController {
         
         guard let selectedGroup = self.selectedGroup else { return }
         
-        provider.fetch(object: .challenges, in: selectedGroup) { [weak self] result in
+        provider.fetchChallenges(in: selectedGroup) { [weak self] result in
             switch result {
             case .success(let challenges):
                 guard let challenges = challenges as? [Challenge] else { return }
@@ -227,7 +227,7 @@ class UserGroupVC: UIViewController {
         
         guard let selectedGroup = self.selectedGroup else { return }
         
-        provider.fetch(object: .album, in: selectedGroup) { [weak self] result in
+        provider.fetchAlbum(in: selectedGroup) { [weak self] result in
             switch result {
             case .success(let albums):
                 guard let albums = albums as? [Album] else { return }

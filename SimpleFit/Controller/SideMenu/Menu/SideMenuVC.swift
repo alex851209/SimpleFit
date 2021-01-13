@@ -84,7 +84,7 @@ class SideMenuVC: UIViewController {
     private func fetchMemberCount() {
         
         for group in groupList {
-            groupProvider.fetch(object: .members, in: group) { [weak self] result in
+            groupProvider.fetchMembers(in: group) { [weak self] result in
                 switch result {
                 case .success(let memberList): self?.memberCounts[group.id] = memberList.count
                 case .failure(let error): print(error)

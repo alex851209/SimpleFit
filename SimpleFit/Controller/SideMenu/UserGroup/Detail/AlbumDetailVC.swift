@@ -60,7 +60,7 @@ class AlbumDetailVC: BlurViewController {
         
         SFProgressHUD.showLoading()
         
-        provider.remove(object: .album, of: id, in: group) { [weak self] result in
+        provider.removeAlbum(of: id, in: group) { [weak self] result in
             switch result {
             case .success(let id):
                 print("Success removing album: \(id)")

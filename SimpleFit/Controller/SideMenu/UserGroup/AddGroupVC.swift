@@ -52,10 +52,13 @@ class AddGroupVC: BlurViewController {
         
         categoryTextField.layer.cornerRadius = 5
         categoryTextField.layer.borderColor = UIColor.systemGray4.cgColor
+        categoryTextField.backgroundColor = .clear
         groupTitleTextField.layer.cornerRadius = 5
         groupTitleTextField.layer.borderColor = UIColor.systemGray4.cgColor
+        groupTitleTextField.backgroundColor = .clear
         groupContentTextView.layer.cornerRadius = 5
         groupContentTextView.layer.borderColor = UIColor.systemGray4.cgColor
+        groupContentTextView.backgroundColor = .clear
         
         ownerNameLabel.text = newGroup.owner.name
         ownerAvatarImage.loadImage(newGroup.owner.avatar)

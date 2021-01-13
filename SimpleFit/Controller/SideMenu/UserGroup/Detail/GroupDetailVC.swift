@@ -77,7 +77,7 @@ class GroupDetailVC: UIViewController {
     
     private func fetchMember() {
         
-        provider.fetch(object: .members, in: group) { [weak self] result in
+        provider.fetchMembers(in: group) { [weak self] result in
             switch result {
             case .success(let members):
                 guard let members = members as? [User] else { return }
@@ -92,7 +92,7 @@ class GroupDetailVC: UIViewController {
     
     private func fetchChallenge() {
         
-        provider.fetch(object: .challenges, in: group) { [weak self] result in
+        provider.fetchChallenges(in: group) { [weak self] result in
             switch result {
             case .success(let challenges):
                 guard let challenges = challenges as? [Challenge] else { return }
@@ -106,7 +106,7 @@ class GroupDetailVC: UIViewController {
     
     private func fetchAlbum() {
         
-        provider.fetch(object: .album, in: group) { [weak self] result in
+        provider.fetchAlbum(in: group) { [weak self] result in
             switch result {
             case .success(let albums):
                 guard let albums = albums as? [Album] else { return }
@@ -136,7 +136,7 @@ class GroupDetailVC: UIViewController {
         
         user.groups?.remove(at: groupIndex)
         
-        provider.remove(object: .members, of: user.id, in: group) { [weak self] result in
+        provider.removeMember(of: user.id, in: group) { [weak self] result in
             switch result {
             case .success:
                 print("Success exit group: \(String(describing: self?.group))")
@@ -220,7 +220,7 @@ class GroupDetailVC: UIViewController {
         
         SFProgressHUD.showLoading()
         
-        provider.remove(object: .challenges, of: id, in: group) { result in
+        provider.removeChallenge(of: id, in: group) { result in
             switch result {
             case .success:
                 print("Success removing challenge: \(id)")
